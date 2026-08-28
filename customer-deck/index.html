@@ -105,7 +105,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
 .shot{position:relative;border-radius:20px;overflow:hidden;background:#fff;
       box-shadow:0 8px 26px rgba(20,102,222,.10),0 5px 14px rgba(23,74,131,.1);border:1px solid #C9DCFA}
 .shot .clip{overflow:hidden}
-.shot img{display:block;width:100%;cursor:zoom-in}
+.shot img{display:block;width:100%;height:auto;cursor:zoom-in}
 .shot .clip img{margin-top:-5.804%}
 
 /* สไลด์แบบภาพใหญ่ + จุดขายข้างขวา */
@@ -743,89 +743,105 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
   <div class="eyebrow">DOCUMENT FLOW · เอกสารเชื่อมถึงกันทั้งระบบ</div>
   <h1>ออเดอร์หนึ่งใบ — เอกสารทุกใบผูกถึงกันโดยอัตโนมัติ</h1>
   <div class="rule"></div>
-  <div class="syswrap" style="padding:26px 30px 14px">
-  <svg viewBox="0 0 1700 640" font-family="Sarabun,sans-serif">
+  <div class="syswrap" style="padding:28px 32px 16px">
+  <svg viewBox="0 0 1700 1120" font-family="Sarabun,sans-serif">
     <defs>
-      <marker id="dmg" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <marker id="dmg" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
         <path d="M0.8 1.2L8.8 5L0.8 8.8z" fill="#C3CCD8"/>
       </marker>
-      <marker id="dmb" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <marker id="dmb" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
         <path d="M0.8 1.2L8.8 5L0.8 8.8z" fill="#1466DE"/>
       </marker>
       <filter id="dmsh" x="-20%" y="-30%" width="140%" height="170%">
-        <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#14487F" flood-opacity="0.10"/>
+        <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#14487F" flood-opacity="0.11"/>
       </filter>
     </defs>
-    <!-- เส้นรอง (เทานุ่ม): สายซื้อ + สาขาผลิต -->
-    <g stroke="#C3CCD8" stroke-width="2.2" fill="none" stroke-linecap="round">
-      <path d="M290 505 H336" marker-end="url(#dmg)"/>
-      <path d="M566 505 H612" marker-end="url(#dmg)"/>
-      <path d="M842 505 H872 Q888 505 888 489 V367" marker-end="url(#dmg)"/>
-      <path d="M962 285 H998 Q1014 285 1014 269 V216" marker-end="url(#dmg)"/>
-      <path d="M962 325 H1014 Q1030 325 1030 341 V424" marker-end="url(#dmg)"/>
+
+    <!-- ── เส้นรอง (เทานุ่ม) ── -->
+    <g stroke="#C3CCD8" stroke-width="2.6" fill="none" stroke-linecap="round">
+      <path d="M406 529 H424"  marker-end="url(#dmg)"/>
+      <path d="M766 529 H784"  marker-end="url(#dmg)"/>
+      <path d="M955 464 V262"  marker-end="url(#dmg)"/>
+      <path d="M790 214 H771 Q755 214 755 230 V843 Q755 859 771 859 H784" marker-end="url(#dmg)"/>
     </g>
-    <!-- เส้นทางหลักของออเดอร์ (Royal) : SQ → SO → WO → PR → ST → DL → AR -->
-    <g stroke="#1466DE" stroke-width="3.2" fill="none" stroke-linecap="round" opacity=".95">
-      <path d="M290 145 H336" marker-end="url(#dmb)"/>
-      <path d="M566 145 H642 Q658 145 658 161 V244" marker-end="url(#dmb)"/>
-      <path d="M962 245 H1046 Q1062 245 1062 229 V176" marker-end="url(#dmb)"/>
-      <path d="M1292 130 H1338" marker-end="url(#dmb)"/>
-      <path d="M1440 176 V240" marker-end="url(#dmb)"/>
-      <path d="M1440 328 V392" marker-end="url(#dmb)"/>
+    <!-- ── เส้นทางหลักของออเดอร์ (Royal) ── -->
+    <g stroke="#1466DE" stroke-width="3.6" fill="none" stroke-linecap="round" opacity=".95">
+      <path d="M406 169 H424"   marker-end="url(#dmb)"/>
+      <path d="M766 169 H784"   marker-end="url(#dmb)"/>
+      <path d="M1196 169 H1284" marker-end="url(#dmb)"/>
+      <path d="M1455 234 V464"  marker-end="url(#dmb)"/>
+      <path d="M1455 594 V794"  marker-end="url(#dmb)"/>
+      <path d="M1455 924 V984"  marker-end="url(#dmb)"/>
     </g>
-    <!-- การ์ดเอกสาร -->
-    <g filter="url(#dmsh)" font-family="Sarabun,sans-serif">
-      <!-- สายขาย -->
-      <rect x="60" y="100" width="230" height="90" rx="15" fill="#fff" stroke="#DCE3EC"/><rect x="60" y="100" width="230" height="7" rx="3.5" fill="#84AFFB"/>
-      <rect x="336" y="100" width="230" height="90" rx="15" fill="#fff" stroke="#DCE3EC"/><rect x="336" y="100" width="230" height="7" rx="3.5" fill="#2E9CE8"/>
-      <!-- WO hero -->
-      <rect x="612" y="244" width="350" height="122" rx="17" fill="#F0F6FF" stroke="#1466DE" stroke-width="2.4"/>
-      <!-- สาขาผลิต -->
-      <rect x="944" y="130" width="230" height="86" rx="15" fill="#fff" stroke="#DCE3EC"/><rect x="944" y="130" width="230" height="7" rx="3.5" fill="#0F7350"/>
-      <rect x="960" y="424" width="214" height="86" rx="15" fill="#fff" stroke="#DCE3EC"/><rect x="960" y="424" width="214" height="7" rx="3.5" fill="#FF6648"/>
-      <!-- ST → DL → AR -->
-      <rect x="1062" y="88" width="230" height="88" rx="15" fill="#fff" stroke="#DCE3EC"/><rect x="1062" y="88" width="230" height="7" rx="3.5" fill="#1179B8"/>
-      <rect x="1338" y="88" width="230" height="88" rx="15" fill="#fff" stroke="#DCE3EC"/><rect x="1338" y="88" width="230" height="7" rx="3.5" fill="#0E4CA8"/>
-      <rect x="1338" y="240" width="230" height="88" rx="15" fill="#fff" stroke="#DCE3EC"/><rect x="1338" y="240" width="230" height="7" rx="3.5" fill="#5B8C00"/>
-      <rect x="1338" y="392" width="230" height="88" rx="15" fill="#F4FBDE" stroke="#CDE87F"/>
-      <!-- สายซื้อ -->
-      <rect x="60" y="460" width="230" height="90" rx="15" fill="#fff" stroke="#DCE3EC"/><rect x="60" y="460" width="230" height="7" rx="3.5" fill="#84AFFB"/>
-      <rect x="336" y="460" width="230" height="90" rx="15" fill="#fff" stroke="#DCE3EC"/><rect x="336" y="460" width="230" height="7" rx="3.5" fill="#2E9CE8"/>
-      <rect x="612" y="460" width="230" height="90" rx="15" fill="#fff" stroke="#DCE3EC"/><rect x="612" y="460" width="230" height="7" rx="3.5" fill="#FF6648"/>
-      <rect x="872" y="285" width="90" height="0" fill="none"/>
+    <!-- ป้ายกำกับเส้น -->
+    <g font-size="16" fill="#55617A">
+      <text x="1475" y="360">ได้ล็อตสินค้า</text>
+      <text x="1475" y="705">พร้อมขาย</text>
+      <text x="985" y="380">ตัดสต๊อกตามล็อตที่เบิกจริง</text>
+      <text x="700" y="560" text-anchor="end">ของเสียแยกสาเหตุ →</text>
     </g>
-    <!-- ข้อความบนการ์ด -->
-    <g font-size="14" fill="#8A93A6">
-      <text x="82" y="136">ใบเสนอราคา</text><text x="358" y="136">ใบสั่งขาย</text>
-      <text x="966" y="164">รับผลผลิต · ล็อตสินค้า</text><text x="982" y="458">รับของเสีย</text>
-      <text x="1084" y="122">ย้ายเข้าคลังสำเร็จรูป</text><text x="1360" y="122">ใบส่งของถึงลูกค้า</text>
-      <text x="1360" y="274">วางบิลขาย</text>
-      <text x="82" y="496">ใบสั่งซื้อวัตถุดิบ</text><text x="358" y="496">รับวัตถุดิบ · ล็อต</text><text x="634" y="496">เบิกเข้าผลิต · คืน</text>
+
+    <!-- ── การ์ดเอกสาร (ใหญ่ อ่านง่าย) ── -->
+    <g filter="url(#dmsh)">
+      <!-- แถวบน : สายขาย → ผลิต -->
+      <rect x="70"  y="110" width="336" height="120" rx="17" fill="#fff" stroke="#DCE3EC"/><rect x="70"  y="110" width="336" height="9" rx="4.5" fill="#84AFFB"/>
+      <rect x="430" y="110" width="336" height="120" rx="17" fill="#fff" stroke="#DCE3EC"/><rect x="430" y="110" width="336" height="9" rx="4.5" fill="#2E9CE8"/>
+      <rect x="790" y="84"  width="406" height="172" rx="19" fill="#F0F6FF" stroke="#1466DE" stroke-width="2.8"/>
+      <rect x="1284" y="110" width="342" height="124" rx="17" fill="#fff" stroke="#DCE3EC"/><rect x="1284" y="110" width="342" height="9" rx="4.5" fill="#0F7350"/>
+      <!-- แถวกลาง : สายซื้อ → เบิก · ย้ายคลัง -->
+      <rect x="70"  y="470" width="336" height="120" rx="17" fill="#fff" stroke="#DCE3EC"/><rect x="70"  y="470" width="336" height="9" rx="4.5" fill="#84AFFB"/>
+      <rect x="430" y="470" width="336" height="120" rx="17" fill="#fff" stroke="#DCE3EC"/><rect x="430" y="470" width="336" height="9" rx="4.5" fill="#2E9CE8"/>
+      <rect x="790" y="470" width="336" height="120" rx="17" fill="#fff" stroke="#DCE3EC"/><rect x="790" y="470" width="336" height="9" rx="4.5" fill="#FF6648"/>
+      <rect x="1284" y="470" width="342" height="124" rx="17" fill="#fff" stroke="#DCE3EC"/><rect x="1284" y="470" width="342" height="9" rx="4.5" fill="#1179B8"/>
+      <!-- แถวล่าง : ของเสีย · ส่งของ -->
+      <rect x="790" y="800" width="336" height="120" rx="17" fill="#fff" stroke="#DCE3EC"/><rect x="790" y="800" width="336" height="9" rx="4.5" fill="#C4442A"/>
+      <rect x="1284" y="800" width="342" height="124" rx="17" fill="#fff" stroke="#DCE3EC"/><rect x="1284" y="800" width="342" height="9" rx="4.5" fill="#0E4CA8"/>
+      <!-- แถบผลลัพธ์ -->
+      <rect x="70" y="990" width="1556" height="102" rx="18" fill="#F4FBDE" stroke="#CDE87F" stroke-width="2"/>
     </g>
-    <g font-size="20" font-weight="700" fill="#0E4CA8">
-      <text x="82" y="166">SQ2607-009</text><text x="358" y="166">SO2607-018</text>
-      <text x="966" y="194">PR2607-121</text><text x="982" y="488">SR2607-033</text>
-      <text x="1084" y="152">ST2607-027</text><text x="1360" y="152">DL2607-064</text>
-      <text x="1360" y="304" fill="#5B8C00">AR2607-0044</text>
-      <text x="82" y="526">PO2607-042</text><text x="358" y="526">GR2607-051</text><text x="634" y="526">MI · MR2607</text>
+
+    <!-- ── ข้อความบนการ์ด ── -->
+    <g font-size="18" fill="#8A93A6">
+      <text x="96" y="152">ใบเสนอราคา</text><text x="456" y="152">ใบสั่งขาย</text><text x="1310" y="152">รับผลผลิต · ได้ล็อตสินค้า</text>
+      <text x="96" y="512">ใบสั่งซื้อวัตถุดิบ</text><text x="456" y="512">รับวัตถุดิบ · ได้ล็อต</text><text x="816" y="512">เบิก / คืนวัตถุดิบ</text><text x="1310" y="512">ย้ายเข้าคลังสำเร็จรูป</text>
+      <text x="816" y="842">รับของเสีย</text><text x="1310" y="842">ใบส่งของถึงลูกค้า</text>
     </g>
-    <text x="787" y="292" font-size="15" fill="#5A8FE0" text-anchor="middle" font-weight="700" letter-spacing=".08em">ศูนย์กลางทุกสาย</text>
-    <text x="787" y="325" font-size="26" font-weight="800" fill="#1466DE" text-anchor="middle">W2607-053 · ใบสั่งผลิต</text>
-    <text x="787" y="351" font-size="14.5" fill="#55617A" text-anchor="middle">เบิก · คืน · รับผลผลิต · รับของเสีย อ้างใบนี้ทั้งหมด</text>
-    <!-- การ์ดปลายทางเขียว -->
-    <text x="1360" y="428" font-size="14" fill="#5E7A0A">ผลลัพธ์</text>
-    <text x="1360" y="456" font-size="18.5" font-weight="800" fill="#3D6212">ต้นทุน–กำไรจริงต่อออเดอร์</text>
-    <text x="1360" y="474" font-size="13.5" fill="#5E7A0A">สรุปให้อัตโนมัติเมื่อสายเอกสารครบ</text>
+    <g font-size="28" font-weight="700" fill="#0E4CA8">
+      <text x="96" y="192">SQ2607-009</text><text x="456" y="192">SO2607-018</text><text x="1310" y="192">PR2607-121</text>
+      <text x="96" y="552">PO2607-042</text><text x="456" y="552">GR2607-051</text><text x="816" y="552">MI2607-008</text><text x="1310" y="552">ST2607-027</text>
+      <text x="816" y="882">SR2607-033</text><text x="1310" y="882">DL2607-064</text>
+    </g>
+    <g font-size="15" fill="#8A93A6">
+      <text x="96" y="216">บจก. ไทยแพ็คเกจจิ้ง · 1,248,000 บาท</text>
+      <text x="1310" y="218">ล็อต B6907-1180 · 48,000 ชิ้น</text>
+      <text x="456" y="576">ล็อตวัตถุดิบ TPI-6907-1042</text>
+      <text x="816" y="576">ใบคืน MR2607-014 อ้างใบเดียวกัน</text>
+      <text x="816" y="906">ส่งต่อจอ Scrap Pareto อัตโนมัติ</text>
+      <text x="1310" y="908">ส่ง 24 ก.ค. 69 · ครบ 6 พาเลท</text>
+    </g>
+
+    <!-- WO hero -->
+    <text x="993" y="128" font-size="16" fill="#5A8FE0" text-anchor="middle" font-weight="700" letter-spacing=".08em">ศูนย์กลางทุกสาย</text>
+    <text x="993" y="176" font-size="34" font-weight="800" fill="#1466DE" text-anchor="middle">W2607-053</text>
+    <text x="993" y="207" font-size="19" font-weight="700" fill="#2A3346" text-anchor="middle">ใบสั่งผลิต · ถุงหิ้ว HD 09×14</text>
+    <text x="993" y="234" font-size="15.5" fill="#55617A" text-anchor="middle">เบิก · คืน · รับผลผลิต · รับของเสีย อ้างใบนี้ทั้งหมด</text>
+
+    <!-- แถบผลลัพธ์ -->
+    <text x="104" y="1032" font-size="16" font-weight="700" fill="#5E7A0A" letter-spacing=".06em">ครบสายแล้วระบบสรุปให้อัตโนมัติ</text>
+    <text x="104" y="1066" font-size="23" font-weight="800" fill="#3D6212">วางบิลขาย AR2607-0044 · ต้นทุนจริง DM·DL·OH · กำไรจริงของออเดอร์นี้</text>
+    <text x="1592" y="1052" font-size="15.5" fill="#5E7A0A" text-anchor="end">คลิกเอกสารใบไหนก็ได้</text>
+    <text x="1592" y="1074" font-size="15.5" fill="#5E7A0A" text-anchor="end">ในจอจริง → กระโดดไปเปิดใบนั้นทันที</text>
+
     <!-- legend -->
-    <g font-size="15.5" fill="#6C7180">
-      <line x1="620" y1="600" x2="672" y2="600" stroke="#1466DE" stroke-width="3.2" stroke-linecap="round"/>
-      <text x="684" y="606">เส้นทางหลักของออเดอร์นี้</text>
-      <line x1="950" y1="600" x2="1002" y2="600" stroke="#C3CCD8" stroke-width="2.2" stroke-linecap="round"/>
-      <text x="1014" y="606">เอกสารประกอบในสายเดียวกัน — ผูกด้วยจำนวนจริงรายบรรทัด</text>
+    <g font-size="17" fill="#6C7180">
+      <line x1="74" y1="330" x2="130" y2="330" stroke="#1466DE" stroke-width="3.6" stroke-linecap="round"/>
+      <text x="142" y="336">เส้นทางหลักของออเดอร์</text>
+      <line x1="74" y1="368" x2="130" y2="368" stroke="#C3CCD8" stroke-width="2.6" stroke-linecap="round"/>
+      <text x="142" y="374">สายประกอบ — ผูกด้วยจำนวนจริงรายบรรทัด</text>
     </g>
   </svg>
   </div>
-  <div class="foot"><span class="brand">BESIDE</span>ทุกใบสร้างต่อจากใบก่อนหน้า ไม่ต้องคีย์ซ้ำ — และย้อนดูต้นทางได้เสมอ · หน้าถัดไปคือจอจริงของผังนี้ในระบบ</div>
+  <div class="foot"><span class="brand">BESIDE</span>ทุกใบสร้างต่อจากใบก่อนหน้า ไม่ต้องคีย์ซ้ำ และย้อนดูต้นทางได้เสมอ · หน้าถัดไปคือจอจริงของผังนี้ในระบบ</div>
 </div>
 </div>
 
