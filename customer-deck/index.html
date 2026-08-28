@@ -501,7 +501,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
   <div class="scrim"></div>
   <nav>
     <div class="head">
-      <span class="t">สไลด์ (30)</span>
+      <span class="t">สไลด์ (31)</span>
       <button id="pin" title="ตรึงเมนูไว้ (P)">📌</button>
     </div>
     <div class="nsec">เปิดเรื่อง</div>
@@ -530,16 +530,17 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
     <a href="#idle"><span class="idx">20</span><span class="txt"><span class="nm">Idle Material</span><span class="cd">เงินจมในโกดัง</span></span></a>
     <a href="#shock"><span class="idx">21</span><span class="txt"><span class="nm">Price Shock Simulator</span><span class="cd">วัตถุดิบขึ้น ต้องขึ้นราคาเท่าไร</span></span></a>
     <a href="#trace"><span class="idx">22</span><span class="txt"><span class="nm">สอบย้อนเอกสาร</span><span class="cd">คลิกเดียวถึงต้นทาง</span></span></a>
-    <a href="#report"><span class="idx">23</span><span class="txt"><span class="nm">Report Designer</span><span class="cd">ออกแบบฟอร์มเองทั้งใบ</span></span></a>
+    <a href="#relmap"><span class="idx">23</span><span class="txt"><span class="nm">Relationship Map (จอจริง)</span><span class="cd">ผังสายเอกสารเต็มวงจร</span></span></a>
+    <a href="#report"><span class="idx">24</span><span class="txt"><span class="nm">Report Designer</span><span class="cd">ออกแบบฟอร์มเองทั้งใบ</span></span></a>
     <div class="nsec">BESIDE MOBILE · เครื่องยิงบาร์โค้ด</div>
-    <a href="#mobile"><span class="idx">24</span><span class="txt"><span class="nm">แนวคิด Beside Mobile</span><span class="cd">ยิงคือการกระทำหลัก</span></span></a>
-    <a href="#mstart"><span class="idx">25</span><span class="txt"><span class="nm">เริ่มกะทำงาน</span><span class="cd">ยิงบัตร → เลือกงาน → ยิงนับ</span></span></a>
-    <a href="#mgr"><span class="idx">26</span><span class="txt"><span class="nm">รับของเข้า 4 จอจบ</span><span class="cd">ยิง 2 ครั้ง แตะจอ 1 ครั้ง</span></span></a>
-    <a href="#mguard"><span class="idx">27</span><span class="txt"><span class="nm">จอกันพลาด</span><span class="cd">ดักก่อนความเสียหายเกิด</span></span></a>
-    <a href="#mline"><span class="idx">28</span><span class="txt"><span class="nm">หน้าเครื่องถึงขึ้นรถ</span><span class="cd">ข้อมูลเกิดที่หน้างาน</span></span></a>
-    <a href="#mtrust"><span class="idx">29</span><span class="txt"><span class="nm">เสถียรแม้เน็ตหลุด</span><span class="cd">เสียง · สั่น · ออฟไลน์ · คิว</span></span></a>
+    <a href="#mobile"><span class="idx">25</span><span class="txt"><span class="nm">แนวคิด Beside Mobile</span><span class="cd">ยิงคือการกระทำหลัก</span></span></a>
+    <a href="#mstart"><span class="idx">26</span><span class="txt"><span class="nm">เริ่มกะทำงาน</span><span class="cd">ยิงบัตร → เลือกงาน → ยิงนับ</span></span></a>
+    <a href="#mgr"><span class="idx">27</span><span class="txt"><span class="nm">รับของเข้า 4 จอจบ</span><span class="cd">ยิง 2 ครั้ง แตะจอ 1 ครั้ง</span></span></a>
+    <a href="#mguard"><span class="idx">28</span><span class="txt"><span class="nm">จอกันพลาด</span><span class="cd">ดักก่อนความเสียหายเกิด</span></span></a>
+    <a href="#mline"><span class="idx">29</span><span class="txt"><span class="nm">หน้าเครื่องถึงขึ้นรถ</span><span class="cd">ข้อมูลเกิดที่หน้างาน</span></span></a>
+    <a href="#mtrust"><span class="idx">30</span><span class="txt"><span class="nm">เสถียรแม้เน็ตหลุด</span><span class="cd">เสียง · สั่น · ออฟไลน์ · คิว</span></span></a>
     <div class="nsec">ปิดท้าย</div>
-    <a href="#close"><span class="idx">30</span><span class="txt"><span class="nm">ทำไมต้อง Beside</span><span class="cd">ก้าวต่อไป</span></span></a>
+    <a href="#close"><span class="idx">31</span><span class="txt"><span class="nm">ทำไมต้อง Beside</span><span class="cd">ก้าวต่อไป</span></span></a>
   </nav>
 
   <main>
@@ -1318,6 +1319,17 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
   </svg>
   </div>
   <div class="foot"><span class="brand">BESIDE</span>ความสามารถจริงของจอ Document Relationship Map — เริ่มจากเอกสารใบไหนก็ได้ เดินขึ้นหาต้นทางหรือลงหาปลายทาง ผูกกันด้วยจำนวนจริงรายบรรทัดถึงระดับล็อต</div>
+</div>
+</div>
+
+<!-- ═══ · RELATIONSHIP MAP (จอจริง) ═══ -->
+<div class="slidewrap">
+<div class="sheet" data-key="relmap">
+  <div class="eyebrow">TRACEABILITY · DOCUMENT RELATIONSHIP MAP<span class="tag real">จอจริง · ข้อมูลตัวอย่าง</span></div>
+  <h1>Document Relationship Map — จอจริงของผังสอบย้อน</h1>
+  <div class="rule"></div>
+  <div class="shot"><img width="3360" height="2000" src="img/shot-122.png" alt="Document Relationship Map" data-t="Document Relationship Map — สายเอกสารเต็มวงจรในจอเดียว"></div>
+  <div class="foot"><span class="brand">BESIDE</span>พิมพ์เลขที่เอกสารใบเดียว — ระบบวาดสายเอกสารทั้งวงจรให้: ฝั่งขาย → ผลิต → ส่งของ และฝั่งซื้อ → รับของ → เบิกเข้าผลิต · คลิกใบไหนก็เห็นรายละเอียดและกระโดดไปเอกสารจริงได้</div>
 </div>
 </div>
 
