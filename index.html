@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beside — ชุดนำเสนอ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Sarabun","Noto Sans Thai",-apple-system,sans-serif;min-height:100vh;color:#fff;
+     background:linear-gradient(150deg,#0A3F92 0%,#0E4CA8 45%,#1466DE 100%);
+     display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px}
+.mark{display:flex;align-items:center;gap:12px;font-weight:800;font-size:26px;letter-spacing:.1em}
+.mark i{width:42px;height:7px;background:#DDF956;border-radius:4px;display:block}
+h1{font-size:clamp(26px,4.5vw,44px);font-weight:800;margin-top:28px;text-align:center;line-height:1.3}
+h1 em{font-style:normal;color:#DDF956}
+p.sub{color:#DCE8F8;font-size:clamp(15px,2vw,19px);margin-top:12px;text-align:center;max-width:60ch;line-height:1.6}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,420px));gap:22px;margin-top:44px;width:100%;max-width:920px;justify-content:center}
+a.card{display:block;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.3);border-radius:22px;
+       padding:28px 30px;text-decoration:none;color:#fff;transition:.18s;backdrop-filter:blur(4px)}
+a.card:hover{background:rgba(255,255,255,.2);transform:translateY(-3px)}
+a.card .t{font-size:23px;font-weight:800}
+a.card .t small{display:block;font-size:14px;color:#DDF956;font-weight:700;letter-spacing:.08em;margin-bottom:8px}
+a.card .d{font-size:15px;color:#DCE8F8;margin-top:10px;line-height:1.6}
+a.card .go{display:inline-block;margin-top:16px;background:#DDF956;color:#3D4F06;font-weight:800;
+           border-radius:13px;padding:8px 20px;font-size:15px}
+.foot{margin-top:52px;font-size:13px;color:#A9C2E8;text-align:center;line-height:1.7}
+</style>
+</head>
+<body>
+  <div class="mark"><i></i>BESIDE</div>
+  <h1>ชุดนำเสนอ <em>Beside</em> — ระบบบริหารโรงงานครบวงจร</h1>
+  <p class="sub">เปิดในเบราว์เซอร์ได้เลย · คีย์ลัดในสไลด์: ← → เปลี่ยนหน้า · F เต็มจอ · M เมนู · คลิกภาพเพื่อขยาย</p>
+  <div class="cards">
+    <a class="card" href="customer-deck/">
+      <div class="t"><small>สำหรับนำเสนอลูกค้า</small>Customer Deck · 30 สไลด์</div>
+      <div class="d">เรื่องเล่าครบตั้งแต่ปัญหาโรงงาน → ระบบครบวงจร → แดชบอร์ด/จอเด่นทุกฝ่าย → Beside Mobile เครื่องยิงบาร์โค้ด → ทำไมต้อง Beside</div>
+      <span class="go">เปิดสไลด์ ›</span>
+    </a>
+    <a class="card" href="program-shots/">
+      <div class="t"><small>แคตตาล็อกทุกจอ</small>Program Shots · 77 จอ + 28 รายงาน</div>
+      <div class="d">ภาพหน้าจอจริงทุกโปรแกรมแยกตามโมดูล ขาย · ซื้อ · วางแผน · ผลิต · QC · คลัง · ต้นทุน — ไว้ตอบคำถาม "มีจอ...ไหม" ได้ทันที</div>
+      <span class="go">เปิดแคตตาล็อก ›</span>
+    </a>
+  </div>
+  <div class="foot">BESIDE · TECHLEGEND — สิงหาคม 2569<br>ภาพจากระบบจริง · จอที่ใช้ข้อมูลตัวอย่างติดป้ายกำกับไว้ในสไลด์</div>
+</body>
+</html>

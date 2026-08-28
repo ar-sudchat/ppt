@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beside — Program Shots ทุกโปรแกรม</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:"Sarabun","Noto Sans Thai",-apple-system,sans-serif;background:#DCE8FB;color:#2A3346;display:flex;flex-direction:column;overflow:hidden}
+header.bar{flex:0 0 auto;background:#0E4CA8;color:#fff;padding:0 18px;height:60px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 16px rgba(14,76,168,.28);z-index:30}
+header.bar .logo{font-weight:700;letter-spacing:.06em;font-size:19px}
+header.bar .sub{font-size:13.5px;opacity:.8}
+header.bar .spacer2{flex:1}
+header.bar .count{font-size:15px;opacity:.92;min-width:76px;text-align:center;font-variant-numeric:tabular-nums}
+header.bar button{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:12px;height:36px;min-width:42px;font-size:17px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0 11px;font-family:inherit;transition:.16s}
+header.bar button:hover{background:rgba(255,255,255,.3)}
+#zoom{display:inline-flex;border:1px solid rgba(255,255,255,.28);border-radius:12px;overflow:hidden}
+#zoom button{border:0;border-radius:0;min-width:60px;height:36px;font-size:13px;font-weight:700;background:transparent;border-left:1px solid rgba(255,255,255,.2)}
+#zoom button:first-child{border-left:0}
+#zoom button.on{background:#fff;color:#0E4CA8}
+.body{flex:1;display:flex;min-height:0;position:relative}
+.edge{position:absolute;left:0;top:0;bottom:0;width:18px;z-index:18;cursor:pointer}
+.edge::after{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:78px;border-radius:0 6px 6px 0;background:#84AFFB;opacity:.8;transition:.16s}
+.edge:hover::after{opacity:1;width:7px;background:#1466DE}
+body.pinned .edge{display:none}
+nav{background:#F1F6FE;border-right:1px solid #D5E3FB;overflow-y:auto;padding:10px 0 16px;position:absolute;left:0;top:0;bottom:0;width:320px;z-index:20;transform:translateX(-100%);transition:transform .24s cubic-bezier(.4,0,.2,1);box-shadow:8px 0 30px rgba(14,76,168,.15)}
+nav.open{transform:none}
+body.pinned nav{position:relative;flex:0 0 320px;transform:none;box-shadow:none;z-index:5}
+nav .head{display:flex;align-items:center;gap:8px;padding:8px 14px 6px 20px}
+nav .head .t{flex:1;font-size:12px;letter-spacing:.14em;color:#8A93A6;font-weight:700}
+nav .head button{background:transparent;border:1px solid #D5E3FB;color:#8A93A6;border-radius:11px;width:34px;height:32px;cursor:pointer;font-size:14px}
+nav .head button.on{background:#1466DE;border-color:#1466DE;color:#fff}
+nav .nsec{font-size:11px;letter-spacing:.12em;font-weight:700;color:#5A8FE0;padding:14px 20px 4px}
+nav a{display:flex;gap:10px;align-items:flex-start;padding:8px 14px 8px 18px;text-decoration:none;color:#2A4670;border-radius:13px;margin:2px 12px;transition:.14s;position:relative}
+nav a:hover{background:#EAF2FE}
+nav a.on{background:#fff;box-shadow:0 3px 12px rgba(14,76,168,.14)}
+nav a.on::before{content:'';position:absolute;left:-6px;top:11px;bottom:11px;width:4px;border-radius:4px;background:#1466DE}
+nav a .idx{flex:0 0 30px;height:24px;border-radius:9px;background:#DCE8FB;color:#4A7FD0;font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+nav a.on .idx{background:#1466DE;color:#fff}
+nav a .nm{display:block;font-size:14px;font-weight:600;line-height:1.3}
+nav a .cd{font-size:11.5px;color:#8A93A6;margin-top:2px}
+nav a .bd{font-size:10px;font-weight:700;padding:1px 7px;border-radius:9px;margin-left:6px;white-space:nowrap;vertical-align:1px}
+nav a .bd.real{background:#F4FBDE;color:#5B8C00}
+nav a .bd.sim{background:#F8FCE2;color:#5F6B14}
+nav a .bd.rpt{background:#EAF2FE;color:#0E4CA8}
+.scrim{position:absolute;inset:0;background:rgba(14,76,168,.14);z-index:19;opacity:0;pointer-events:none;transition:opacity .24s}
+.scrim.on{opacity:1;pointer-events:auto}
+body.pinned .scrim{display:none}
+main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.slidewrap{display:none}
+.slidewrap.on{display:block}
+.sheet{width:1800px;padding:34px 44px 26px;background:#F3F7FD;transform-origin:top left;border-radius:22px;overflow:hidden;box-shadow:0 14px 40px rgba(14,76,168,.18)}
+.eyebrow{font-size:15px;letter-spacing:.14em;font-weight:600;color:#5A8FE0;margin-bottom:8px}
+.sheet h1{font-size:40px;font-weight:700;color:#0E4CA8;letter-spacing:-.01em;line-height:1.12}
+.sheet h1 small{font-size:22px;color:#55617A;font-weight:600;margin-left:14px}
+.rule{height:5px;width:110px;background:#1466DE;border-radius:3px;margin:12px 0 16px}
+.tag{display:inline-block;font-size:13px;font-weight:700;padding:2px 11px;border-radius:22px;margin-left:12px;vertical-align:middle}
+.tag.real{background:#F4FBDE;color:#5B8C00}
+.tag.sim{background:#F8FCE2;color:#5F6B14}
+.tag.rpt{background:#EAF2FE;color:#0E4CA8}
+.shot{border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 8px 26px rgba(20,102,222,.10),0 5px 14px rgba(23,74,131,.1);border:1px solid #C9DCFA}
+.shot img{display:block;width:100%;cursor:zoom-in}
+.foot{margin-top:16px;padding-top:12px;border-top:1px solid #C9DCFA;font-size:15px;color:#8A93A6}
+.brand{float:right;font-weight:700;color:#1466DE;letter-spacing:.04em}
+/* cover */
+.sheet.dark{background:linear-gradient(150deg,#0A3F92,#0E4CA8 45%,#1466DE);padding:0}
+.cover{min-height:900px;display:flex;flex-direction:column;justify-content:center;padding:70px 90px;color:#fff}
+.cover .mark{display:flex;align-items:center;gap:13px;font-weight:700;font-size:24px;letter-spacing:.1em}
+.cover .mark i{width:40px;height:6px;background:#DDF956;border-radius:4px;display:block}
+.cover h1{font-size:64px;line-height:1.2;font-weight:800;color:#fff;margin-top:48px}
+.cover h1 em{font-style:normal;color:#DDF956}
+.cover .sub{font-size:24px;color:#DCE8F8;margin-top:24px;line-height:1.6}
+.cover .chips{display:flex;gap:12px;margin-top:44px;flex-wrap:wrap}
+.cover .chips span{border:1px solid rgba(255,255,255,.34);background:rgba(255,255,255,.10);border-radius:26px;padding:8px 20px;font-size:16px;font-weight:600}
+#lb{position:fixed;inset:0;background:rgba(10,40,90,.92);z-index:60;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:30px;cursor:zoom-out}
+#lb.on{display:flex}
+#lb img{max-width:96vw;max-height:86vh;border-radius:12px;box-shadow:0 24px 70px rgba(0,0,0,.5);background:#fff}
+#lb .cap{color:#fff;font-size:18px;font-weight:700}
+.hint{position:fixed;right:20px;bottom:18px;background:rgba(14,76,168,.92);color:#fff;font-size:13px;padding:9px 16px;border-radius:22px;pointer-events:none;opacity:0;transition:opacity .4s;z-index:40}
+.hint.show{opacity:1}
+</style>
+</head>
+<body>
+<header class="bar">
+  <button id="menu" title="เมนู (M)">☰</button>
+  <span class="logo">BESIDE</span>
+  <span class="sub">Program Shots · 77 จอ + 28 รายงาน · ส.ค. 2569</span>
+  <span class="spacer2"></span>
+  <span id="zoom"><button data-m="width">กว้าง</button><button data-m="page">ทั้งหน้า</button></span>
+  <button id="fs" title="เต็มจอ (F)">⛶</button>
+  <button id="prev" title="ก่อนหน้า (←)">‹</button>
+  <span class="count" id="count"></span>
+  <button id="next" title="ถัดไป (→)">›</button>
+</header>
+<div class="body">
+  <div class="edge"></div>
+  <div class="scrim"></div>
+  <nav>
+    <div class="head"><span class="t">ทั้งหมด (106)</span><button id="pin" title="ตรึงเมนู (P)">📌</button></div>
+    <a href="#cover"><span class="idx">1</span><span><span class="nm">หน้าปก</span><span class="cd">Program Shots</span></span></a>
+    <div class="nsec">ITEMS · สินค้า</div>
+    <a href="#items-01-item-category"><span class="idx">2</span><span><span class="nm">Item Category</span><span class="cd">p-ptech-14<span class="bd real">จริง</span></span></span></a>
+    <a href="#items-02-item-group"><span class="idx">3</span><span><span class="nm">Item Group</span><span class="cd">p-ptech-13<span class="bd real">จริง</span></span></span></a>
+    <a href="#items-03-item-master"><span class="idx">4</span><span><span class="nm">Item Master</span><span class="cd">p-ptech-16<span class="bd real">จริง</span></span></span></a>
+    <a href="#items-03b-item-master-detail"><span class="idx">5</span><span><span class="nm">Item Master · หน้ารายละเอียดสินค้า</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <a href="#items-04-item-type"><span class="idx">6</span><span><span class="nm">Item Type</span><span class="cd">p-ptech-12<span class="bd real">จริง</span></span></span></a>
+    <a href="#items-05-unit-of-measurement"><span class="idx">7</span><span><span class="nm">Unit Of Measurement</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <div class="nsec">SALE · งานขาย</div>
+    <a href="#sale-01-sale-period"><span class="idx">8</span><span><span class="nm">Sale Period</span><span class="cd">p-ptech-108<span class="bd real">จริง</span></span></span></a>
+    <a href="#sale-02-delivery-dl"><span class="idx">9</span><span><span class="nm">Delivery DL</span><span class="cd">p-ptech-128<span class="bd real">จริง</span></span></span></a>
+    <a href="#sale-03-sale-order"><span class="idx">10</span><span><span class="nm">Sale Order</span><span class="cd">p-ptech-34<span class="bd real">จริง</span></span></span></a>
+    <a href="#sale-04-sales-approve"><span class="idx">11</span><span><span class="nm">Sales Approve</span><span class="cd">p-ptech-37<span class="bd real">จริง</span></span></span></a>
+    <a href="#sale-05-sales-forecast"><span class="idx">12</span><span><span class="nm">Sales Forecast</span><span class="cd">p-ptech-29<span class="bd real">จริง</span></span></span></a>
+    <a href="#sale-05b-sales-forecast-detail"><span class="idx">13</span><span><span class="nm">Sales Forecast · หน้ารายละเอียดแผนขาย</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <a href="#sale-06-sales-quotation"><span class="idx">14</span><span><span class="nm">Sales Quotation</span><span class="cd">p-ptech-116<span class="bd real">จริง</span></span></span></a>
+    <a href="#sale-07-so-sales-forecast"><span class="idx">15</span><span><span class="nm">SO Sales Forecast</span><span class="cd">p-ptech-32<span class="bd real">จริง</span></span></span></a>
+    <a href="#sale-08-ap-invoice"><span class="idx">16</span><span><span class="nm">AP Invoice</span><span class="cd">p-ptech-143<span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <a href="#sale-09-ar-invoice"><span class="idx">17</span><span><span class="nm">AR Invoice</span><span class="cd">p-ptech-144<span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <a href="#sale-10-sales-forecast-dashboard"><span class="idx">18</span><span><span class="nm">Sales Forecast Dashboard</span><span class="cd">p-ptech-121<span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <div class="nsec" style="color:#8A93A6">รายงาน · SALE</div>
+    <a href="#sale-rpt-01-back-order-report"><span class="idx">19</span><span><span class="nm">Back Order Report · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#sale-rpt-02-sales-forecast-customer"><span class="idx">20</span><span><span class="nm">Sales Forecast Customer · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#sale-rpt-03-sales-summary"><span class="idx">21</span><span><span class="nm">Sales Summary · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#sale-rpt-04-report-sales-customer"><span class="idx">22</span><span><span class="nm">Report Sales Customer · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#sale-rpt-05-outstanding-documents"><span class="idx">23</span><span><span class="nm">Outstanding Documents · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#sale-rpt-06-doc-status-summary"><span class="idx">24</span><span><span class="nm">Doc Status Summary · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#sale-rpt-07-sq-register"><span class="idx">25</span><span><span class="nm">Sq Register · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#sale-rpt-08-so-register"><span class="idx">26</span><span><span class="nm">So Register · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#sale-rpt-09-dl-register"><span class="idx">27</span><span><span class="nm">Dl Register · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#sale-rpt-10-invoice-register"><span class="idx">28</span><span><span class="nm">Invoice Register · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <div class="nsec">PLANNING · วางแผนผลิต</div>
+    <a href="#planning-01-bill-of-material"><span class="idx">29</span><span><span class="nm">Bill Of Material</span><span class="cd">p-ptech-23<span class="bd real">จริง</span></span></span></a>
+    <a href="#planning-01b-bill-of-material-tree"><span class="idx">30</span><span><span class="nm">Bill of Material · โครงสร้างสูตรหลายชั้น (Tree)</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <a href="#planning-02-shift-definition"><span class="idx">31</span><span><span class="nm">Shift Definition</span><span class="cd">p-ptech-21<span class="bd real">จริง</span></span></span></a>
+    <a href="#planning-03-procurement-suggestion"><span class="idx">32</span><span><span class="nm">Procurement Suggestion</span><span class="cd">p-ptech-28<span class="bd real">จริง</span></span></span></a>
+    <a href="#planning-04-shift-scheduling"><span class="idx">33</span><span><span class="nm">Shift Scheduling</span><span class="cd">p-ptech-22<span class="bd real">จริง</span></span></span></a>
+    <a href="#planning-05-work-order"><span class="idx">34</span><span><span class="nm">Work Order</span><span class="cd">p-ptech-95<span class="bd real">จริง</span></span></span></a>
+    <a href="#planning-05b-work-order-detail"><span class="idx">35</span><span><span class="nm">Work Order · หน้ารายละเอียดใบสั่งผลิต</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <a href="#planning-05c-work-order-board"><span class="idx">36</span><span><span class="nm">Work Order Board · บอร์ดการ์ดใบสั่งผลิต — ลากจัดคิวได้</span><span class="cd"><span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <a href="#planning-06-master-production-schedule"><span class="idx">37</span><span><span class="nm">Master Production Schedule</span><span class="cd">p-ptech-24<span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <a href="#planning-06b-mps-weekly"><span class="idx">38</span><span><span class="nm">MPS · มุมมองรายสัปดาห์</span><span class="cd"><span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <a href="#planning-07-material-requirements-planning"><span class="idx">39</span><span><span class="nm">Material Requirements Planning</span><span class="cd">p-ptech-25<span class="bd real">จริง</span></span></span></a>
+    <a href="#planning-07b-mrp-heatmap"><span class="idx">40</span><span><span class="nm">MRP · มุมมอง Heatmap</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <div class="nsec" style="color:#8A93A6">รายงาน · PLANNING</div>
+    <a href="#planning-rpt-01-workorder-form"><span class="idx">41</span><span><span class="nm">Workorder Form · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#planning-rpt-02-machine-planning"><span class="idx">42</span><span><span class="nm">Machine Planning · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <div class="nsec">PRODUCTION · ผลิต</div>
+    <a href="#production-01-dashboard-production-plan"><span class="idx">43</span><span><span class="nm">Dashboard Production Plan</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <a href="#production-02-downtime-cause"><span class="idx">44</span><span><span class="nm">Downtime Cause</span><span class="cd">p-ptech-41<span class="bd real">จริง</span></span></span></a>
+    <a href="#production-03-machine"><span class="idx">45</span><span><span class="nm">Machine</span><span class="cd">p-ptech-39<span class="bd real">จริง</span></span></span></a>
+    <a href="#production-03b-machine-detail"><span class="idx">46</span><span><span class="nm">Machine · หน้ารายละเอียดเครื่องจักร</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <a href="#production-04-machine-group"><span class="idx">47</span><span><span class="nm">Machine Group</span><span class="cd">p-ptech-38<span class="bd real">จริง</span></span></span></a>
+    <a href="#production-05-machine-subgroup"><span class="idx">48</span><span><span class="nm">Machine Subgroup</span><span class="cd">p-ptech-99<span class="bd real">จริง</span></span></span></a>
+    <a href="#production-06-routing"><span class="idx">49</span><span><span class="nm">Routing</span><span class="cd">p-ptech-40<span class="bd real">จริง</span></span></span></a>
+    <a href="#production-06b-routing-detail"><span class="idx">50</span><span><span class="nm">Routing · หน้ารายละเอียดขั้นตอนผลิต</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <a href="#production-07-standard-cost"><span class="idx">51</span><span><span class="nm">Standard Cost </span><span class="cd">p-ptech-7<span class="bd real">จริง</span></span></span></a>
+    <a href="#production-08-downtime"><span class="idx">52</span><span><span class="nm">Downtime</span><span class="cd">p-ptech-42<span class="bd real">จริง</span></span></span></a>
+    <a href="#production-09-machine-monitoring1"><span class="idx">53</span><span><span class="nm">Machine Monitoring · มุมมองรวมทุกเครื่อง (ภาพชุดใหม่)</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <a href="#production-10-material-issue"><span class="idx">54</span><span><span class="nm">Material Issue</span><span class="cd">p-ptech-44<span class="bd real">จริง</span></span></span></a>
+    <a href="#production-11-material-return"><span class="idx">55</span><span><span class="nm">Material Return</span><span class="cd">p-ptech-47<span class="bd real">จริง</span></span></span></a>
+    <a href="#production-12-product-receipt"><span class="idx">56</span><span><span class="nm">Product Receipt</span><span class="cd">p-ptech-45<span class="bd real">จริง</span></span></span></a>
+    <a href="#production-13-oee"><span class="idx">57</span><span><span class="nm">Oee</span><span class="cd"><span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <a href="#production-14-pareto-downtime"><span class="idx">58</span><span><span class="nm">Pareto Downtime</span><span class="cd">p-ptech-120<span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <a href="#production-15-scrap-pareto"><span class="idx">59</span><span><span class="nm">Scrap Pareto</span><span class="cd">p-ptech-123<span class="bd real">จริง</span></span></span></a>
+    <div class="nsec" style="color:#8A93A6">รายงาน · PRODUCTION</div>
+    <a href="#production-rpt-01-production-daily"><span class="idx">60</span><span><span class="nm">Production Daily · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#production-rpt-02-material-issue-form"><span class="idx">61</span><span><span class="nm">Material Issue Form · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#production-rpt-03-material-return-form"><span class="idx">62</span><span><span class="nm">Material Return Form · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#production-rpt-04-product-receipt-form"><span class="idx">63</span><span><span class="nm">Product Receipt Form · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#production-rpt-05-product-sticker"><span class="idx">64</span><span><span class="nm">Product Sticker · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#production-rpt-06-oee-report"><span class="idx">65</span><span><span class="nm">Oee Report · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <div class="nsec">QUALITY CONTROL · คุณภาพ</div>
+    <a href="#quality-control-01-document-control"><span class="idx">66</span><span><span class="nm">Document Control</span><span class="cd">p-ptech-103<span class="bd real">จริง</span></span></span></a>
+    <a href="#quality-control-02-product-specification"><span class="idx">67</span><span><span class="nm">Product Specification</span><span class="cd">p-ptech-52<span class="bd real">จริง</span></span></span></a>
+    <a href="#quality-control-02b-product-specification-detail"><span class="idx">68</span><span><span class="nm">Product Specification · สเปก QC รายสินค้า</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <a href="#quality-control-03-qc-properties"><span class="idx">69</span><span><span class="nm">QC Properties</span><span class="cd">p-ptech-51<span class="bd real">จริง</span></span></span></a>
+    <a href="#quality-control-04-scrap-cause"><span class="idx">70</span><span><span class="nm">Scrap Cause</span><span class="cd">p-ptech-54<span class="bd real">จริง</span></span></span></a>
+    <a href="#quality-control-05-product-inspection"><span class="idx">71</span><span><span class="nm">Product Inspection</span><span class="cd">p-ptech-53<span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <a href="#quality-control-05b-product-inspection-choose-doc"><span class="idx">72</span><span><span class="nm">Product Inspection · Popup เลือกเอกสารที่จะตรวจ</span><span class="cd"><span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <a href="#quality-control-06-scrap-receipt"><span class="idx">73</span><span><span class="nm">Scrap Receipt</span><span class="cd">p-ptech-55<span class="bd real">จริง</span></span></span></a>
+    <div class="nsec" style="color:#8A93A6">รายงาน · QUALITY CONTROL</div>
+    <a href="#quality-control-rpt-01-quality-check-sheet"><span class="idx">74</span><span><span class="nm">Quality Check Sheet · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#quality-control-rpt-02-certificate-of-analysis"><span class="idx">75</span><span><span class="nm">Certificate Of Analysis · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#quality-control-rpt-03-scrap-sticker"><span class="idx">76</span><span><span class="nm">Scrap Sticker · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#quality-control-rpt-04-scrap-receipt-form"><span class="idx">77</span><span><span class="nm">Scrap Receipt Form · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#quality-control-rpt-05-pareto-analysis"><span class="idx">78</span><span><span class="nm">Pareto Analysis · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <div class="nsec">INVENTORY · คลังสินค้า</div>
+    <a href="#inventory-01-stock-requisition"><span class="idx">79</span><span><span class="nm">Stock Requisition</span><span class="cd">p-ptech-57<span class="bd real">จริง</span></span></span></a>
+    <a href="#inventory-02-stock-transfer"><span class="idx">80</span><span><span class="nm">Stock Transfer</span><span class="cd">p-ptech-56<span class="bd real">จริง</span></span></span></a>
+    <a href="#inventory-03-batch-tracking"><span class="idx">81</span><span><span class="nm">Batch Tracking</span><span class="cd">p-ptech-97<span class="bd real">จริง</span></span></span></a>
+    <a href="#inventory-04-idle-material-dashboard"><span class="idx">82</span><span><span class="nm">Idle Material Dashboard</span><span class="cd">p-ptech-141<span class="bd real">จริง</span></span></span></a>
+    <a href="#inventory-05-inventory-warehouse"><span class="idx">83</span><span><span class="nm">Inventory Warehouse</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <a href="#inventory-06-stock-balance"><span class="idx">84</span><span><span class="nm">Stock Balance</span><span class="cd">p-ptech-70<span class="bd real">จริง</span></span></span></a>
+    <a href="#inventory-07-stock-ledger-audit"><span class="idx">85</span><span><span class="nm">Stock Ledger Audit</span><span class="cd">p-ptech-138<span class="bd real">จริง</span></span></span></a>
+    <a href="#inventory-08-stock-movement"><span class="idx">86</span><span><span class="nm">Stock Movement</span><span class="cd">p-ptech-69<span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <a href="#inventory-09-stock-overview"><span class="idx">87</span><span><span class="nm">Stock Overview</span><span class="cd">p-ptech-117<span class="bd real">จริง</span></span></span></a>
+    <div class="nsec" style="color:#8A93A6">รายงาน · INVENTORY</div>
+    <a href="#inventory-rpt-01-material-requisition-form"><span class="idx">88</span><span><span class="nm">Material Requisition Form · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#inventory-rpt-02-transfer-form"><span class="idx">89</span><span><span class="nm">Transfer Form · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#inventory-rpt-03-stock-balance-report"><span class="idx">90</span><span><span class="nm">Stock Balance Report · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <div class="nsec">COSTING · ต้นทุน</div>
+    <a href="#costing-01-standard-cost"><span class="idx">91</span><span><span class="nm">Standard Cost</span><span class="cd">p-ptech-7<span class="bd real">จริง</span></span></span></a>
+    <a href="#costing-02-standard-cost-book"><span class="idx">92</span><span><span class="nm">Standard Cost Book</span><span class="cd">p-ptech-137<span class="bd real">จริง</span></span></span></a>
+    <a href="#costing-03-recalculation"><span class="idx">93</span><span><span class="nm">Recalculation</span><span class="cd">p-ptech-136<span class="bd real">จริง</span></span></span></a>
+    <a href="#costing-04-cost-simulator"><span class="idx">94</span><span><span class="nm">Cost Simulator</span><span class="cd">p-ptech-142<span class="bd real">จริง</span></span></span></a>
+    <a href="#costing-05-cost-comparison"><span class="idx">95</span><span><span class="nm">Cost Comparison</span><span class="cd">p-ptech-119<span class="bd real">จริง</span></span></span></a>
+    <a href="#costing-06-job-cost-sheet"><span class="idx">96</span><span><span class="nm">Job Cost Sheet</span><span class="cd">p-ptech-140<span class="bd sim">ตัวอย่าง</span></span></span></a>
+    <div class="nsec">MASTER DATA · ข้อมูลหลัก</div>
+    <a href="#master-data-01-currency-master"><span class="idx">97</span><span><span class="nm">Currency Master</span><span class="cd">p-ptech-129<span class="bd real">จริง</span></span></span></a>
+    <a href="#master-data-02-customer"><span class="idx">98</span><span><span class="nm">Customer</span><span class="cd">p-ptech-19<span class="bd real">จริง</span></span></span></a>
+    <a href="#master-data-02b-customer-detail"><span class="idx">99</span><span><span class="nm">Customer · หน้ารายละเอียดลูกค้า</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <a href="#master-data-03-vat-master"><span class="idx">100</span><span><span class="nm">VAT Master</span><span class="cd">p-ptech-127<span class="bd real">จริง</span></span></span></a>
+    <a href="#master-data-04-vendor"><span class="idx">101</span><span><span class="nm">Vendor</span><span class="cd">p-ptech-20<span class="bd real">จริง</span></span></span></a>
+    <a href="#master-data-04b-vendor-detail"><span class="idx">102</span><span><span class="nm">Vendor · หน้ารายละเอียดผู้ขาย</span><span class="cd"><span class="bd real">จริง</span></span></span></a>
+    <div class="nsec">PURCHASE · จัดซื้อ</div>
+    <a href="#purchase-01-goods-receipt-po"><span class="idx">103</span><span><span class="nm">Goods Receipt PO</span><span class="cd">p-ptech-115<span class="bd real">จริง</span></span></span></a>
+    <a href="#purchase-02-purchase-order"><span class="idx">104</span><span><span class="nm">Purchase Order</span><span class="cd">p-ptech-132<span class="bd real">จริง</span></span></span></a>
+    <div class="nsec" style="color:#8A93A6">รายงาน · PURCHASE</div>
+    <a href="#purchase-rpt-01-po-register"><span class="idx">105</span><span><span class="nm">Po Register · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+    <a href="#purchase-rpt-02-gr-register"><span class="idx">106</span><span><span class="nm">Gr Register · รายงาน / แบบฟอร์ม — จาก Report Designer</span><span class="cd">Report Designer<span class="bd rpt">รายงาน</span></span></span></a>
+  </nav>
+  <main>
+<div class="slidewrap"><div class="sheet dark" data-key="cover">
+  <div class="cover">
+    <div class="mark"><i></i>BESIDE</div>
+    <h1>ทุกโปรแกรมในระบบ<br><em>77 จอ + 28 รายงาน</em> จากระบบจริง</h1>
+    <p class="sub">แคปจากระบบที่รันจริงทั้งหมด · tenant <b>cmos</b> · ธีม BesideRoyal<br>แยกตามโมดูลในเมนู — เลือกดูจากเมนูซ้าย หรือกด ← → ไล่ทีละจอ</p>
+    <div class="chips"><span>ITEMS · 6</span><span>SALE · 21</span><span>PLANNING · 14</span><span>PRODUCTION · 23</span><span>QUALITY CONTROL · 13</span><span>INVENTORY · 12</span><span>COSTING · 6</span><span>MASTER DATA · 6</span><span>PURCHASE · 4</span></div>
+  </div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="items-01-item-category">
+  <div class="eyebrow">ITEMS · สินค้า · p-ptech-14<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Item Category</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="items/01-item-category.png" alt="Item Category" loading="lazy" data-t="Item Category"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/item-master/itemBrand · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="items-02-item-group">
+  <div class="eyebrow">ITEMS · สินค้า · p-ptech-13<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Item Group</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="items/02-item-group.png" alt="Item Group" loading="lazy" data-t="Item Group"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/item-master/itemGroup · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="items-03-item-master">
+  <div class="eyebrow">ITEMS · สินค้า · p-ptech-16<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Item Master</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="items/03-item-master.png" alt="Item Master" loading="lazy" data-t="Item Master"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/item-master/itemMaster-a · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="items-03b-item-master-detail">
+  <div class="eyebrow">ITEMS · สินค้า<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Item Master<small>หน้ารายละเอียดสินค้า</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="items/03b-item-master-detail.png" alt="Item Master" loading="lazy" data-t="Item Master — หน้ารายละเอียดสินค้า"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="items-04-item-type">
+  <div class="eyebrow">ITEMS · สินค้า · p-ptech-12<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Item Type</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="items/04-item-type.png" alt="Item Type" loading="lazy" data-t="Item Type"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/item-master/itemType · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="items-05-unit-of-measurement">
+  <div class="eyebrow">ITEMS · สินค้า<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Unit Of Measurement</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="items/05-unit-of-measurement.png" alt="Unit Of Measurement" loading="lazy" data-t="Unit Of Measurement"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-01-sale-period">
+  <div class="eyebrow">SALE · งานขาย · p-ptech-108<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Sale Period</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/01-sale-period.png" alt="Sale Period" loading="lazy" data-t="Sale Period"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/sales/salePeriod · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-02-delivery-dl">
+  <div class="eyebrow">SALE · งานขาย · p-ptech-128<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Delivery DL</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/02-delivery-dl.png" alt="Delivery DL" loading="lazy" data-t="Delivery DL"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/sales/p-ptech-109b · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-03-sale-order">
+  <div class="eyebrow">SALE · งานขาย · p-ptech-34<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Sale Order</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/03-sale-order.png" alt="Sale Order" loading="lazy" data-t="Sale Order"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/sales/p-ptech-107a · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-04-sales-approve">
+  <div class="eyebrow">SALE · งานขาย · p-ptech-37<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Sales Approve</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/04-sales-approve.png" alt="Sales Approve" loading="lazy" data-t="Sales Approve"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/sales/saleForecast-summary · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-05-sales-forecast">
+  <div class="eyebrow">SALE · งานขาย · p-ptech-29<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Sales Forecast</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/05-sales-forecast.png" alt="Sales Forecast" loading="lazy" data-t="Sales Forecast"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/sales/saleForecast · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-05b-sales-forecast-detail">
+  <div class="eyebrow">SALE · งานขาย<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Sales Forecast<small>หน้ารายละเอียดแผนขาย</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/05b-sales-forecast-detail.png" alt="Sales Forecast" loading="lazy" data-t="Sales Forecast — หน้ารายละเอียดแผนขาย"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-06-sales-quotation">
+  <div class="eyebrow">SALE · งานขาย · p-ptech-116<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Sales Quotation</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/06-sales-quotation.png" alt="Sales Quotation" loading="lazy" data-t="Sales Quotation"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/sales/p-ptech-108a · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-07-so-sales-forecast">
+  <div class="eyebrow">SALE · งานขาย · p-ptech-32<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>SO Sales Forecast</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/07-so-sales-forecast.png" alt="SO Sales Forecast" loading="lazy" data-t="SO Sales Forecast"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/sales/soSaleForecast · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-08-ap-invoice">
+  <div class="eyebrow">SALE · งานขาย · p-ptech-143<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>AP Invoice</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/08-ap-invoice.png" alt="AP Invoice" loading="lazy" data-t="AP Invoice"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/sales/p-ptech-131a · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-09-ar-invoice">
+  <div class="eyebrow">SALE · งานขาย · p-ptech-144<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>AR Invoice</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/09-ar-invoice.png" alt="AR Invoice" loading="lazy" data-t="AR Invoice"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/sales/p-ptech-132a · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-10-sales-forecast-dashboard">
+  <div class="eyebrow">SALE · งานขาย · p-ptech-121<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>Sales Forecast Dashboard</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/10-sales-forecast-dashboard.png" alt="Sales Forecast Dashboard" loading="lazy" data-t="Sales Forecast Dashboard"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/sales/p-ptech-120 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-rpt-01-back-order-report">
+  <div class="eyebrow">SALE · งานขาย<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Back Order Report<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/reports/01-back-order-report.png" alt="Back Order Report" loading="lazy" data-t="Back Order Report — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-rpt-02-sales-forecast-customer">
+  <div class="eyebrow">SALE · งานขาย<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Sales Forecast Customer<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/reports/02-sales-forecast-customer.png" alt="Sales Forecast Customer" loading="lazy" data-t="Sales Forecast Customer — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-rpt-03-sales-summary">
+  <div class="eyebrow">SALE · งานขาย<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Sales Summary<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/reports/03-sales-summary.png" alt="Sales Summary" loading="lazy" data-t="Sales Summary — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-rpt-04-report-sales-customer">
+  <div class="eyebrow">SALE · งานขาย<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Report Sales Customer<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/reports/04-report-sales-customer.png" alt="Report Sales Customer" loading="lazy" data-t="Report Sales Customer — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-rpt-05-outstanding-documents">
+  <div class="eyebrow">SALE · งานขาย<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Outstanding Documents<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/reports/05-outstanding-documents.png" alt="Outstanding Documents" loading="lazy" data-t="Outstanding Documents — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-rpt-06-doc-status-summary">
+  <div class="eyebrow">SALE · งานขาย<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Doc Status Summary<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/reports/06-doc-status-summary.png" alt="Doc Status Summary" loading="lazy" data-t="Doc Status Summary — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-rpt-07-sq-register">
+  <div class="eyebrow">SALE · งานขาย<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Sq Register<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/reports/07-sq-register.png" alt="Sq Register" loading="lazy" data-t="Sq Register — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-rpt-08-so-register">
+  <div class="eyebrow">SALE · งานขาย<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>So Register<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/reports/08-so-register.png" alt="So Register" loading="lazy" data-t="So Register — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-rpt-09-dl-register">
+  <div class="eyebrow">SALE · งานขาย<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Dl Register<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/reports/09-dl-register.png" alt="Dl Register" loading="lazy" data-t="Dl Register — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="sale-rpt-10-invoice-register">
+  <div class="eyebrow">SALE · งานขาย<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Invoice Register<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="sale/reports/10-invoice-register.png" alt="Invoice Register" loading="lazy" data-t="Invoice Register — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-01-bill-of-material">
+  <div class="eyebrow">PLANNING · วางแผนผลิต · p-ptech-23<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Bill Of Material</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/01-bill-of-material.png" alt="Bill Of Material" loading="lazy" data-t="Bill Of Material"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/planning-b/p-ptech-21 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-01b-bill-of-material-tree">
+  <div class="eyebrow">PLANNING · วางแผนผลิต<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Bill of Material<small>โครงสร้างสูตรหลายชั้น (Tree)</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/01b-bill-of-material-tree.png" alt="Bill of Material" loading="lazy" data-t="Bill of Material — โครงสร้างสูตรหลายชั้น (Tree)"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-02-shift-definition">
+  <div class="eyebrow">PLANNING · วางแผนผลิต · p-ptech-21<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Shift Definition</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/02-shift-definition.png" alt="Shift Definition" loading="lazy" data-t="Shift Definition"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/planning-b/p-ptech-19 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-03-procurement-suggestion">
+  <div class="eyebrow">PLANNING · วางแผนผลิต · p-ptech-28<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Procurement Suggestion</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/03-procurement-suggestion.png" alt="Procurement Suggestion" loading="lazy" data-t="Procurement Suggestion"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/planning-b/p-ptech-25 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-04-shift-scheduling">
+  <div class="eyebrow">PLANNING · วางแผนผลิต · p-ptech-22<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Shift Scheduling</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/04-shift-scheduling.png" alt="Shift Scheduling" loading="lazy" data-t="Shift Scheduling"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/planning-b/detailshiftwork · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-05-work-order">
+  <div class="eyebrow">PLANNING · วางแผนผลิต · p-ptech-95<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Work Order</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/05-work-order.png" alt="Work Order" loading="lazy" data-t="Work Order"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/planning-b/p-ptech-22a · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-05b-work-order-detail">
+  <div class="eyebrow">PLANNING · วางแผนผลิต<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Work Order<small>หน้ารายละเอียดใบสั่งผลิต</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/05b-work-order-detail.png" alt="Work Order" loading="lazy" data-t="Work Order — หน้ารายละเอียดใบสั่งผลิต"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-05c-work-order-board">
+  <div class="eyebrow">PLANNING · วางแผนผลิต<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>Work Order Board<small>บอร์ดการ์ดใบสั่งผลิต — ลากจัดคิวได้</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/05c-work-order-board.png" alt="Work Order Board" loading="lazy" data-t="Work Order Board — บอร์ดการ์ดใบสั่งผลิต — ลากจัดคิวได้"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-06-master-production-schedule">
+  <div class="eyebrow">PLANNING · วางแผนผลิต · p-ptech-24<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>Master Production Schedule</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/06-master-production-schedule.png" alt="Master Production Schedule" loading="lazy" data-t="Master Production Schedule"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/planning-b/p-ptech-23a · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-06b-mps-weekly">
+  <div class="eyebrow">PLANNING · วางแผนผลิต<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>MPS<small>มุมมองรายสัปดาห์</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/06b-mps-weekly.png" alt="MPS" loading="lazy" data-t="MPS — มุมมองรายสัปดาห์"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-07-material-requirements-planning">
+  <div class="eyebrow">PLANNING · วางแผนผลิต · p-ptech-25<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Material Requirements Planning</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/07-material-requirements-planning.png" alt="Material Requirements Planning" loading="lazy" data-t="Material Requirements Planning"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/planning-b/p-ptech-24 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-07b-mrp-heatmap">
+  <div class="eyebrow">PLANNING · วางแผนผลิต<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>MRP<small>มุมมอง Heatmap</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/07b-mrp-heatmap.png" alt="MRP" loading="lazy" data-t="MRP — มุมมอง Heatmap"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-rpt-01-workorder-form">
+  <div class="eyebrow">PLANNING · วางแผนผลิต<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Workorder Form<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/reports/01-workorder-form.png" alt="Workorder Form" loading="lazy" data-t="Workorder Form — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="planning-rpt-02-machine-planning">
+  <div class="eyebrow">PLANNING · วางแผนผลิต<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Machine Planning<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="planning/reports/02-machine-planning.png" alt="Machine Planning" loading="lazy" data-t="Machine Planning — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-01-dashboard-production-plan">
+  <div class="eyebrow">PRODUCTION · ผลิต<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Dashboard Production Plan</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/01-dashboard-production-plan.png" alt="Dashboard Production Plan" loading="lazy" data-t="Dashboard Production Plan"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-02-downtime-cause">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-41<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Downtime Cause</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/02-downtime-cause.png" alt="Downtime Cause" loading="lazy" data-t="Downtime Cause"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/dowtimereason · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-03-machine">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-39<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Machine</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/03-machine.png" alt="Machine" loading="lazy" data-t="Machine"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/machinemas-a · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-03b-machine-detail">
+  <div class="eyebrow">PRODUCTION · ผลิต<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Machine<small>หน้ารายละเอียดเครื่องจักร</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/03b-machine-detail.png" alt="Machine" loading="lazy" data-t="Machine — หน้ารายละเอียดเครื่องจักร"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-04-machine-group">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-38<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Machine Group</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/04-machine-group.png" alt="Machine Group" loading="lazy" data-t="Machine Group"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/machineGroup · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-05-machine-subgroup">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-99<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Machine Subgroup</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/05-machine-subgroup.png" alt="Machine Subgroup" loading="lazy" data-t="Machine Subgroup"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/machineSubGroup · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-06-routing">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-40<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Routing</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/06-routing.png" alt="Routing" loading="lazy" data-t="Routing"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/routing · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-06b-routing-detail">
+  <div class="eyebrow">PRODUCTION · ผลิต<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Routing<small>หน้ารายละเอียดขั้นตอนผลิต</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/06b-routing-detail.png" alt="Routing" loading="lazy" data-t="Routing — หน้ารายละเอียดขั้นตอนผลิต"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-07-standard-cost">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-7<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Standard Cost </h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/07-standard-cost.png" alt="Standard Cost " loading="lazy" data-t="Standard Cost "></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-cst3a · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-08-downtime">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-42<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Downtime</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/08-downtime.png" alt="Downtime" loading="lazy" data-t="Downtime"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-ptech-31 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-09-machine-monitoring1">
+  <div class="eyebrow">PRODUCTION · ผลิต<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Machine Monitoring<small>มุมมองรวมทุกเครื่อง (ภาพชุดใหม่)</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/09-machine-monitoring1.png" alt="Machine Monitoring" loading="lazy" data-t="Machine Monitoring — มุมมองรวมทุกเครื่อง (ภาพชุดใหม่)"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-10-material-issue">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-44<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Material Issue</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/10-material-issue.png" alt="Material Issue" loading="lazy" data-t="Material Issue"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-ptech-33 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-11-material-return">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-47<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Material Return</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/11-material-return.png" alt="Material Return" loading="lazy" data-t="Material Return"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-ptech-34 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-12-product-receipt">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-45<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Product Receipt</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/12-product-receipt.png" alt="Product Receipt" loading="lazy" data-t="Product Receipt"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/product-receipt-b · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-13-oee">
+  <div class="eyebrow">PRODUCTION · ผลิต<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>Oee</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/13-oee.png" alt="Oee" loading="lazy" data-t="Oee"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-14-pareto-downtime">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-120<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>Pareto Downtime</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/14-pareto-downtime.png" alt="Pareto Downtime" loading="lazy" data-t="Pareto Downtime"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-ptech-115 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-15-scrap-pareto">
+  <div class="eyebrow">PRODUCTION · ผลิต · p-ptech-123<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Scrap Pareto</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/15-scrap-pareto.png" alt="Scrap Pareto" loading="lazy" data-t="Scrap Pareto"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-ptech-116 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-rpt-01-production-daily">
+  <div class="eyebrow">PRODUCTION · ผลิต<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Production Daily<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/reports/01-production-daily.png" alt="Production Daily" loading="lazy" data-t="Production Daily — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-rpt-02-material-issue-form">
+  <div class="eyebrow">PRODUCTION · ผลิต<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Material Issue Form<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/reports/02-material-issue-form.png" alt="Material Issue Form" loading="lazy" data-t="Material Issue Form — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-rpt-03-material-return-form">
+  <div class="eyebrow">PRODUCTION · ผลิต<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Material Return Form<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/reports/03-material-return-form.png" alt="Material Return Form" loading="lazy" data-t="Material Return Form — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-rpt-04-product-receipt-form">
+  <div class="eyebrow">PRODUCTION · ผลิต<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Product Receipt Form<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/reports/04-product-receipt-form.png" alt="Product Receipt Form" loading="lazy" data-t="Product Receipt Form — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-rpt-05-product-sticker">
+  <div class="eyebrow">PRODUCTION · ผลิต<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Product Sticker<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/reports/05-product-sticker.png" alt="Product Sticker" loading="lazy" data-t="Product Sticker — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="production-rpt-06-oee-report">
+  <div class="eyebrow">PRODUCTION · ผลิต<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Oee Report<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="production/reports/06-oee-report.png" alt="Oee Report" loading="lazy" data-t="Oee Report — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-01-document-control">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ · p-ptech-103<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Document Control</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/01-document-control.png" alt="Document Control" loading="lazy" data-t="Document Control"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/quality/p-adm13 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-02-product-specification">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ · p-ptech-52<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Product Specification</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/02-product-specification.png" alt="Product Specification" loading="lazy" data-t="Product Specification"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/quality/p-ptech-38 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-02b-product-specification-detail">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Product Specification<small>สเปก QC รายสินค้า</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/02b-product-specification-detail.png" alt="Product Specification" loading="lazy" data-t="Product Specification — สเปก QC รายสินค้า"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-03-qc-properties">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ · p-ptech-51<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>QC Properties</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/03-qc-properties.png" alt="QC Properties" loading="lazy" data-t="QC Properties"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/quality/qcproperties · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-04-scrap-cause">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ · p-ptech-54<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Scrap Cause</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/04-scrap-cause.png" alt="Scrap Cause" loading="lazy" data-t="Scrap Cause"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/quality/p-ptech-40 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-05-product-inspection">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ · p-ptech-53<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>Product Inspection</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/05-product-inspection.png" alt="Product Inspection" loading="lazy" data-t="Product Inspection"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/quality/p-ptech-39 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-05b-product-inspection-choose-doc">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>Product Inspection<small>Popup เลือกเอกสารที่จะตรวจ</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/05b-product-inspection-choose-doc.png" alt="Product Inspection" loading="lazy" data-t="Product Inspection — Popup เลือกเอกสารที่จะตรวจ"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-06-scrap-receipt">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ · p-ptech-55<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Scrap Receipt</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/06-scrap-receipt.png" alt="Scrap Receipt" loading="lazy" data-t="Scrap Receipt"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/quality/p-ptech-41 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-rpt-01-quality-check-sheet">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Quality Check Sheet<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/reports/01-quality-check-sheet.png" alt="Quality Check Sheet" loading="lazy" data-t="Quality Check Sheet — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-rpt-02-certificate-of-analysis">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Certificate Of Analysis<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/reports/02-certificate-of-analysis.png" alt="Certificate Of Analysis" loading="lazy" data-t="Certificate Of Analysis — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-rpt-03-scrap-sticker">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Scrap Sticker<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/reports/03-scrap-sticker.png" alt="Scrap Sticker" loading="lazy" data-t="Scrap Sticker — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-rpt-04-scrap-receipt-form">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Scrap Receipt Form<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/reports/04-scrap-receipt-form.png" alt="Scrap Receipt Form" loading="lazy" data-t="Scrap Receipt Form — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="quality-control-rpt-05-pareto-analysis">
+  <div class="eyebrow">QUALITY CONTROL · คุณภาพ<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Pareto Analysis<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="quality-control/reports/05-pareto-analysis.png" alt="Pareto Analysis" loading="lazy" data-t="Pareto Analysis — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-01-stock-requisition">
+  <div class="eyebrow">INVENTORY · คลังสินค้า · p-ptech-57<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Stock Requisition</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/01-stock-requisition.png" alt="Stock Requisition" loading="lazy" data-t="Stock Requisition"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/inventory/p-ptech-44 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-02-stock-transfer">
+  <div class="eyebrow">INVENTORY · คลังสินค้า · p-ptech-56<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Stock Transfer</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/02-stock-transfer.png" alt="Stock Transfer" loading="lazy" data-t="Stock Transfer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/inventory/p-ptech-45 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-03-batch-tracking">
+  <div class="eyebrow">INVENTORY · คลังสินค้า · p-ptech-97<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Batch Tracking</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/03-batch-tracking.png" alt="Batch Tracking" loading="lazy" data-t="Batch Tracking"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/inventory/p-ptech-46 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-04-idle-material-dashboard">
+  <div class="eyebrow">INVENTORY · คลังสินค้า · p-ptech-141<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Idle Material Dashboard</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/04-idle-material-dashboard.png" alt="Idle Material Dashboard" loading="lazy" data-t="Idle Material Dashboard"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/inventory/p-ptech-129 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-05-inventory-warehouse">
+  <div class="eyebrow">INVENTORY · คลังสินค้า<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Inventory Warehouse</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/05-inventory-warehouse.png" alt="Inventory Warehouse" loading="lazy" data-t="Inventory Warehouse"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-06-stock-balance">
+  <div class="eyebrow">INVENTORY · คลังสินค้า · p-ptech-70<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Stock Balance</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/06-stock-balance.png" alt="Stock Balance" loading="lazy" data-t="Stock Balance"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/inventory/p-ptech-48 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-07-stock-ledger-audit">
+  <div class="eyebrow">INVENTORY · คลังสินค้า · p-ptech-138<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Stock Ledger Audit</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/07-stock-ledger-audit.png" alt="Stock Ledger Audit" loading="lazy" data-t="Stock Ledger Audit"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/inventory/p-ptech-126 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-08-stock-movement">
+  <div class="eyebrow">INVENTORY · คลังสินค้า · p-ptech-69<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>Stock Movement</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/08-stock-movement.png" alt="Stock Movement" loading="lazy" data-t="Stock Movement"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/inventory/p-ptech-47 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-09-stock-overview">
+  <div class="eyebrow">INVENTORY · คลังสินค้า · p-ptech-117<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Stock Overview</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/09-stock-overview.png" alt="Stock Overview" loading="lazy" data-t="Stock Overview"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/inventory/p-ptech-121 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-rpt-01-material-requisition-form">
+  <div class="eyebrow">INVENTORY · คลังสินค้า<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Material Requisition Form<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/reports/01-material-requisition-form.png" alt="Material Requisition Form" loading="lazy" data-t="Material Requisition Form — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-rpt-02-transfer-form">
+  <div class="eyebrow">INVENTORY · คลังสินค้า<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Transfer Form<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/reports/02-transfer-form.png" alt="Transfer Form" loading="lazy" data-t="Transfer Form — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="inventory-rpt-03-stock-balance-report">
+  <div class="eyebrow">INVENTORY · คลังสินค้า<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Stock Balance Report<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="inventory/reports/03-stock-balance-report.png" alt="Stock Balance Report" loading="lazy" data-t="Stock Balance Report — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="costing-01-standard-cost">
+  <div class="eyebrow">COSTING · ต้นทุน · p-ptech-7<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Standard Cost</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="costing/01-standard-cost.png" alt="Standard Cost" loading="lazy" data-t="Standard Cost"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-cst3a · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="costing-02-standard-cost-book">
+  <div class="eyebrow">COSTING · ต้นทุน · p-ptech-137<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Standard Cost Book</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="costing/02-standard-cost-book.png" alt="Standard Cost Book" loading="lazy" data-t="Standard Cost Book"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-ptech-125 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="costing-03-recalculation">
+  <div class="eyebrow">COSTING · ต้นทุน · p-ptech-136<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Recalculation</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="costing/03-recalculation.png" alt="Recalculation" loading="lazy" data-t="Recalculation"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-ptech-123 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="costing-04-cost-simulator">
+  <div class="eyebrow">COSTING · ต้นทุน · p-ptech-142<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Cost Simulator</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="costing/04-cost-simulator.png" alt="Cost Simulator" loading="lazy" data-t="Cost Simulator"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-ptech-130 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="costing-05-cost-comparison">
+  <div class="eyebrow">COSTING · ต้นทุน · p-ptech-119<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Cost Comparison</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="costing/05-cost-comparison.png" alt="Cost Comparison" loading="lazy" data-t="Cost Comparison"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-ptech-124 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="costing-06-job-cost-sheet">
+  <div class="eyebrow">COSTING · ต้นทุน · p-ptech-140<span class="tag sim">ข้อมูลตัวอย่าง</span></div>
+  <h1>Job Cost Sheet</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="costing/06-job-cost-sheet.png" alt="Job Cost Sheet" loading="lazy" data-t="Job Cost Sheet"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/production-b/p-ptech-128 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="master-data-01-currency-master">
+  <div class="eyebrow">MASTER DATA · ข้อมูลหลัก · p-ptech-129<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Currency Master</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="master-data/01-currency-master.png" alt="Currency Master" loading="lazy" data-t="Currency Master"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/administrator/currency-master · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="master-data-02-customer">
+  <div class="eyebrow">MASTER DATA · ข้อมูลหลัก · p-ptech-19<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Customer</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="master-data/02-customer.png" alt="Customer" loading="lazy" data-t="Customer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/planning-b/customer · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="master-data-02b-customer-detail">
+  <div class="eyebrow">MASTER DATA · ข้อมูลหลัก<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Customer<small>หน้ารายละเอียดลูกค้า</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="master-data/02b-customer-detail.png" alt="Customer" loading="lazy" data-t="Customer — หน้ารายละเอียดลูกค้า"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="master-data-03-vat-master">
+  <div class="eyebrow">MASTER DATA · ข้อมูลหลัก · p-ptech-127<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>VAT Master</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="master-data/03-vat-master.png" alt="VAT Master" loading="lazy" data-t="VAT Master"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/sales/p-ptech-112 · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="master-data-04-vendor">
+  <div class="eyebrow">MASTER DATA · ข้อมูลหลัก · p-ptech-20<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Vendor</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="master-data/04-vendor.png" alt="Vendor" loading="lazy" data-t="Vendor"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/planning-b/vendor · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="master-data-04b-vendor-detail">
+  <div class="eyebrow">MASTER DATA · ข้อมูลหลัก<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Vendor<small>หน้ารายละเอียดผู้ขาย</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="master-data/04b-vendor-detail.png" alt="Vendor" loading="lazy" data-t="Vendor — หน้ารายละเอียดผู้ขาย"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="purchase-01-goods-receipt-po">
+  <div class="eyebrow">PURCHASE · จัดซื้อ · p-ptech-115<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Goods Receipt PO</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="purchase/01-goods-receipt-po.png" alt="Goods Receipt PO" loading="lazy" data-t="Goods Receipt PO"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/purchase/p-ptech-105b · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="purchase-02-purchase-order">
+  <div class="eyebrow">PURCHASE · จัดซื้อ · p-ptech-132<span class="tag real">ข้อมูลจริง</span></div>
+  <h1>Purchase Order</h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="purchase/02-purchase-order.png" alt="Purchase Order" loading="lazy" data-t="Purchase Order"></div>
+  <div class="foot"><span class="brand">BESIDE</span>/purchase/p-ptech-110a · tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="purchase-rpt-01-po-register">
+  <div class="eyebrow">PURCHASE · จัดซื้อ<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Po Register<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="purchase/reports/01-po-register.png" alt="Po Register" loading="lazy" data-t="Po Register — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+<div class="slidewrap"><div class="sheet" data-key="purchase-rpt-02-gr-register">
+  <div class="eyebrow">PURCHASE · จัดซื้อ<span class="tag rpt">รายงาน / แบบฟอร์ม</span></div>
+  <h1>Gr Register<small>รายงาน / แบบฟอร์ม — จาก Report Designer</small></h1>
+  <div class="rule"></div>
+  <div class="shot"><img src="purchase/reports/02-gr-register.png" alt="Gr Register" loading="lazy" data-t="Gr Register — รายงาน / แบบฟอร์ม — จาก Report Designer"></div>
+  <div class="foot"><span class="brand">BESIDE</span>tenant cmos · ธีม BesideRoyal · แคป 28 ส.ค. 2569</div>
+</div></div>
+  </main>
+</div>
+<div id="lb"><img alt=""><div class="cap"></div></div>
+<div class="hint">← → เปลี่ยนจอ · F เต็มจอ · 1 กว้าง · 2 ทั้งหน้า · M เมนู · P ตรึง · คลิกภาพเพื่อขยาย</div>
+<script>
+const wraps=[...document.querySelectorAll('.slidewrap')];
+const links=[...document.querySelectorAll('nav a')];
+const nav=document.querySelector('nav');
+const scrim=document.querySelector('.scrim');
+const count=document.getElementById('count');
+const pinBtn=document.getElementById('pin');
+const keys=wraps.map(w=>w.querySelector('.sheet').dataset.key);
+let i=0,hideTimer=null;
+let pinned=false;try{pinned=localStorage.getItem('ps-pin')==='1';}catch(e){}
+function applyPin(){document.body.classList.toggle('pinned',pinned);pinBtn.classList.toggle('on',pinned);if(pinned){nav.classList.add('open');scrim.classList.remove('on');}requestAnimationFrame(fit);}
+function openNav(){clearTimeout(hideTimer);nav.classList.add('open');if(!pinned)scrim.classList.add('on');}
+function closeNav(){if(pinned)return;clearTimeout(hideTimer);nav.classList.remove('open');scrim.classList.remove('on');}
+document.querySelector('.edge').addEventListener('mouseenter',openNav);
+nav.addEventListener('mouseleave',()=>{if(!pinned){hideTimer=setTimeout(closeNav,340);}});
+nav.addEventListener('mouseenter',()=>clearTimeout(hideTimer));
+scrim.addEventListener('click',closeNav);
+document.getElementById('menu').addEventListener('click',()=>{nav.classList.contains('open')?closeNav():openNav();});
+pinBtn.addEventListener('click',()=>{pinned=!pinned;try{localStorage.setItem('ps-pin',pinned?'1':'0');}catch(e){}applyPin();});
+let mode='width';try{mode=localStorage.getItem('ps-zoom')||'width';}catch(e){}
+function fit(){const w=wraps[i];const sheet=w.querySelector('.sheet');const main=document.querySelector('main');
+sheet.style.transform='none';const natH=sheet.offsetHeight,natW=1800;
+const availW=main.clientWidth-36,availH=main.clientHeight-36;
+const s=mode==='page'?Math.min(1,availW/natW,availH/natH):Math.min(1,availW/natW);
+sheet.style.transform='scale('+s+')';w.style.height=(natH*s)+'px';w.style.width=(natW*s)+'px';w.style.margin='0 auto';
+main.style.justifyContent=(natH*s)<availH?'center':'flex-start';
+document.querySelectorAll('#zoom button').forEach(b=>b.classList.toggle('on',b.dataset.m===mode));}
+function setMode(m){mode=m;try{localStorage.setItem('ps-zoom',m);}catch(e){}document.querySelector('main').scrollTop=0;fit();}
+document.querySelectorAll('#zoom button').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.m)));
+const fsBtn=document.getElementById('fs');
+function toggleFs(){if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else document.documentElement.requestFullscreen().catch(()=>{});}
+fsBtn.addEventListener('click',toggleFs);
+document.addEventListener('fullscreenchange',()=>{const on=!!document.fullscreenElement;fsBtn.textContent=on?'✕':'⛶';requestAnimationFrame(fit);});
+function show(n){i=(n+wraps.length)%wraps.length;
+wraps.forEach((w,k)=>w.classList.toggle('on',k===i));
+links.forEach((a,k)=>a.classList.toggle('on',k===i));
+count.textContent=(i+1)+' / '+wraps.length;
+if(links[i])links[i].scrollIntoView({block:'nearest'});
+document.querySelector('main').scrollTop=0;fit();
+if(location.hash.slice(1)!==keys[i])history.replaceState(null,'','#'+keys[i]);}
+links.forEach((a,k)=>a.addEventListener('click',e=>{e.preventDefault();show(k);}));
+document.getElementById('prev').addEventListener('click',()=>show(i-1));
+document.getElementById('next').addEventListener('click',()=>show(i+1));
+const lb=document.getElementById('lb');
+document.querySelectorAll('.shot img').forEach(el=>el.addEventListener('click',()=>{lb.querySelector('img').src=el.src;lb.querySelector('.cap').textContent=el.dataset.t||'';lb.classList.add('on');}));
+lb.addEventListener('click',()=>lb.classList.remove('on'));
+addEventListener('keydown',e=>{
+if(lb.classList.contains('on')){if(e.key==='Escape')lb.classList.remove('on');return;}
+if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(i+1);}
+if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);}
+if(e.key==='Home')show(0);
+if(e.key==='End')show(wraps.length-1);
+if(e.key==='Escape')closeNav();
+if(e.key==='m'||e.key==='M')nav.classList.contains('open')?closeNav():openNav();
+if(e.key==='p'||e.key==='P')pinBtn.click();
+if(e.key==='1')setMode('width');
+if(e.key==='2')setMode('page');
+if(e.key==='f'||e.key==='F')toggleFs();});
+addEventListener('resize',fit);addEventListener('load',fit);
+applyPin();
+const start=keys.indexOf(location.hash.slice(1));show(start>=0?start:0);
+const hint=document.querySelector('.hint');setTimeout(()=>hint.classList.add('show'),500);setTimeout(()=>hint.classList.remove('show'),7000);
+</script>
+</body>
+</html>
