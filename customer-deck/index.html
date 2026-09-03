@@ -555,7 +555,7 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
     <a href="#pain"><span class="idx">2</span><span class="txt"><span class="nm">Hidden Costs</span><span class="cd">ทำไมโรงงานต้องการระบบนี้</span></span></a>
     <a href="#system"><span class="idx">3</span><span class="txt"><span class="nm">System Overview</span><span class="cd">ระบบเดียว ครบทั้งโรงงาน</span></span></a>
     <div class="nsec">ระบบงานหลัก</div>
-    <a href="#sales"><span class="idx">4</span><span class="txt"><span class="nm">Sales Flow</span><span class="cd">เสนอราคา → วางบิล</span></span></a>
+    <a href="#sales"><span class="idx">4</span><span class="txt"><span class="nm">Sales Flow</span><span class="cd">เสนอราคา → ใบกำกับภาษี</span></span></a>
     <a href="#sfdash"><span class="idx">5</span><span class="txt"><span class="nm">Sales Forecast Dashboard</span><span class="cd">แผนขาย vs ยอดจริง</span></span></a>
     <a href="#purchase"><span class="idx">6</span><span class="txt"><span class="nm">Purchase Flow</span><span class="cd">ขอซื้อ → ตั้งหนี้</span></span></a>
     <a href="#relmap"><span class="idx">7</span><span class="txt"><span class="nm">Document Relationship Map</span><span class="cd">ผังสายเอกสารเต็มวงจร</span></span></a>
@@ -651,7 +651,7 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
     <rect x="30" y="40" width="360" height="150" rx="20" fill="#EAF2FE" stroke="#B9D2FA"/>
     <text x="60" y="82" font-size="24" font-weight="700" fill="#0E4CA8">Sales</text>
     <text x="60" y="118" font-size="18" fill="#55617A">ใบเสนอราคา → ใบสั่งขาย</text>
-    <text x="60" y="148" font-size="18" fill="#55617A">ใบส่งของ → วางบิล AR · Back Order</text>
+    <text x="60" y="148" font-size="18" fill="#55617A">ใบส่งของ → ใบกำกับภาษีขาย · Back Order</text>
     <!-- Purchase -->
     <rect x="30" y="230" width="360" height="150" rx="20" fill="#E9F6FD" stroke="#A9DBF5"/>
     <text x="60" y="272" font-size="24" font-weight="700" fill="#1179B8">Purchase</text>
@@ -723,9 +723,9 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
       <div class="cd2">ตัด Stock ตาม Lot จริงที่ขึ้นรถ — ยิงบาร์โค้ดตรวจตอนโหลดได้ด้วย Beside Mobile</div>
     </div>
     <div class="citem">
-      <div class="ch"><span class="no">4</span><div><div class="cn">วางบิลขาย</div><div class="cc">AR Invoice</div></div></div>
-      <div class="shot"><div class="clip"><img width="3360" height="2000" src="img/w-132a.png" alt="AR Invoice" data-t="วางบิลขาย · AR Invoice"></div></div>
-      <div class="cd2">รวบใบส่งของหลายใบมาวางบิลรอบเดียว พร้อมภาษีขายครบถ้วน</div>
+      <div class="ch"><span class="no">4</span><div><div class="cn">ใบกำกับภาษีขาย</div><div class="cc">AR Invoice</div></div></div>
+      <div class="shot"><div class="clip"><img width="3360" height="2000" src="img/w-132a.png" alt="AR Invoice" data-t="ใบกำกับภาษีขาย · AR Invoice"></div></div>
+      <div class="cd2">รวบใบส่งของหลายใบออกใบกำกับภาษีรอบเดียว พร้อมภาษีขายครบถ้วน</div>
     </div>
   </div>
   <div class="chainnote"><span class="ic3">+</span><span><b>Back Order Report</b> ตามของค้างส่งให้อัตโนมัติ — รู้ทันทีว่าลูกค้ารายไหนรอของอะไร ค้างมากี่วัน · <b>Sales Forecast Dashboard</b> เทียบแผนขายกับยอดจริงรายเดือน</span></div>
@@ -1639,7 +1639,7 @@ const EN = {
 "Beside คืออะไร":"What Beside is",
 "ระบบเดียว ครบทั้งโรงงาน":"One system, the whole plant",
 "ระบบงานหลัก":"CORE FLOWS",
-"เสนอราคา → วางบิล":"Quotation → invoice",
+"เสนอราคา → ใบกำกับภาษี":"Quotation → invoice",
 "แผนขาย vs ยอดจริง":"Plan vs actual sales",
 "ขอซื้อ → ตั้งหนี้":"Requisition → AP",
 "Relationship Map (จอจริง)":"Relationship Map (real screen)",
@@ -1710,7 +1710,7 @@ const EN = {
 "ระบบเดียว เชื่อมทุกกระบวนการทั่วทั้งโรงงาน":"One system linking every process in the plant",
 "เอกสารเชื่อมโยงกันตั้งแต่ใบเสนอราคาจนถึงต้นทุนจริงต่อชิ้น พร้อมบันทึกธุรกรรมหน้างานผ่านบาร์โค้ดเข้าสู่ระบบได้ทันที":"Documents link from the quotation all the way to real cost per piece, and floor work is scanned straight into the system",
 "ใบเสนอราคา → ใบสั่งขาย":"Quotation → sales order",
-"ใบส่งของ → วางบิล AR · Back Order":"Delivery → AR invoice · back order",
+"ใบส่งของ → ใบกำกับภาษีขาย · Back Order":"Delivery → AR invoice · back order",
 "ใบขอซื้อ → ใบสั่งซื้อ":"Requisition → purchase order",
 "รับสินค้า GR → ตั้งหนี้ AP":"Goods receipt → AP invoice",
 "ใบสั่งผลิต · เบิก–คืนวัตถุดิบ":"Work order · issue and return material",
@@ -1731,7 +1731,7 @@ const EN = {
 
 /* ── sales ── */
 "จอจริงจากระบบ":"Real screens from the system",
-"ตั้งแต่ใบเสนอราคาถึงวางบิล ข้อมูลเชื่อมต่อกันตลอดกระบวนการ":"From quotation to invoice, the data stays connected the whole way",
+"ตั้งแต่ใบเสนอราคาถึงใบกำกับภาษี ข้อมูลเชื่อมต่อกันตลอดกระบวนการ":"From quotation to invoice, the data stays connected the whole way",
 "ฝ่ายขายสร้างเอกสารต่อเนื่องจากรายการเดิมได้ทันที ลดการป้อนข้อมูลซ้ำ และตรวจสอบย้อนกลับถึงเอกสารต้นทางได้ทุกขั้นตอน":"Sales can build the next document straight from the last one — no re-typing, and every step traces back to where it started",
 "ใบเสนอราคา":"Quotation",
 "ใบเสนอราคา · Sales Quotation":"Quotation · Sales Quotation",
@@ -1742,9 +1742,9 @@ const EN = {
 "ใบส่งของ":"Delivery note",
 "ใบส่งของ · Delivery":"Delivery note · Delivery",
 "ตัด Stock ตาม Lot จริงที่ขึ้นรถ — ยิงบาร์โค้ดตรวจตอนโหลดได้ด้วย Beside Mobile":"Stock is taken from the real lots that go on the truck — scan them at loading with Beside Mobile",
-"วางบิลขาย":"AR invoice",
-"วางบิลขาย · AR Invoice":"AR invoice · AR Invoice",
-"รวบใบส่งของหลายใบมาวางบิลรอบเดียว พร้อมภาษีขายครบถ้วน":"Bill several delivery notes in one go, with output tax complete",
+"ใบกำกับภาษีขาย":"AR invoice",
+"ใบกำกับภาษีขาย · AR Invoice":"Tax invoice · AR Invoice",
+"รวบใบส่งของหลายใบออกใบกำกับภาษีรอบเดียว พร้อมภาษีขายครบถ้วน":"Bill several delivery notes in one go, with output tax complete",
 "<b>Back Order Report</b> ตามของค้างส่งให้อัตโนมัติ — รู้ทันทีว่าลูกค้ารายไหนรอของอะไร ค้างมากี่วัน · <b>Sales Forecast Dashboard</b> เทียบแผนขายกับยอดจริงรายเดือน":"<b>Back Order Report</b> chases open items for you — who is waiting for what, and for how many days · <b>Sales Forecast Dashboard</b> puts the sales plan next to the actual, month by month",
 
 /* ── sfdash ── */
