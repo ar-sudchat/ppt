@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ปฏิบัติการคลัง Live</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap">
+<style>
+:root{--royal:#1466DE;--royal-d:#0B47A0;--sky:#2E9CE8;--lime:#DDF956;--coral:#FF6648;--ok:#2FA37B;}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:#101B2E;color:#DCE6F5;font-family:'Sarabun',sans-serif;
+  font-size:14px;line-height:1.6;display:flex;flex-direction:column;overflow:hidden}
+button{font-family:inherit}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.top{background:var(--royal);color:#fff;flex:none;z-index:40}
+.top-in{display:flex;align-items:center;gap:12px;padding:8px 16px;flex-wrap:wrap}
+.mark{display:flex;align-items:center;gap:9px;font-weight:700;font-size:13.5px}
+.beam{width:24px;height:4px;background:var(--lime);border-radius:2px}
+.idc{font-family:ui-monospace,Menlo,monospace;font-size:11px;font-weight:600;background:#ffffff22;
+  border:1px solid #ffffff44;border-radius:5px;padding:2px 8px}
+.crumb{font-size:12px;opacity:.9}
+.topbtns{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.tb{font-size:11.5px;font-weight:700;border:1px solid #ffffff55;border-radius:7px;padding:4px 12px;
+  background:transparent;color:#fff;cursor:pointer}
+.tb:hover{background:#ffffff22}
+.tb.pri{background:#fff;color:var(--royal-d);border-color:#fff}
+.stagewrap{flex:1;position:relative;min-height:0}
+canvas{display:block}
+.stats{position:absolute;top:10px;left:10px;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 340px)}
+.stat{background:rgba(13,22,38,.75);border:1px solid rgba(255,255,255,.16);border-radius:9px;
+  padding:5px 11px;backdrop-filter:blur(4px);min-width:78px}
+.stat .l{font-size:10px;color:#8FA0BC;line-height:1.3}
+.stat .v{font-size:16px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.stat.lime .v{color:#DDF956}.stat.bad .v{color:#FF8A70}
+.hintbar{position:absolute;top:56px;left:10px;font-size:11px;color:#8FA0BC;background:rgba(13,22,38,.6);
+  border-radius:7px;padding:4px 11px;pointer-events:none;backdrop-filter:blur(3px);max-width:55%}
+.side{position:absolute;top:10px;right:10px;bottom:10px;width:312px;display:flex;flex-direction:column;gap:8px}
+.card{background:rgba(13,22,38,.9);border:1px solid rgba(255,255,255,.18);border-radius:11px;
+  padding:11px 13px;backdrop-filter:blur(6px);font-size:12px}
+.card h4{margin:0 0 7px;font-size:12.5px;font-weight:700;color:#B9C7DE;display:flex;justify-content:space-between;gap:8px}
+.card h4 span{font-weight:600;color:#8FA0BC;font-size:10.5px}
+.card.grow{flex:1;min-height:0;overflow-y:auto}
+.search3{display:flex;gap:6px}
+.search3 input{flex:1;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);border-radius:7px;
+  padding:6px 10px;font:inherit;font-size:12px;color:#fff;outline:none}
+.search3 input::placeholder{color:#7E8DA8}
+.search3 button{border:none;background:var(--royal);color:#fff;font-weight:700;font-size:11.5px;border-radius:7px;padding:6px 12px;cursor:pointer}
+.zx{font-size:10px;font-weight:700;color:#8FA0BC}
+.selcode{font-size:15px;font-family:ui-monospace,Menlo,monospace;color:#fff;font-weight:700;margin:1px 0 2px}
+.selsub{font-size:10.5px;color:#8FA0BC;margin-bottom:7px}
+.pal{border:1px solid rgba(255,255,255,.15);border-radius:9px;padding:8px 10px;font-size:11.5px;
+  line-height:1.5;margin-bottom:7px;background:rgba(255,255,255,.03)}
+.pal .h{display:flex;justify-content:space-between;gap:8px}
+.pal .h b{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#fff}
+.pal .h span{font-size:10px;color:#8FA0BC}
+.pal .s{color:#9AA9C4;font-size:10.5px}
+.pal .act{display:flex;gap:5px;margin-top:6px}
+.pal .act button{flex:1;font-size:10.5px;font-weight:700;border-radius:6px;padding:4px;cursor:pointer;
+  border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.07);color:#fff}
+.pal .act button:hover{border-color:#DDF956;color:#DDF956}
+.pal .act button.warn:hover{border-color:#FF6648;color:#FF8A70}
+.empty{color:#8FA0BC;font-size:11px;text-align:center;padding:10px 4px;line-height:1.6}
+.itrow{display:flex;justify-content:space-between;gap:8px;padding:4px 2px;border-bottom:1px dashed rgba(255,255,255,.1);
+  font-size:11.5px;cursor:pointer;border-radius:5px}
+.itrow:hover{background:rgba(255,255,255,.05)}
+.itrow.on{background:rgba(221,249,86,.1)}
+.itrow .n{color:#DCE6F5}.itrow .n small{color:#8FA0BC;display:block;font-size:10px}
+.itrow .q{text-align:right;font-variant-numeric:tabular-nums;color:#fff;font-weight:700}
+.itrow .q small{color:#8FA0BC;font-weight:400;display:block;font-size:10px}
+.lg{font-size:10.5px;padding:4px 2px;border-bottom:1px dashed rgba(255,255,255,.08);line-height:1.5;color:#9AA9C4}
+.lg b{color:#fff;font-weight:600}
+.lg .tt{color:#6E86B4;font-family:ui-monospace,Menlo,monospace;font-size:9.5px}
+.lg .mv{color:#5FB2EE}.lg .in{color:#5FD6A4}.lg .out{color:#FF8A70}
+.gmsg{position:absolute;left:50%;transform:translateX(-50%);bottom:16px;
+  background:rgba(13,22,38,.9);border:1px solid #DDF956;border-radius:10px;
+  padding:8px 18px;font-size:12.5px;color:#fff;display:none;white-space:nowrap;z-index:30}
+.gmsg.show{display:block}
+.gmsg b{color:#DDF956}
+.gmsg button{margin-left:10px;border:1px solid rgba(255,255,255,.3);background:none;color:#8FA0BC;
+  border-radius:6px;font-size:10.5px;padding:2px 9px;cursor:pointer}
+/* modal รับของ */
+.modal{position:fixed;inset:0;background:rgba(5,9,15,.6);display:none;align-items:center;justify-content:center;z-index:100}
+.modal.show{display:flex}
+.mbox{width:320px;background:#141C2E;border:1px solid rgba(255,255,255,.2);border-radius:13px;padding:16px 18px}
+.mbox h3{margin:0 0 4px;font-size:15px;color:#fff}
+.mbox .ms{font-size:11px;color:#8FA0BC;margin-bottom:11px}
+.mrow{margin-bottom:9px}
+.mrow label{display:block;font-size:11px;color:#B9C7DE;margin-bottom:3px}
+.mrow select,.mrow input{width:100%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);
+  border-radius:7px;padding:7px 10px;font:inherit;font-size:12px;color:#fff;outline:none}
+.mrow select option{background:#141C2E}
+.mbtns{display:flex;gap:7px;margin-top:13px}
+.mbtns button{flex:1;border-radius:8px;padding:8px;font-size:12.5px;font-weight:700;cursor:pointer;border:none}
+.mbtns .ok{background:var(--royal);color:#fff}
+.mbtns .gh{background:rgba(255,255,255,.08);color:#8FA0BC;border:1px solid rgba(255,255,255,.2)}
+.toasts{position:fixed;top:64px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;
+  gap:7px;z-index:200;align-items:center;pointer-events:none}
+.toast{background:#0B1119;color:#E6EDF6;font-size:12px;font-weight:600;border-radius:9px;
+  border:1px solid rgba(255,255,255,.2);padding:8px 15px;opacity:0;transform:translateY(-8px);transition:all .25s}
+.toast.show{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+@media (max-width:820px){.side{width:250px}.stats{max-width:calc(100% - 280px)}}
+</style>
+</head>
+<body>
+<div class="top"><div class="top-in">
+  <span class="mark"><span class="beam"></span> BESIDE · WMS</span>
+  <span class="idc">p-ptech-147a</span>
+  <span class="crumb">คลังสินค้า › <b>ปฏิบัติการคลัง (Live)</b> › ผังจากโหมดสร้าง</span>
+  <span class="topbtns">
+    <button class="tb pri" id="bt-recv">＋ รับของเข้า</button>
+    <button class="tb" id="bt-reload">โหลดผังจาก Builder ใหม่</button>
+    <button class="tb" id="bt-reset">รีเซ็ตสต๊อก</button>
+  </span>
+</div></div>
+<div class="stagewrap" id="stage">
+  <div class="stats" id="stats"></div>
+  <div class="hintbar">คลิกพาเลท = ดูของ/สั่งย้าย-เบิก · คลิกช่องว่าง = ดูรหัสช่อง · ลาก = หมุน · ล้อ = ซูม · ลากขวา/Shift = เลื่อน</div>
+  <div class="side">
+    <div class="card"><div class="search3">
+      <input id="q" placeholder="ค้นหา พาเลท / ล็อต / สินค้า / รหัสช่อง">
+      <button id="qgo">บิน</button></div></div>
+    <div class="card" id="selcard"><h4>ช่องที่เลือก</h4>
+      <div class="empty">คลิกพาเลทหรือช่องในภาพ</div></div>
+    <div class="card grow" id="sumcard"><h4>จำนวนตามสินค้า <span>คลิกเพื่อไฮไลต์</span></h4><div id="sumbody"></div></div>
+    <div class="card" style="max-height:170px;overflow-y:auto" id="logcard"><h4>เคลื่อนไหวล่าสุด</h4><div id="logbody"><div class="empty">ยังไม่มีรายการ</div></div></div>
+  </div>
+  <div class="gmsg" id="gmsg"></div>
+</div>
+<div class="modal" id="rmodal"><div class="mbox">
+  <h3>รับของเข้า (GRN)</h3>
+  <div class="ms">พาเลทใหม่จะเกิดที่ท่ารับของ แล้วให้สั่งเก็บเข้าช่อง — ระบบแนะช่องให้ตามลำดับเดินหยิบ</div>
+  <div class="mrow"><label>สินค้า</label><select id="r-item"></select></div>
+  <div class="mrow"><label>จำนวน</label><input id="r-qty" type="number" value="1000" min="1"></div>
+  <div class="mrow"><label>ล็อต</label><input id="r-lot" value=""></div>
+  <div class="mbtns"><button class="gh" id="r-cancel">ยกเลิก</button><button class="ok" id="r-ok">รับเข้า</button></div>
+</div></div>
+<div class="toasts" id="toasts"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ═══ โหลดผังจาก Builder (localStorage เดียวกัน) ═══ */
+const pad=(n,w)=>String(n).padStart(w,'0');
+const SAMPLE=[
+  {id:1,type:'dock',x:-16,z:14.5,rot:0,props:{}},
+  {id:2,type:'dock',x:-11,z:14.5,rot:0,props:{}},
+  {id:3,type:'dock',x:12,z:14.5,rot:0,props:{}},
+  {id:4,type:'dock',x:17,z:14.5,rot:0,props:{}},
+  {id:5,type:'zone',x:-15,z:6,rot:0,props:{kind:0,w:9,d:5}},
+  {id:6,type:'zone',x:-5.5,z:6,rot:0,props:{kind:2,w:8,d:5}},
+  {id:7,type:'zone',x:12,z:6,rot:0,props:{kind:1,w:12,d:5}},
+  {id:8,type:'zone',x:17,z:-13.6,rot:0,props:{kind:3,w:5,d:2.6}},
+  {id:9,type:'rack',x:-10.5,z:1,rot:0,props:{bays:11,levels:3,cap:2,aisle:'A'}},
+  {id:10,type:'rack',x:10.5,z:1,rot:0,props:{bays:11,levels:3,cap:2,aisle:'B'}},
+  {id:11,type:'rack',x:-10.5,z:-3.2,rot:0,props:{bays:11,levels:3,cap:2,aisle:'C'}},
+  {id:12,type:'rack',x:10.5,z:-3.2,rot:0,props:{bays:11,levels:3,cap:2,aisle:'D'}},
+  {id:13,type:'rack',x:-10.5,z:-7.4,rot:0,props:{bays:11,levels:3,cap:2,aisle:'E'}},
+  {id:14,type:'rack',x:10.5,z:-7.4,rot:0,props:{bays:11,levels:3,cap:2,aisle:'F'}},
+  {id:15,type:'shelf',x:-10.5,z:-11.6,rot:0,props:{bays:12,levels:3,cap:1,scheme:3,aisle:'P1'}},
+  {id:16,type:'shelf',x:10.5,z:-11.6,rot:0,props:{bays:12,levels:3,cap:1,scheme:3,aisle:'P2'}},
+  {id:17,type:'pillar',x:0,z:1,rot:0,props:{}},
+  {id:18,type:'pillar',x:0,z:-3.2,rot:0,props:{}},
+  {id:19,type:'pillar',x:0,z:-7.4,rot:0,props:{}},
+  {id:20,type:'pillar',x:0,z:-11.6,rot:0,props:{}},
+  {id:21,type:'fork',x:-15.5,z:12,rot:0,props:{}},
+  {id:22,type:'fork',x:5,z:-1.1,rot:90,props:{}},
+  {id:23,type:'office',x:-19,z:10.8,rot:90,props:{}},
+  {id:24,type:'office',x:-19,z:13,rot:90,props:{}},
+  {id:25,type:'fork',x:-5,z:-1.1,rot:90,props:{}},
+  {id:26,type:'fork',x:-7,z:-9.5,rot:90,props:{}},
+  {id:27,type:'fork',x:14,z:11.5,rot:90,props:{}},
+  {id:28,type:'mark',x:-9,z:12.9,rot:0,props:{kind:1,len:18}},
+  {id:29,type:'mark',x:9,z:12.9,rot:0,props:{kind:1,len:18}},
+  {id:30,type:'mark',x:0,z:-1,rot:90,props:{kind:1,len:26}},
+  {id:31,type:'mark',x:-10.5,z:-1.1,rot:0,props:{kind:1,len:16}},
+  {id:32,type:'mark',x:10.5,z:-1.1,rot:0,props:{kind:1,len:16}},
+  {id:33,type:'mark',x:-10.5,z:-5.3,rot:0,props:{kind:1,len:16}},
+  {id:34,type:'mark',x:10.5,z:-5.3,rot:0,props:{kind:1,len:16}},
+  {id:35,type:'mark',x:-10.5,z:-9.5,rot:0,props:{kind:1,len:16}},
+  {id:36,type:'mark',x:10.5,z:-9.5,rot:0,props:{kind:1,len:16}},
+  {id:37,type:'mark',x:-13,z:10.2,rot:180,props:{kind:0,len:6}},
+  {id:38,type:'mark',x:0,z:9.6,rot:180,props:{kind:0,len:6}},
+  {id:39,type:'mark',x:5,z:3.4,rot:270,props:{kind:0,len:6}},
+  {id:40,type:'mark',x:15,z:10.2,rot:0,props:{kind:0,len:6}},
+  {id:41,type:'mark',x:-19,z:7.5,rot:90,props:{kind:2,len:6}},
+  {id:42,type:'mark',x:12,z:12.6,rot:0,props:{kind:2,len:6}},
+  {id:43,type:'mark',x:17,z:12.6,rot:0,props:{kind:2,len:6}}];
+let LAYOUT=[],layoutFromBuilder=false;
+function loadLayout(){
+  try{const d=JSON.parse(localStorage.getItem('wms-builder-v2'));
+    if(d&&d.OBJ&&d.OBJ.length){LAYOUT=d.OBJ;layoutFromBuilder=true;return}}catch(e){}
+  LAYOUT=SAMPLE;layoutFromBuilder=false;
+}
+loadLayout();
+const layoutHash=JSON.stringify(LAYOUT).length+':'+LAYOUT.length;
+
+/* ═══ ฉาก ═══ */
+const FLOOR_W=40,FLOOR_D=30;
+const ZONEKINDS=[{k:'RECV',t:'ท่ารับของ',c:0x2E9CE8},{k:'STAGE',t:'พักรอส่ง',c:0x8FB4E8},
+  {k:'QC',t:'พักรอ QC',c:0xE5A85A},{k:'SCRAP',t:'ของเสีย',c:0xFF6648}];
+const MARKKINDS=[{k:'ARROW'},{k:'LINE'},{k:'ZEBRA'}];
+const SCHEMES=[{post:0x1D4E9E,beam:0xE8641B},{post:0x4A7D57,beam:0xE8641B},
+  {post:0xE8641B,beam:0x1D4E9E},{post:0xA7B2BF,beam:0x8E99A8},{post:0x3D5379,beam:0x50699A}];
+const stage=document.getElementById('stage');
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+stage.insertBefore(renderer.domElement,stage.firstChild);
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x101B2E);scene.fog=new THREE.Fog(0x101B2E,55,120);
+const camera=new THREE.PerspectiveCamera(48,1,0.1,300);
+scene.add(new THREE.HemisphereLight(0xBFD4F2,0x1A2438,0.95));
+const sun=new THREE.DirectionalLight(0xFFF4E0,0.85);sun.position.set(20,28,12);scene.add(sun);
+const fl2=new THREE.DirectionalLight(0x6FA6F5,0.25);fl2.position.set(-16,10,-18);scene.add(fl2);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(FLOOR_W,FLOOR_D),new THREE.MeshLambertMaterial({color:0x18263E}));
+floor.rotation.x=-Math.PI/2;scene.add(floor);
+const grid=new THREE.GridHelper(FLOOR_W,FLOOR_W*2,0x24344F,0x1D2B45);
+grid.position.y=0.01;grid.scale.z=FLOOR_D/FLOOR_W;scene.add(grid);
+const _matC={};function matC(c){if(!_matC[c])_matC[c]=new THREE.MeshLambertMaterial({color:c});return _matC[c]}
+const woodMat=matC(0x8A6B44),guardM=matC(0xF2C230);
+const _texC={};
+function cachedTex(key,draw){if(_texC[key])return _texC[key];
+  const cv2=document.createElement('canvas');cv2.width=256;cv2.height=128;
+  draw(cv2.getContext('2d'),cv2);
+  const t=new THREE.CanvasTexture(cv2);t.anisotropy=4;_texC[key]=t;return t}
+const numTex=n=>cachedTex('n'+n,g=>{g.font='700 92px Sarabun,sans-serif';g.fillStyle='#C7D3E8';
+  g.textAlign='center';g.textBaseline='middle';g.fillText(pad(n,2),128,66)});
+const ltrTex=c=>cachedTex('l'+c,g=>{const fs=c.length<=1?100:c.length<=2?84:c.length<=4?60:44;
+  g.font='700 '+fs+'px Sarabun,sans-serif';g.fillStyle='#FFFFFF';
+  g.textAlign='center';g.textBaseline='middle';g.fillText(c,128,66)});
+const zoneTex=(t,c)=>cachedTex('z'+t,g=>{g.font='700 52px Sarabun,sans-serif';g.fillStyle=c;
+  g.textAlign='center';g.textBaseline='middle';g.fillText(t,128,64)});
+
+/* วาดผัง (อ่านอย่างเดียว) + สร้างตาราง slot */
+const SLOTS=[]; // {code,x,y,z,type:'RACK'|'FLOOR',zone,aisle,bay,lv,seq}
+function rot2(px,pz,rot){const r=-rot*Math.PI/180,c=Math.cos(r),s=Math.sin(r);
+  return [px*c - pz*s, px*s + pz*c]}
+LAYOUT.forEach(o=>{
+  const g=new THREE.Group();g.position.set(o.x,0,o.z);g.rotation.y=-o.rot*Math.PI/180;scene.add(g);
+  const t=o.type,p=o.props||{};
+  if(t==='rack'||t==='shelf'){
+    const lvH=t==='rack'?1.7:1.1,levels=p.levels||3,bays=p.bays||8,cap=p.cap||1;
+    const bayW=t==='rack'?1.5:1.3,w=bays*bayW,d=t==='rack'?1.2:1.0;
+    const sch=SCHEMES[p.scheme??0];
+    const postG=new THREE.BoxGeometry(0.09,levels*lvH+0.6,0.09);
+    for(let i=0;i<=bays;i++)[-d/2,d/2].forEach(dz=>{
+      const m=new THREE.Mesh(postG,matC(sch.post));m.position.set(-w/2+i*bayW,(levels*lvH+0.6)/2,dz);g.add(m)});
+    const beamG=new THREE.BoxGeometry(w,0.07,0.08);
+    for(let l=1;l<=levels;l++)[-d/2,d/2].forEach(dz=>{
+      const m=new THREE.Mesh(beamG,matC(sch.beam));m.position.set(0,l*lvH+0.18,dz);g.add(m)});
+    if(t==='rack')[[-w/2],[w/2]].forEach(([px])=>[-d/2,d/2].forEach(dz=>{
+      const gd=new THREE.Mesh(new THREE.BoxGeometry(0.16,0.42,0.16),guardM);
+      gd.position.set(px,0.21,dz);g.add(gd)}));
+    const base=new THREE.Mesh(new THREE.BoxGeometry(w,0.06,d),matC(0x2A3B5C));
+    base.position.y=0.03;g.add(base);
+    const aisle=p.aisle||'?';const topH=levels*lvH+0.6;
+    const sbg=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.85,1.5),matC(0x0B47A0));
+    sbg.position.set(-w/2+0.15,topH+0.85,0);g.add(sbg);
+    [[0.06],[-0.06]].forEach(([dx])=>{
+      const sp=new THREE.Mesh(new THREE.PlaneGeometry(1.3,0.72),
+        new THREE.MeshBasicMaterial({map:ltrTex(aisle),transparent:true}));
+      sp.rotation.y=dx>0?Math.PI/2:-Math.PI/2;sp.position.set(-w/2+0.15+dx,topH+0.85,0);g.add(sp)});
+    for(let i=1;i<=bays;i++){
+      const bx=-w/2+(i-0.5)*bayW;
+      [[d/2+0.015,0],[-d/2-0.015,Math.PI]].forEach(([dz,ry])=>{
+        const bl=new THREE.Mesh(new THREE.PlaneGeometry(0.62,0.3),
+          new THREE.MeshBasicMaterial({map:numTex(i),transparent:true}));
+        bl.rotation.y=ry;bl.position.set(bx,0.42,dz);g.add(bl)});
+      /* slot pallet ต่อช่อง×ชั้น×ตำแหน่ง */
+      for(let l=0;l<levels;l++)for(let sl=0;sl<cap;sl++){
+        const off=cap>1?(sl===0?-bayW*0.24:bayW*0.24):0;
+        const [wx,wz]=rot2(bx+off,0,o.rot);
+        SLOTS.push({code:`${aisle}-${pad(i,2)}-${String.fromCharCode(65+l)}${cap>1?'/'+(sl+1):''}`,
+          x:o.x+wx,y:l*lvH+(l===0?0.05:0.24),z:o.z+wz,rot:o.rot,
+          pw:cap>1?bayW*0.40:bayW*0.72,pd:d*0.78,
+          type:'RACK',zone:'ชั้นวาง แถว '+aisle,aisle,bay:i,lv:String.fromCharCode(65+l),
+          seq:(aisle.charCodeAt(0)*1000)+(i*10)+l});
+      }
+    }
+  }else if(t==='zone'){
+    const kind=ZONEKINDS[p.kind||0],w=p.w||5,d=p.d||6;
+    const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),
+      new THREE.MeshBasicMaterial({color:kind.c,transparent:true,opacity:0.15,depthWrite:false}));
+    m.rotation.x=-Math.PI/2;m.position.y=0.02;g.add(m);
+    const eg=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(w,d)),
+      new THREE.LineBasicMaterial({color:kind.c,transparent:true,opacity:0.8}));
+    eg.rotation.x=-Math.PI/2;eg.position.y=0.03;g.add(eg);
+    const tl=new THREE.Mesh(new THREE.PlaneGeometry(Math.min(w*0.9,4),Math.min(w*0.9,4)/4),
+      new THREE.MeshBasicMaterial({map:zoneTex(kind.t,'#'+kind.c.toString(16).padStart(6,'0')),transparent:true,depthWrite:false}));
+    tl.rotation.x=-Math.PI/2;tl.position.y=0.04;g.add(tl);
+    /* โซนพื้น = slot วางพาเลทแบบตาราง */
+    const cols=Math.max(1,Math.floor(w/1.6)),rows=Math.max(1,Math.floor(d/1.6));
+    let n=1;
+    for(let r=0;r<rows;r++)for(let c2=0;c2<cols;c2++){
+      const lx=-w/2+0.9+c2*1.6,lz=-d/2+0.9+r*1.6;
+      if(lx>w/2-0.5||lz>d/2-0.5)continue;
+      const [wx,wz]=rot2(lx,lz,o.rot);
+      SLOTS.push({code:`${kind.k}-${pad(n++,2)}`,x:o.x+wx,y:0.05,z:o.z+wz,rot:o.rot,
+        pw:1.1,pd:1.1,type:kind.k,zone:kind.t,aisle:kind.k,bay:n,lv:'',seq:900000+n});
+    }
+  }else if(t==='dock'){
+    const w=4,d=1.0;
+    const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),
+      new THREE.MeshBasicMaterial({color:0xDDF956,transparent:true,opacity:0.5,depthWrite:false}));
+    m.rotation.x=-Math.PI/2;m.position.y=0.025;g.add(m);
+    for(let i=0;i<4;i++){const s2=new THREE.Mesh(new THREE.PlaneGeometry(w/9,d),
+      new THREE.MeshBasicMaterial({color:0x101B2E,transparent:true,opacity:0.9,depthWrite:false}));
+      s2.rotation.x=-Math.PI/2;s2.position.set(-w/2+w*(i+0.5)/4,0.026,0);g.add(s2)}
+    const fr=new THREE.Mesh(new THREE.BoxGeometry(w+0.4,3.2,0.18),matC(0x3D5379));
+    fr.position.set(0,1.6,-d/2);g.add(fr);
+  }else if(t==='wall'){
+    const m=new THREE.Mesh(new THREE.BoxGeometry(p.len||6,3,0.3),matC(0x2E4066));m.position.y=1.5;g.add(m);
+  }else if(t==='pillar'){
+    const m=new THREE.Mesh(new THREE.BoxGeometry(0.7,5.2,0.7),matC(0x36486E));m.position.y=2.6;g.add(m);
+    const wn=new THREE.Mesh(new THREE.BoxGeometry(0.72,0.5,0.72),new THREE.MeshBasicMaterial({color:0xDDF956}));
+    wn.position.y=0.55;g.add(wn);
+  }else if(t==='fork'){
+    const body=new THREE.Mesh(new THREE.BoxGeometry(1.1,0.52,1.35),matC(0xE59A2B));body.position.set(0,0.5,0.45);g.add(body);
+    const roof=new THREE.Mesh(new THREE.BoxGeometry(1.05,0.06,1.1),matC(0x9AA8C2));roof.position.set(0,1.85,0.5);g.add(roof);
+    [[-0.48,0.05],[0.48,0.05],[-0.48,0.95],[0.48,0.95]].forEach(([px,pz])=>{
+      const pp=new THREE.Mesh(new THREE.BoxGeometry(0.06,1.05,0.06),matC(0x9AA8C2));pp.position.set(px,1.3,pz);g.add(pp)});
+    [[-0.3],[0.3]].forEach(([px])=>{const fk=new THREE.Mesh(new THREE.BoxGeometry(0.14,0.05,0.95),matC(0x9AA8C2));
+      fk.position.set(px,0.09,-0.85);g.add(fk)});
+  }else if(t==='office'){
+    const top=new THREE.Mesh(new THREE.BoxGeometry(1.7,0.06,0.75),matC(0x8A96AE));top.position.set(0,0.74,-0.3);g.add(top);
+    const scr=new THREE.Mesh(new THREE.BoxGeometry(0.62,0.4,0.05),matC(0x22304A));scr.position.set(0,1.12,-0.5);g.add(scr);
+    const glow=new THREE.Mesh(new THREE.PlaneGeometry(0.56,0.34),new THREE.MeshBasicMaterial({color:0x5FB2EE}));
+    glow.position.set(0,1.12,-0.47);g.add(glow);
+    const st=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.08,0.5),matC(0x22304A));st.position.set(0,0.46,0.42);g.add(st);
+  }else if(t==='mark'){
+    const kind=MARKKINDS[p.kind||0].k;
+    if(kind==='ARROW'){
+      const tx=cachedTex('arrow',g2=>{g2.canvas.width=256;g2.canvas.height=256;
+        g2.strokeStyle='#DDF956';g2.fillStyle='#DDF956';g2.lineWidth=34;g2.lineCap='round';
+        g2.beginPath();g2.moveTo(128,225);g2.lineTo(128,95);g2.stroke();
+        g2.beginPath();g2.moveTo(128,20);g2.lineTo(60,120);g2.lineTo(196,120);g2.closePath();g2.fill()});
+      const m=new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.MeshBasicMaterial({map:tx,transparent:true,depthWrite:false}));
+      m.rotation.x=-Math.PI/2;m.position.y=0.035;g.add(m);
+    }else if(kind==='LINE'){
+      const m=new THREE.Mesh(new THREE.PlaneGeometry(p.len||6,0.45),
+        new THREE.MeshBasicMaterial({color:0xDDF956,transparent:true,opacity:0.7,depthWrite:false}));
+      m.rotation.x=-Math.PI/2;m.position.y=0.035;g.add(m);
+    }else{
+      const tx=cachedTex('zebra',g2=>{g2.canvas.width=256;g2.canvas.height=170;
+        g2.fillStyle='#E8EEF9';for(let i=0;i<6;i++)g2.fillRect(10+i*42,10,26,150)});
+      const m=new THREE.Mesh(new THREE.PlaneGeometry(3,2),new THREE.MeshBasicMaterial({map:tx,transparent:true,depthWrite:false}));
+      m.rotation.x=-Math.PI/2;m.position.y=0.035;g.add(m);
+    }
+  }
+});
+const slotByCode=Object.fromEntries(SLOTS.map(s=>[s.code,s]));
+
+/* ═══ สต๊อก — สร้างครั้งแรกจากผัง แล้วเซฟการเปลี่ยนแปลงจริง ═══ */
+const ITEMS=[
+  {c:'RM-PP-1100',n:'เม็ดพลาสติก PP โฮโมพอลิเมอร์',u:'KG',q:1000},
+  {c:'RM-PE-0450',n:'เม็ดพลาสติก LDPE เกรดฟิล์ม',u:'KG',q:800},
+  {c:'RM-HD-0210',n:'เม็ดพลาสติก HDPE เกรดถุง',u:'KG',q:900},
+  {c:'RM-MB-BLU',n:'มาสเตอร์แบตช์ สีน้ำเงิน',u:'KG',q:25},
+  {c:'PK-CT-4060',n:'กล่องกระดาษลูกฟูก 40×60',u:'ใบ',q:400},
+  {c:'PK-BAG-25',n:'ถุงบรรจุ 25 กก.',u:'ใบ',q:500}];
+const ITEM_COL={'RM-PP-1100':0x2E9CE8,'RM-PE-0450':0x6FA6F5,'RM-HD-0210':0x1466DE,
+  'RM-MB-BLU':0x84AFFB,'PK-CT-4060':0xB08D57,'PK-BAG-25':0x4A8AE8};
+let STOCK={};   // code -> {lpn,item,lot,qty,age}
+let LOG=[],lpnSeq=500;
+function h32(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)/4294967296}
+function genStock(){
+  STOCK={};LOG=[];lpnSeq=500;
+  SLOTS.filter(s=>s.type==='RACK').forEach(s=>{
+    if(h32(s.code+'occ')>=0.62)return;
+    const it=ITEMS[Math.floor(h32(s.code+'itm')*ITEMS.length)];
+    const age=Math.floor(Math.pow(h32(s.code+'age'),1.6)*120);
+    STOCK[s.code]={lpn:'PLT-6908-'+pad(lpnSeq++,5),item:it.c,
+      lot:'B69'+pad(Math.max(1,8-Math.floor(age/30)),2)+'-'+pad(1+Math.floor(h32(s.code+'lot')*120),3),
+      qty:it.q,age};
+  });
+}
+function persist(){try{localStorage.setItem('wms-ops-v1',
+  JSON.stringify({layoutHash,STOCK,LOG:LOG.slice(0,40),lpnSeq}))}catch(e){}}
+(function(){
+  try{const d=JSON.parse(localStorage.getItem('wms-ops-v1'));
+    if(d&&d.layoutHash===layoutHash&&d.STOCK){STOCK=d.STOCK;LOG=d.LOG||[];lpnSeq=d.lpnSeq||900;return}
+  }catch(e){}
+  genStock();persist();
+})();
+
+/* mesh พาเลท + กล่องรับคลิกช่องว่าง */
+const palGrp=new Map();   // code -> Group
+const slotHits=[];        // invisible box ทุก slot
+function palletMesh(s,st){
+  const g=new THREE.Group();
+  const pal=new THREE.Mesh(new THREE.BoxGeometry(s.pw,0.09,s.pd),woodMat);
+  pal.position.y=0.045;g.add(pal);
+  const ch=0.5+h32((st.lpn||s.code)+'h')*0.75;
+  const cg=new THREE.Mesh(new THREE.BoxGeometry(s.pw*0.94,ch,s.pd*0.92),
+    new THREE.MeshLambertMaterial({color:ITEM_COL[st.item]||0x6FA6F5}));
+  cg.position.y=0.09+ch/2;cg.userData.slot=s.code;g.add(cg);
+  g.position.set(s.x,s.y,s.z);g.rotation.y=-s.rot*Math.PI/180;
+  return g;
+}
+function drawStock(){
+  palGrp.forEach(g=>scene.remove(g));palGrp.clear();
+  Object.entries(STOCK).forEach(([code,st])=>{
+    const s=slotByCode[code];if(!s)return;
+    const g=palletMesh(s,st);palGrp.set(code,g);scene.add(g);
+  });
+}
+SLOTS.forEach(s=>{
+  const hit=new THREE.Mesh(new THREE.BoxGeometry(s.pw+0.15,1.15,s.pd+0.15),
+    new THREE.MeshBasicMaterial({visible:false}));
+  hit.position.set(s.x,s.y+0.55,s.z);hit.userData.slot=s.code;
+  scene.add(hit);slotHits.push(hit);
+});
+drawStock();
+function addLog(ty,txt){
+  LOG.unshift({ty,txt,tt:new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'})});
+  if(LOG.length>40)LOG.pop();renderLog();persist();
+}
+
+/* ═══ กล้อง + ray ═══ */
+let target=new THREE.Vector3(0,0.8,0),sph={r:40,phi:0.86,theta:0.70};  // เห็นอาคาร 40×30 ทั้งหลังตั้งแต่เปิด
+function updCam(){camera.position.set(
+  target.x+sph.r*Math.sin(sph.phi)*Math.sin(sph.theta),
+  target.y+sph.r*Math.cos(sph.phi),
+  target.z+sph.r*Math.sin(sph.phi)*Math.cos(sph.theta));camera.lookAt(target)}
+const cv=renderer.domElement;let drag=null,pinch=null;
+const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();
+function cast(e){const r=cv.getBoundingClientRect();
+  ptr.x=((e.clientX-r.left)/r.width)*2-1;ptr.y=-((e.clientY-r.top)/r.height)*2+1;
+  ray.setFromCamera(ptr,camera);
+  const cargos=[];palGrp.forEach(g=>g.traverse(m=>{if(m.userData.slot)cargos.push(m)}));
+  let h=ray.intersectObjects(cargos,false)[0];
+  if(h)return h.object.userData.slot;
+  h=ray.intersectObjects(slotHits,false)[0];
+  return h?h.object.userData.slot:null}
+cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);
+  drag={x:e.clientX,y:e.clientY,btn:e.button,shift:e.shiftKey,moved:false}});
+cv.addEventListener('pointermove',e=>{
+  if(!drag){cv.style.cursor=cast(e)?'pointer':'grab';return}
+  const dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+  if(Math.abs(dx)+Math.abs(dy)>3)drag.moved=true;
+  if(drag.btn===2||drag.shift){const s2=sph.r/700;
+    const fwd=new THREE.Vector3().subVectors(target,camera.position);fwd.y=0;fwd.normalize();
+    const right=new THREE.Vector3(fwd.z,0,-fwd.x);
+    target.addScaledVector(right,dx*s2).addScaledVector(fwd,dy*s2);
+  }else{sph.theta-=dx*0.006;sph.phi=Math.min(1.5,Math.max(0.12,sph.phi-dy*0.005))}
+  drag.x=e.clientX;drag.y=e.clientY;updCam()});
+cv.addEventListener('pointerup',e=>{
+  if(drag&&!drag.moved&&e.button===0){const c=cast(e);if(c)clickSlot(c);}
+  drag=null});
+cv.addEventListener('contextmenu',e=>{e.preventDefault();cancelMove()});
+cv.addEventListener('wheel',e=>{e.preventDefault();
+  sph.r=Math.min(70,Math.max(5,sph.r*(1+e.deltaY*0.001)));updCam()},{passive:false});
+cv.addEventListener('touchstart',e=>{if(e.touches.length===2)pinch=Math.hypot(
+  e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY)},{passive:true});
+cv.addEventListener('touchmove',e=>{if(pinch&&e.touches.length===2){
+  const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+  sph.r=Math.min(70,Math.max(5,sph.r*pinch/d));pinch=d;updCam()}},{passive:true});
+cv.addEventListener('touchend',()=>pinch=null);
+let fly=null;const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function flyTo(pt,r){if(rm){target.copy(pt);sph.r=r;updCam();return}
+  fly={t0:performance.now(),dur:800,f:{x:target.x,y:target.y,z:target.z,r:sph.r},t:{x:pt.x,y:pt.y,z:pt.z,r}}}
+
+/* ═══ เลือก / ย้าย / เบิก ═══ */
+const selBox=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1,1,1)),
+  new THREE.LineBasicMaterial({color:0xDDF956}));selBox.visible=false;scene.add(selBox);
+const tgtBox=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1,1,1)),
+  new THREE.LineBasicMaterial({color:0x5FD6A4}));tgtBox.visible=false;scene.add(tgtBox);
+let selected=null,moveFrom=null,anim=null,hlItem=null;
+function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;
+  document.getElementById('toasts').appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));
+  setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),300)},2400)}
+function gmsg(html){const el=document.getElementById('gmsg');
+  el.innerHTML=html?html+'<button onclick="cancelMove()">ยกเลิก (Esc)</button>':'';
+  el.classList.toggle('show',!!html)}
+function markSel(code){
+  const s=slotByCode[code];if(!s){selBox.visible=false;return}
+  selBox.visible=true;selBox.scale.set(s.pw+0.2,1.25,s.pd+0.2);
+  selBox.position.set(s.x,s.y+0.55,s.z);
+}
+function clickSlot(code){
+  if(moveFrom){doMove(moveFrom,code);return}
+  selected=code;markSel(code);renderSel();
+}
+function suggestSlot(){
+  return SLOTS.filter(s=>s.type==='RACK'&&!STOCK[s.code]).sort((a,b)=>a.seq-b.seq)[0]||null;
+}
+function startMove(code){
+  moveFrom=code;const sug=suggestSlot();
+  if(sug&&sug.code!==code){tgtBox.visible=true;
+    tgtBox.scale.set(sug.pw+0.25,1.3,sug.pd+0.25);
+    tgtBox.position.set(sug.x,sug.y+0.55,sug.z);
+    flyTo(new THREE.Vector3(sug.x,sug.y+0.6,sug.z),13);
+    gmsg(`ย้าย <b>${STOCK[code].lpn}</b> — ระบบแนะช่อง <b>${sug.code}</b> (กรอบเขียว) · คลิกช่องปลายทางที่ต้องการ`);
+  }else gmsg(`ย้าย <b>${STOCK[code].lpn}</b> — คลิกช่องปลายทาง`);
+}
+window.cancelMove=function(){moveFrom=null;tgtBox.visible=false;gmsg('')};
+function doMove(from,to){
+  if(to===from){cancelMove();return}
+  const st=STOCK[from],sTo=slotByCode[to];
+  if(!st||!sTo)return;
+  if(STOCK[to]){toast('ช่อง '+to+' มีของอยู่แล้ว — เลือกช่องว่าง');return}
+  delete STOCK[from];STOCK[to]=st;
+  const gFrom=palGrp.get(from);palGrp.delete(from);palGrp.set(to,gFrom);
+  const sFrom=slotByCode[from];
+  anim={g:gFrom,t0:performance.now(),dur:rm?1:850,
+    f:{x:sFrom.x,y:sFrom.y,z:sFrom.z},t:{x:sTo.x,y:sTo.y,z:sTo.z},peak:Math.max(sFrom.y,sTo.y)+1.6};
+  addLog('mv',`<b>${st.lpn}</b> · ${st.item} ย้าย <b>${from}</b> → <b>${to}</b>`);
+  toast('ย้าย '+st.lpn+' ไป '+to+' แล้ว — BinTrans (MOVE) บันทึก');
+  cancelMove();selected=to;markSel(to);renderSel();renderStats();renderSum();persist();
+}
+function doIssue(code){
+  const st=STOCK[code];if(!st)return;
+  delete STOCK[code];
+  const g=palGrp.get(code);if(g)scene.remove(g);palGrp.delete(code);
+  addLog('out',`<b>${st.lpn}</b> · ${st.item} เบิกออกจาก <b>${code}</b> → post Goods Issue`);
+  toast('เบิก '+st.lpn+' ออกแล้ว — post GI ผ่าน inv engine');
+  selected=code;markSel(code);renderSel();renderStats();renderSum();persist();
+}
+/* รับของเข้า */
+const rmodal=document.getElementById('rmodal');
+document.getElementById('r-item').innerHTML=ITEMS.map((it,i)=>`<option value="${i}">${it.c} · ${it.n}</option>`).join('');
+document.getElementById('bt-recv').addEventListener('click',()=>{
+  document.getElementById('r-lot').value='B6909-'+pad(1+Math.floor(Math.random()*99),3);
+  rmodal.classList.add('show')});
+document.getElementById('r-cancel').addEventListener('click',()=>rmodal.classList.remove('show'));
+document.getElementById('r-ok').addEventListener('click',()=>{
+  const it=ITEMS[+document.getElementById('r-item').value];
+  const qty=+document.getElementById('r-qty').value||it.q;
+  const lot=document.getElementById('r-lot').value||'—';
+  const recv=SLOTS.filter(s=>s.type==='RECV'&&!STOCK[s.code])[0];
+  if(!recv){toast('ท่ารับของเต็ม — เก็บของเข้าช่องก่อน');rmodal.classList.remove('show');return}
+  const st={lpn:'PLT-6909-'+pad(lpnSeq++,5),item:it.c,lot,qty,age:0};
+  STOCK[recv.code]=st;
+  const g=palletMesh(recv,st);palGrp.set(recv.code,g);scene.add(g);
+  addLog('in',`<b>${st.lpn}</b> · ${it.c} ${qty.toLocaleString()} ${it.u} รับเข้า <b>${recv.code}</b> → post GRN`);
+  toast('รับเข้า '+st.lpn+' ที่ '+recv.code+' — คลิกพาเลทแล้วสั่ง "ย้าย" เพื่อเก็บเข้าช่อง');
+  rmodal.classList.remove('show');
+  selected=recv.code;markSel(recv.code);renderSel();renderStats();renderSum();persist();
+  flyTo(new THREE.Vector3(recv.x,0.6,recv.z),12);
+});
+addEventListener('keydown',e=>{if(e.key==='Escape')cancelMove()});
+
+/* ═══ แผงขวา ═══ */
+function renderSel(){
+  const el=document.getElementById('selcard');
+  if(!selected){el.innerHTML='<h4>ช่องที่เลือก</h4><div class="empty">คลิกพาเลทหรือช่องในภาพ</div>';return}
+  const s=slotByCode[selected],st=STOCK[selected];
+  el.innerHTML=`<h4>ช่องที่เลือก <span>${s.zone}</span></h4>
+    <div class="selcode">${s.code}</div>
+    <div class="selsub">${s.type==='RACK'?'ชั้นวาง · ลำดับเดิน '+s.seq%1000:'พื้นที่พื้น'}${st?'':' · ว่าง พร้อมรับของ'}</div>
+    ${st?`<div class="pal"><div class="h"><b>${st.lpn}</b><span>${st.age<1?'วันนี้':Math.round(st.age)+' วัน'}</span></div>
+      <div class="s">${st.item} · ${(ITEMS.find(i=>i.c===st.item)||{}).n||''}</div>
+      <div class="s">ล็อต ${st.lot} · <b style="color:#fff">${st.qty.toLocaleString()} ${(ITEMS.find(i=>i.c===st.item)||{}).u||''}</b></div>
+      <div class="act"><button onclick="startMoveUI()">↔ ย้าย</button>
+      <button class="warn" onclick="issueUI()">↧ เบิกออก</button></div></div>`
+    :`<div class="empty">ช่องว่าง — ใช้เป็นปลายทางตอนสั่งย้ายได้</div>`}`;
+}
+window.startMoveUI=()=>{if(selected&&STOCK[selected])startMove(selected)};
+window.issueUI=()=>{if(selected&&STOCK[selected])doIssue(selected)};
+function renderStats(){
+  const total=SLOTS.filter(s=>s.type==='RACK').length;
+  const used=Object.keys(STOCK).filter(c=>slotByCode[c]&&slotByCode[c].type==='RACK').length;
+  const recv=Object.keys(STOCK).filter(c=>slotByCode[c]&&slotByCode[c].type==='RECV').length;
+  document.getElementById('stats').innerHTML=`
+  <div class="stat"><div class="l">ตำแหน่งเก็บ</div><div class="v">${total}</div></div>
+  <div class="stat lime"><div class="l">พาเลทในคลัง</div><div class="v">${Object.keys(STOCK).length}</div></div>
+  <div class="stat"><div class="l">ใช้พื้นที่ชั้นวาง</div><div class="v">${total?Math.round(used/total*100):0}%</div></div>
+  <div class="stat ${recv?'bad':''}"><div class="l">ค้างท่ารับ</div><div class="v">${recv}</div></div>
+  <div class="stat"><div class="l">ผัง</div><div class="v" style="font-size:11px;line-height:2.1">${layoutFromBuilder?'จาก Builder ✓':'ตัวอย่าง'}</div></div>`;
+}
+function renderSum(){
+  const agg={};
+  Object.entries(STOCK).forEach(([c,st])=>{
+    agg[st.item]=agg[st.item]||{q:0,n:0};agg[st.item].q+=st.qty;agg[st.item].n++});
+  document.getElementById('sumbody').innerHTML=Object.entries(agg).sort().map(([it,a])=>{
+    const info=ITEMS.find(i=>i.c===it)||{};
+    return `<div class="itrow ${hlItem===it?'on':''}" data-it="${it}">
+      <span class="n"><span class="mono">${it}</span><small>${info.n||''}</small></span>
+      <span class="q">${a.q.toLocaleString()} ${info.u||''}<small>${a.n} พาเลท</small></span></div>`;
+  }).join('')||'<div class="empty">คลังว่าง</div>';
+  document.querySelectorAll('.itrow').forEach(r=>r.addEventListener('click',()=>{
+    hlItem=hlItem===r.dataset.it?null:r.dataset.it;
+    palGrp.forEach((g,code)=>{const dim=hlItem&&STOCK[code].item!==hlItem;
+      g.traverse(m=>{if(m.material){m.material.transparent=true;m.material.opacity=dim?0.12:1}})});
+    renderSum();
+  }));
+}
+function renderLog(){
+  document.getElementById('logbody').innerHTML=LOG.length?LOG.map(l=>
+    `<div class="lg"><span class="tt">${l.tt}</span> <span class="${l.ty}">${l.ty==='mv'?'ย้าย':l.ty==='in'?'รับเข้า':'เบิก'}</span> ${l.txt}</div>`).join('')
+    :'<div class="empty">ยังไม่มีรายการ</div>';
+}
+/* ค้นหา */
+function search(){
+  const q=document.getElementById('q').value.trim().toUpperCase();if(!q)return;
+  let code=Object.keys(STOCK).find(c=>STOCK[c].lpn.toUpperCase().includes(q)||STOCK[c].lot.toUpperCase().includes(q)||STOCK[c].item.toUpperCase().includes(q));
+  if(!code)code=SLOTS.find(s=>s.code.toUpperCase()===q||s.code.toUpperCase().includes(q))?.code;
+  if(!code){toast('ไม่พบ "'+q+'"');return}
+  const s=slotByCode[code];selected=code;markSel(code);renderSel();
+  flyTo(new THREE.Vector3(s.x,s.y+0.6,s.z),11);
+}
+document.getElementById('qgo').addEventListener('click',search);
+document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')search()});
+document.getElementById('bt-reset').addEventListener('click',()=>{
+  genStock();drawStock();renderStats();renderSum();renderLog();persist();
+  toast('รีเซ็ตสต๊อกกลับค่าเริ่มต้นแล้ว')});
+document.getElementById('bt-reload').addEventListener('click',()=>location.reload());
+
+/* ═══ วนวาด ═══ */
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;
+  renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix()}
+addEventListener('resize',resize);
+function loop(now){
+  requestAnimationFrame(loop);
+  if(fly){const k=Math.min(1,(now-fly.t0)/fly.dur),e=1-Math.pow(1-k,3);
+    target.set(fly.f.x+(fly.t.x-fly.f.x)*e,fly.f.y+(fly.t.y-fly.f.y)*e,fly.f.z+(fly.t.z-fly.f.z)*e);
+    sph.r=fly.f.r+(fly.t.r-fly.f.r)*e;updCam();if(k>=1)fly=null}
+  if(anim){const k=Math.min(1,(now-anim.t0)/anim.dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+    const x=anim.f.x+(anim.t.x-anim.f.x)*e,z=anim.f.z+(anim.t.z-anim.f.z)*e;
+    const base=anim.f.y+(anim.t.y-anim.f.y)*e;
+    anim.g.position.set(x,base+Math.sin(k*Math.PI)*(anim.peak-Math.max(anim.f.y,anim.t.y)),z);
+    if(k>=1){anim.g.position.set(anim.t.x,anim.t.y,anim.t.z);anim=null}}
+  renderer.render(scene,camera)}
+resize();updCam();renderStats();renderSum();renderLog();requestAnimationFrame(loop);
+if(!layoutFromBuilder)toast('ยังไม่มีผังจาก Builder ในเครื่องนี้ — ใช้ผังตัวอย่าง 08-CV');
+</script>
+</body>
+</html>

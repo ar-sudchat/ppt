@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ออกแบบแดชบอร์ดเอง — Beside</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap">
+<style>
+/* ===== BESIDE CI ===== */
+:root{
+  --royal:#1466DE;--royal-d:#0B47A0;--sky:#2E9CE8;--vista:#84AFFB;
+  --lime:#DDF956;--coral:#FF6648;--grey:#6C7180;
+  --ink:#111A26;--mut:#6C7180;--ground:#EEF3FA;--surf:#FFFFFF;
+  --line:#DCE3EC;--soft:#F4F7FB;--ok:#0F7350;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:'Sarabun',-apple-system,sans-serif;font-size:13px;color:var(--ink);
+     background:var(--ground);display:flex;flex-direction:column;overflow:hidden;line-height:1.5}
+button{font-family:inherit;cursor:pointer}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+
+/* ===== แถบบนสุด (เหมือนทุกจอในระบบ) ===== */
+.top{background:var(--royal);color:#fff;flex:none}
+.top-in{display:flex;align-items:center;gap:12px;padding:8px 16px}
+.mark{display:flex;align-items:center;gap:9px;font-weight:700;font-size:13.5px}
+.beam{width:24px;height:4px;background:var(--lime);border-radius:2px}
+.idc{font-family:ui-monospace,Menlo,monospace;font-size:11px;font-weight:600;background:#ffffff22;
+     border:1px solid #ffffff44;border-radius:5px;padding:2px 8px}
+.crumb{font-size:12px;opacity:.9}
+.topbtns{margin-left:auto;display:flex;gap:6px}
+.tb{font-size:11.5px;font-weight:700;border:1px solid #ffffff55;border-radius:7px;padding:5px 13px;
+    background:transparent;color:#fff}
+.tb:hover{background:#ffffff22}
+.tb.pri{background:#fff;color:var(--royal-d);border-color:#fff}
+
+/* ===== แถบเครื่องมือ ===== */
+.bar{flex:none;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;
+     gap:14px;padding:7px 16px}
+.dname{font-size:15px;font-weight:800;color:var(--royal-d)}
+.dname small{font-weight:600;color:var(--mut);font-size:11.5px;margin-left:7px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:#fff;font-size:11.5px;font-weight:700;color:var(--mut);padding:5px 14px}
+.seg button.on{background:var(--royal);color:#fff}
+.chip{font-size:11px;color:var(--mut);background:var(--soft);border:1px solid var(--line);
+      border-radius:20px;padding:3px 11px}
+.chip b{color:var(--ink)}
+.barR{margin-left:auto;display:flex;align-items:center;gap:8px}
+
+/* ===== โครง 3 คอลัมน์ ===== */
+.wrap{flex:1;display:flex;min-height:0}
+
+/* ---- คลังวิดเจ็ต ---- */
+.pal{flex:0 0 206px;background:#fff;border-right:1px solid var(--line);overflow-y:auto;padding:11px}
+.pal h4{margin:0 0 6px;font-size:11px;letter-spacing:.1em;color:var(--mut);font-weight:800}
+.search{display:flex;margin-bottom:9px}
+.search input{flex:1;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font:inherit;
+              font-size:12px;outline:none;background:var(--soft)}
+.pgrp{font-size:10.5px;font-weight:800;color:var(--royal);letter-spacing:.06em;margin:9px 0 5px}
+.pgrp:first-of-type{margin-top:0}
+.pitem{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:9px;
+       padding:5px 9px;margin-bottom:5px;background:#fff;cursor:grab;transition:.12s}
+.pitem:hover{border-color:var(--vista);background:#F5F9FF;transform:translateX(2px)}
+.pitem .ic{flex:0 0 26px;height:26px;border-radius:8px;background:#EAF2FE;color:var(--royal);
+           display:flex;align-items:center;justify-content:center;font-size:14px}
+.pitem .nm{font-size:12.5px;font-weight:600}
+.pitem .nm small{display:block;font-size:10px;color:var(--mut);font-weight:400}
+
+/* ---- พื้นที่จัดวาง ---- */
+.canvasWrap{flex:1;min-width:0;overflow-y:auto;padding:14px}
+.canvas{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;align-content:start}
+body.design .canvas{background-image:radial-gradient(circle,#CBD8EA 1px,transparent 1px);
+                    background-size:26px 26px;padding:8px;border-radius:12px}
+.w{grid-column:span 3;background:var(--surf);border:1px solid var(--line);border-radius:12px;
+   padding:11px 13px;position:relative;box-shadow:0 1px 2px rgba(17,26,38,.05)}
+body.design .w{cursor:pointer}
+body.design .w:hover{border-color:var(--vista)}
+.w.sel{border-color:var(--royal);box-shadow:0 0 0 3px rgba(20,102,222,.16)}
+body.view .w.sel{box-shadow:0 1px 2px rgba(17,26,38,.05);border-color:var(--line)}
+.w .wh{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.w .wt{font-size:12.5px;font-weight:700}
+.w .ws{font-size:10.5px;color:var(--mut);margin-left:auto}
+.hd{position:absolute;width:9px;height:9px;background:#fff;border:2px solid var(--royal);border-radius:2px;display:none}
+body.design .w.sel .hd{display:block}
+.hd.tl{left:-5px;top:-5px}.hd.tr{right:-5px;top:-5px}
+.hd.bl{left:-5px;bottom:-5px}.hd.br{right:-5px;bottom:-5px;cursor:nwse-resize}
+.wtag{position:absolute;top:-9px;left:11px;background:var(--royal);color:#fff;font-size:9.5px;
+      font-weight:800;padding:2px 8px;border-radius:20px;display:none}
+body.design .w.sel .wtag{display:block}
+
+/* การ์ดตัวเลข */
+.kpi .v{font-size:27px;font-weight:800;color:var(--royal-d);line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi .u{font-size:12px;color:var(--mut);font-weight:600;margin-left:4px}
+.kpi .d{font-size:11px;font-weight:700;margin-top:3px}
+.kpi .d.up{color:var(--ok)}.kpi .d.dn{color:#C43A20}
+
+/* ตาราง */
+table{width:100%;border-collapse:collapse;font-size:11.5px}
+th{text-align:left;color:var(--mut);font-weight:700;font-size:10.5px;padding:0 0 5px;
+   border-bottom:1px solid var(--line)}
+td{padding:5px 0;border-bottom:1px dashed var(--line);vertical-align:middle}
+td.r{text-align:right;font-variant-numeric:tabular-nums}
+.pill{font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:20px}
+.pill.late{background:#FFECE8;color:#C43A20}
+.pill.run{background:#EAF2FE;color:var(--royal-d)}
+.pill.wait{background:#F7FCDF;color:#5E7A0A}
+
+/* ช่องว่างรอวาง */
+.drop{grid-column:span 12;border:2px dashed var(--vista);border-radius:12px;background:#F5F9FF;
+      display:flex;align-items:center;justify-content:center;gap:9px;padding:16px;color:var(--royal);
+      font-size:12.5px;font-weight:700}
+.drop.hot{background:#E4EFFF;border-color:var(--royal);border-style:solid}
+body.view .drop{display:none}
+
+/* ---- แผงคุณสมบัติ ---- */
+.props{flex:0 0 258px;background:#fff;border-left:1px solid var(--line);overflow-y:auto;padding:12px}
+body.view .props{opacity:.45;pointer-events:none}
+.props h4{margin:0 0 3px;font-size:11px;letter-spacing:.1em;color:var(--mut);font-weight:800}
+.pselt{font-size:15px;font-weight:800;color:var(--royal-d);margin-bottom:2px}
+.pselc{font-size:10.5px;color:var(--mut);margin-bottom:12px}
+.f{margin-bottom:10px}
+.f label{display:block;font-size:10.5px;font-weight:700;color:var(--mut);margin-bottom:4px}
+.f .ctl{border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:12px;background:var(--soft);
+        display:flex;align-items:center;justify-content:space-between;gap:8px}
+.f .ctl.src{background:#EAF2FE;border-color:#BBD4FA;color:var(--royal-d);font-weight:700}
+.f .ctl small{color:var(--mut);font-weight:400}
+.f .ctl::after{content:'⌄';color:var(--mut);font-size:14px;line-height:1}
+.f .ctl.nochev::after{content:''}
+.sw{display:flex;gap:6px}
+.sw i{width:24px;height:24px;border-radius:7px;border:2px solid transparent;font-style:normal;cursor:pointer}
+.sw i.on{border-color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.del{width:100%;margin-top:6px;border:1px solid #FFC4B7;background:#FFECE8;color:#C43A20;
+     font-size:11.5px;font-weight:700;border-radius:8px;padding:7px}
+.hintp{margin-top:12px;background:var(--soft);border:1px solid var(--line);border-radius:10px;
+       padding:9px 11px;font-size:11px;color:var(--mut);line-height:1.55}
+.hintp b{color:var(--ink)}
+
+/* ---- แถบล่าง ---- */
+.foot{flex:none;background:#fff;border-top:1px solid var(--line);display:flex;align-items:center;
+      gap:14px;padding:5px 16px;font-size:11px;color:var(--mut)}
+.foot .ok{color:var(--ok);font-weight:700}
+.foot .rt{margin-left:auto}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:44px;background:var(--royal-d);color:#fff;
+       border-radius:10px;padding:8px 18px;font-size:12.5px;font-weight:600;display:none;z-index:50}
+.toast.show{display:block}
+.toast b{color:var(--lime)}
+</style>
+</head>
+<body class="design">
+
+<div class="top"><div class="top-in">
+  <div class="mark"><span class="beam"></span>BESIDE · DASHBOARD</div>
+  <span class="idc">p-ptech-150a</span>
+  <span class="crumb">แดชบอร์ด › ออกแบบแดชบอร์ด</span>
+  <div class="topbtns">
+    <button class="tb" onclick="say('ย้อนกลับ 1 ขั้น')">เลิกทำ</button>
+    <button class="tb" onclick="say('แชร์ให้ <b>ฝ่ายผลิต</b> แล้ว — 14 คนเรียกใช้ได้')">แชร์</button>
+    <button class="tb pri" onclick="say('บันทึกแล้ว — เรียกใช้จากเมนูแดชบอร์ดได้ทันที')">บันทึก</button>
+  </div>
+</div></div>
+
+<div class="bar">
+  <div class="dname">ภาพรวมฝ่ายผลิต — กะเช้า<small>เจ้าของ: หัวหน้าฝ่ายผลิต</small></div>
+  <div class="seg">
+    <button id="mDesign" class="on" onclick="mode('design')">ออกแบบ</button>
+    <button id="mView" onclick="mode('view')">ดูจริง</button>
+  </div>
+  <span class="chip">กริด <b>12</b> คอลัมน์</span>
+  <span class="chip">ช่วงเวลา <b>วันนี้</b></span>
+  <div class="barR">
+    <span class="chip">ผู้ที่เห็น <b>ฝ่ายผลิต</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- คลังวิดเจ็ต -->
+  <div class="pal">
+    <h4>คลังวิดเจ็ต</h4>
+    <div class="search"><input placeholder="ค้นหาวิดเจ็ต..."></div>
+    <div id="palList"></div>
+  </div>
+
+  <!-- พื้นที่จัดวาง -->
+  <div class="canvasWrap">
+    <div class="canvas" id="canvas"></div>
+  </div>
+
+  <!-- คุณสมบัติ -->
+  <div class="props">
+    <h4>คุณสมบัติวิดเจ็ต</h4>
+    <div class="pselt" id="pT">—</div>
+    <div class="pselc" id="pC">คลิกวิดเจ็ตที่ต้องการตั้งค่า</div>
+
+    <div class="f"><label>ชนิดการแสดงผล</label><div class="ctl" id="pKind">กราฟพาเรโต</div></div>
+    <div class="f"><label>แหล่งข้อมูล</label><div class="ctl src" id="pSrc">ของเสียรายสาเหตุ</div></div>
+    <div class="f"><label>ตัวกรอง</label><div class="ctl" id="pFil">ทุกแผนก · ทุกเครื่อง</div></div>
+    <div class="f"><label>ช่วงเวลา</label><div class="ctl">ตามแดชบอร์ด (วันนี้)</div></div>
+    <div class="f"><label>ชุดสี</label>
+      <div class="sw">
+        <i class="on" style="background:#1466DE" onclick="pick(this)"></i>
+        <i style="background:#2E9CE8" onclick="pick(this)"></i>
+        <i style="background:#84AFFB" onclick="pick(this)"></i>
+        <i style="background:#FF6648" onclick="pick(this)"></i>
+        <i style="background:#DDF956" onclick="pick(this)"></i>
+        <i style="background:#6C7180" onclick="pick(this)"></i>
+      </div>
+    </div>
+    <div class="f two">
+      <div><label>กว้าง (คอลัมน์)</label><div class="ctl" id="pW">7</div></div>
+      <div><label>สูง (แถว)</label><div class="ctl nochev" id="pH">2</div></div>
+    </div>
+    <button class="del" onclick="delSel()">ลบวิดเจ็ต</button>
+
+    <div class="hintp"><b>ไม่ต้องเขียน SQL</b> — ผู้ใช้เลือกได้เฉพาะแหล่งข้อมูลที่ผู้ดูแลระบบเปิดสิทธิ์ให้ตามบทบาทเท่านั้น</div>
+  </div>
+</div>
+
+<div class="foot">
+  <span class="ok">● บันทึกอัตโนมัติ</span>
+  <span>แก้ล่าสุด 14:22 น.</span>
+  <span>7 วิดเจ็ตบนหน้านี้</span>
+  <span class="rt">ลากวิดเจ็ตจากคลังด้านซ้ายมาวาง · คลิกวิดเจ็ตเพื่อตั้งค่า · ลากมุมเพื่อปรับขนาด</span>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── คลังวิดเจ็ต ─────────────────────────────────────────────── */
+const PAL = [
+  ['กราฟ', [
+    ['▮', 'กราฟแท่ง', 'เทียบค่าระหว่างกลุ่ม', 'bar'],
+    ['◠', 'กราฟเส้น', 'ดูแนวโน้มตามเวลา', 'line'],
+    ['◕', 'โดนัท', 'สัดส่วนของทั้งหมด', 'donut'],
+    ['▨', 'พาเรโต', 'เรียงลำดับสิ่งที่ต้องแก้ก่อน', 'pareto'],
+  ]],
+  ['ตัวเลข', [
+    ['#', 'ตัวเลขใหญ่', 'ตัวเลขสำคัญค่าเดียว', 'kpi'],
+    ['◑', 'เกจ', 'เทียบกับเป้า', 'gauge'],
+    ['●', 'ไฟสถานะ', 'สถานะเขียว เหลือง แดง', 'light'],
+  ]],
+  ['ข้อมูล', [
+    ['▤', 'ตาราง', 'ข้อมูลรายแถว', 'table'],
+    ['≡', 'รายการอันดับ', 'จัดอันดับสูงสุด ต่ำสุด', 'rank'],
+  ]],
+  ['อื่น ๆ', [
+    ['T', 'ข้อความ', 'หัวข้อและคำอธิบาย', 'text'],
+  ]],
+];
+document.getElementById('palList').innerHTML = PAL.map(([g, items]) =>
+  '<div class="pgrp">' + g + '</div>' + items.map(([ic, nm, ds, k]) =>
+    '<div class="pitem" draggable="true" data-k="' + k + '" data-nm="' + nm + '">' +
+    '<div class="ic">' + ic + '</div><div class="nm">' + nm + '<small>' + ds + '</small></div></div>'
+  ).join('')).join('');
+
+/* ── ข้อมูลตัวอย่าง ──────────────────────────────────────────── */
+const BAR = [['EXT-01', 3200], ['EXT-02', 2870], ['INJ-01', 2410], ['INJ-02', 1980], ['BLW-01', 1120], ['BLW-02', 900]];
+const PAR = [['ฟิล์มย่น', 2450], ['สีเพี้ยน', 1980], ['ขอบไม่เรียบ', 1310], ['หนาเกินพิกัด', 780], ['อื่น ๆ', 900]];
+const DON = [['เดินเครื่อง', 68, '#1466DE'], ['ตั้งเครื่อง', 12, '#2E9CE8'], ['รอวัตถุดิบ', 9, '#FF6648'], ['ซ่อมบำรุง', 7, '#84AFFB'], ['อื่น ๆ', 4, '#C9D6E8']];
+const ROWS = [
+  ['MO2609-004', 'PP-1100', '4,000', 62, 'late', 'เกินกำหนด 1 วัน'],
+  ['MO2609-007', 'PE-0450', '2,500', 88, 'run', 'กำลังผลิต'],
+  ['MO2609-011', 'HD-0210', '6,200', 35, 'run', 'กำลังผลิต'],
+  ['MO2609-014', 'MB-BLK7', '900', 0, 'wait', 'รอวัตถุดิบ'],
+  ['MO2609-016', 'CT-4060', '1,800', 0, 'wait', 'รอคิวเครื่อง'],
+];
+
+const money = n => n.toLocaleString('en-US');
+
+function svgBar(data, color) {
+  const max = Math.max(...data.map(d => d[1])), W = 100, H = 112, bw = W / data.length;
+  return '<svg viewBox="0 0 100 ' + H + '" preserveAspectRatio="none" style="width:100%;height:112px">' +
+    data.map((d, i) => {
+      const h = d[1] / max * 84;
+      return '<rect x="' + (i * bw + bw * .18) + '" y="' + (92 - h) + '" width="' + bw * .64 + '" height="' + h +
+        '" rx="1" fill="' + color + '" opacity="' + (0.55 + 0.45 * (d[1] / max)) + '"/>';
+    }).join('') + '</svg>' +
+    '<div style="display:flex;font-size:9.5px;color:#6C7180;margin-top:2px">' +
+    data.map(d => '<div style="flex:1;text-align:center">' + d[0] + '</div>').join('') + '</div>';
+}
+
+function svgPareto(data, color) {
+  const tot = data.reduce((a, d) => a + d[1], 0), max = data[0][1];
+  let cum = 0;
+  const pts = data.map((d, i) => { cum += d[1]; return [(i + .5) / data.length * 100, 92 - cum / tot * 84]; });
+  const bw = 100 / data.length;
+  return '<svg viewBox="0 0 100 112" preserveAspectRatio="none" style="width:100%;height:112px">' +
+    '<line x1="0" y1="' + (92 - .8 * 84) + '" x2="100" y2="' + (92 - .8 * 84) + '" stroke="#C9D6E8" stroke-width=".6" stroke-dasharray="2 2"/>' +
+    data.map((d, i) => {
+      const h = d[1] / max * 84;
+      return '<rect x="' + (i * bw + bw * .16) + '" y="' + (92 - h) + '" width="' + bw * .68 + '" height="' + h +
+        '" rx="1" fill="' + color + '" opacity="' + (i < 3 ? 1 : .42) + '"/>';
+    }).join('') +
+    '<polyline points="' + pts.map(p => p[0] + ',' + p[1]).join(' ') + '" fill="none" stroke="#FF6648" stroke-width="1.4"/>' +
+    pts.map(p => '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="1.6" fill="#FF6648"/>').join('') +
+    '</svg>' +
+    '<div style="display:flex;font-size:9.5px;color:#6C7180;margin-top:2px">' +
+    data.map(d => '<div style="flex:1;text-align:center">' + d[0] + '</div>').join('') + '</div>';
+}
+
+function svgDonut(data) {
+  let a = -90, seg = '';
+  data.forEach(d => {
+    const ang = d[1] / 100 * 360, r = 34, cx = 50, cy = 50;
+    const x1 = cx + r * Math.cos(a * Math.PI / 180), y1 = cy + r * Math.sin(a * Math.PI / 180);
+    a += ang;
+    const x2 = cx + r * Math.cos(a * Math.PI / 180), y2 = cy + r * Math.sin(a * Math.PI / 180);
+    seg += '<path d="M' + cx + ' ' + cy + ' L' + x1 + ' ' + y1 + ' A' + r + ' ' + r + ' 0 ' + (ang > 180 ? 1 : 0) + ' 1 ' + x2 + ' ' + y2 + ' Z" fill="' + d[2] + '"/>';
+  });
+  return '<div style="display:flex;align-items:center;gap:10px">' +
+    '<svg viewBox="0 0 100 100" style="width:104px;height:104px;flex:none">' + seg +
+    '<circle cx="50" cy="50" r="19" fill="#fff"/>' +
+    '<text x="50" y="49" text-anchor="middle" font-size="15" font-weight="800" fill="#0B47A0">68%</text>' +
+    '<text x="50" y="59" text-anchor="middle" font-size="7" fill="#6C7180">เดินเครื่อง</text></svg>' +
+    '<div style="flex:1">' + data.map(d =>
+      '<div style="display:flex;align-items:center;gap:6px;font-size:11px;margin-bottom:3px">' +
+      '<i style="width:9px;height:9px;border-radius:2px;background:' + d[2] + '"></i>' +
+      '<span style="flex:1">' + d[0] + '</span><b>' + d[1] + '%</b></div>').join('') +
+    '</div></div>';
+}
+
+/* ── วิดเจ็ตบนหน้าแดชบอร์ด ───────────────────────────────────────── */
+let WIDGETS = [
+  { id: 'k1', span: 3, t: 'ยอดผลิตวันนี้', kind: 'ตัวเลขใหญ่', src: 'ยอดรับผลผลิต', body: '<div class="v">12,480<span class="u">ชิ้น</span></div><div class="d up">▲ 6.2% จากเมื่อวาน</div>', cls: 'kpi', h: 1 },
+  { id: 'k2', span: 3, t: 'ของเสีย', kind: 'ตัวเลขใหญ่', src: 'ของเสียรายสาเหตุ', body: '<div class="v">1.82<span class="u">%</span></div><div class="d up">▼ 0.4% จากเมื่อวาน</div>', cls: 'kpi', h: 1 },
+  { id: 'k3', span: 3, t: 'OEE เฉลี่ย', kind: 'เกจ', src: 'ประสิทธิผลเครื่องจักร', body: '<div class="v">76.4<span class="u">%</span></div><div class="d dn">▼ ต่ำกว่าเป้า 85%</div>', cls: 'kpi', h: 1 },
+  { id: 'k4', span: 3, t: 'ใบสั่งผลิตค้าง', kind: 'ตัวเลขใหญ่', src: 'ใบสั่งผลิต', body: '<div class="v">6<span class="u">ใบ</span></div><div class="d dn">1 ใบเกินกำหนด</div>', cls: 'kpi', h: 1 },
+  { id: 'w1', span: 7, t: 'ยอดผลิตรายเครื่อง', kind: 'กราฟแท่ง', src: 'ยอดรับผลผลิต', body: svgBar(BAR, '#1466DE'), sub: 'ชิ้น · กะเช้า', h: 2 },
+  { id: 'w2', span: 5, t: 'สัดส่วนเวลาเครื่องจักร', kind: 'โดนัท', src: 'เวลาเดินเครื่อง', body: svgDonut(DON), sub: 'ทั้งไลน์', h: 2 },
+  { id: 'w3', span: 7, t: 'สาเหตุของเสีย เรียงตามผลกระทบ', kind: 'กราฟพาเรโต', src: 'ของเสียรายสาเหตุ', body: svgPareto(PAR, '#1466DE'), sub: '3 สาเหตุแรก = 81.8%', h: 2 },
+  {
+    id: 'w4', span: 5, t: 'ใบสั่งผลิตที่ต้องติดตาม', kind: 'ตาราง', src: 'ใบสั่งผลิต', sub: '5 ใบ', h: 2,
+    body: '<table><tr><th>ใบสั่งผลิต</th><th>สินค้า</th><th class="r">จำนวน</th><th class="r">คืบหน้า</th><th></th></tr>' +
+      ROWS.map(r => '<tr><td class="mono">' + r[0] + '</td><td>' + r[1] + '</td><td class="r">' + r[2] +
+        '</td><td class="r">' + r[3] + '%</td><td class="r"><span class="pill ' + r[4] + '">' + r[5] + '</span></td></tr>').join('') + '</table>'
+  },
+];
+
+let SEL = 'w3';
+
+function render() {
+  document.getElementById('canvas').innerHTML =
+    WIDGETS.map(w => '<div class="w ' + (w.cls || '') + (w.id === SEL ? ' sel' : '') + '" style="grid-column:span ' + w.span + '" data-id="' + w.id + '">' +
+      '<span class="wtag">กำลังตั้งค่า</span>' +
+      '<div class="wh"><span class="wt">' + w.t + '</span>' + (w.sub ? '<span class="ws">' + w.sub + '</span>' : '') + '</div>' +
+      w.body +
+      '<i class="hd tl"></i><i class="hd tr"></i><i class="hd bl"></i><i class="hd br"></i></div>').join('') +
+    '<div class="drop" id="drop">＋ ลากวิดเจ็ตมาวางตรงนี้เพื่อเพิ่มลงแดชบอร์ด</div>';
+
+  document.querySelectorAll('.w').forEach(el =>
+    el.addEventListener('click', () => { SEL = el.dataset.id; render(); }));
+
+  const drop = document.getElementById('drop');
+  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('hot'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('hot'));
+  drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('hot'); addW(e.dataTransfer.getData('k'), e.dataTransfer.getData('nm')); });
+
+  props();
+}
+
+function props() {
+  const w = WIDGETS.find(x => x.id === SEL);
+  const q = id => document.getElementById(id);
+  if (!w) { q('pT').textContent = '—'; q('pC').textContent = 'คลิกวิดเจ็ตที่ต้องการตั้งค่า'; return; }
+  q('pT').textContent = w.t;
+  q('pC').textContent = 'วิดเจ็ต ' + w.id.toUpperCase() + ' · ' + w.kind;
+  q('pKind').textContent = w.kind;
+  q('pSrc').textContent = w.src;
+  q('pFil').textContent = w.fil || 'ทุกแผนก · ทุกเครื่อง';
+  q('pW').textContent = w.span;
+  q('pH').textContent = w.h;
+}
+
+function addW(kind, nm) {
+  const id = 'n' + (WIDGETS.length + 1);
+  WIDGETS.push({
+    id, span: 4, h: 2, t: nm + ' (ใหม่)', kind: nm, src: 'ยังไม่ได้เลือก', sub: 'รอเลือกแหล่งข้อมูล',
+    body: '<div style="height:96px;display:flex;align-items:center;justify-content:center;color:#84AFFB;' +
+      'border:2px dashed #C9D6E8;border-radius:9px;font-size:11.5px">เลือกแหล่งข้อมูลที่แผงด้านขวา</div>'
+  });
+  SEL = id; render();
+  say('เพิ่ม <b>' + nm + '</b> แล้ว — เลือกแหล่งข้อมูลได้ที่แผงด้านขวา');
+}
+
+function delSel() {
+  const w = WIDGETS.find(x => x.id === SEL);
+  if (!w) return;
+  WIDGETS = WIDGETS.filter(x => x.id !== SEL);
+  SEL = WIDGETS.length ? WIDGETS[WIDGETS.length - 1].id : null;
+  render(); say('ลบ <b>' + w.t + '</b> แล้ว');
+}
+
+function mode(m) {
+  document.body.className = m;
+  document.getElementById('mDesign').classList.toggle('on', m === 'design');
+  document.getElementById('mView').classList.toggle('on', m === 'view');
+  say(m === 'view' ? 'โหมด <b>ดูจริง</b> — มุมมองที่ผู้ใช้ในแผนกจะเห็น' : 'โหมด <b>ออกแบบ</b> — ลาก วาง และตั้งค่าได้');
+}
+
+function pick(el) { [...el.parentNode.children].forEach(c => c.classList.remove('on')); el.classList.add('on'); }
+
+let tt;
+function say(html) {
+  const t = document.getElementById('toast');
+  t.innerHTML = html; t.classList.add('show');
+  clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+document.addEventListener('dragstart', e => {
+  const it = e.target.closest('.pitem');
+  if (!it) return;
+  e.dataTransfer.setData('k', it.dataset.k);
+  e.dataTransfer.setData('nm', it.dataset.nm);
+});
+document.querySelectorAll('.pitem').forEach(it =>
+  it.addEventListener('dblclick', () => addW(it.dataset.k, it.dataset.nm)));
+
+render();
+</script>
+</body>
+</html>

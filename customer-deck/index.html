@@ -547,7 +547,7 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
   <div class="scrim"></div>
   <nav>
     <div class="head">
-      <span class="t">สไลด์ (30)</span>
+      <span class="t">สไลด์ (34)</span>
       <button id="pin" title="ตรึงเมนูไว้ (P)">📌</button>
     </div>
     <div class="nsec">เปิดเรื่อง</div>
@@ -578,14 +578,20 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
     <a href="#idle"><span class="idx">22</span><span class="txt"><span class="nm">Idle Material</span><span class="cd">เงินจมในโกดัง</span></span></a>
     <a href="#shock"><span class="idx">23</span><span class="txt"><span class="nm">Cost Simulator</span><span class="cd">วัตถุดิบขึ้น ต้องขึ้นราคาเท่าไร</span></span></a>
     <a href="#report"><span class="idx">24</span><span class="txt"><span class="nm">Report Designer</span><span class="cd">ออกแบบฟอร์มเองทั้งใบ</span></span></a>
+    <div class="nsec">BESIDE AI · ผู้ช่วยในระบบ</div>
+    <a href="#aidoc"><span class="idx">25</span><span class="txt"><span class="nm">Beside Assistant</span><span class="cd">อ่าน PO ลูกค้า → ร่างใบสั่งขาย</span></span></a>
+    <a href="#aipanel"><span class="idx">26</span><span class="txt"><span class="nm">Assistant in Every Screen</span><span class="cd">สั่งด้วยคำพูด เปิดจอให้เอง</span></span></a>
+    <div class="nsec">กำลังพัฒนา · กดเล่นได้ในสไลด์</div>
+    <a href="#wms"><span class="idx">27</span><span class="txt"><span class="nm">Warehouse Live</span><span class="cd">ผังคลัง 3 มิติ ใส่ของจริง</span></span></a>
+    <a href="#dashui"><span class="idx">28</span><span class="txt"><span class="nm">Dashboard Designer</span><span class="cd">ประกอบ Dashboard เอง</span></span></a>
     <div class="nsec">BESIDE MOBILE · เครื่องยิงบาร์โค้ด</div>
-    <a href="#mstart"><span class="idx">25</span><span class="txt"><span class="nm">Start of Shift</span><span class="cd">หน้าหลัก → เริ่มงาน → คิวงานค้าง</span></span></a>
-    <a href="#mgr"><span class="idx">26</span><span class="txt"><span class="nm">Goods Receipt PO</span><span class="cd">ยิง PO → เลือกบรรทัด → บันทึก</span></span></a>
-    <a href="#mguard"><span class="idx">27</span><span class="txt"><span class="nm">Built-in Guards</span><span class="cd">ยอด Lot · FEFO · ยังไม่ตัดสต๊อก</span></span></a>
-    <a href="#mline"><span class="idx">28</span><span class="txt"><span class="nm">Production Floor</span><span class="cd">ของดี · ของเสีย · ป้าย Lot</span></span></a>
-    <a href="#mtrust"><span class="idx">29</span><span class="txt"><span class="nm">Status &amp; Audit Trail</span><span class="cd">ออฟไลน์ · ประวัติ · สรุปหน้างาน</span></span></a>
+    <a href="#mstart"><span class="idx">29</span><span class="txt"><span class="nm">Start of Shift</span><span class="cd">หน้าหลัก → เริ่มงาน → คิวงานค้าง</span></span></a>
+    <a href="#mgr"><span class="idx">30</span><span class="txt"><span class="nm">Goods Receipt PO</span><span class="cd">ยิง PO → เลือกบรรทัด → บันทึก</span></span></a>
+    <a href="#mguard"><span class="idx">31</span><span class="txt"><span class="nm">Built-in Guards</span><span class="cd">ยอด Lot · FEFO · ยังไม่ตัดสต๊อก</span></span></a>
+    <a href="#mline"><span class="idx">32</span><span class="txt"><span class="nm">Production Floor</span><span class="cd">ของดี · ของเสีย · ป้าย Lot</span></span></a>
+    <a href="#mtrust"><span class="idx">33</span><span class="txt"><span class="nm">Status &amp; Audit Trail</span><span class="cd">ออฟไลน์ · ประวัติ · สรุปหน้างาน</span></span></a>
     <div class="nsec">ปิดท้าย</div>
-    <a href="#close"><span class="idx">30</span><span class="txt"><span class="nm">ติดต่อเรา</span><span class="cd">พร้อมอยู่เคียงข้างธุรกิจคุณ</span></span></a>
+    <a href="#close"><span class="idx">34</span><span class="txt"><span class="nm">ติดต่อเรา</span><span class="cd">พร้อมอยู่เคียงข้างธุรกิจคุณ</span></span></a>
   </nav>
 
   <main>
@@ -1350,6 +1356,131 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
   <div class="foot"><span class="brand">BESIDE</span></div>
 </div>
 </div>
+
+<style>
+/* ── สไลด์วิดีโอ ── */
+.vidbox{max-width:1520px;margin:0 auto;border-radius:20px;overflow:hidden;background:#0B1B33;
+        border:1px solid #C9DCFA;box-shadow:0 8px 26px rgba(20,102,222,.10),0 5px 14px rgba(23,74,131,.1)}
+.vidbox video{display:block;width:100%;height:auto;background:#0B1B33}
+.vidnote{max-width:1520px;margin:10px auto 0;font-size:14.5px;color:#8A93A6;text-align:center}
+</style>
+
+<!-- ═══ 25 · BESIDE AI · อ่าน PO ของลูกค้า (วิดีโอ) ═══ -->
+<div class="slidewrap">
+<div class="sheet compact" data-key="aidoc">
+  <div class="eyebrow">BESIDE AI · ผู้ช่วยอ่านเอกสารให้<span class="tag real">คลิปจากระบบจริง</span></div>
+  <h1>Beside Assistant</h1>
+  <div class="lead">ลูกค้าส่ง PO เป็น PDF มา — แนบเข้าแชทแล้วสั่งเป็นภาษาพูด ผู้ช่วยอ่านเอกสาร จับคู่ลูกค้าและรหัสสินค้าให้ทีละบรรทัด แล้วเปิดร่างใบสั่งขายในจอจริงให้ตรวจ</div>
+  <div class="rule"></div>
+  <div class="wide-shot">
+    <div class="vidbox">
+      <video controls playsinline preload="metadata" poster="img/poster-ai-doc.jpg"
+             title="Beside Assistant — จาก PO ของลูกค้า สู่ร่างใบสั่งขาย">
+        <source src="VDO/1-console-po-to-so.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="vidnote">คลิปบันทึกหน้าจอจริง · ไม่มีเสียง · 50 วินาที</div>
+    <div class="sp-list">
+      <div class="sp"><span class="n">1</span><div><div class="t">อ่านเอกสารของลูกค้าได้ตรง ๆ</div><div class="d">แนบ PDF ใบสั่งซื้อเข้าไปในแชท ผู้ช่วยดึงหัวเอกสารและรายการออกมาทั้งใบ — 5 บรรทัด ยอดสุทธิ 42,553.90 บาท ตรงกับต้นฉบับทุกตัว</div></div></div>
+      <div class="sp"><span class="n">2</span><div><div class="t">จับคู่รหัสให้ พร้อมบอกความมั่นใจ</div><div class="d">“ถุงหูหิ้ว HD 8x16 นิ้ว สีขาว” → FG-HT-0816-WH ความมั่นใจ 100% · บรรทัดที่กำกวมผู้ช่วยไม่เดา แต่ถามกลับเป็นแบบฟอร์มให้เลือกเอง</div></div></div>
+      <div class="sp"><span class="n">3</span><div><div class="t">เปิดร่างในจอจริง แล้วคุณกดบันทึกเอง</div><div class="d">ผู้ช่วยกรอกรหัสลูกค้า รายการ จำนวน และหมายเหตุอ้างเลขที่ PO ให้ในจอใบสั่งขาย — แต่ไม่บันทึกแทน คนยังเป็นคนตัดสินใจเสมอ</div></div></div>
+    </div>
+  </div>
+  <div class="foot"><span class="brand">BESIDE</span></div>
+</div>
+</div>
+
+<!-- ═══ 26 · BESIDE AI · ผู้ช่วยในจอ (วิดีโอ) ═══ -->
+<div class="slidewrap">
+<div class="sheet compact" data-key="aipanel">
+  <div class="eyebrow">BESIDE AI · ผู้ช่วยอยู่ในทุกจอ<span class="tag real">คลิปจากระบบจริง</span></div>
+  <h1>Assistant in Every Screen</h1>
+  <div class="lead">เปิดผู้ช่วยจากมุมขวาล่างได้ทุกจอ — พิมพ์หรือพูดว่าอยากทำอะไร ผู้ช่วยพาไปเปิดจอที่ถูกต้องให้เอง แล้วอยู่กับจอนั้นต่อเพื่อตอบคำถามในบริบทเดียวกัน</div>
+  <div class="rule"></div>
+  <div class="wide-shot">
+    <div class="vidbox">
+      <video controls playsinline preload="metadata" poster="img/poster-ai-panel.jpg"
+             title="Beside Assistant — สั่งด้วยคำพูด ผู้ช่วยเปิดจอให้">
+        <source src="VDO/2-beside-panel.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="vidnote">คลิปบันทึกหน้าจอจริง · ไม่มีเสียง · 42 วินาที</div>
+    <div class="sp-list">
+      <div class="sp"><span class="n">1</span><div><div class="t">ไม่ต้องจำว่าเมนูอยู่ไหน</div><div class="d">พิมพ์ว่า “ใบสั่งขาย” ผู้ช่วยเปิดจอ Sale Order ให้ทันที · จะเปิดในจอเดิมหรือแท็บใหม่ก็เลือกได้จากการ์ด</div></div></div>
+      <div class="sp"><span class="n">2</span><div><div class="t">ผู้ช่วยรู้ว่าคุณอยู่จอไหน</div><div class="d">เปิดจอไหนอยู่ แผงจะติดชื่อจอนั้นให้ แล้วถามต่อเรื่องจอนั้นได้เลย ไม่ต้องอธิบายซ้ำว่ากำลังทำอะไรอยู่</div></div></div>
+      <div class="sp"><span class="n">3</span><div><div class="t">อ่านในนามบัญชีของคุณ</div><div class="d">ผู้ช่วยเห็นข้อมูลเท่าที่สิทธิ์ของคุณเห็น ไม่มากกว่านั้น · การบันทึกทุกอย่างยังทำผ่านจอ Beside ตามปกติ</div></div></div>
+    </div>
+  </div>
+  <div class="foot"><span class="brand">BESIDE</span></div>
+</div>
+</div>
+
+<style>
+/* ── สไลด์เดโมสด : ฝังหน้าจอจริงลงสไลด์ กดใช้งานได้ระหว่างนำเสนอ ── */
+.tag.demo{background:#FFF1ED;color:#C4442A}
+.sheet.compact{position:relative;padding:26px 44px 22px}
+.sheet.compact .eyebrow{margin-bottom:6px;padding-right:210px}
+.sheet.compact h1{font-size:38px}
+.sheet.compact .lead{font-size:19px;margin-top:6px;max-width:1600px}
+.sheet.compact .rule{height:4px;width:96px;margin:10px 0 13px}
+.openlink{position:absolute;right:44px;top:26px;display:inline-flex;align-items:center;gap:9px;z-index:2;
+          background:#1466DE;color:#fff;text-decoration:none;font-size:16px;font-weight:700;
+          padding:9px 18px;border-radius:14px;box-shadow:0 4px 14px rgba(20,102,222,.28);transition:.16s}
+.openlink:hover{background:#0E4CA8}
+.openlink .ar{font-size:18px;line-height:1}
+.embedbox{position:relative;overflow:hidden}
+.embedbox iframe{border:0;display:block;transform-origin:top left;background:#fff}
+</style>
+
+<!-- ═══ 25 · WAREHOUSE LIVE (เดโมสด) ═══ -->
+<div class="slidewrap">
+<div class="sheet compact" data-key="wms">
+  <a class="openlink" href="embed/warehouse-live.html" target="_blank" rel="noopener">เปิดเต็มหน้าจอ <span class="ar">↗</span></a>
+  <div class="eyebrow">WAREHOUSE · ปฏิบัติการคลัง 3 มิติ<span class="tag plan">อยู่ระหว่างพัฒนา</span><span class="tag demo">กดเล่นได้ในสไลด์</span></div>
+  <h1>Warehouse Live</h1>
+  <div class="lead">ผังคลังของโรงงานคุณเอง วาดครั้งเดียวตอนติดตั้ง แล้วใส่ของจริงลงไป — Pallet ไหนอยู่ช่องไหน ช่องไหนว่าง ใครหยิบอะไรไปล่าสุด เห็นครบในภาพเดียว</div>
+  <div class="rule"></div>
+  <div class="wide-shot">
+    <div class="shot"><div class="embedbox" style="height:1000px">
+      <div style="width:1712px;height:1000px;overflow:hidden">
+        <iframe title="Warehouse Live" loading="lazy" src="embed/warehouse-live.html"
+                style="width:1370px;height:800px;transform:scale(1.25)" scrolling="no"></iframe>
+      </div>
+    </div></div>
+    <div class="sp-list">
+      <div class="sp"><span class="n">1</span><div><div class="t">ผังคลังของคุณเอง ไม่ใช่ผังสำเร็จรูป</div><div class="d">กี่แถว กี่ชั้น กี่ช่อง ประตูรับ–ประตูส่งอยู่ตรงไหน ทางเดินกว้างเท่าไร — วาดเองได้ทั้งผังที่จอ Warehouse Builder แล้วหน้านี้ใช้ผังเดียวกันทันที ไม่ต้องวาดซ้ำ</div></div></div>
+      <div class="sp"><span class="n">2</span><div><div class="t">รู้ตำแหน่งของทุก Pallet</div><div class="d">คลิก Pallet เพื่อดูสินค้า Lot และจำนวน · สั่งย้ายช่องได้จากผังเลย · คลิกช่องว่างเพื่อรับของเข้า</div></div></div>
+      <div class="sp"><span class="n">3</span><div><div class="t">วางของตามหลักคลังจริง</div><div class="d">ของหมุนเร็วอยู่ใกล้ประตู ของช้าอยู่ลึกสุด · Zone พักรอ QC แยกจากของพร้อมขาย · ของเสียอยู่มุมไกล ไม่หยิบผิดโดยบังเอิญ</div></div></div>
+    </div>
+  </div>
+  <div class="foot"><span class="brand">BESIDE</span></div>
+</div>
+</div>
+
+<!-- ═══ 26 · DASHBOARD DESIGNER (ต้นแบบกดได้) ═══ -->
+<div class="slidewrap">
+<div class="sheet compact" data-key="dashui">
+  <a class="openlink" href="embed/dashboard-custom.html" target="_blank" rel="noopener">เปิดเต็มหน้าจอ <span class="ar">↗</span></a>
+  <div class="eyebrow">DASHBOARD DESIGNER · ประกอบ Dashboard เอง<span class="tag plan">ต้นแบบหน้าจอ</span><span class="tag demo">กดเล่นได้ในสไลด์</span></div>
+  <h1>Dashboard Designer</h1>
+  <div class="lead">แต่ละแผนกอยากเห็นไม่เหมือนกัน — ประกอบ Dashboard ของตัวเองได้เลย ไม่ต้องรอทีมพัฒนา เลือก Widget จากคลังด้านซ้าย จัดวางตรงกลาง ตั้งค่าด้านขวา แล้วบันทึกไว้ใช้เองหรือแชร์ทั้งแผนก</div>
+  <div class="rule"></div>
+  <div class="wide-shot">
+    <div class="shot"><div class="embedbox" style="height:1000px;display:flex;justify-content:center;background:#EAF2FE">
+      <div style="width:1707px;height:1000px;overflow:hidden">
+        <iframe title="Dashboard Designer" loading="lazy" src="embed/dashboard-custom.html"
+                style="width:1400px;height:820px;transform:scale(1.2195)" scrolling="no"></iframe>
+      </div>
+    </div></div>
+    <div class="sp-list">
+      <div class="sp"><span class="n">1</span><div><div class="t">ลากวางเหมือนต่อบล็อก</div><div class="d">คลัง Widget 10 ชิ้น 4 กลุ่ม — กราฟ · ตัวเลข · ตารางข้อมูล · อื่น ๆ ลากลงผืนผ้าใบ 12 คอลัมน์ ย่อขยายและสลับที่ได้อิสระ</div></div></div>
+      <div class="sp"><span class="n">2</span><div><div class="t">ตั้งค่าได้ทุกชิ้น</div><div class="d">ชนิดกราฟ · แหล่งข้อมูล · ตัวกรอง · ช่วงเวลา · ชุดสี · ขนาด — แก้แล้วเห็นผลทันทีในจอเดียว</div></div></div>
+      <div class="sp"><span class="n">3</span><div><div class="t">สลับ ออกแบบ ↔ ดูจริง</div><div class="d">โหมดดูจริงซ่อนเส้นกริดและแผงตั้งค่า เหลือ Dashboard สะอาด พร้อมขึ้นจอผนังหน้าโรงงาน</div></div></div>
+    </div>
+  </div>
+  <div class="foot"><span class="brand">BESIDE</span></div>
+</div>
+</div>
 <style>
 .mi-grid{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:start}
 .mi-grid .ph{width:auto;display:flex;flex-direction:column;align-items:center}
@@ -1945,6 +2076,55 @@ const EN = {
 "สลับข้อมูลจำลอง ↔ ข้อมูลจริงในจอเดียว":"Switch sample data ↔ real data on the spot",
 "เห็นฟอร์มพร้อมข้อมูลทันที ไม่ต้องพิมพ์ลองทีละรอบ — ภาพนี้คือใบเบิกวัตถุดิบ MI-2609-0042 พร้อม QR และบาร์โค้ดเอกสาร":"See the form filled in at once instead of test printing again and again — this is material issue MI-2609-0042, QR and document barcode included",
 
+/* ── aidoc · aipanel (สไลด์วิดีโอ AI) ── */
+"BESIDE AI · ผู้ช่วยในระบบ":"BESIDE AI · THE ASSISTANT",
+"อ่าน PO ลูกค้า → ร่างใบสั่งขาย":"Read a customer PO → draft the sales order",
+"สั่งด้วยคำพูด เปิดจอให้เอง":"Ask in plain words, it opens the screen",
+"BESIDE AI · ผู้ช่วยอ่านเอกสารให้":"BESIDE AI · IT READS THE DOCUMENT FOR YOU",
+"BESIDE AI · ผู้ช่วยอยู่ในทุกจอ":"BESIDE AI · ON EVERY SCREEN",
+"คลิปจากระบบจริง":"Recorded on the real system",
+"คลิปบันทึกหน้าจอจริง · ไม่มีเสียง · 50 วินาที":"Screen recording of the real system · no sound · 50 seconds",
+"คลิปบันทึกหน้าจอจริง · ไม่มีเสียง · 42 วินาที":"Screen recording of the real system · no sound · 42 seconds",
+"ลูกค้าส่ง PO เป็น PDF มา — แนบเข้าแชทแล้วสั่งเป็นภาษาพูด ผู้ช่วยอ่านเอกสาร จับคู่ลูกค้าและรหัสสินค้าให้ทีละบรรทัด แล้วเปิดร่างใบสั่งขายในจอจริงให้ตรวจ":"The customer sends a PO as a PDF — attach it to the chat and ask in plain words. The assistant reads the document, matches the customer and the item codes line by line, then opens a draft sales order on the real screen for you to check",
+"อ่านเอกสารของลูกค้าได้ตรง ๆ":"It reads the customer's own document",
+"แนบ PDF ใบสั่งซื้อเข้าไปในแชท ผู้ช่วยดึงหัวเอกสารและรายการออกมาทั้งใบ — 5 บรรทัด ยอดสุทธิ 42,553.90 บาท ตรงกับต้นฉบับทุกตัว":"Attach the purchase order PDF to the chat and the assistant pulls out the header and every line — 5 lines, 42,553.90 baht net, matching the original figure for figure",
+"จับคู่รหัสให้ พร้อมบอกความมั่นใจ":"It matches the item codes, and says how sure it is",
+"“ถุงหูหิ้ว HD 8x16 นิ้ว สีขาว” → FG-HT-0816-WH ความมั่นใจ 100% · บรรทัดที่กำกวมผู้ช่วยไม่เดา แต่ถามกลับเป็นแบบฟอร์มให้เลือกเอง":"“HD carrier bag 8x16 in, white” → FG-HT-0816-WH at 100% confidence · where a line is ambiguous the assistant does not guess, it asks you back with a short form to pick from",
+"เปิดร่างในจอจริง แล้วคุณกดบันทึกเอง":"It drafts on the real screen, you press save",
+"ผู้ช่วยกรอกรหัสลูกค้า รายการ จำนวน และหมายเหตุอ้างเลขที่ PO ให้ในจอใบสั่งขาย — แต่ไม่บันทึกแทน คนยังเป็นคนตัดสินใจเสมอ":"It fills in the customer code, the lines, the quantities and a remark quoting the PO number on the sales order screen — but it never saves for you. The decision stays with a person",
+"เปิดผู้ช่วยจากมุมขวาล่างได้ทุกจอ — พิมพ์หรือพูดว่าอยากทำอะไร ผู้ช่วยพาไปเปิดจอที่ถูกต้องให้เอง แล้วอยู่กับจอนั้นต่อเพื่อตอบคำถามในบริบทเดียวกัน":"Open the assistant from the bottom right corner of any screen — type or say what you want to do and it opens the right screen for you, then stays with that screen to answer questions in the same context",
+"ไม่ต้องจำว่าเมนูอยู่ไหน":"No need to remember where the menu is",
+"พิมพ์ว่า “ใบสั่งขาย” ผู้ช่วยเปิดจอ Sale Order ให้ทันที · จะเปิดในจอเดิมหรือแท็บใหม่ก็เลือกได้จากการ์ด":"Type “sales order” and it opens the Sale Order screen right away · open it in place or in a new tab, your choice from the card",
+"ผู้ช่วยรู้ว่าคุณอยู่จอไหน":"It knows which screen you are on",
+"เปิดจอไหนอยู่ แผงจะติดชื่อจอนั้นให้ แล้วถามต่อเรื่องจอนั้นได้เลย ไม่ต้องอธิบายซ้ำว่ากำลังทำอะไรอยู่":"Whatever screen you open, the panel labels itself with it, so you can ask about that screen without explaining what you are doing all over again",
+"อ่านในนามบัญชีของคุณ":"It reads as you, not above you",
+"ผู้ช่วยเห็นข้อมูลเท่าที่สิทธิ์ของคุณเห็น ไม่มากกว่านั้น · การบันทึกทุกอย่างยังทำผ่านจอ Beside ตามปกติ":"The assistant sees exactly what your permissions let you see, no more · and every save still goes through the normal Beside screens",
+
+/* ── wms · dashui (สไลด์เดโมสด) ── */
+"เปิดเต็มหน้าจอ":"Open full screen",
+"กำลังพัฒนา · กดเล่นได้ในสไลด์":"In development · try it here",
+"ผังคลัง 3 มิติ ใส่ของจริง":"3D warehouse map with real stock",
+"ประกอบ Dashboard เอง":"Build your own dashboard",
+"อยู่ระหว่างพัฒนา":"In development",
+"กดเล่นได้ในสไลด์":"Live — try it here",
+"ต้นแบบหน้าจอ":"Screen prototype",
+"WAREHOUSE · ปฏิบัติการคลัง 3 มิติ":"WAREHOUSE · 3D FLOOR OPERATIONS",
+"ผังคลังของโรงงานคุณเอง วาดครั้งเดียวตอนติดตั้ง แล้วใส่ของจริงลงไป — Pallet ไหนอยู่ช่องไหน ช่องไหนว่าง ใครหยิบอะไรไปล่าสุด เห็นครบในภาพเดียว":"Your own warehouse layout, drawn once at setup and then filled with real stock — which pallet sits in which slot, which slots are free, who picked what last, all in one picture",
+"ผังคลังของคุณเอง ไม่ใช่ผังสำเร็จรูป":"Your layout, not a stock template",
+"กี่แถว กี่ชั้น กี่ช่อง ประตูรับ–ประตูส่งอยู่ตรงไหน ทางเดินกว้างเท่าไร — วาดเองได้ทั้งผังที่จอ Warehouse Builder แล้วหน้านี้ใช้ผังเดียวกันทันที ไม่ต้องวาดซ้ำ":"How many rows, levels and slots, where the receiving and shipping doors sit, how wide the aisles are — you draw all of it in Warehouse Builder, and this screen uses the very same layout, with nothing drawn twice",
+"รู้ตำแหน่งของทุก Pallet":"Every pallet has a known place",
+"คลิก Pallet เพื่อดูสินค้า Lot และจำนวน · สั่งย้ายช่องได้จากผังเลย · คลิกช่องว่างเพื่อรับของเข้า":"Click a pallet to see the item, lot and quantity · move it to another slot from the map itself · click an empty slot to receive stock into it",
+"วางของตามหลักคลังจริง":"Laid out the way real warehouses work",
+"ของหมุนเร็วอยู่ใกล้ประตู ของช้าอยู่ลึกสุด · Zone พักรอ QC แยกจากของพร้อมขาย · ของเสียอยู่มุมไกล ไม่หยิบผิดโดยบังเอิญ":"Fast movers near the doors, slow movers deep inside · a QC holding zone kept apart from sellable stock · scrap in the far corner, so nobody picks it by mistake",
+"DASHBOARD DESIGNER · ประกอบ Dashboard เอง":"DASHBOARD DESIGNER · BUILD YOUR OWN",
+"แต่ละแผนกอยากเห็นไม่เหมือนกัน — ประกอบ Dashboard ของตัวเองได้เลย ไม่ต้องรอทีมพัฒนา เลือก Widget จากคลังด้านซ้าย จัดวางตรงกลาง ตั้งค่าด้านขวา แล้วบันทึกไว้ใช้เองหรือแชร์ทั้งแผนก":"Every department wants to see something different — so each one builds its own dashboard instead of waiting for the development team. Pick widgets from the library on the left, arrange them in the middle, set them up on the right, then keep it or share it with the department",
+"ลากวางเหมือนต่อบล็อก":"Drag and drop, like stacking blocks",
+"คลัง Widget 10 ชิ้น 4 กลุ่ม — กราฟ · ตัวเลข · ตารางข้อมูล · อื่น ๆ ลากลงผืนผ้าใบ 12 คอลัมน์ ย่อขยายและสลับที่ได้อิสระ":"A library of 10 widgets in 4 groups — charts · figures · data tables · others. Drop them on a 12 column canvas and resize or reorder them freely",
+"ตั้งค่าได้ทุกชิ้น":"Every piece is configurable",
+"ชนิดกราฟ · แหล่งข้อมูล · ตัวกรอง · ช่วงเวลา · ชุดสี · ขนาด — แก้แล้วเห็นผลทันทีในจอเดียว":"Chart type · data source · filters · date range · colour set · size — change it and see the result on the spot",
+"สลับ ออกแบบ ↔ ดูจริง":"Switch design ↔ live view",
+"โหมดดูจริงซ่อนเส้นกริดและแผงตั้งค่า เหลือ Dashboard สะอาด พร้อมขึ้นจอผนังหน้าโรงงาน":"Live view hides the grid and the settings panel, leaving a clean dashboard ready for the wall screen on the shop floor",
+
 /* ── mstart ── */
 "BESIDE MOBILE · 1 ใน 3":"BESIDE MOBILE · 1 of 3",
 "เริ่มกะทำงาน — ยิงบัตร เลือกงาน แล้วยิงต่อได้เลย":"Starting a shift — scan the badge, pick the job, and keep scanning",
@@ -2249,7 +2429,7 @@ const EN = {
 "เครื่องทรงสมาร์ตโฟน · 15×7.5 ซม.":"Smartphone-shaped unit · 15×7.5 cm",
 
 /* ── แยกหน้า Standard Cost / Job Cost + Comparison ── */
-"สไลด์ (30)":"SLIDES (30)",
+"สไลด์ (34)":"SLIDES (34)",
 "เล่มต้นทุนมาตรฐาน + Cost Sheet":"Standard cost book + Cost Sheet",
 "ต้นทุนจริงต่อใบ · กำไรรายสินค้า":"Real cost per order · margin per product",
 "Standard Cost Book — เล่มต้นทุนมาตรฐาน ลองก่อน ค่อยประกาศใช้":"Standard Cost Book — try a costing first, publish it after",
