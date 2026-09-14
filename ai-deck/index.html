@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap">
 <style>
-/* ════════════ โครงเว็บนำเสนอ (ธีมเดียวกับชุด exec-shots · CI Beside) ════════════ */
+/* ════════════ โครงเว็บนำเสนอ  ════════════ */
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
 body{font-family:"Sarabun","Noto Sans Thai",-apple-system,BlinkMacSystemFont,sans-serif;
@@ -16,7 +16,7 @@ body{font-family:"Sarabun","Noto Sans Thai",-apple-system,BlinkMacSystemFont,san
 
 header.bar{flex:0 0 auto;background:#0E4CA8;color:#fff;padding:0 18px;height:62px;
        display:flex;align-items:center;gap:14px;box-shadow:0 2px 16px rgba(14,76,168,.28);z-index:30}
-header.bar .logo{font-weight:700;letter-spacing:.06em;font-size:19px}
+header.bar .logo{font-weight:700;letter-spacing:0;font-size:19px}
 header.bar .sub{font-size:14px;opacity:.8}
 header.bar .spacer2{flex:1}
 header.bar .count{font-size:15px;opacity:.92;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
@@ -180,7 +180,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
          box-shadow:0 8px 26px rgba(20,102,222,.10)}
 .syswrap svg{display:block;width:100%;height:auto}
 
-/* ════════════ Beside Mobile — สไตล์ของเด็ค ════════════ */
+/* ════════════ สไตล์มือถือ (ไม่ได้ใช้) ════════════ */
 .phones{display:flex;gap:52px;justify-content:center;align-items:flex-start}
 .ph{width:382px;position:relative}
 .ph-lab{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:9px;
@@ -229,7 +229,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
 .cta .box{flex:0 0 auto;background:#DDF956;color:#3D4F06;border-radius:16px;padding:16px 30px;
      font-size:21px;font-weight:800;box-shadow:0 10px 26px -8px rgba(0,0,0,.35)}
 
-/* ════════════ CSS จอมือถือ BESIDE Mobile (ยกจากคลังหน้าจอ · CI เดียวกัน) ════════════ */
+/* ════════════ CSS จอมือถือ (ไม่ได้ใช้) ════════════ */
 
 /* พิมพ์ / PDF — ทุกสไลด์ขนาดจริงหน้าละแผ่น */
 @media print{
@@ -246,8 +246,8 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
 <body>
 <header class="bar">
   <button id="menu" title="เปิด/ปิดเมนู (M)">☰</button>
-  <span class="logo">BESIDE</span>
-  <span class="sub">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ · ก.ย. 2026</span>
+  <span class="logo">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</span>
+  <span class="sub">เอกสารนำเสนอสำหรับผู้บริหาร · ก.ย. 2026</span>
   <span class="spacer2"></span>
   <span id="zoom">
     <button data-m="width" title="เต็มความกว้าง (1)">กว้าง</button><button data-m="page" title="เห็นทั้งหน้าในจอเดียว (2)">ทั้งหน้า</button>
@@ -278,7 +278,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
     <div class="nsec">เทคนิค</div>
     <a href="#architecture"><span class="idx">6</span><span class="txt"><span class="nm">สถาปัตยกรรมระบบ</span><span class="cd">รับข้อมูล → ประมวลผล → ส่งถึงผู้ใช้</span></span></a>
     <a href="#models"><span class="idx">7</span><span class="txt"><span class="nm">กลยุทธ์ LLM</span><span class="cd">เลือกขนาดโมเดลให้ตรงงาน</span></span></a>
-    <a href="#data"><span class="idx">8</span><span class="txt"><span class="nm">ข้อมูลและธรรมาภิบาล</span><span class="cd">ทุก Insight ย้อนถึงต้นทาง</span></span></a>
+    <a href="#data"><span class="idx">8</span><span class="txt"><span class="nm">การดูแลข้อมูล</span><span class="cd">ตรวจย้อนได้ทุกขั้น</span></span></a>
     <div class="nsec">ผู้ใช้เห็นอะไร</div>
     <a href="#dashboard"><span class="idx">9</span><span class="txt"><span class="nm">หน้าจอผู้ใช้</span><span class="cd">เปิด 30 วินาที รู้ว่าต้องตัดสินใจอะไร</span></span></a>
     <div class="nsec">การลงทุนและแผนงาน</div>
@@ -355,7 +355,6 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
   <div class="cover">
     <div class="cv-grid">
       <div class="hero-copy">
-        <div class="wordmark">BESIDE<i></i></div>
         <div class="camp">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ ทำงานตลอด 24 ชั่วโมง</div>
         <h1><span class="kick">หากข่าวในประเด็นที่หน่วยงานติดตามถูกแชร์ไปแล้ว 2 ชั่วโมงจึงทราบ <span class="nw">อาจชี้แจงไม่ทัน</span></span><span class="big"><span class="nw">รู้ทันประเด็น</span><br><em class="nw">ภายใน 15 นาที</em></span></h1>
         <p class="sub">แต่ละวันมีข่าวและบทความที่เกี่ยวข้องกับภารกิจของหน่วยงานหลายร้อยชิ้น ระบบจะอ่านทั้งหมด<wbr><span class="nw">ทุก 15 นาที</span> และเสนอผู้บริหาร <b class="nw">เฉพาะเรื่องที่ต้องตัดสินใจหรือชี้แจง เฉลี่ยวันละ 2–3 เรื่อง</b></p>
@@ -380,7 +379,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
         </div>
       </div>
     </div>
-    <div class="cfoot"><span>เอกสารนำเสนอสำหรับผู้บริหาร · 2569</span><span>BESIDE · TECHLEGEND</span></div>
+    <div class="cfoot"><span>เอกสารนำเสนอสำหรับผู้บริหาร · 2569</span><span>TECHLEGEND</span></div>
   </div>
 </div>
 </div>
@@ -464,7 +463,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
     <div class="c"><div class="t">ผู้บริหาร</div><div class="d"><span class="nw">สรุปวันละหนึ่งหน้า</span><br><span class="nw">พร้อมข้อเสนอการสั่งการ</span></div></div>
   </div>
 
-  <div class="foot"><span class="brand">BESIDE</span>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
+  <div class="foot">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
 </div>
 </div>
 
@@ -487,7 +486,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
 
 .sheet[data-key="live"] .sx-app{background:#EEF4FD;color:#2A3346;font-size:15px;line-height:1.35}
 .sheet[data-key="live"] .sx-app button{font:inherit;cursor:pointer;border:0;transition:background .15s,color .15s,box-shadow .15s}
-/* แถบหัวแอป — navy แบบ Beside */
+/* แถบหัวแอป — navy */
 .sheet[data-key="live"] .sx-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:9px 16px 9px 18px;background:#0E4CA8;color:#fff}
 .sheet[data-key="live"] .sx-brand{display:flex;align-items:center;gap:12px}
 .sheet[data-key="live"] .sx-brand>i{width:40px;height:40px;border-radius:12px;background:#fff;color:#1466DE;font-style:normal;font-weight:800;font-size:16px;display:grid;place-items:center}
@@ -715,7 +714,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
     </div>
   </div>
   <div class="live-note"><span class="live-dot"></span><b id="sxNoteMain">ผลการทำงาน 1 รอบ จำนวน 16 รายการ</b><span id="sxNoteSub">· คะแนนผลกระทบ 64/100 → รวมไว้ในสรุปประจำวัน หากคะแนนถึง 80 จะแจ้งทันที</span></div>
-  <div class="foot"><span class="brand">BESIDE</span>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
+  <div class="foot">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
 </div>
 </div>
 <script>
@@ -929,7 +928,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
     </div>
   </div>
 
-  <div class="foot"><span class="brand">BESIDE</span>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
+  <div class="foot">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
 </div>
 </div>
 
@@ -1063,7 +1062,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
     </div>
   </div>
 
-  <div class="foot"><span class="brand">BESIDE</span>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
+  <div class="foot">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
 </div>
 </div>
 
@@ -1170,7 +1169,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
     <div class="cap"><b>พัฒนาต่อได้:</b> เปลี่ยนไปใช้โมเดลที่ fine-tune รอบใหม่ได้ <span class="nw">โดยไม่ต้องแก้ระบบส่วนอื่น</span></div>
   </div>
 
-  <div class="foot"><span class="brand">BESIDE</span>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
+  <div class="foot">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
 </div>
 </div>
 
@@ -1178,62 +1177,73 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
 <!-- nav: เทคนิค | กลยุทธ์ LLM | เลือกขนาดโมเดลให้ตรงงาน -->
 <style>
 .sheet[data-key="models"] .lead b{color:#0E4CA8;font-weight:700}
-.sheet[data-key="models"] .tiers{display:grid;grid-template-columns:1fr 1.16fr 1fr;gap:22px;align-items:stretch;margin-top:22px}
-.sheet[data-key="models"] .tier{position:relative;background:#fff;border:1px solid #D5E3FB;border-radius:21px;
-  border-top:5px solid #84AFFB;padding:22px 26px 20px;box-shadow:0 8px 26px rgba(20,102,222,.10);display:flex;flex-direction:column}
-.sheet[data-key="models"] .tier:nth-child(3){border-top-color:#2E9CE8}
-.sheet[data-key="models"] .tier-tag{align-self:flex-start;font-size:15px;font-weight:700;padding:5px 14px;border-radius:25px;
-  background:#EAF2FE;color:#1466DE;letter-spacing:.02em}
-.sheet[data-key="models"] .tier-size{font-size:58px;font-weight:700;color:#0E4CA8;line-height:1;margin-top:16px;letter-spacing:-.01em}
-.sheet[data-key="models"] .tier-kind{font-size:17px;font-weight:600;color:#55617A;margin-top:8px}
-.sheet[data-key="models"] .tier-bar{height:10px;border-radius:99px;background:#EAF0FA;margin:16px 0 14px;overflow:hidden}
+/* 2 ขั้น: คัดกรอง → วิเคราะห์ */
+.sheet[data-key="models"] .flow{display:grid;grid-template-columns:1fr 92px 1.2fr;align-items:stretch;margin-top:26px}
+.sheet[data-key="models"] .tier{background:#fff;border:1px solid #D5E3FB;border-radius:22px;box-shadow:0 8px 26px rgba(20,102,222,.10);
+  display:flex;flex-direction:column;overflow:hidden}
+.sheet[data-key="models"] .stage{display:flex;align-items:center;gap:14px;padding:16px 26px;background:#EAF2FE;border-bottom:1px solid #D5E3FB}
+.sheet[data-key="models"] .stage i{flex:0 0 42px;height:42px;border-radius:13px;background:#1466DE;color:#fff;font-style:normal;
+  font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center}
+.sheet[data-key="models"] .stage b{font-size:23px;font-weight:700;color:#0E4CA8}
+.sheet[data-key="models"] .stage span{font-size:17px;color:#55617A;margin-left:4px}
+.sheet[data-key="models"] .stage em{margin-left:auto;font-style:normal;font-size:18px;font-weight:700;padding:6px 16px;border-radius:25px;
+  background:#fff;color:#0E4CA8;white-space:nowrap}
+.sheet[data-key="models"] .body{flex:1;display:grid;grid-template-columns:1fr 1.1fr;gap:30px;padding:28px 30px 28px}
+.sheet[data-key="models"] .why{margin-top:22px;display:flex;align-items:center;gap:22px;background:#0E4CA8;color:#fff;border-radius:20px;padding:18px 28px}
+.sheet[data-key="models"] .why .k{flex:0 0 auto;font-size:15px;font-weight:700;color:#DDF956;padding:6px 14px;border:1px solid rgba(221,249,86,.5);border-radius:25px}
+.sheet[data-key="models"] .why p{font-size:19.5px;line-height:1.5;color:#DCE8F8}
+.sheet[data-key="models"] .why b{color:#fff;font-weight:700}
+.sheet[data-key="models"] .col{display:flex;flex-direction:column}
+.sheet[data-key="models"] .tier-tag{align-self:flex-start;font-size:15.5px;font-weight:700;padding:5px 14px;border-radius:25px;
+  background:#EAF2FE;color:#1466DE}
+.sheet[data-key="models"] .tier-size{font-size:72px;font-weight:700;color:#0E4CA8;line-height:1;margin-top:18px;white-space:nowrap}
+.sheet[data-key="models"] .tier-kind{font-size:18px;font-weight:600;color:#55617A;margin-top:10px;line-height:1.45}
+.sheet[data-key="models"] .tier-bar{height:10px;border-radius:99px;background:#EAF0FA;margin:20px 0 0;overflow:hidden}
 .sheet[data-key="models"] .tier-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#84AFFB,#1466DE)}
-.sheet[data-key="models"] .tier-role{font-size:18px;color:#2A3346;line-height:1.5;min-height:58px}
-.sheet[data-key="models"] .tier-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.sheet[data-key="models"] .tier-chips span{font-size:16px;font-weight:600;padding:5px 12px;border-radius:11px;
-  background:#F3F7FD;color:#2A4670;border:1px solid #D5E3FB}
-.sheet[data-key="models"] .tier-depth{margin-top:16px;font-size:15px;font-weight:600;color:#8A93A6}
-.sheet[data-key="models"] .tier-depth i{display:flex;gap:6px;margin-top:8px}
-.sheet[data-key="models"] .tier-depth i b{flex:1;height:9px;border-radius:99px;background:#E3EBF8}
+.sheet[data-key="models"] .tier-depth{margin-top:auto;padding-top:22px;font-size:15.5px;font-weight:600;color:#8A93A6}
+.sheet[data-key="models"] .tier-depth i{display:flex;gap:6px;margin-top:9px}
+.sheet[data-key="models"] .tier-depth i b{flex:1;height:10px;border-radius:99px;background:#E3EBF8}
 .sheet[data-key="models"] .tier-depth i b.f{background:#1466DE}
-.sheet[data-key="models"] .tier-foot{margin-top:auto;padding-top:14px;border-top:1px dashed #D5E3FB;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.sheet[data-key="models"] .tier-depth + .tier-foot{margin-top:18px}
-.sheet[data-key="models"] .tier-foot b{display:block;font-size:24px;font-weight:700;color:#0E4CA8;line-height:1.2}
-.sheet[data-key="models"] .tier-foot span{display:block;font-size:16px;color:#55617A;margin-top:3px;line-height:1.4}
+.sheet[data-key="models"] .lbl{font-size:15px;font-weight:700;color:#5A8FE0;margin-bottom:6px}
+.sheet[data-key="models"] .tier-role{font-size:20.5px;color:#2A3346;line-height:1.55}
+.sheet[data-key="models"] .tier-chips{display:flex;flex-wrap:wrap;gap:9px}
+.sheet[data-key="models"] .col .lbl + .tier-chips{margin-bottom:0}
+.sheet[data-key="models"] .col .tier-role + .lbl{margin-top:22px}
+.sheet[data-key="models"] .tier-chips span{font-size:17.5px;font-weight:600;padding:7px 14px;border-radius:11px;
+  background:#F3F7FD;color:#2A4670;border:1px solid #D5E3FB}
+.sheet[data-key="models"] .tier-foot{margin-top:auto;padding-top:18px;border-top:1px dashed #D5E3FB;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.sheet[data-key="models"] .tier-foot b{display:block;font-size:26px;font-weight:700;color:#0E4CA8;line-height:1.2}
+.sheet[data-key="models"] .tier-foot span{display:block;font-size:16px;color:#55617A;margin-top:4px;line-height:1.4}
+.sheet[data-key="models"] .tier-foot span span{display:inline;margin:0}
+
+/* ลูกศรระหว่างขั้น */
+.sheet[data-key="models"] .arr{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.sheet[data-key="models"] .arr i{width:54px;height:54px;border-radius:50%;background:#1466DE;color:#fff;font-style:normal;font-size:26px;
+  font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(20,102,222,.28)}
+.sheet[data-key="models"] .arr span{font-size:14px;font-weight:700;color:#5A8FE0;text-align:center;line-height:1.35}
 
 /* ชั้นที่แนะนำ — พื้นไล่น้ำเงินแบบปก ตัวหนังสือขาว + lime */
-.sheet[data-key="models"] .tier.on{background:linear-gradient(150deg,#0A3F92 0%,#0E4CA8 45%,#1466DE 100%);border:0;
-  border-top:5px solid #DDF956;color:#fff;box-shadow:0 22px 50px rgba(14,76,168,.34),0 0 0 4px rgba(20,102,222,.14);padding:22px 30px 20px}
+.sheet[data-key="models"] .tier.on{background:linear-gradient(150deg,#0A3F92 0%,#0E4CA8 45%,#1466DE 100%);border:0;color:#fff;
+  box-shadow:0 22px 50px rgba(14,76,168,.34),0 0 0 4px rgba(20,102,222,.14)}
+.sheet[data-key="models"] .tier.on .stage{background:rgba(255,255,255,.1);border-bottom-color:rgba(255,255,255,.18)}
+.sheet[data-key="models"] .tier.on .stage i{background:#DDF956;color:#0E4CA8}
+.sheet[data-key="models"] .tier.on .stage b{color:#fff}
+.sheet[data-key="models"] .tier.on .stage span{color:#DCE8F8}
+.sheet[data-key="models"] .tier.on .stage em{background:#DDF956;color:#3D4F06}
 .sheet[data-key="models"] .tier.on .tier-tag{background:#DDF956;color:#3D4F06;font-size:16px}
-.sheet[data-key="models"] .tier.on .tier-size{color:#DDF956;font-size:70px;margin-top:12px}
+.sheet[data-key="models"] .tier.on .tier-size{color:#DDF956;font-size:76px}
 .sheet[data-key="models"] .tier.on .tier-kind{color:#DCE8F8}
 .sheet[data-key="models"] .tier.on .tier-bar{background:rgba(255,255,255,.18)}
 .sheet[data-key="models"] .tier.on .tier-bar i{background:linear-gradient(90deg,#84AFFB,#DDF956)}
-.sheet[data-key="models"] .tier.on .tier-role{color:#fff;font-size:19px;font-weight:500}
-.sheet[data-key="models"] .tier.on .tier-chips span{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);color:#fff}
 .sheet[data-key="models"] .tier.on .tier-depth{color:#A9C2E8}
 .sheet[data-key="models"] .tier.on .tier-depth i b{background:rgba(255,255,255,.2)}
 .sheet[data-key="models"] .tier.on .tier-depth i b.f{background:#DDF956}
+.sheet[data-key="models"] .tier.on .lbl{color:#A9C2E8}
+.sheet[data-key="models"] .tier.on .tier-role{color:#fff;font-size:21.5px;font-weight:500}
+.sheet[data-key="models"] .tier.on .tier-chips span{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);color:#fff}
 .sheet[data-key="models"] .tier.on .tier-foot{border-top-color:rgba(255,255,255,.3)}
 .sheet[data-key="models"] .tier.on .tier-foot b{color:#fff}
 .sheet[data-key="models"] .tier.on .tier-foot span{color:#DCE8F8}
-
-/* แถบเส้นทางงาน คัดกรอง → วิเคราะห์ → ตรวจทาน */
-.sheet[data-key="models"] .routebar{display:grid;grid-template-columns:1fr auto 1.16fr auto 1fr;gap:16px;align-items:center;margin-top:22px;
-  background:#fff;border:1px solid #D5E3FB;border-radius:21px;padding:16px 22px;box-shadow:0 8px 26px rgba(20,102,222,.10)}
-.sheet[data-key="models"] .rb{display:flex;align-items:center;gap:14px;padding:6px 8px;border-radius:15px}
-.sheet[data-key="models"] .rb i{flex:0 0 40px;height:40px;border-radius:12px;background:#1466DE;color:#fff;font-style:normal;
-  font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center}
-.sheet[data-key="models"] .rb b{display:block;font-size:20px;font-weight:700;color:#0E4CA8}
-.sheet[data-key="models"] .rb small{display:block;font-size:16px;color:#55617A;margin-top:1px}
-.sheet[data-key="models"] .rb em{margin-left:auto;font-style:normal;font-size:17px;font-weight:700;padding:6px 14px;border-radius:25px;
-  background:#EAF2FE;color:#0E4CA8;white-space:nowrap}
-.sheet[data-key="models"] .rb.on{background:#EAF2FE;padding:8px 14px}
-.sheet[data-key="models"] .rb.on i{background:#0E4CA8;color:#DDF956}
-.sheet[data-key="models"] .rb.on em{background:#DDF956;color:#3D4F06}
-.sheet[data-key="models"] .rb.last em{background:#FFEDE8;color:#C23A1E}
-.sheet[data-key="models"] .rb-arr{color:#84AFFB;font-size:28px;font-weight:700}
-.sheet[data-key="models"] .tier-foot span span{display:inline;margin:0}
 </style>
 <div class="slidewrap">
 <div class="sheet" data-key="models">
@@ -1242,129 +1252,142 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
   <div class="rule"></div>
   <p class="lead">ให้โมเดลภาษา (LLM) อ่านทุกหน้า โดยไม่คัดทิ้งด้วยคำค้น ส่วน<b>ชั้นวิเคราะห์ควรอยู่ที่ 100B ขึ้นไป</b> เพราะเป็นขนาดที่แยกบริบทเชิงนโยบาย<span class="nw">และน้ำเสียงของข่าวภาษาไทยได้ชัดเจน</span> <span class="nw">(ข้อมูลรุ่น ณ ก.ย. 2569)</span></p>
 
-  <div class="tiers">
+  <div class="flow">
 
     <div class="tier">
-      <span class="tier-tag">ชั้นคัดกรอง (ภาษาไทย)</span>
-      <div class="tier-size">4–30B</div>
-      <div class="tier-kind">โมเดลภาษาไทย fine-tune ได้ทั้งโมเดล</div>
-      <div class="tier-bar"><i style="width:24%"></i></div>
-      <div class="tier-role">อ่านทุกหน้าเว็บ คัดว่าเกี่ยวข้องกับภารกิจหรือไม่ ระบุหัวข้อ บุคคล และองค์กรที่ถูกกล่าวถึง</div>
-      <div class="tier-chips"><span>Typhoon 2.5</span><span>OpenThai 2.0</span><span>Pathumma</span></div>
-      <div class="tier-depth">ความลึกของการให้เหตุผล<i><b class="f"></b><b class="f"></b><b></b><b></b><b></b></i></div>
-      <div class="tier-foot"><div><b>~17–20 GB</b><span>VRAM ที่ Q4</span></div><div><b>Full FT</b><span>เทรนได้ทุกพารามิเตอร์ <span class="nw">ครอบคลุมกว่าแบบ LoRA</span></span></div></div>
+      <div class="stage"><i>1</i><b>คัดกรอง</b><span>อ่านทุกหน้าเว็บ</span><em>100% ของข่าว</em></div>
+      <div class="body">
+        <div class="col">
+          <span class="tier-tag">ชั้นคัดกรอง (ภาษาไทย)</span>
+          <div class="tier-size">4–30B</div>
+          <div class="tier-kind">โมเดลภาษาไทย <span class="nw">fine-tune ได้ทั้งโมเดล</span></div>
+          <div class="tier-bar"><i style="width:24%"></i></div>
+          <div class="tier-depth">ความลึกของการให้เหตุผล<i><b class="f"></b><b class="f"></b><b></b><b></b><b></b></i></div>
+        </div>
+        <div class="col">
+          <div class="lbl">หน้าที่</div>
+          <div class="tier-role">อ่านทุกหน้าเว็บ คัดว่าเกี่ยวข้องกับภารกิจหรือไม่ <span class="nw">ระบุหัวข้อ บุคคล</span> <span class="nw">และองค์กรที่ถูกกล่าวถึง</span></div>
+          <div class="lbl">ตัวอย่างรุ่น</div>
+          <div class="tier-chips"><span>Typhoon 2.5</span><span>OpenThai 2.0</span><span>Pathumma</span></div>
+          <div class="tier-foot"><div><b>~17–20 GB</b><span>VRAM ที่ Q4</span></div><div><b>Full FT</b><span>เทรนได้ทุกพารามิเตอร์ <span class="nw">ครอบคลุมกว่าแบบ LoRA</span></span></div></div>
+        </div>
+      </div>
     </div>
+
+    <div class="arr"><i>→</i><span>ส่งต่อเฉพาะ<br>ที่เกี่ยวข้อง</span></div>
 
     <div class="tier on">
-      <span class="tier-tag">★ ชั้นวิเคราะห์ที่แนะนำ</span>
-      <div class="tier-size">100–120B</div>
-      <div class="tier-kind">MoE · Apache 2.0 · fine-tune ต่อยอดได้</div>
-      <div class="tier-bar"><i style="width:72%"></i></div>
-      <div class="tier-role">ให้คะแนนผลกระทบ อ่านน้ำเสียงข่าว ระบุข้อถกเถียงเชิงนโยบาย <span class="nw">และเสนอแนวทางดำเนินการ</span></div>
-      <div class="tier-chips"><span>gpt-oss-120B</span><span>Mistral Small 4</span><span>Qwen3.5-122B</span><span>Llama 4 Scout</span></div>
-      <div class="tier-depth">ความลึกของการให้เหตุผล<i><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b></b></i></div>
-      <div class="tier-foot"><div><b>~55–80 GB</b><span>VRAM ที่ Q4–Q5</span></div><div><b>5–17B</b><span>พารามิเตอร์ที่ใช้จริงต่อ token <span class="nw">จึงประมวลผลได้เร็ว</span></span></div></div>
-    </div>
-
-    <div class="tier">
-      <span class="tier-tag">สำหรับขยายในระยะถัดไป</span>
-      <div class="tier-size">300B+</div>
-      <div class="tier-kind">sparse MoE · อ่านบริบทได้ถึง 1M token</div>
-      <div class="tier-bar"><i style="width:100%"></i></div>
-      <div class="tier-role">ตรวจทานกรณีวิกฤตก่อนเสนอผู้บริหาร <span class="nw">และงานที่ต้องอ้างอิงเอกสารยาว</span></div>
-      <div class="tier-chips"><span>DeepSeek V4 Pro</span><span>GLM-5.2</span><span>Kimi K3</span></div>
-      <div class="tier-depth">ความลึกของการให้เหตุผล<i><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b></i></div>
-      <div class="tier-foot"><div><b>1M</b><span>token ของบริบทต่อคำถาม</span></div><div><b>MIT</b><span>DeepSeek V4 และ GLM <span class="nw">ใช้งานได้เสรี</span></span></div></div>
+      <div class="stage"><i>2</i><b>วิเคราะห์</b><span>ให้คะแนน เหตุผล และข้อเสนอ</span><em>~10–15%</em></div>
+      <div class="body">
+        <div class="col">
+          <span class="tier-tag">★ ชั้นวิเคราะห์ที่แนะนำ</span>
+          <div class="tier-size">100–120B</div>
+          <div class="tier-kind">MoE · Apache 2.0 <span class="nw">· fine-tune ต่อยอดได้</span></div>
+          <div class="tier-bar"><i style="width:72%"></i></div>
+          <div class="tier-depth">ความลึกของการให้เหตุผล<i><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b></b></i></div>
+        </div>
+        <div class="col">
+          <div class="lbl">หน้าที่</div>
+          <div class="tier-role">ให้คะแนนผลกระทบ อ่านน้ำเสียงข่าว <span class="nw">ระบุข้อถกเถียงเชิงนโยบาย</span> <span class="nw">และเสนอแนวทางดำเนินการ</span></div>
+          <div class="lbl">ตัวอย่างรุ่น</div>
+          <div class="tier-chips"><span>gpt-oss-120B</span><span>Mistral Small 4</span><span>Qwen3.5-122B</span><span>Llama 4 Scout</span></div>
+          <div class="tier-foot"><div><b>~55–80 GB</b><span>VRAM ที่ Q4–Q5</span></div><div><b>5–17B</b><span>พารามิเตอร์ที่ใช้จริงต่อ token <span class="nw">จึงประมวลผลได้เร็ว</span></span></div></div>
+        </div>
+      </div>
     </div>
 
   </div>
 
-  <div class="routebar">
-    <div class="rb"><i>1</i><div><b>คัดกรอง</b><small>คัดความเกี่ยวข้องทุกหน้า</small></div><em>100%</em></div>
-    <div class="rb-arr">→</div>
-    <div class="rb on"><i>2</i><div><b>วิเคราะห์</b><small>ให้คะแนน เหตุผล และข้อเสนอ</small></div><em>~10–15%</em></div>
-    <div class="rb-arr">→</div>
-    <div class="rb last"><i>3</i><div><b>ตรวจทาน</b><small>ตรวจทานกรณีวิกฤต</small></div><em>1–2%</em></div>
-  </div>
+  <div class="why"><span class="k">ทำไมแบ่ง 2 ชั้น</span><p>โมเดลเล็กอ่านทุกหน้าได้เร็วและใช้เครื่องน้อย <span class="nw">แล้วส่งต่อเฉพาะข่าวที่เกี่ยวข้องราว 10–15%</span> ให้โมเดลใหญ่วิเคราะห์ <b class="nw">จึงแม่นยำโดยไม่ต้องใช้โมเดลใหญ่กับทุกหน้า</b></p></div>
 
-  <div class="foot"><span class="brand">BESIDE</span>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
+  <div class="foot">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
 </div>
 </div>
 
 <!-- ═══ 8 · DATA ═══ -->
-<!-- nav: เทคนิค | ข้อมูลและธรรมาภิบาล | ทุก Insight ย้อนถึงต้นทาง -->
+<!-- nav: เทคนิค | การดูแลข้อมูล | ตรวจย้อนได้ทุกขั้น -->
 <style>
-.sheet[data-key="data"] .data-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:stretch;margin-top:22px}
-.sheet[data-key="data"] .data-diagram{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-content:start}
-.sheet[data-key="data"] .entity{background:#fff;border:1px solid #D5E3FB;border-radius:18px;overflow:hidden;
-  box-shadow:0 4px 16px rgba(20,102,222,.07);border-top:5px solid #84AFFB}
-.sheet[data-key="data"] .entity b{display:flex;align-items:center;gap:9px;padding:9px 16px;background:#F3F7FD;border-bottom:1px solid #E1EBFB;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:17px;font-weight:700;color:#0E4CA8}
-.sheet[data-key="data"] .entity b::before{content:'';flex:0 0 12px;height:12px;border-radius:3px;background:#84AFFB}
-.sheet[data-key="data"] .entity ul{list-style:none;padding:5px 16px 8px}
-.sheet[data-key="data"] .entity li{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:15.5px;color:#47536B;
-  line-height:1.3;padding:4px 0;border-bottom:1px dashed #E6EEFA}
-.sheet[data-key="data"] .entity li:last-child{border-bottom:0}
-.sheet[data-key="data"] .entity.primary{border-top-color:#1466DE}
-.sheet[data-key="data"] .entity.primary b{background:#EAF2FE}
-.sheet[data-key="data"] .entity.primary b::before{background:#1466DE}
-.sheet[data-key="data"] .entity.ai{border-top-color:#8FBF2E}
-.sheet[data-key="data"] .entity.ai b{background:#F4FBDE;color:#3D5A06}
-.sheet[data-key="data"] .entity.ai b::before{background:#8FBF2E}
-.sheet[data-key="data"] .entity.alert{border-top-color:#FF6648}
-.sheet[data-key="data"] .entity.alert b{background:#FFF1ED;color:#B5351B}
-.sheet[data-key="data"] .entity.alert b::before{background:#FF6648}
+/* ตามข่าวหนึ่งเรื่อง 5 ขั้น — อธิบายสำหรับผู้บริหารที่ไม่ใช่สายเทคนิค */
+.sheet[data-key="data"] .sec-t{display:flex;align-items:baseline;gap:14px;margin:24px 0 14px}
+.sheet[data-key="data"] .sec-t b{font-size:24px;font-weight:700;color:#0E4CA8}
+.sheet[data-key="data"] .sec-t span{font-size:17px;color:#55617A}
+.sheet[data-key="data"] .journey{display:grid;grid-template-columns:repeat(5,1fr);gap:28px}
+.sheet[data-key="data"] .step{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #D5E3FB;
+  border-top:5px solid var(--c);border-radius:20px;box-shadow:0 8px 26px rgba(20,102,222,.10);padding:18px 20px 0}
+.sheet[data-key="data"] .step:not(:last-child)::after{content:'';position:absolute;right:-21px;top:50%;width:11px;height:11px;
+  border-top:3px solid #84AFFB;border-right:3px solid #84AFFB;transform:translateY(-50%) rotate(45deg)}
+.sheet[data-key="data"] .step .hd{display:flex;align-items:center;gap:13px}
+.sheet[data-key="data"] .ic{flex:0 0 50px;height:50px;border-radius:15px;background:var(--bg);color:var(--c);
+  display:flex;align-items:center;justify-content:center}
+.sheet[data-key="data"] .ic svg{width:27px;height:27px;display:block}
+.sheet[data-key="data"] .step .no{display:block;font-size:14px;font-weight:700;color:var(--c)}
+.sheet[data-key="data"] .step h3{font-size:22px;font-weight:700;color:#0E4CA8;line-height:1.25}
+.sheet[data-key="data"] .step p{flex:1;font-size:17.5px;color:#47536B;line-height:1.55;margin:13px 0 16px}
+.sheet[data-key="data"] .step .ex{margin:0 -20px;padding:11px 20px 14px;background:var(--bg);border-top:1px dashed var(--line);
+  border-radius:0 0 19px 19px}
+.sheet[data-key="data"] .step .ex small{display:block;font-size:13.5px;font-weight:700;color:var(--c)}
+.sheet[data-key="data"] .step .ex b{display:block;font-size:18px;font-weight:700;color:#2A3346;margin-top:2px;line-height:1.35}
+.sheet[data-key="data"] .s1{--c:#1466DE;--bg:#EAF2FE;--line:#C9DCFA}
+.sheet[data-key="data"] .s2{--c:#1B8FD8;--bg:#E6F4FC;--line:#BFE2F6}
+.sheet[data-key="data"] .s3{--c:#5E8C0A;--bg:#F4FBDE;--line:#DCEFB0}
+.sheet[data-key="data"] .s4{--c:#D9472E;--bg:#FFF1ED;--line:#FFD2C6}
+.sheet[data-key="data"] .s5{--c:#0E4CA8;--bg:#EEF2FB;--line:#CCD8F0}
 
-.sheet[data-key="data"] .security{background:linear-gradient(150deg,#0A3F92 0%,#0E4CA8 50%,#1466DE 100%);border-radius:21px;color:#fff;
-  padding:22px 26px 24px;box-shadow:0 14px 36px rgba(14,76,168,.26);display:flex;flex-direction:column}
-.sheet[data-key="data"] .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:16px}
-.sheet[data-key="data"] .shield{flex:0 0 58px;height:58px;border-radius:17px;background:#DDF956;display:flex;align-items:center;justify-content:center}
-.sheet[data-key="data"] .shield svg{width:32px;height:32px;display:block}
-.sheet[data-key="data"] .security h3{font-size:28px;font-weight:700;letter-spacing:.01em}
-.sheet[data-key="data"] .security-list{flex:1;display:flex;flex-direction:column;gap:11px}
-.sheet[data-key="data"] .security-item{flex:1;display:flex;gap:14px;align-items:center;background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.14);border-radius:15px;padding:10px 16px;font-size:17.5px;line-height:1.5;color:#DCE8F8}
-.sheet[data-key="data"] .security-item i{flex:0 0 34px;height:34px;border-radius:11px;background:rgba(255,255,255,.16);color:#fff;font-style:normal;
-  font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center}
-.sheet[data-key="data"] .security-item b{color:#DDF956;font-weight:700}
+.sheet[data-key="data"] .guard{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sheet[data-key="data"] .g{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid #D5E3FB;border-radius:18px;
+  padding:19px 22px;box-shadow:0 4px 16px rgba(20,102,222,.07)}
+.sheet[data-key="data"] .g .ic{--bg:#0E4CA8;--c:#DDF956;flex-basis:48px;height:48px}
+.sheet[data-key="data"] .g b{display:block;font-size:19.5px;font-weight:700;color:#0E4CA8;line-height:1.3}
+.sheet[data-key="data"] .g span{display:block;font-size:17.5px;color:#55617A;line-height:1.45;margin-top:2px}
+.sheet[data-key="data"] .g span span{display:inline;margin:0}
 </style>
 <div class="slidewrap">
 <div class="sheet" data-key="data">
-  <div class="eyebrow">07 · ข้อมูลและธรรมาภิบาลข้อมูล</div>
+  <div class="eyebrow">07 · การดูแลข้อมูล</div>
   <h1>ทุกผลวิเคราะห์ตรวจสอบย้อนถึงต้นทางได้</h1>
   <div class="rule"></div>
-  <p class="lead">ทุกรายการบนหน้าจอผู้บริหารย้อนดู URL ต้นทาง เวลาที่ดึงข้อมูล โมเดล และคำสั่ง (prompt) ที่ใช้ได้ <span class="nw">หากปรับคำสั่ง ก็วิเคราะห์ข้อมูลในคลังใหม่ได้ทั้งหมดโดยไม่ต้องดึงเว็บซ้ำ</span></p>
+  <p class="lead">ระบบบันทึกทุกขั้นตั้งแต่ข่าวต้นฉบับจนถึงการแจ้งเตือน ผู้บริหารจึงกดดูได้ว่า<b>เรื่องที่เสนอมาจากข่าวใด AI สรุปว่าอย่างไร และส่งถึงใครแล้ว</b></p>
 
-  <div class="data-layout">
-    <div class="data-diagram">
-      <div class="entity primary"><b>source_account</b><ul><li>platform</li><li>account_id</li><li>token_ref</li><li>status</li></ul></div>
-      <div class="entity primary"><b>monitor_query</b><ul><li>brand</li><li>keywords</li><li>negative_terms</li><li>schedule</li></ul></div>
-      <div class="entity"><b>raw_item</b><ul><li>source_id</li><li>url</li><li>payload_hash</li><li>published_at</li></ul></div>
-      <div class="entity"><b>content_item</b><ul><li>canonical_text</li><li>language</li><li>entity</li><li>engagement</li><li>dedupe_group</li></ul></div>
-      <div class="entity ai"><b>ai_analysis</b><ul><li>model</li><li>prompt_version</li><li>relevance</li><li>topic</li><li>sentiment</li><li>summary</li></ul></div>
-      <div class="entity alert"><b>alert_event</b><ul><li>score</li><li>rule</li><li>recipient</li><li>sent_at</li><li>acknowledged</li></ul></div>
-      <div class="entity"><b>feedback</b><ul><li>useful</li><li>wrong_topic</li><li>wrong_sentiment</li><li>note</li></ul></div>
-      <div class="entity"><b>connector_health</b><ul><li>last_success</li><li>quota</li><li>error_count</li><li>latency</li></ul></div>
-      <div class="entity"><b>audit_log</b><ul><li>actor</li><li>action</li><li>object</li><li>before/after</li></ul></div>
+  <div class="sec-t"><b>ตามข่าวหนึ่งเรื่อง ระบบบันทึกอะไรไว้บ้าง</b><span>ตัวอย่าง: ข่าวร้องเรียนขั้นตอนขออนุญาตล่าช้า</span></div>
+  <div class="journey">
+    <div class="step s1">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><div><span class="no">ขั้นที่ 1</span><h3>ข่าวต้นฉบับ</h3></div></div>
+      <p>เก็บลิงก์ข่าว เวลาที่เผยแพร่ <span class="nw">และสำเนาเนื้อหาไว้</span> <span class="nw">แม้ต้นทางลบข่าวก็ยังตรวจสอบได้</span></p>
+      <div class="ex"><small>ตัวอย่าง</small><b>ข่าวจาก 4 สำนัก <span class="nw">เผยแพร่ 10:05 น.</span></b></div>
     </div>
-
-    <div class="security">
-      <div class="sec-head">
-        <div class="shield"><svg viewBox="0 0 24 24" fill="none" stroke="#0E4CA8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 4.5 5.6v6c0 4.6 3.1 8.3 7.5 9.6 4.4-1.3 7.5-5 7.5-9.6v-6z"/><path d="m8.6 12.1 2.4 2.4 4.6-4.8"/></svg></div>
-        <h3>มาตรการควบคุมระบบ</h3>
-      </div>
-      <div class="security-list">
-        <div class="security-item"><i>1</i><span><b>ติดตั้งในหน่วยงาน:</b> ระบบและโมเดลอยู่ในศูนย์ข้อมูลของหน่วยงาน <span class="nw">ข้อมูลไม่ถูกส่งออกนอกองค์กร</span></span></div>
-        <div class="security-item"><i>2</i><span><b>PDPA:</b> เก็บเฉพาะเนื้อหาสาธารณะ กำหนดระยะเวลาจัดเก็บและสิทธิ์เข้าถึงตามระเบียบของหน่วยงาน</span></div>
-        <div class="security-item"><i>3</i><span><b>ตรวจสอบย้อนกลับ:</b> ทุกผลวิเคราะห์ย้อนดู URL ข้อมูลดิบ รุ่นของ prompt และรุ่นของโมเดลได้</span></div>
-        <div class="security-item"><i>4</i><span><b>ควบคุมปริมาณการใช้:</b> กำหนดโควตาต่อแหล่งข้อมูล ใช้แคช ตัดข้อมูลซ้ำ <span class="nw">และมีหน้าจอติดตามการใช้งาน</span></span></div>
-        <div class="security-item"><i>5</i><span><b>ความต่อเนื่องของระบบ:</b> ลองดึงใหม่อัตโนมัติ แยกงานที่ล้มเหลวไว้ตรวจ <span class="nw">และแสดงเวลาที่ดึงสำเร็จล่าสุด</span></span></div>
-        <div class="security-item"><i>6</i><span><b>ผู้ใช้มีส่วนร่วม:</b> ผลที่เจ้าหน้าที่ยืนยันหรือแก้ไข นำไปใช้เทรนโมเดลรอบถัดไป</span></div>
-      </div>
+    <div class="step s2">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg></div><div><span class="no">ขั้นที่ 2</span><h3>จัดระเบียบ</h3></div></div>
+      <p>รวมข่าวเรื่องเดียวกันจากหลายสำนัก<span class="nw">เป็นประเด็นเดียว</span> <span class="nw">เจ้าหน้าที่ไม่ต้องอ่านซ้ำ</span></p>
+      <div class="ex"><small>ตัวอย่าง</small><b>4 ข่าว → 1 ประเด็น</b></div>
+    </div>
+    <div class="step s3">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3l1.8 4.6L17.5 9l-4.7 1.4L11 15l-1.8-4.6L4.5 9l4.7-1.4z"/><path d="M18.5 14.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></div><div><span class="no">ขั้นที่ 3</span><h3>AI วิเคราะห์</h3></div></div>
+      <p>สรุปว่าเป็นประเด็นอะไร <span class="nw">เชิงบวกหรือลบ เร่งด่วนแค่ไหน</span> <span class="nw">พร้อมบันทึกรุ่นของ AI ที่ใช้</span></p>
+      <div class="ex"><small>ตัวอย่าง</small><b>ร้องเรียน · เชิงลบ <span class="nw">· 87 คะแนน</span></b></div>
+    </div>
+    <div class="step s4">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 21h4"/></svg></div><div><span class="no">ขั้นที่ 4</span><h3>แจ้งเตือน</h3></div></div>
+      <p>บันทึกว่าส่งถึงใคร เมื่อไร <span class="nw">และเปิดอ่านแล้วหรือยัง</span></p>
+      <div class="ex"><small>ตัวอย่าง</small><b>ส่งกองประชาสัมพันธ์ <span class="nw">10:17 น. · อ่านแล้ว</span></b></div>
+    </div>
+    <div class="step s5">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/><path d="m16 11 2 2 4-4"/></svg></div><div><span class="no">ขั้นที่ 5</span><h3>เจ้าหน้าที่ยืนยัน</h3></div></div>
+      <p>เจ้าหน้าที่กดยืนยันหรือแก้ผลวิเคราะห์ <span class="nw">ระบบนำไปปรับให้แม่นยำขึ้น</span></p>
+      <div class="ex"><small>ตัวอย่าง</small><b>ยืนยันแล้ว: ถูกต้อง</b></div>
     </div>
   </div>
 
-  <div class="foot"><span class="brand">BESIDE</span>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
+  <div class="sec-t"><b>มาตรการดูแลข้อมูล</b></div>
+  <div class="guard">
+    <div class="g"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M10 21v-5h4v5"/></svg></div><div><b>ข้อมูลอยู่ในหน่วยงาน</b><span>ระบบและ AI ติดตั้งในศูนย์ข้อมูลของหน่วยงาน <span class="nw">ไม่ส่งข้อมูลออกภายนอก</span></span></div></div>
+    <div class="g"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><div><b>เก็บเฉพาะข้อมูลสาธารณะ</b><span>กำหนดสิทธิ์และระยะเวลาจัดเก็บ<span class="nw">ตาม PDPA และระเบียบหน่วยงาน</span></span></div></div>
+    <div class="g"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v3l2 2"/></svg></div><div><b>รู้ว่าใครทำอะไร เมื่อไร</b><span>ทุกการเปิดดูและแก้ไขมีบันทึก <span class="nw">ตรวจสอบย้อนหลังได้</span></span></div></div>
+    <div class="g"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-5"/></svg></div><div><b>ควบคุมค่าใช้จ่าย</b><span>ไม่ดึงข่าวซ้ำ <span class="nw">และมีหน้าจอดูปริมาณการใช้งาน</span></span></div></div>
+    <div class="g"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.9-3M4 4v4h4M4 13a8 8 0 0 0 14.9 3M20 20v-4h-4"/></svg></div><div><b>เว็บใดขัดข้อง ระบบยังทำงานต่อ</b><span>ลองดึงใหม่อัตโนมัติ <span class="nw">และแจ้งเมื่อแหล่งข่าวใดดึงไม่ได้</span></span></div></div>
+    <div class="g"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v4H3zM5 9v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"/><path d="M10 14h4"/></svg></div><div><b>วิเคราะห์ข่าวเก่าใหม่ได้</b><span>ปรับวิธีวิเคราะห์แล้วใช้กับข่าวในคลัง<span class="nw">โดยไม่ต้องดึงเว็บซ้ำ</span></span></div></div>
+  </div>
+
+  <div class="foot">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
 </div>
 </div>
 
@@ -1462,7 +1485,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
       <div class="db-note">การแจ้งเตือนทุกครั้งระบุ<b>เหตุผลและข้อเสนอแนะ</b> <span class="nw">เจ้าหน้าที่ไม่ต้องเปิดอ่านข่าวเองทั้งหมด</span></div>
     </div>
   </div>
-  <div class="foot"><span class="brand">BESIDE</span>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
+  <div class="foot">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
 </div>
 </div>
 
@@ -1540,7 +1563,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
     </div>
   </div>
 
-  <div class="foot"><span class="brand">BESIDE</span>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
+  <div class="foot">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
 </div>
 </div>
 
@@ -1613,7 +1636,7 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
     <div class="pills"><span class="pill">ความแม่นยำ ≥ 90%</span><span class="pill">แจ้งผิด &lt; 10%</span><span class="pill">แจ้งประเด็นเร่งด่วนภายใน 15 นาที</span><span class="pill">เจ้าหน้าที่ใช้งานจริง</span></div>
   </div>
 
-  <div class="foot"><span class="brand">BESIDE</span>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
+  <div class="foot">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</div>
 </div>
 </div>
 
