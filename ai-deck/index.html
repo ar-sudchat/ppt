@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ — Executive Blueprint</title>
+<style>
+:root{
+  --royal:#1466DE;--sky:#2E9CE8;--vista:#84AFFB;--lime:#DDF956;--coral:#FF6648;
+  --teal:#14B8A6;--ink:#0A1733;--muted:#63718A;--line:#DFE8F4;--paper:#F4F8FD;--white:#fff;
+  --shadow:0 22px 55px rgba(18,60,120,.11);--soft-shadow:0 12px 32px rgba(18,60,120,.08);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+body{margin:0;background:linear-gradient(180deg,#EAF3FF 0,#F8FBFF 12%,#F3F7FC 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Thai",Tahoma,Arial,sans-serif;line-height:1.5}
+a{color:inherit}
+.wrap{max-width:1480px;margin:auto;padding:18px}
+.navbar{position:sticky;top:10px;z-index:99;max-width:1480px;margin:10px auto 0;padding:0 18px}
+.navbar>div{display:flex;align-items:center;gap:14px;padding:10px 12px;border:1px solid rgba(210,225,243,.94);border-radius:17px;background:rgba(255,255,255,.88);backdrop-filter:blur(18px);box-shadow:0 10px 30px rgba(16,51,104,.08)}
+.logo{font-weight:950;letter-spacing:-.45px;white-space:nowrap}.logo b{color:var(--royal)}
+.navlinks{display:flex;gap:4px;overflow:auto;scrollbar-width:none}.navlinks::-webkit-scrollbar{display:none}.navlinks a{text-decoration:none;font-size:12px;font-weight:750;color:#54627A;padding:7px 9px;border-radius:9px;white-space:nowrap}.navlinks a:hover{background:#EDF4FF;color:var(--royal)}
+.nav-badge{margin-left:auto;white-space:nowrap;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:900;color:#0C6B53;background:#E8FBF4;border:1px solid #C8F2E3}
+.slide{scroll-snap-align:start;position:relative;min-height:820px;margin:18px 0;border:1px solid #D9E6F5;border-radius:34px;background:#fff;box-shadow:var(--shadow);overflow:hidden;padding:48px 52px}
+.slide:before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(46,156,232,.12),rgba(46,156,232,0) 70%);right:-160px;top:-180px;pointer-events:none}
+.slide.alt{background:linear-gradient(140deg,#F9FCFF,#EFF6FF 58%,#F7FBE6)}
+.slide.dark{color:white;background:radial-gradient(circle at 78% 25%,rgba(46,156,232,.35),transparent 32%),linear-gradient(135deg,#091832,#102B56 62%,#0B1C3B);border-color:#183C6D}.slide.dark:before{background:radial-gradient(circle,rgba(221,249,86,.20),rgba(221,249,86,0) 65%)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;border:1px solid #CFE2FF;background:#EDF5FF;color:var(--royal);font-size:11px;font-weight:950;letter-spacing:.8px;text-transform:uppercase}.dark .eyebrow{color:#D9E8FF;background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.15)}
+.head{display:grid;grid-template-columns:1fr minmax(260px,460px);gap:30px;align-items:end;margin-bottom:28px}.head h2{font-size:40px;line-height:1.08;letter-spacing:-1.5px;margin:8px 0 0}.head p{margin:0;color:var(--muted);font-size:15px}.dark .head p{color:#BFD0E8}
+h1{font-size:68px;line-height:.98;letter-spacing:-3px;margin:16px 0 18px;max-width:850px}.lead{font-size:21px;color:#50617D;max-width:760px;margin:0}.dark .lead{color:#C2D2E8}
+.hero{display:grid;grid-template-columns:1.02fr .98fr;gap:30px;align-items:center;background:radial-gradient(circle at 91% 6%,rgba(221,249,86,.82),transparent 16%),radial-gradient(circle at 70% 62%,rgba(132,175,251,.32),transparent 27%),linear-gradient(135deg,#fff,#F2F8FF 62%,#E8F3FF)}
+.hero-copy{position:relative;z-index:3}.hero .eyebrow{margin-bottom:2px}.hero-note{display:flex;gap:9px;align-items:center;margin-top:26px;font-size:13px;color:#53617A}.dot{width:9px;height:9px;border-radius:50%;background:#20B77A;box-shadow:0 0 0 5px rgba(32,183,122,.12)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.chip{font-size:12px;font-weight:850;border-radius:999px;padding:7px 10px;background:#fff;border:1px solid #D9E6F5;box-shadow:0 8px 18px rgba(18,60,120,.05)}
+/* Hero illustration */
+.command{position:relative;min-height:570px;display:grid;place-items:center}.orbit{position:absolute;border:1px dashed rgba(20,102,222,.28);border-radius:50%}.o1{width:500px;height:500px}.o2{width:380px;height:380px}.o3{width:260px;height:260px}.pulse{position:absolute;width:135px;height:135px;border-radius:34px;background:linear-gradient(145deg,#1466DE,#2E9CE8);box-shadow:0 30px 65px rgba(20,102,222,.34);display:grid;place-items:center;color:white;z-index:3;transform:rotate(5deg)}.pulse svg{width:72px;height:72px;transform:rotate(-5deg)}
+.signal{position:absolute;z-index:4;padding:10px 12px;background:#fff;border:1px solid #D9E6F5;border-radius:14px;box-shadow:var(--soft-shadow);font-size:12px;font-weight:850;display:flex;align-items:center;gap:8px}.signal .mini{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-weight:950}.sig1{top:50px;left:15px}.sig2{top:115px;right:12px}.sig3{bottom:125px;left:2px}.sig4{bottom:66px;right:22px}.sig5{top:260px;left:4px}.sig6{top:295px;right:-3px}
+.sig1 .mini{background:#E9F2FF;color:#1265D8}.sig2 .mini{background:#111;color:white}.sig3 .mini{background:#FFF0EE;color:#EF493B}.sig4 .mini{background:#EAFBF6;color:#087E68}.sig5 .mini{background:#F5EEFF;color:#7B48C9}.sig6 .mini{background:#EDF6FF;color:#2F80C5}
+.preview{position:absolute;width:330px;height:210px;bottom:8px;left:50%;transform:translateX(-50%);z-index:2;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(245,250,255,.96));border:1px solid #D9E6F5;border-radius:24px;box-shadow:0 30px 70px rgba(16,63,124,.15);padding:18px}.preview-top{display:flex;justify-content:space-between;align-items:center}.preview-dot{display:flex;gap:4px}.preview-dot i{width:7px;height:7px;border-radius:50%;background:#CFDAE8}.preview-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.p-kpi{padding:10px;border-radius:12px;background:#F5F9FF}.p-kpi b{font-size:18px}.p-kpi span{display:block;font-size:9px;color:#77859A}.chart{height:68px;margin-top:12px;position:relative;border-radius:10px;background:linear-gradient(180deg,#F4F8FD,#fff);overflow:hidden}.chart svg{width:100%;height:100%}
+/* Executive value */
+.value-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}.before-after{display:grid;grid-template-columns:1fr 80px 1fr;gap:12px;align-items:stretch}.ba{border-radius:24px;padding:24px;border:1px solid #DFE8F4;position:relative;overflow:hidden}.ba.before{background:#F8FAFD}.ba.after{background:linear-gradient(145deg,#EDF6FF,#F8FFE2)}.ba h3{font-size:23px;margin:10px 0}.ba p{color:var(--muted);font-size:14px}.ba-list{display:grid;gap:10px;margin-top:18px}.ba-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#53617A}.ba-item i{width:25px;height:25px;display:grid;place-items:center;border-radius:8px;background:white;border:1px solid #DFE8F4;font-style:normal;font-weight:950;flex:none}.ba-arrow{display:grid;place-items:center;color:var(--royal);font-size:42px}.impact-panel{border-radius:26px;background:linear-gradient(160deg,#0C1E42,#123667);color:#fff;padding:26px;position:relative;overflow:hidden}.impact-panel:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(46,156,232,.38),transparent 68%);right:-60px;bottom:-60px}.impact-panel h3{font-size:25px;margin:8px 0 18px;position:relative;z-index:2}.impact-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;position:relative;z-index:2}.impact-card{padding:15px;border-radius:16px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12)}.impact-card strong{font-size:26px}.impact-card span{display:block;font-size:11px;color:#BDD0EA;margin-top:3px}
+/* Main flow */
+.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;align-items:stretch;margin-top:22px}.pipe{position:relative;border-radius:24px;border:1px solid #DDE7F3;background:#fff;padding:22px 18px 18px;min-height:315px;box-shadow:0 14px 30px rgba(18,60,120,.06)}.pipe:not(:last-child):after{content:"";position:absolute;width:30px;height:3px;background:linear-gradient(90deg,#8CB6F3,#2E9CE8);right:-26px;top:50%;z-index:5}.pipe:not(:last-child):before{content:"";position:absolute;right:-28px;top:calc(50% - 5px);border-left:8px solid #2E9CE8;border-top:5px solid transparent;border-bottom:5px solid transparent;z-index:6}.pipe-num{width:34px;height:34px;border-radius:12px;background:#EAF3FF;color:var(--royal);display:grid;place-items:center;font-size:12px;font-weight:950}.pipe-icon{height:96px;display:grid;place-items:center;margin:12px 0}.pipe-icon svg{width:82px;height:82px}.pipe h3{font-size:20px;margin:4px 0}.pipe p{font-size:12px;color:var(--muted);margin:0}.pipe-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:13px}.pipe-tags span{font-size:10px;padding:5px 7px;border-radius:999px;background:#F2F6FB;color:#5B6980;font-weight:800}.pipe.ai{background:linear-gradient(170deg,#F8F4FF,#F1F8FF);border-color:#D9CDFD}.pipe.ai .pipe-num{background:#EEE8FF;color:#6B46C1}.pipe.action{background:linear-gradient(170deg,#F1FCFA,#F5FBFF);border-color:#CDEDE7}.pipe.action .pipe-num{background:#DFF8F2;color:#07836F}
+.callout{margin-top:22px;padding:16px 18px;border-radius:18px;border:1px solid #CDE2FA;background:linear-gradient(90deg,#EDF6FF,#F9FDDC);display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}.callout .bulb{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:#fff;font-size:24px}.callout b{font-size:15px}.callout span{font-size:12px;color:var(--muted)}.callout .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;font-weight:850;background:#0E2348;color:#DCE9FF;border-radius:12px;padding:10px 12px}
+/* Sources */
+.source-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:24px}.source-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.source-card{border-radius:19px;border:1px solid #DFE8F4;background:#fff;padding:17px;min-height:155px}.source-top{display:flex;justify-content:space-between;align-items:center}.brand-icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-weight:950;background:#EDF4FF;color:var(--royal)}.status-pill{font-size:9px;font-weight:950;border-radius:999px;padding:5px 7px}.ready{background:#E8F9F1;color:#167A54}.phase2{background:#FFF5DF;color:#9A6200}.eval{background:#F0F3F7;color:#64718A}.source-card h3{font-size:16px;margin:10px 0 3px}.source-card p{font-size:11px;color:var(--muted);margin:0}.source-card .micro{font-size:10px;font-weight:850;color:#40506A;margin-top:10px}.access-map{border-radius:25px;background:#0D2247;color:white;padding:24px;min-height:355px;position:relative;overflow:hidden}.access-map:after{content:"";position:absolute;width:270px;height:270px;border-radius:50%;background:radial-gradient(circle,rgba(46,156,232,.36),transparent 67%);right:-70px;bottom:-90px}.access-map h3{font-size:23px;margin:6px 0 8px;position:relative;z-index:2}.access-map p{font-size:12px;color:#BDCEE7;position:relative;z-index:2}.access-lines{display:grid;gap:11px;margin-top:20px;position:relative;z-index:2}.access-line{display:grid;grid-template-columns:110px 1fr auto;gap:9px;align-items:center;font-size:11px}.meter{height:8px;background:rgba(255,255,255,.10);border-radius:99px;overflow:hidden}.meter i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#84AFFB,#DDF956)}.access-line b{font-size:11px}.warning{margin-top:17px;padding:12px;border-radius:13px;background:rgba(255,102,72,.12);border:1px solid rgba(255,102,72,.22);font-size:11px;color:#FFD7CE;position:relative;z-index:2}
+/* AI engine */
+.ai-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:center}.funnel{height:480px;border-radius:28px;background:linear-gradient(180deg,#F5F9FF,#EEF5FF);border:1px solid #D9E7F6;padding:26px;position:relative;overflow:hidden}.funnel-stage{margin:auto;border-radius:18px;text-align:center;padding:14px 12px;font-weight:900;position:relative;box-shadow:0 10px 24px rgba(18,60,120,.07)}.f1{width:94%;background:#fff;border:1px solid #DDE7F4}.f2{width:76%;margin-top:18px;background:#EDF6FF;border:1px solid #CFE2FA}.f3{width:58%;margin-top:18px;background:#F3EEFF;border:1px solid #DED2FF}.f4{width:39%;margin-top:18px;background:#FFF0EC;border:1px solid #FFD1C7}.funnel-stage strong{font-size:31px;display:block;line-height:1}.funnel-stage span{font-size:11px;color:var(--muted)}.funnel-arrow{text-align:center;color:#6597DA;font-size:24px;line-height:1;margin-top:3px}.funnel-note{text-align:center;margin-top:13px;font-size:11px;color:#6B788E}.engine{border-radius:28px;border:1px solid #DCDFF4;background:radial-gradient(circle at 83% 12%,rgba(221,249,86,.62),transparent 20%),linear-gradient(145deg,#fff,#F8F5FF);padding:26px}.brain-row{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:center}.brain{width:165px;height:165px;border-radius:44px;background:linear-gradient(145deg,#6F58DB,#1466DE);display:grid;place-items:center;box-shadow:0 28px 55px rgba(78,67,190,.26)}.brain svg{width:104px;height:104px}.engine h3{font-size:26px;margin:6px 0}.engine p{font-size:13px;color:var(--muted)}.analysis-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}.analysis-card{padding:14px;border-radius:15px;border:1px solid #E1E7F1;background:#fff}.analysis-card b{font-size:13px}.analysis-card span{display:block;font-size:10px;color:var(--muted);margin-top:4px}.score-row{display:grid;grid-template-columns:170px 1fr;gap:16px;margin-top:18px;align-items:center}.score-ring{width:155px;height:155px;border-radius:50%;background:conic-gradient(var(--coral) 0 82%,#E6EDF6 82%);display:grid;place-items:center;position:relative}.score-ring:after{content:"";width:117px;height:117px;border-radius:50%;background:#fff;position:absolute}.score-ring div{position:relative;z-index:2;text-align:center}.score-ring strong{font-size:40px;display:block;line-height:1}.score-ring span{font-size:9px;color:var(--muted)}.thresholds{display:grid;gap:8px}.threshold{display:grid;grid-template-columns:85px 1fr;gap:8px;align-items:center;font-size:11px}.threshold span{grid-column:1/-1}.th-dot{height:8px;border-radius:99px}.critical{background:#FF7155}.digest{background:#FFB94A}.archive{background:#84AFFB}
+/* Architecture */
+.arch-board{display:grid;grid-template-columns:1fr 70px 1.1fr 70px 1.05fr;gap:8px;align-items:center}.tower{display:grid;gap:10px}.arch-block{border-radius:18px;border:1px solid #DAE6F4;background:#fff;padding:15px 16px;display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;box-shadow:0 10px 22px rgba(18,60,120,.05)}.arch-block .ico{width:42px;height:42px;border-radius:13px;background:#EDF5FF;color:var(--royal);display:grid;place-items:center;font-weight:950}.arch-block b{font-size:14px;display:block}.arch-block span{font-size:10px;color:var(--muted);display:block;margin-top:2px}.bridge{height:100%;display:grid;place-items:center;position:relative}.bridge:before{content:"";height:78%;width:2px;background:linear-gradient(#D0E0F3,#2E9CE8,#D0E0F3)}.bridge:after{content:"→";position:absolute;background:#fff;color:var(--royal);font-size:26px;padding:6px}.core{border-radius:28px;padding:22px;background:linear-gradient(160deg,#0D234A,#13386A);color:#fff;box-shadow:0 28px 60px rgba(13,35,74,.23)}.core h3{margin:0 0 12px;font-size:22px}.core-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.core-item{border-radius:14px;padding:13px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10)}.core-item b{font-size:12px}.core-item span{font-size:9px;color:#BED0E9;display:block;margin-top:3px}.arch-caption{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}.caption-card{padding:13px 14px;border-radius:15px;background:#F7FAFE;border:1px solid #E1E8F3;font-size:11px;color:#5D6A7E}.caption-card b{color:#263A59}
+/* Tech stack */
+.tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.tech-card{border-radius:21px;border:1px solid #DFE8F3;background:#fff;padding:18px;min-height:176px;position:relative;overflow:hidden}.tech-card:after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(46,156,232,.10),transparent 70%);right:-15px;top:-10px}.tech-no{font-size:10px;font-weight:950;color:var(--royal);letter-spacing:.7px}.tech-card h3{font-size:17px;margin:8px 0}.tech-card p{font-size:11px;color:var(--muted);margin:0}.tokens{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}.tokens span{font-size:9px;font-weight:850;border-radius:8px;padding:5px 7px;background:#F1F6FC;color:#51617A}.tech-flow{margin-top:18px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}.tech-flow span{font-size:11px;font-weight:900;padding:8px 10px;border-radius:10px;background:#0F254C;color:#DDEAFF}.tech-flow i{font-style:normal;color:var(--royal);font-weight:950}
+/* Data/security */
+.data-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}.data-diagram{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.entity{border-radius:17px;border:1px solid #DFE8F4;padding:14px;background:#fff}.entity b{font-size:13px}.entity span{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;color:#69788F;margin-top:6px;line-height:1.55}.entity.primary{background:#EDF6FF;border-color:#CDE1FA}.entity.ai{background:#F4F0FF;border-color:#DCD0FF}.entity.alert{background:#FFF1ED;border-color:#FFD4CB}.security{border-radius:25px;background:linear-gradient(150deg,#0C2248,#164475);color:#fff;padding:24px}.shield{width:78px;height:78px;border-radius:25px;background:linear-gradient(145deg,#2E9CE8,#1466DE);display:grid;place-items:center;font-size:34px;box-shadow:0 18px 38px rgba(46,156,232,.25)}.security h3{font-size:24px;margin:12px 0}.security-list{display:grid;gap:8px}.security-item{display:flex;gap:9px;font-size:11px;color:#C8D8EC}.security-item i{width:20px;height:20px;border-radius:7px;background:rgba(255,255,255,.10);display:grid;place-items:center;font-style:normal;font-size:10px;flex:none}
+/* Dashboard */
+.dashboard-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:23px}.screen{border-radius:28px;padding:18px;background:#0C1D3C;box-shadow:0 28px 60px rgba(12,29,60,.24);min-height:490px}.screen-inner{height:100%;border-radius:19px;background:#F7FAFD;padding:16px}.screen-top{display:flex;justify-content:space-between;align-items:center}.screen-top b{font-size:15px}.screen-top span{font-size:9px;color:#718098}.screen-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:13px}.dkpi{padding:12px;border-radius:13px;background:#fff;border:1px solid #E3EAF3}.dkpi strong{font-size:27px;display:block}.dkpi span{font-size:9px;color:#738096}.visuals{display:grid;grid-template-columns:1.35fr .65fr;gap:9px;margin-top:10px}.vis{border-radius:13px;background:#fff;border:1px solid #E3EAF3;padding:11px;min-height:140px}.vis h4{font-size:10px;margin:0;color:#66748A}.vis svg{width:100%;height:98px;margin-top:6px}.mentions{margin-top:9px;display:grid;gap:6px}.mention{padding:9px 10px;border-radius:11px;background:#fff;border:1px solid #E3EAF3;display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center}.mention .micon{width:26px;height:26px;border-radius:8px;background:#EDF4FF;display:grid;place-items:center;font-size:10px;font-weight:950}.mention b{font-size:10px}.mention p{font-size:8px;color:#718096;margin:1px 0 0}.mention .mscore{font-size:9px;font-weight:950;color:#C04D39}.alert-demo{display:grid;gap:12px}.phone{width:300px;margin:auto;border-radius:36px;padding:13px;background:#0B152A;box-shadow:0 24px 50px rgba(11,21,42,.22)}.phone-screen{border-radius:27px;background:#EFF5FB;padding:15px;min-height:415px}.phone-notch{width:70px;height:14px;border-radius:99px;background:#0B152A;margin:0 auto 15px}.message{border-radius:18px;background:white;padding:15px;border:1px solid #DFE8F3;box-shadow:0 10px 22px rgba(18,60,120,.06)}.message .alert-head{display:flex;gap:8px;align-items:center}.bell{width:36px;height:36px;border-radius:12px;background:#FFF0EC;display:grid;place-items:center}.message h4{font-size:13px;margin:0}.message p{font-size:10px;color:#627088;margin:8px 0}.action-btn{display:block;text-align:center;padding:9px;border-radius:10px;background:#1466DE;color:white;font-size:10px;font-weight:900}.demo-note{font-size:12px;color:var(--muted);text-align:center}
+/* Costs */
+.cost-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px}.budget-card{border-radius:28px;padding:27px;background:radial-gradient(circle at 90% 10%,rgba(221,249,86,.65),transparent 20%),linear-gradient(145deg,#F1F7FF,#FFFFFF);border:1px solid #D9E6F5}.budget-card .big{font-size:52px;font-weight:950;letter-spacing:-2px;line-height:1;margin:12px 0 5px}.budget-card .big small{font-size:15px;letter-spacing:0}.budget-card p{font-size:12px;color:var(--muted)}.cost-lines{display:grid;gap:8px;margin-top:18px}.cost-line{display:grid;grid-template-columns:150px 1fr 80px;gap:10px;align-items:center;font-size:11px}.cbar{height:10px;border-radius:99px;background:#E7EEF7;overflow:hidden}.cbar i{display:block;height:100%;background:linear-gradient(90deg,#1466DE,#2E9CE8);border-radius:99px}.variable{border-radius:28px;background:#0E2348;color:white;padding:27px}.variable h3{font-size:24px;margin:7px 0}.variable p{font-size:12px;color:#BDCEE7}.variable-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:18px}.var{padding:13px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}.var b{font-size:12px}.var span{display:block;font-size:9px;color:#C2D4EA;margin-top:3px}.guardrail{margin-top:16px;padding:13px;border-radius:13px;background:rgba(255,102,72,.13);border:1px solid rgba(255,102,72,.20);font-size:11px;color:#FFDAD2}
+/* Roadmap */
+.timeline{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px}.timeline:before{content:"";position:absolute;left:8%;right:8%;top:34px;height:3px;background:linear-gradient(90deg,#1466DE,#2E9CE8,#84AFFB,#14B8A6);z-index:0}.timeline.m6{grid-template-columns:repeat(6,1fr);gap:13px}.timeline.m6:before{top:28px;left:1.9%;right:14%}.timeline.m6 .week-no{width:56px;height:56px;border-radius:18px;border-width:4px;margin-bottom:13px;font-size:13px}.timeline.m6 .week{display:flex;flex-direction:column}.timeline.m6 .week-card{padding:20px 18px;min-height:360px;flex:1}.timeline.m6 .week-card h3{font-size:18px;margin:2px 0 12px;line-height:1.25}.timeline.m6 .week-card ul{font-size:14px;line-height:1.6;padding-left:16px}.timeline.m6 .week-card li{margin:9px 0}.week.mark .week-no{background:var(--lime);border-color:#F3FFC2;color:#28400A}.week.mark .week-card{border-color:#C6DE8E;background:linear-gradient(170deg,#FCFFF2,#fff)}.week.last .week-no{background:#0E2348;border-color:#D6E4F7;color:#DDF956}@media(max-width:1050px){.timeline.m6{grid-template-columns:1fr 1fr}}.week{position:relative;z-index:2}.week-no{width:68px;height:68px;border-radius:22px;background:#fff;border:5px solid #E5F0FF;box-shadow:0 12px 28px rgba(18,60,120,.10);display:grid;place-items:center;color:var(--royal);font-size:12px;font-weight:950;margin-bottom:16px}.week-card{border-radius:22px;border:1px solid #DFE8F4;background:#fff;padding:19px;min-height:260px}.week-card h3{font-size:19px;margin:3px 0 10px}.week-card ul{padding-left:16px;margin:0;color:var(--muted);font-size:11px}.week-card li{margin:6px 0}.gate{margin-top:21px;border-radius:19px;background:linear-gradient(100deg,#0E2348,#174578);color:#fff;padding:16px 18px;display:flex;justify-content:space-between;gap:15px;align-items:center}.gate b{font-size:14px}.gate span{font-size:10px;color:#C5D6EA}.gate-pills{display:flex;gap:6px;flex-wrap:wrap}.gate-pill{font-size:9px;font-weight:950;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.10)}
+/* Decision */
+.decision-main{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center}.decision h2{font-size:52px;line-height:1.02;letter-spacing:-2px;margin:10px 0 16px}.decision p{color:#C1D2E9;max-width:700px}.approval{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px}.approval-card{padding:16px;border-radius:17px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10)}.approval-card b{font-size:13px}.approval-card span{font-size:10px;color:#BCD0E8;display:block;margin-top:4px}.launch{height:480px;border-radius:36px;background:radial-gradient(circle at 50% 45%,rgba(46,156,232,.34),transparent 40%);position:relative;display:grid;place-items:center}.rocket{width:230px;height:230px;border-radius:70px;background:linear-gradient(145deg,#1466DE,#2E9CE8);box-shadow:0 34px 70px rgba(0,0,0,.25);display:grid;place-items:center;transform:rotate(-4deg)}.rocket svg{width:145px;height:145px;transform:rotate(4deg)}.launch-tag{position:absolute;border-radius:14px;padding:10px 12px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.13);font-size:10px;font-weight:850}.lt1{top:42px;left:18px}.lt2{top:87px;right:9px}.lt3{bottom:92px;left:5px}.lt4{bottom:48px;right:24px}
+/* Appendix */
+.ref-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.ref{border-radius:15px;border:1px solid #E1E8F2;padding:13px 14px;background:#FAFCFF}.ref b{font-size:11px}.ref a{display:block;font-size:9px;color:#55729B;word-break:break-all;margin-top:4px}.fineprint{font-size:10px;color:#8190A5;margin-top:18px}
+.footer{text-align:center;padding:25px 0 40px;font-size:11px;color:#8190A4}
+@media(max-width:1050px){
+  .slide{min-height:auto;padding:34px 28px}.hero,.value-grid,.source-layout,.ai-layout,.data-layout,.dashboard-layout,.cost-layout,.decision-main{grid-template-columns:1fr}.head{grid-template-columns:1fr}.pipeline{grid-template-columns:1fr 1fr}.pipe:not(:last-child):after,.pipe:not(:last-child):before{display:none}.arch-board{grid-template-columns:1fr}.bridge{height:48px}.bridge:before{height:2px;width:80%}.tech-grid{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:1fr 1fr}.timeline:before{display:none}.command{min-height:560px}.source-cards{grid-template-columns:1fr 1fr}.approval{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){h1{font-size:45px}.head h2{font-size:31px}.slide{padding:27px 20px;border-radius:24px}.pipeline,.tech-grid,.timeline,.source-cards,.approval,.ref-grid,.data-diagram{grid-template-columns:1fr}.before-after{grid-template-columns:1fr}.ba-arrow{transform:rotate(90deg)}.command{transform:scale(.84);margin:-45px -40px}.nav-badge{display:none}.navbar{padding:0 8px}.wrap{padding:8px}.screen-kpis,.impact-cards{grid-template-columns:1fr}.visuals{grid-template-columns:1fr}}
+@media print{.navbar{display:none}.slide{box-shadow:none;break-after:page;min-height:96vh;margin:0;border-radius:0}.wrap{max-width:none;padding:0}}
+
+/* --- V3 INTERACTIVE / MODEL / HARDWARE --- */
+.live-slide{padding:34px 36px 42px;background:radial-gradient(circle at 80% 10%,rgba(46,156,232,.14),transparent 26%),linear-gradient(145deg,#fff,#eef7ff 56%,#f7fbe7)}
+.live-slide .head{margin-bottom:18px}.live-slide .head h2{font-size:38px}.live-shell{border:1px solid #cfe0f3;border-radius:28px;background:#081a36;padding:8px;box-shadow:0 28px 70px rgba(17,58,115,.18);overflow:hidden}.live-frame{width:100%;height:auto;border:0;border-radius:22px;background:#f5f9ff;display:block}.live-note{display:flex;align-items:center;gap:12px;margin-top:14px;font-size:13px;color:#61718a}.live-note b{color:#0b1f3a}.live-dot{width:10px;height:10px;border-radius:50%;background:#16b886;box-shadow:0 0 0 6px rgba(22,184,134,.12);animation:livePulse 1.8s infinite}@keyframes livePulse{50%{transform:scale(1.25);box-shadow:0 0 0 11px rgba(22,184,134,.04)}}
+.funnel-svg{width:100%;height:auto;display:block}.funnel-wrap{border-radius:28px;background:linear-gradient(180deg,#F7FAFF,#EFF5FF);border:1px solid #D9E7F6;padding:20px 18px 14px}.funnel-cap{text-align:center;margin-top:6px;font-size:12px;color:#7A879C;font-weight:700}.tier-stack{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch;margin-top:10px}.tier{position:relative;border-radius:28px;border:1px solid var(--line);background:#fff;padding:30px 26px 26px;box-shadow:var(--soft-shadow);display:flex;flex-direction:column}.tier.on{background:linear-gradient(162deg,#F3F9FF 0,#FAFFEB 100%);border-color:#BCD9A9;box-shadow:0 26px 60px rgba(48,110,40,.14);transform:translateY(-12px)}.tier-tag{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:#EEF5FF;color:var(--royal);font-size:12px;font-weight:950;letter-spacing:.2px}.tier.on .tier-tag{background:var(--lime);color:#2C4400}.tier-size{font-size:64px;font-weight:1000;letter-spacing:-2.8px;line-height:1;margin:22px 0 6px}.tier.on .tier-size{font-size:72px;color:#12386A}.tier-kind{font-size:14px;font-weight:850;color:var(--muted)}.tier-bar{height:10px;border-radius:99px;background:#EAF0F8;margin:20px 0 18px;overflow:hidden}.tier-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#84AFFB,#1466DE)}.tier.on .tier-bar i{background:linear-gradient(90deg,#1466DE,#8FBF2E)}.tier-role{font-size:15px;color:#4B5A73;font-weight:750;min-height:54px;line-height:1.55}.tier-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.tier-chips span{font-size:12.5px;font-weight:850;padding:8px 11px;border-radius:11px;background:#F2F6FC;color:#3F4F69;border:1px solid #E3EAF4}.tier.on .tier-chips span{background:#fff;border-color:#D8E6C4}.tier-foot{margin-top:auto;padding-top:20px;border-top:1px dashed #DCE5F1;display:grid;grid-template-columns:1fr 1fr;gap:10px}.tier-foot div b{display:block;font-size:19px;letter-spacing:-.4px}.tier-foot div span{font-size:11.5px;color:var(--muted);font-weight:800}.tier-depth{display:block;margin-top:20px;font-size:12px;font-weight:850;color:var(--muted)}.tier-depth i{display:flex;gap:5px;margin-top:8px}.tier-depth i b{flex:1;height:8px;border-radius:99px;background:#E6ECF5}.tier-depth i b.f{background:var(--royal)}.tier.on .tier-depth i b.f{background:#5A9E1F}.routebar{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;align-items:center;margin-top:26px;padding:18px 24px;border-radius:22px;background:#0C2247;color:#fff}.rb{display:flex;align-items:center;gap:12px}.rb i{width:32px;height:32px;flex:none;border-radius:10px;background:rgba(255,255,255,.13);display:grid;place-items:center;font-style:normal;font-weight:950;font-size:13px}.rb b{font-size:14px;display:block;letter-spacing:.2px}.rb small{display:block;font-size:11.5px;color:#B9CCE7;font-weight:700}.rb em{margin-left:auto;font-style:normal;font-size:11.5px;font-weight:950;padding:6px 10px;border-radius:999px;background:var(--lime);color:#22370C;white-space:nowrap}.rb-arr{color:#6E9BD8;font-size:22px;font-weight:900}@media(max-width:1050px){.tier-stack{grid-template-columns:1fr}.tier.on{transform:none}.routebar{grid-template-columns:1fr}.rb-arr{transform:rotate(90deg)}}.model-route{display:grid;grid-template-columns:1.15fr .9fr .9fr;gap:18px;align-items:stretch}.model-route.tiers{grid-template-columns:1.02fr .9fr .98fr .9fr;gap:14px}.model-route.tiers .model-card{padding:18px;border-radius:22px}.model-route.tiers .model-card h3{font-size:23px;margin:11px 0 7px}.model-route.tiers .model-card .fit{min-height:0}.model-card.reco{background:linear-gradient(155deg,#f4faff,#f8ffe6);border-color:#bcd9a9;box-shadow:0 18px 40px rgba(58,120,42,.10)}.model-card.reco .provider{background:#ddf956;color:#2c4400}.model-card.reco .model-use{background:linear-gradient(90deg,#e8f6ff,#f4fdd6)}.model-card.soft{background:#fbfcfe}.model-hero{border-radius:28px;background:linear-gradient(145deg,#0a1d3d,#12396c);color:#fff;padding:28px;position:relative;overflow:hidden}.model-hero:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-70px;bottom:-90px;background:radial-gradient(circle,rgba(46,156,232,.48),transparent 68%)}.model-hero .big-num{font-size:72px;line-height:.9;font-weight:1000;letter-spacing:-4px;color:#ddf956}.model-hero h3{font-size:31px;line-height:1.03;margin:12px 0}.model-hero p{font-size:14px;color:#c5d6ed;max-width:520px}.route-steps{display:grid;gap:10px;margin-top:20px;position:relative;z-index:2}.route-step{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;padding:12px;border-radius:15px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.11)}.route-step i{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.12);display:grid;place-items:center;font-style:normal;font-weight:950}.route-step b{font-size:14px}.route-step small{display:block;color:#b8cce7;font-size:10px}.route-step em{font-style:normal;font-size:10px;padding:5px 7px;border-radius:999px;background:#ddf956;color:#18320d;font-weight:950}
+.model-card{border:1px solid #dbe6f3;background:#fff;border-radius:26px;padding:22px;box-shadow:0 15px 34px rgba(20,61,119,.07);position:relative;overflow:hidden}.model-card .provider{display:inline-flex;padding:6px 9px;border-radius:999px;background:#eef5ff;color:#1466de;font-size:10px;font-weight:950}.model-card h3{font-size:26px;margin:14px 0 8px;line-height:1}.model-card .fit{font-size:12px;color:#65748b;min-height:52px}.model-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:16px}.model-metric{padding:10px;border-radius:13px;background:#f4f8fd}.model-metric b{display:block;font-size:15px}.model-metric span{font-size:9px;color:#718096}.model-use{margin-top:14px;padding:12px;border-radius:14px;background:linear-gradient(90deg,#edf6ff,#f9fddf);font-size:11px;font-weight:800;color:#3c4d66}.model-small{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.mini-model{padding:13px;border-radius:17px;border:1px solid #dfe8f4;background:#fff}.mini-model b{font-size:13px}.mini-model span{display:block;margin-top:3px;font-size:10px;color:#718096}
+.hw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.hw{border-radius:28px;padding:26px;position:relative;overflow:hidden;min-height:420px;border:1px solid #dce8f5;background:#fff;box-shadow:0 16px 38px rgba(22,62,118,.08)}.hw.reco{background:linear-gradient(155deg,#f3f9ff,#f7ffe4);border-color:#b9dcbb}.hw.darkhw{background:linear-gradient(155deg,#0b1c3b,#123867);color:#fff;border-color:#234f7f}.hw-badge{display:inline-flex;padding:6px 9px;border-radius:999px;font-size:10px;font-weight:950;background:#edf5ff;color:#1466de}.reco .hw-badge{background:#ddf956;color:#284100}.darkhw .hw-badge{background:rgba(255,255,255,.12);color:#dceaff}.hw-icon{height:110px;display:grid;place-items:center}.chip-graphic{width:105px;height:82px;border-radius:22px;background:linear-gradient(145deg,#1b375c,#0b203f);border:6px solid #dce9f6;box-shadow:0 15px 35px rgba(17,49,87,.23);position:relative}.chip-graphic:after{content:"AI";position:absolute;inset:0;display:grid;place-items:center;color:#ddf956;font-size:28px;font-weight:1000}.darkhw .chip-graphic{border-color:#5279a6}.hw h3{font-size:29px;line-height:1;margin:6px 0 12px}.hw-spec{font-size:13px;color:#617189}.darkhw .hw-spec{color:#c0d2e8}.hw-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:20px}.hw-kpi{padding:11px;border-radius:14px;background:#f4f8fd}.darkhw .hw-kpi{background:rgba(255,255,255,.08)}.hw-kpi b{font-size:18px;display:block}.hw-kpi span{font-size:9px;color:#76869b}.darkhw .hw-kpi span{color:#b9cbe4}.hw-verdict{position:absolute;left:26px;right:26px;bottom:24px;padding:12px 14px;border-radius:14px;background:#0b2d58;color:#fff;font-size:11px;font-weight:850}.reco .hw-verdict{background:#1466de}.darkhw .hw-verdict{background:#ddf956;color:#243b10}.hw-flow{margin-top:18px;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center}.hw-flow .choice{border-radius:17px;padding:14px;background:#f6f9fd;border:1px solid #dfe8f4;text-align:center}.hw-flow .choice b{font-size:13px}.hw-flow .choice span{display:block;font-size:10px;color:#748399}.hw-flow i{font-style:normal;color:#2e9ce8;font-size:25px;font-weight:900}
+@keyframes flowDash{to{stroke-dashoffset:-28}} .pipe-icon path[stroke],.pipe-icon circle[stroke]{transition:.2s}.pipeline:hover .pipe-icon path[stroke]{filter:drop-shadow(0 0 4px rgba(20,102,222,.18))}.pipe:not(:last-child):after{background:linear-gradient(90deg,#8CB6F3,#2E9CE8,#ddf956,#2E9CE8);background-size:220% 100%;animation:pipeMove 2.2s linear infinite}@keyframes pipeMove{to{background-position:-220% 0}}
+@media(max-width:1050px){.model-route,.hw-grid{grid-template-columns:1fr}.model-small{grid-template-columns:1fr 1fr}.hw-flow{grid-template-columns:1fr}.hw-flow i{transform:rotate(90deg)}}
+@media(max-width:680px){.live-slide{padding:24px 14px}.model-small{grid-template-columns:1fr}.model-hero .big-num{font-size:56px}}
+
+/* ===== READABILITY PASS : ขยายขนาดตัวอักษรที่เล็กเกินไป + กันข้อความล้นกรอบ ===== */
+.head p{font-size:16.5px;line-height:1.5}
+.lead{font-size:22px}
+.eyebrow,.chip{font-size:12.5px}
+.p-kpi span,.status-pill,.score-ring span,.core-item span,.tokens span,.entity span,.screen-top span,.dkpi span,.mscore,.var span,.gate-pill,.ref a,.model-metric span,.hw-kpi span{font-size:11.5px}
+.pipe-tags span,.source-card .micro,.analysis-card span,.arch-block span,.tech-no,.vis h4,.message p,.action-btn,.gate span,.route-step small,.route-step em,.model-card .provider,.mini-model span,.hw-badge,.hw-flow .choice span,.security-item i,.micon,.demo-note{font-size:12.5px}
+.mention b,.mention p{font-size:13px}
+.impact-card span,.source-card p,.access-line,.access-line b,.warning,.funnel-stage span,.threshold,.caption-card,.tech-card p,.tech-flow span,.security-item,.cost-line,.guardrail,.week-card ul,.ref b,.footer,.hw-verdict{font-size:13px}
+.model-card .fit,.budget-card p,.variable p,.access-map p,.core-item b,.var b,.arch-block b{font-size:13.5px}
+.funnel-note,.budget-card p[style]{font-size:11.5px}
+/* กันล้นกรอบเมื่อข้อความยาวขึ้น */
+.slide h1,.slide h2,.slide h3,.slide h4,.slide p,.slide span,.slide li,.slide b,.slide strong{overflow-wrap:break-word;word-break:break-word}
+.funnel{height:auto;min-height:480px}
+.preview{height:auto;min-height:210px}
+.hw{display:flex;flex-direction:column}
+.hw-verdict{position:static;margin-top:auto;padding-top:13px}
+.hw-kpis{margin-bottom:6px}
+.access-line{grid-template-columns:140px 1fr auto}
+.threshold{grid-template-columns:96px 1fr}
+.route-step{grid-template-columns:38px 1fr auto}
+.model-card .fit{min-height:0}
+.week-card ul{line-height:1.65}
+.security-item{line-height:1.55}
+.cost-line{align-items:center}
+
+#approach .cost-line{grid-template-columns:215px 1fr 92px}#approach .cost-line b{text-align:right}#approach .cost-line span{line-height:1.25}#approach .arch-caption .caption-card{line-height:1.5}
+.slide .head{margin-bottom:20px}
+/* ===== SCALE PASS : ปรับสัดส่วนตัวอักษรให้สมดุลกับสไลด์ 1600x900 ===== */
+h1{font-size:98px;letter-spacing:-4px;max-width:none;margin:18px 0 22px}
+.slide h2,.head h2{font-size:52px;letter-spacing:-2px;line-height:1.06}
+.lead{font-size:27px;max-width:none;line-height:1.5}
+.head p{font-size:19px}
+.head{grid-template-columns:1fr minmax(300px,520px);gap:36px}
+.eyebrow{font-size:14px;padding:8px 13px}
+.chip{font-size:14px;padding:9px 13px}
+.hero-note{font-size:15px}
+/* หัวข้อย่อยในการ์ด */
+.pipe h3{font-size:23px}
+.source-card h3{font-size:20px}
+.week-card h3{font-size:22px}
+.core h3{font-size:26px}
+.variable h3,.model-card h3,.access-map h3,.impact-panel h3,.engine h3,.security h3{font-size:28px}
+.hw h3{font-size:32px}
+.model-hero h3{font-size:34px}
+.budget-card .big{font-size:56px}
+.ba h3{font-size:26px}
+.arch-block b{font-size:16px}
+.core-item b,.var b,.impact-card strong,.analysis-card b,.caption-card b{font-size:15px}
+.tech-card h3{font-size:20px}
+.screen-top b,.dash h4,.vis h4{font-size:15px}
+.dkpi strong{font-size:38px}
+.mention b{font-size:15px}
+.mention p{font-size:13px}
+.alert-head h4{font-size:16px}
+.message p{font-size:13px}
+.gate b{font-size:18px}
+.gate-pill{font-size:14px}
+.week-card ul{font-size:14.5px}
+.cost-line,.access-line,.security-item,.caption-card,.guardrail,.warning,.tech-flow span,.hw-verdict{font-size:14px}
+.var span,.core-item span,.hw-kpi span,.model-metric span,.impact-card span{font-size:12.5px}
+.hw-kpi b{font-size:21px}
+.funnel-stage strong{font-size:42px}
+.funnel-stage span{font-size:14px}
+.threshold b{font-size:15px}
+.score-ring strong{font-size:44px}
+/* หน้าปก: ให้ภาพประกอบสมดุลกับข้อความที่ใหญ่ขึ้น */
+.slide.hero>.slide-inner{grid-template-columns:1.06fr .94fr;gap:34px}
+.command{min-height:660px}
+.preview{width:390px;height:auto;min-height:230px}
+.chips{gap:9px}
+
+/* ===================== PRESENTATION MODE ===================== */
+html,body{height:100%;overflow:hidden;background:#0E1622}
+.wrap{max-width:none;padding:0;margin:0}
+.pbar{position:fixed;top:0;left:0;right:0;height:54px;z-index:120;display:flex;align-items:center;gap:8px;padding:0 14px;background:#fff;border-bottom:1px solid #E3EAF3;box-shadow:0 2px 10px rgba(15,40,80,.06)}
+.ptitle{display:flex;flex-direction:column;line-height:1.15;margin-left:4px}
+.ptitle b{font-size:14px;color:#0B1F3A;letter-spacing:-.2px}
+.ptitle span{font-size:11.5px;color:#7A889C}
+.pspace{flex:1}
+.pbtn{border:1px solid #DCE6F3;background:#fff;color:#2B3B52;font:inherit;font-size:13px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer;transition:.15s}
+.pbtn:hover{background:#F2F7FF;border-color:#B9D3F2}
+.pbtn.active{background:#1466DE;border-color:#1466DE;color:#fff}
+.pbtn.ghost{padding:8px 11px;font-size:15px;color:#46566E}
+.pcount{font-size:13px;font-weight:900;color:#42536B;min-width:56px;text-align:center}
+.pdrawer{position:fixed;top:54px;left:0;bottom:0;width:290px;background:#0D2247;color:#fff;z-index:119;transform:translateX(-100%);transition:.25s;overflow:auto;padding:14px}
+.pdrawer.open{transform:none}
+.pdrawer-head{font-size:11.5px;font-weight:900;letter-spacing:.1em;color:#93B4DE;margin:4px 6px 12px}
+.pitem{display:flex;gap:10px;align-items:center;padding:10px 11px;border-radius:12px;cursor:pointer;font-size:13px;font-weight:700;color:#D6E4F7}
+.pitem:hover{background:rgba(255,255,255,.08)}
+.pitem.on{background:#1466DE;color:#fff}
+.pitem i{font-style:normal;font-size:11px;opacity:.75;min-width:20px}
+.pmask{position:fixed;inset:54px 0 0 0;background:rgba(8,20,40,.35);z-index:118;opacity:0;pointer-events:none;transition:.25s}
+.pmask.on{opacity:1;pointer-events:auto}
+#viewport{position:fixed;top:54px;left:0;right:0;bottom:0;overflow:auto;background:#0E1622}
+#scroller{position:relative;width:100%}
+#stage{position:absolute;top:0;left:0;width:1600px;height:900px;transform-origin:top left}
+.slide{position:absolute!important;inset:0;width:1600px;height:900px;min-height:0!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:44px 60px!important;overflow:hidden;scroll-snap-align:none;visibility:hidden;opacity:0;z-index:0;transition:opacity .18s ease}
+.slide.active{visibility:visible;opacity:1;z-index:2}
+.slide-inner{transform-origin:top left;height:100%}
+.slide.hero{display:block}
+.slide.hero>.slide-inner{display:grid;grid-template-columns:1.02fr .98fr;gap:30px;align-items:center}
+.live-frame{width:auto;max-width:100%;height:auto;max-height:670px;margin:0 auto}
+.live-slide .head{margin-bottom:10px}
+.live-shell{padding:6px;width:fit-content;max-width:100%;margin:0 auto}
+.live-note{margin-top:8px}
+.footer{display:none}
+@media print{
+  html,body{overflow:visible;background:#fff}
+  .pbar,.pdrawer,.pmask{display:none!important}
+  #viewport{position:static;overflow:visible}
+  #stage{position:static;transform:none!important;width:1600px;height:auto}
+  .slide{position:relative!important;visibility:visible!important;opacity:1!important;page-break-after:always;break-after:page;width:1600px;height:900px}
+  @page{size:1600px 900px;margin:0}
+}
+
+
+/* ===== SLIDE 02 : หน้าจอเดโมวาดด้วย HTML/CSS (แทนภาพแคป — คมทุกขนาดจอ) ===== */
+.live-shell.sx-shell{width:100%;padding:7px;border-radius:26px;background:#0B1C3A}
+.sx-app{border-radius:20px;background:linear-gradient(135deg,#F7FAFF,#EEF5FF 60%,#F5F9EC);padding:12px 14px 14px;color:#0A1733;font-size:13px;line-height:1.35}
+.sx-app button{font:inherit;cursor:pointer;border:0;transition:background .15s,color .15s,box-shadow .15s}
+.sx-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:2px 4px 10px}
+.sx-brand{display:flex;align-items:center;gap:11px}
+.sx-brand>i{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#1466DE,#2E9CE8);color:#fff;font-style:normal;font-weight:900;font-size:15px;display:grid;place-items:center;box-shadow:0 8px 18px rgba(20,102,222,.28)}
+.sx-brand b{display:block;font-size:16px;font-weight:850;letter-spacing:-.2px}
+.sx-brand span{display:block;font-size:12px;color:#6A7890}
+.sx-engine{display:flex;align-items:center;gap:4px;padding:4px;border-radius:14px;background:#fff;border:1px solid #DCE6F3;box-shadow:0 6px 16px rgba(18,60,120,.06)}
+.sx-engine span{font-size:11.5px;font-weight:850;color:#6A7890;padding:0 10px;letter-spacing:.3px}
+.sx-engine button{padding:8px 14px;border-radius:10px;background:transparent;color:#42536B;font-size:13.5px;font-weight:800}
+.sx-engine button.on{background:#0E2348;color:#fff;box-shadow:0 6px 14px rgba(14,35,72,.25)}
+.sx-body{border-radius:16px;background:rgba(255,255,255,.72);border:1px solid #DDE7F3;padding:12px}
+.sx-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.sx-tabs,.sx-ctrl{display:flex;gap:6px;align-items:center}
+.sx-tabs button,.sx-ctrl button{padding:9px 15px;border-radius:11px;background:#F1F5FB;color:#42536B;font-size:14px;font-weight:800}
+.sx-tabs button:not(.on):hover,.sx-ctrl button:hover{background:#E4EDF9}
+.sx-tabs button.on{background:#1466DE;color:#fff;box-shadow:0 8px 18px rgba(20,102,222,.28)}
+.sx-ctrl .sx-play,.sx-ctrl .sx-play:hover{background:#0E2348;color:#fff}
+.sx-ctrl em{font-style:normal;color:#8391A7;margin-right:4px}
+
+.sx-flow{display:grid;grid-template-columns:1.5fr .92fr 1.3fr 1fr 1.28fr;gap:18px;padding:12px;border-radius:14px;background:#F6F9FD;border:1px solid #E3EBF5}
+.sx-col{position:relative;display:flex;flex-direction:column;min-width:0}
+.sx-col:not(:last-child)::after{content:"";position:absolute;right:-13px;top:calc(50% + 12px);width:8px;height:8px;border-top:2.5px solid #A9C4EA;border-right:2.5px solid #A9C4EA;transform:rotate(45deg)}
+.sx-app.run .sx-col.now::after{border-color:var(--c)}
+.sx-lbl{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:850;color:#5F6E86;letter-spacing:.3px;margin:0 0 8px 2px;text-transform:uppercase}
+.sx-lbl i{width:24px;height:24px;border-radius:8px;background:var(--c);color:#fff;font-style:normal;font-size:12.5px;display:grid;place-items:center}
+.sx-card{flex:1;border-radius:16px;background:#fff;border:1px solid #E1E9F3;padding:14px;box-shadow:0 8px 20px rgba(18,60,120,.05);transition:opacity .35s,filter .35s,box-shadow .35s;display:flex;flex-direction:column}
+.sx-card h4{margin:0;font-size:21px;font-weight:900;letter-spacing:-.3px}
+.sx-card>p{margin:3px 0 0;font-size:12.5px;color:#6A7890;font-weight:650}
+.sx-app.idle .sx-card,.sx-app.run .sx-col:not(.on) .sx-card{opacity:.5;filter:saturate(.3)}
+.sx-app.run .sx-col.now .sx-card{box-shadow:0 0 0 2px var(--c),0 14px 30px rgba(18,60,120,.12)}
+
+.sx-src{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.sx-src>div{display:flex;align-items:center;gap:9px;padding:9px;border-radius:12px;border:1px solid #E6EDF6;background:#FBFCFE;min-width:0}
+.sx-src i{width:34px;height:34px;flex:none;border-radius:10px;color:#fff;font-style:normal;font-weight:900;font-size:16px;display:grid;place-items:center}
+.sx-src i svg{width:14px;height:14px}
+.sx-src b{font-size:14px;font-weight:850;line-height:1.15;min-width:0}
+.sx-src small{display:block;font-size:11px;color:#6A7890;font-weight:650;margin-top:2px}
+.sx-app.run .sx-col.now .sx-src i{animation:sxPing 1.2s ease-in-out infinite}
+.sx-src>div:nth-child(2) i{animation-delay:.2s!important}.sx-src>div:nth-child(3) i{animation-delay:.4s!important}.sx-src>div:nth-child(4) i{animation-delay:.6s!important}.sx-src>div:nth-child(5) i{animation-delay:.8s!important}.sx-src>div:nth-child(6) i{animation-delay:1s!important}
+@keyframes sxPing{50%{transform:scale(1.12);box-shadow:0 0 0 6px rgba(20,102,222,.12)}}
+
+.sx-server{flex:1;display:grid;place-items:center;position:relative;min-height:150px}
+.sx-server svg{width:118px;position:relative;z-index:1}
+.sx-ring{position:absolute;width:150px;height:150px;border-radius:50%;border:1.5px dashed #9FD8D0;background:radial-gradient(circle,rgba(20,184,166,.08),transparent 70%)}
+.sx-app.run .sx-col.now .sx-ring{animation:sxSpin 5s linear infinite}
+@keyframes sxSpin{to{transform:rotate(360deg)}}
+.sx-pill{display:flex;align-items:center;justify-content:center;gap:8px;padding:9px;border-radius:11px;background:#EAF8F5;color:#0B6E5F;font-size:13px;font-weight:850}
+.sx-pill i{width:8px;height:8px;border-radius:50%;background:#16B886}
+.sx-pill.wait{background:#F1F5FB;color:#6A7890}.sx-pill.wait i{background:#A7B4C6}
+
+.sx-ai{position:relative;height:150px;display:grid;place-items:center;margin:6px 0 8px}
+.sx-orb{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#8FB8FF,#4E6BF0 45%,#6A3FD8);color:#fff;font-size:36px;font-weight:950;letter-spacing:-1px;display:grid;place-items:center;box-shadow:0 0 0 14px rgba(120,110,240,.10),0 0 0 28px rgba(120,110,240,.05),0 18px 36px rgba(80,70,210,.35)}
+.sx-app.run .sx-col.now .sx-orb{animation:sxGlow 1.4s ease-in-out infinite}
+@keyframes sxGlow{50%{box-shadow:0 0 0 18px rgba(120,110,240,.16),0 0 0 36px rgba(120,110,240,.07),0 18px 36px rgba(80,70,210,.4)}}
+.sx-chip{position:absolute;width:36px;height:36px;border-radius:11px;background:#fff;border:1px solid #E3E8F2;box-shadow:0 6px 14px rgba(18,60,120,.08);display:grid;place-items:center;font-weight:900;color:#3B4A63;font-size:16px}
+.sx-chip.c1{left:6%;top:30%}.sx-chip.c2{left:17%;bottom:2%}.sx-chip.c3{right:6%;top:10%}.sx-chip.c4{right:15%;bottom:8%}
+.sx-app.run .sx-col.now .sx-chip{animation:sxFloat 1.6s ease-in-out infinite}
+.sx-app.run .sx-col.now .sx-chip.c2,.sx-app.run .sx-col.now .sx-chip.c3{animation-delay:.5s}
+@keyframes sxFloat{50%{transform:translateY(-6px)}}
+.sx-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
+.sx-metrics>div{padding:9px 10px;border-radius:11px;border:1px solid #E6EDF6;background:#FBFCFE}
+.sx-metrics b{display:flex;justify-content:space-between;font-size:13px;font-weight:850}
+.sx-metrics em{font-style:normal;color:#6B46C1}
+.sx-metrics s{display:block;height:6px;border-radius:9px;background:#E8EDF5;margin-top:7px;overflow:hidden;text-decoration:none}
+.sx-metrics s i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#7B5CF0,#1466DE);transition:width .12s linear}
+
+.sx-gauge{position:relative;width:150px;height:150px;margin:10px auto 10px}
+.sx-gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
+.sx-gauge circle{fill:none;stroke-width:15}
+.sx-gauge #sxArc{stroke-linecap:round;transition:stroke .3s}
+.sx-gauge div{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.sx-gauge b{font-size:38px;font-weight:950;line-height:1;letter-spacing:-1px}
+.sx-gauge span{font-size:11px;font-weight:850;color:#6A7890;letter-spacing:.4px;margin-top:3px}
+.sx-lanes{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:auto}
+.sx-lanes span{padding:6px 10px;border-radius:9px;background:#F1F5FB;color:#8391A7;font-size:12.5px;font-weight:850;transition:.25s}
+.sx-lanes span.on[data-lane=archive]{background:#EAF2FF;color:#1466DE;box-shadow:inset 0 0 0 1px #C9DCFA}
+.sx-lanes span.on[data-lane=brief]{background:#FFF1E6;color:#D9661F;box-shadow:inset 0 0 0 1px #FFD2B3}
+.sx-lanes span.on[data-lane=alert]{background:#FFECE8;color:#D2432B;box-shadow:inset 0 0 0 1px #FFC4B7}
+
+.sx-alert{margin-top:12px;border-radius:13px;padding:11px;border:1px solid #DCE6F3;background:#F4F8FD;display:grid;grid-template-columns:34px 1fr;gap:9px;transition:opacity .35s,background .3s,border-color .3s}
+.sx-alert[data-tone=brief]{background:#FFF8F1;border-color:#FFD9BD}
+.sx-alert[data-tone=alert]{background:#FFF3F0;border-color:#FFC7BA}
+.sx-alert.hide{opacity:.3}
+.sx-bell{width:34px;height:34px;border-radius:50%;background:#FFE6C7;display:grid;place-items:center;font-size:16px}
+.sx-alert[data-tone=archive] .sx-bell{background:#E3EDFB}
+.sx-alert b{display:block;font-size:13.5px;line-height:1.3;font-weight:850}
+.sx-alert p{margin:4px 0 0;font-size:11.5px;color:#6A7890;line-height:1.35}
+.sx-ch{grid-column:1/-1;display:flex;gap:5px}
+.sx-ch span{padding:4px 9px;border-radius:7px;background:#fff;border:1px solid #E3E8F2;font-size:11.5px;font-weight:850;color:#3B4A63;transition:opacity .25s}
+.sx-ch span.off{opacity:.35}
+.sx-dash{margin-top:8px;border-radius:13px;border:1px solid #E6EDF6;padding:10px;background:#FBFCFE}
+.sx-dash h5{margin:0;font-size:14px;font-weight:900}
+.sx-dash svg{display:block;width:100%;height:40px;margin:6px 0}
+.sx-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.sx-kpi div{background:#fff;border:1px solid #EDF1F7;border-radius:9px;padding:5px 8px}
+.sx-kpi b{display:block;font-size:18px;font-weight:900;line-height:1.15}
+.sx-kpi span{font-size:11px;color:#6A7890}
+
+.sx-status{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
+.sx-status>div{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:13px;background:#fff;border:1px solid #E1E9F3}
+.sx-status b{display:block;font-size:13.5px;font-weight:850}
+.sx-status span{display:block;font-size:12px;color:#6A7890;font-weight:650}
+.sx-live{width:12px;height:12px;flex:none;border-radius:50%;background:#16B886;box-shadow:0 0 0 5px rgba(22,184,134,.15)}
+.sx-app.run .sx-live{animation:livePulse 1.2s infinite}
+.sx-app.idle .sx-live{background:#9AA8BC;box-shadow:0 0 0 5px rgba(154,168,188,.18)}
+.sx-app.paused .sx-live{background:#F2A93B;box-shadow:0 0 0 5px rgba(242,169,59,.18);animation:none}
+.sx-prog{width:130px;height:7px;flex:none;border-radius:9px;background:#E8EDF5;overflow:hidden}
+.sx-prog i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#1466DE,#2EC4D8);transition:width .12s linear}
+.sx-th{font-size:18px;font-weight:950;color:#FF6648}
+</style>
+</head>
+<body>
+<div class="pbar">
+  <button class="pbtn ghost" id="btnMenu" title="รายการสไลด์">☰</button>
+  <div class="ptitle"><b>ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ</b><span>เอกสารนำเสนอสำหรับผู้บริหาร</span></div>
+  <div class="pspace"></div>
+  <button class="pbtn" id="btnFitW">Fit width</button>
+  <button class="pbtn active" id="btnFitP">Fit page</button>
+  <button class="pbtn" id="btnPdf">PDF</button>
+  <button class="pbtn ghost" id="btnFull" title="เต็มจอ">⛶</button>
+  <button class="pbtn ghost" id="btnPrev" title="ก่อนหน้า">‹</button>
+  <div class="pcount"><span id="pNow">1</span> / <span id="pAll">11</span></div>
+  <button class="pbtn ghost" id="btnNext" title="ถัดไป">›</button>
+</div>
+<div class="pdrawer" id="drawer"><div class="pdrawer-head">สไลด์ทั้งหมด</div><div id="drawerList"></div></div>
+<div class="pmask" id="mask"></div>
+
+<div id="viewport"><div id="scroller"><div id="stage">
+<!-- 1 COVER -->
+<section class="slide hero" id="cover">
+  <div class="hero-copy">
+    <span class="eyebrow">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ · เฝ้าระวัง 24 ชม.</span>
+    <h1><span style="font-size:.28em;display:block;letter-spacing:-1px;color:#1466DE;margin-bottom:12px">ข่าวในประเด็นที่หน่วยงานสนใจเป็นพิเศษ ถูกแชร์ไปแล้ว 2 ชั่วโมง</span>เราจะรู้<br>ตอนไหน?</h1>
+    <p class="lead">ทุกวันมีข่าวและบทความใหม่หลายร้อยชิ้นที่เกี่ยวข้องกับภารกิจของหน่วยงาน ระบบนี้อ่านทั้งหมดทุก 15 นาที แล้วเสนอต่อผู้บริหาร <b>เฉพาะเรื่องที่ต้องตัดสินใจหรือต้องชี้แจง — เฉลี่ยวันละ 2–3 เรื่อง</b></p>
+    <div class="chips"><span class="chip">ประเด็นที่สนใจเป็นพิเศษ</span><span class="chip">ประเด็นนโยบาย</span><span class="chip">เสียงประชาชน</span><span class="chip">เทรนด์ที่เฝ้าติดตาม</span><span class="chip">ข้อมูลบิดเบือน</span><span class="chip">แจ้งเตือน + แนวทางชี้แจง</span></div>
+    <div class="hero-note"><i class="dot"></i><b>เห็นหน้าจอจริงเดือนที่ 3 · ส่งมอบครบเดือนที่ 6</b> · ติดตั้งในศูนย์ข้อมูลของหน่วยงาน ข้อมูลไม่ออกนอกองค์กร</div>
+  </div>
+  <div class="command" aria-label="Social signals flowing into AI intelligence illustration">
+    <div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div>
+    <div class="pulse">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M32 58c-8-6-12-15-10-26 3-15 17-25 32-23 14 2 24 13 24 27 0 9-4 16-10 21-5 4-7 8-7 15H39c0-6-2-10-7-14Z" stroke="white" stroke-width="6" stroke-linecap="round"/><path d="M40 84h22M44 94h14" stroke="white" stroke-width="6" stroke-linecap="round"/><path d="M49 25v18l12 8" stroke="#DDF956" stroke-width="6" stroke-linecap="round"/></svg>
+    </div>
+    <div class="signal sig1"><span class="mini">f</span>Facebook Page</div>
+    <div class="signal sig2"><span class="mini">X</span>X / Trend</div>
+    <div class="signal sig3"><span class="mini">▶</span>YouTube</div>
+    <div class="signal sig4"><span class="mini">W</span>Website / News</div>
+    <div class="signal sig5"><span class="mini">◎</span>Instagram</div>
+    <div class="signal sig6"><span class="mini">C</span>Community</div>
+    <div class="preview">
+      <div class="preview-top"><b>สรุปประเด็นสำหรับผู้บริหาร</b><span style="font-size:10px;color:#6F7F96">Today · 14:10</span></div>
+      <div class="preview-kpi"><div class="p-kpi"><b>12</b><span>ประเด็นที่เกี่ยวข้อง</span></div><div class="p-kpi"><b style="color:#E2553D">2</b><span>ต้องชี้แจง</span></div><div class="p-kpi"><b style="color:#17845F">5</b><span>ควรติดตาม</span></div></div>
+      <div class="chart"><svg viewBox="0 0 300 70" preserveAspectRatio="none"><defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E9CE8" stop-opacity=".25"/><stop offset="1" stop-color="#2E9CE8" stop-opacity="0"/></linearGradient></defs><path d="M0 57 C28 55 30 38 55 42 C90 49 102 20 131 30 C164 41 179 11 206 23 C236 37 251 19 300 9 L300 70 L0 70Z" fill="url(#area)"/><path d="M0 57 C28 55 30 38 55 42 C90 49 102 20 131 30 C164 41 179 11 206 23 C236 37 251 19 300 9" fill="none" stroke="#1466DE" stroke-width="3"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 WHY -->
+<section class="slide" id="why">
+  <div class="head"><div><span class="eyebrow">01 — มุมมองผู้บริหาร</span><h2>ผู้บริหารไม่ได้ขาดข่าว — ขาดคนบอกว่าเรื่องไหนต้องรีบ</h2></div><p>ทุกเรื่องที่เสนอขึ้นไปต้องตอบให้ครบในบรรทัดเดียว: <b>เกิดอะไรขึ้น · สำคัญแค่ไหน · กระทบภารกิจใด · ต้องชี้แจงหรือดำเนินการภายในกี่ชั่วโมง</b></p></div>
+  <div class="value-grid">
+    <div class="before-after">
+      <div class="ba before"><span class="eyebrow" style="background:#F1F4F8;color:#69768A;border-color:#E2E8F0">BEFORE</span><h3>กว่าจะรู้ เรื่องก็ขึ้นหน้าหนึ่งแล้ว</h3><p>เจ้าหน้าที่ต้องเปิดเว็บข่าวทีละสำนัก อ่านซ้ำของเดิม แล้วตัดสินเองว่าเรื่องไหนควรเสนอผู้บริหาร ทำด้วยมือได้ไม่นานก็ไม่ครบ</p><div class="ba-list"><div class="ba-item"><i>↻</i><span>ไล่เปิดเว็บข่าววันละหลายรอบ</span></div><div class="ba-item"><i>?</i><span>ชื่อหน่วยงานตรง แต่คนละประเด็น</span></div><div class="ba-item"><i>⏱</i><span>ข่าวเดียวกัน อ่านซ้ำ 5 สำนัก</span></div><div class="ba-item"><i>!</i><span>ประเด็นร้อนหลุดเพราะอ่านไม่ทัน</span></div></div></div>
+      <div class="ba-arrow">→</div>
+      <div class="ba after"><span class="eyebrow">AFTER</span><h3>รู้ก่อน พร้อมข้อเสนอว่าต้องทำอะไรต่อ</h3><p>ระบบอ่านแทนทั้งหมด ตัดข่าวซ้ำ ให้คะแนนผลกระทบต่อภารกิจ แล้วเสนอเฉพาะเรื่องที่ผู้บริหารต้องสั่งการจริง</p><div class="ba-list"><div class="ba-item"><i>✓</i><span>ข่าว · นโยบาย · เสียงประชาชน หน้าจอเดียว</span></div><div class="ba-item"><i>AI</i><span>อ่านบริบท ไม่ได้จับแค่ชื่อหน่วยงาน</span></div><div class="ba-item"><i>15</i><span>ประเด็นร้อนถึงมือใน 15 นาที</span></div><div class="ba-item"><i>→</i><span>พร้อมข้อเสนอว่าหน่วยใดควรชี้แจง</span></div></div></div>
+    </div>
+    <div class="impact-panel"><span class="eyebrow" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.13);color:#DCEAFF">ประโยชน์ต่อหน่วยงาน</span><h3>ลงทุนครั้งเดียว ใช้ได้ทั้ง 4 สายงาน</h3><div class="impact-cards"><div class="impact-card"><strong>ประชาสัมพันธ์</strong><span>รู้ความเคลื่อนไหวในประเด็นที่หน่วยงานสนใจเป็นพิเศษก่อนที่จะลุกลาม พร้อมตั้งหลักชี้แจง</span></div><div class="impact-card"><strong>นโยบายและยุทธศาสตร์</strong><span>เห็นทิศทางประเด็นสาธารณะและข้อถกเถียงเชิงนโยบาย</span></div><div class="impact-card"><strong>บริการประชาชน</strong><span>รวบรวมข้อร้องเรียนและปัญหาซ้ำที่ปรากฏบนสื่อ</span></div><div class="impact-card"><strong>ผู้บริหาร</strong><span>สรุปวันละหน้า พร้อมข้อเสนอว่าควรสั่งการอะไร</span></div></div></div>
+  </div>
+</section>
+
+<!-- 3 LIVE DEMO -->
+<section class="slide live-slide" id="live">
+  <div class="head"><div><span class="eyebrow">02 — หน้าจอการทำงานของระบบ</span><h2>ตามดูข่าวหนึ่งชิ้น ตั้งแต่เข้าระบบจนถึงมือผู้บริหาร</h2></div><p>ภาพหน้าจอหลังประมวลผลครบหนึ่งรอบ ไล่จากซ้ายไปขวา: รวบรวม · วิเคราะห์ด้วย Local LLM · ให้คะแนนผลกระทบ · แจ้งเตือนและส่งต่อ</p></div>
+  <div class="live-shell sx-shell">
+    <div class="sx-app" id="sxApp">
+      <div class="sx-top">
+        <div class="sx-brand"><i>SI</i><div><b>ระบบติดตามข่าวและแนวโน้ม</b><span>เดโมการทำงานสำหรับผู้บริหาร</span></div></div>
+        <div class="sx-engine"><span>AI Engine</span><button data-engine="cloud">Cloud (สำรอง)</button><button class="on" data-engine="local">Local LLM (ในหน่วยงาน)</button></div>
+      </div>
+      <div class="sx-body">
+        <div class="sx-bar">
+          <div class="sx-tabs"><button class="on" data-set="0">ประเด็นที่สนใจเป็นพิเศษ</button><button data-set="1">ร้องเรียน / วิกฤต</button><button data-set="2">นโยบาย / เทรนด์</button></div>
+          <div class="sx-ctrl"><button class="sx-play" data-act="play">▶ Play Flow</button><button data-act="pause">❚❚ Pause</button><button data-act="reset">↺ Reset</button><button data-act="speed"><em>1×</em>Speed</button></div>
+        </div>
+        <div class="sx-flow">
+          <div class="sx-col" data-step="1" style="--c:#1466DE">
+            <div class="sx-lbl"><i>1</i>แหล่งข้อมูล</div>
+            <div class="sx-card">
+              <h4>เฝ้าฟัง</h4><p>หลายแหล่งพร้อมกัน</p>
+              <div class="sx-src">
+                <div><i style="background:#1877F2">f</i><b>Facebook<small>Page / Mention</small></b></div>
+                <div><i style="background:#0F1419">X</i><b>X<small>Search / API</small></b></div>
+                <div><i style="background:#FF1F3D"><svg viewBox="0 0 14 14"><path d="M3 1.5v11l9.5-5.5z" fill="#fff"/></svg></i><b>YouTube<small>Video / Comment</small></b></div>
+                <div><i style="background:#475A78">N</i><b>สำนักข่าว<small>Media / Press</small></b></div>
+                <div><i style="background:#1BA7E0">◎</i><b>เว็บทั่วไป<small>Search / Blog</small></b></div>
+                <div><i style="background:#7C5CF0">C</i><b>เว็บบอร์ด<small>Forum / Pantip</small></b></div>
+              </div>
+            </div>
+          </div>
+          <div class="sx-col" data-step="2" style="--c:#14B8A6">
+            <div class="sx-lbl"><i>2</i>Collector</div>
+            <div class="sx-card">
+              <h4>รวบรวม</h4><p>API • Search • Connector</p>
+              <div class="sx-server">
+                <div class="sx-ring"></div>
+                <svg viewBox="0 0 130 116" aria-hidden="true">
+                  <defs><linearGradient id="sxSrv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#27477A"/><stop offset="1" stop-color="#0E2348"/></linearGradient></defs>
+                  <g><rect x="5" y="4" width="120" height="30" rx="9" fill="url(#sxSrv)"/><circle cx="22" cy="19" r="4.5" fill="#34D3C0"/><circle cx="36" cy="19" r="4.5" fill="#34D3C0"/><rect x="54" y="17" width="56" height="4" rx="2" fill="#7892BE" opacity=".6"/></g>
+                  <g><rect x="5" y="43" width="120" height="30" rx="9" fill="url(#sxSrv)"/><circle cx="22" cy="58" r="4.5" fill="#34D3C0"/><circle cx="36" cy="58" r="4.5" fill="#34D3C0"/><rect x="54" y="56" width="56" height="4" rx="2" fill="#7892BE" opacity=".6"/></g>
+                  <g><rect x="5" y="82" width="120" height="30" rx="9" fill="url(#sxSrv)"/><circle cx="22" cy="97" r="4.5" fill="#34D3C0"/><circle cx="36" cy="97" r="4.5" fill="#34D3C0"/><rect x="54" y="95" width="56" height="4" rx="2" fill="#7892BE" opacity=".6"/></g>
+                </svg>
+              </div>
+              <div class="sx-pill" id="sxPill"><i></i><span>Batch complete</span></div>
+            </div>
+          </div>
+          <div class="sx-col" data-step="3" style="--c:#6B46C1">
+            <div class="sx-lbl"><i>3</i>วิเคราะห์ด้วย AI</div>
+            <div class="sx-card">
+              <h4>วิเคราะห์</h4><p id="sxEngineTxt">Local LLM • ความเกี่ยวข้อง + ทิศทาง + ประเด็น</p>
+              <div class="sx-ai">
+                <div class="sx-orb">AI</div>
+                <span class="sx-chip c1">✓</span><span class="sx-chip c2">#</span><span class="sx-chip c3">☺</span><span class="sx-chip c4">↗</span>
+              </div>
+              <div class="sx-metrics">
+                <div><b>Relevance<em>0</em></b><s><i></i></s></div>
+                <div><b>Sentiment<em>0</em></b><s><i></i></s></div>
+                <div><b>Topic<em>0</em></b><s><i></i></s></div>
+                <div><b>Urgency<em>0</em></b><s><i></i></s></div>
+              </div>
+            </div>
+          </div>
+          <div class="sx-col" data-step="4" style="--c:#F97316">
+            <div class="sx-lbl"><i>4</i>คะแนนผลกระทบ</div>
+            <div class="sx-card">
+              <h4>จัดลำดับ</h4><p>ก่อนถึงผู้บริหาร</p>
+              <div class="sx-gauge">
+                <svg viewBox="0 0 130 130"><circle cx="65" cy="65" r="54" stroke="#E8EDF5"/><circle id="sxArc" cx="65" cy="65" r="54" stroke="#FF6648" stroke-dasharray="339.29" stroke-dashoffset="339.29"/></svg>
+                <div><b id="sxScore">0</b><span>IMPACT / 100</span></div>
+              </div>
+              <div class="sx-lanes"><span data-lane="archive">Archive</span><span data-lane="brief">Daily Brief</span><span data-lane="alert">Alert Now</span></div>
+            </div>
+          </div>
+          <div class="sx-col" data-step="5" style="--c:#16A34A">
+            <div class="sx-lbl"><i>5</i>ส่งต่อ</div>
+            <div class="sx-card">
+              <h4>ดำเนินการ</h4><p>ส่ง Insight ไปจุดที่ต้องใช้</p>
+              <div class="sx-alert hide" id="sxAlert">
+                <div class="sx-bell" id="sxBell">🔔</div>
+                <div><b id="sxAlertT"></b><p id="sxAlertD"></p></div>
+                <div class="sx-ch"><span data-ch="LINE">LINE</span><span data-ch="Email">Email</span><span data-ch="Teams">Teams</span></div>
+              </div>
+              <div class="sx-dash">
+                <h5>Dashboard เรียลไทม์</h5>
+                <svg viewBox="0 0 240 40" preserveAspectRatio="none" aria-hidden="true">
+                  <defs><linearGradient id="sxSpark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1466DE" stop-opacity=".22"/><stop offset="1" stop-color="#1466DE" stop-opacity="0"/></linearGradient></defs>
+                  <path d="M0 33 L30 30 L60 32 L90 23 L120 25 L150 17 L180 19 L210 8 L240 12 L240 40 L0 40Z" fill="url(#sxSpark)"/>
+                  <path d="M0 33 L30 30 L60 32 L90 23 L120 25 L150 17 L180 19 L210 8 L240 12" fill="none" stroke="#1466DE" stroke-width="2" vector-effect="non-scaling-stroke"/>
+                </svg>
+                <div class="sx-kpi"><div><b>0</b><span>หน่วยงาน</span></div><div><b>0</b><span>ร้องเรียน</span></div><div><b>0</b><span>นโยบาย</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sx-status">
+          <div><div><b>สถานะการทำงาน</b><span id="sxState">Complete — ready for next monitoring cycle</span></div><i class="sx-live"></i></div>
+          <div><div><b>ความคืบหน้า</b><span id="sxCount">16 / 16 signals</span></div><div class="sx-prog"><i id="sxProg"></i></div></div>
+          <div><div><b>เกณฑ์</b><span>คะแนน ≥ 80 → แจ้งเตือนทันที</span></div><span class="sx-th">80+</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="live-note"><span class="live-dot"></span><b id="sxNoteMain">ผลการทำงาน 1 รอบ · 16 สัญญาณ</b><span id="sxNoteSub">· คะแนนผลกระทบ 64/100 → เข้าสรุปประจำวัน (Daily Brief)</span></div>
+</section>
+
+<!-- 4 SOURCES -->
+<section class="slide" id="sources">
+  <div class="head"><div><span class="eyebrow">03 — แหล่งข้อมูล</span><h2>เว็บทั้งตลาดเปิดให้อ่านอยู่แล้ว — อยู่ที่ว่าอ่านถูกวิธีหรือเปล่า</h2></div><p>RSS, Sitemap และ Search API คือช่องทางที่เจ้าของเว็บเปิดไว้ให้ใช้อยู่แล้ว จึงเริ่มได้ทันทีโดยไม่ต้องรออนุมัติสิทธิ์เหมือน Social API และไม่มีประเด็นด้านการเข้าถึงข้อมูลที่ต้องตอบหน่วยตรวจสอบภายหลัง</p></div>
+  <div class="source-layout">
+    <div class="source-cards">
+      <div class="source-card"><div class="source-top"><div class="brand-icon">RSS</div><span class="status-pill ready">เริ่มทันที</span></div><h3>RSS / Atom Feed</h3><p>ฟีดมาตรฐานของสำนักข่าวและเว็บหน่วยงาน โครงสร้างแน่นอน อัปเดตเร็ว ไม่ต้องขอสิทธิ์</p><div class="micro">ครอบคลุม: สื่อไทยกระแสหลักเกือบทั้งหมด</div></div>
+      <div class="source-card"><div class="source-top"><div class="brand-icon">MAP</div><span class="status-pill ready">เริ่มทันที</span></div><h3>Sitemap / News Sitemap</h3><p>ใช้ sitemap.xml และ news-sitemap เพื่อรู้ URL ใหม่พร้อม lastmod สำหรับเว็บที่ไม่มี RSS</p><div class="micro">ครอบคลุม: เว็บองค์กร · เว็บคู่แข่ง</div></div>
+      <div class="source-card"><div class="source-top"><div class="brand-icon">🔍</div><span class="status-pill ready">เริ่มทันที</span></div><h3>Web / News Search API</h3><p>Search API เชิงพาณิชย์สำหรับกวาด keyword ทั้งเว็บ โดยไม่ต้องรู้จักไซต์ปลายทางล่วงหน้า</p><div class="micro">ครอบคลุม: ข่าวใหม่ · เว็บที่ยังไม่อยู่ในลิสต์</div></div>
+      <div class="source-card"><div class="source-top"><div class="brand-icon">&lt;/&gt;</div><span class="status-pill ready">MVP</span></div><h3>Site Parser (HTML)</h3><p>ตัวแยกเนื้อหาหลักต่อไซต์ ด้วย readability + CSS selector เฉพาะเว็บ เคารพ robots.txt และ rate limit</p><div class="micro">ครอบคลุม: เว็บที่ไม่มี feed มาตรฐาน</div></div>
+      <div class="source-card"><div class="source-top"><div class="brand-icon">Δ</div><span class="status-pill ready">MVP</span></div><h3>Page Watch (Diff)</h3><p>เฝ้าหน้าเฉพาะ เช่น หน้าประกาศของหน่วยงานที่เกี่ยวข้อง มติ ครม. หรือหน้าข่าวประชาสัมพันธ์ แล้วแจ้งเมื่อเนื้อหาเปลี่ยน</p><div class="micro">ครอบคลุม: ประกาศ/นโยบายใหม่แบบทันที</div></div>
+      <div class="source-card"><div class="source-top"><div class="brand-icon" style="background:#F1F4F8;color:#68768A">+</div><span class="status-pill phase2">เสริม · Phase 2</span></div><h3>Social (Official API)</h3><p>YouTube · X · Facebook Page ผ่าน API ทางการตามสิทธิ์ที่อนุมัติ ใช้เสริมข้อมูลเว็บ ไม่ใช่แกนหลัก</p><div class="micro">ครอบคลุม: conversation · comment</div></div>
+    </div>
+    <div class="access-map"><span class="eyebrow" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:#DCEAFF">METHOD ที่ใช้จริง</span><h3>ลำดับวิธีดึงข้อมูล: ใช้ช่องทางที่เจ้าของเว็บเปิดให้ก่อนเสมอ</h3><p>เรียงจากวิธีที่เสถียรและถูกต้องที่สุดลงมา ระบบจะ fallback ทีละชั้น ไม่กระโดดไปใช้วิธีที่เปราะตั้งแต่ต้น</p><div class="access-lines"><div class="access-line"><b>1. RSS / Atom</b><div class="meter"><i style="width:100%"></i></div><span>เสถียรสุด</span></div><div class="access-line"><b>2. Sitemap</b><div class="meter"><i style="width:92%"></i></div><span>เสถียร</span></div><div class="access-line"><b>3. Search API</b><div class="meter"><i style="width:86%"></i></div><span>Official</span></div><div class="access-line"><b>4. HTML Parser</b><div class="meter"><i style="width:74%"></i></div><span>robots-compliant</span></div><div class="access-line"><b>5. Headless Render</b><div class="meter"><i style="width:42%"></i></div><span>เฉพาะที่จำเป็น</span></div><div class="access-line"><b>6. Social API</b><div class="meter"><i style="width:55%"></i></div><span>ตามสิทธิ์</span></div></div><div class="warning"><b>Design Rule:</b> ทุก connector เคารพ robots.txt / ToS, ยิงแบบ polite rate limit, และแยก parser ต่อไซต์ — เว็บไหนเปลี่ยนโครงสร้าง ให้พังเฉพาะ parser ตัวนั้น โดย Pipeline และ Dashboard ยังทำงานต่อ</div></div>
+  </div>
+</section>
+
+<!-- 5 AI -->
+<section class="slide alt" id="ai">
+  <div class="head"><div><span class="eyebrow">04 — การวิเคราะห์ด้วย AI</span><h2>AI คัดให้เหลือเฉพาะเรื่องที่ต้องตัดสินใจ พร้อมบอกเหตุผล</h2></div><p>จากข่าวหลายร้อยชิ้นต่อวัน ระบบจะเสนอผู้บริหารเพียงวันละ 2–3 เรื่อง โดยให้ <b>AI อ่านทุกชิ้นเอง</b> ไม่ได้ใช้คำค้นตัดทิ้ง และทุกเรื่องที่เสนอขึ้นไปต้องอธิบายได้ว่าทำไมจึงสำคัญ</p></div>
+  <div class="ai-layout">
+    <div class="funnel-wrap">
+      <svg class="funnel-svg" viewBox="0 0 640 516" role="img" aria-label="Signal funnel: 327 raw items narrowed to 2 action items">
+        <defs>
+          <linearGradient id="fg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAF1FB"/><stop offset="1" stop-color="#DCE8F8"/></linearGradient>
+          <linearGradient id="fg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D9E8FC"/><stop offset="1" stop-color="#C3DAF8"/></linearGradient>
+          <linearGradient id="fg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EBE3FF"/><stop offset="1" stop-color="#D9CCFB"/></linearGradient>
+          <linearGradient id="fg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE3DA"/><stop offset="1" stop-color="#FFC9BB"/></linearGradient>
+        </defs>
+        <g stroke-linejoin="round">
+          <polygon points="20,26 336,26 298,136 58,136"    fill="url(#fg1)" stroke="#CBDDF2" stroke-width="1.5"/>
+          <polygon points="58,136 298,136 260,246 96,246"   fill="url(#fg2)" stroke="#B4D0EE" stroke-width="1.5"/>
+          <polygon points="96,246 260,246 222,356 134,356"  fill="url(#fg3)" stroke="#C9B9F3" stroke-width="1.5"/>
+          <polygon points="134,356 222,356 198,450 158,450" fill="url(#fg4)" stroke="#FFB9A6" stroke-width="1.5"/>
+          <path d="M158 450h40v22a20 20 0 0 1-40 0z" fill="#FF6648"/>
+        </g>
+        <g text-anchor="middle" font-weight="1000" fill="#0A1733">
+          <text x="178" y="97"  font-size="46">327</text>
+          <text x="178" y="207" font-size="46">186</text>
+          <text x="178" y="317" font-size="46" fill="#42268F">12</text>
+          <text x="178" y="416" font-size="42" fill="#B7331A">2</text>
+        </g>
+        <g stroke="#C3D3E6" stroke-width="1.5" stroke-dasharray="3 4">
+          <line x1="322" y1="81"  x2="370" y2="81"/>
+          <line x1="284" y1="191" x2="370" y2="191"/>
+          <line x1="246" y1="301" x2="370" y2="301"/>
+          <line x1="214" y1="403" x2="370" y2="403"/>
+        </g>
+        <g font-size="15.5" font-weight="900" fill="#132A4E">
+          <text x="380" y="72">RAW ITEMS</text>
+          <text x="380" y="182">NORMALIZE + DEDUPE</text>
+          <text x="380" y="292">LLM อ่านครบทุกชิ้น</text>
+          <text x="380" y="394">IMPACT สูง · ต้อง ACTION</text>
+        </g>
+        <g font-size="13" font-weight="750" fill="#6B7A92">
+          <text x="380" y="94">ข่าว · โพสต์ · ความเห็น ทั้งหมด</text>
+          <text x="380" y="204">ตัดของซ้ำ · จัดรูปแบบให้เทียบกันได้</text>
+          <text x="380" y="314">ชี้ว่าเกี่ยวกับภารกิจจริงหรือไม่<tspan x="380" dy="19">ไม่มีการตัดทิ้งด้วยคำค้น</tspan></text>
+          <text x="380" y="416">เสนอผู้บริหารพร้อมเหตุผล<tspan x="380" dy="19">และข้อเสนอว่าควรทำอะไรต่อ</tspan></text>
+        </g>
+        <g text-anchor="end" font-weight="1000" font-size="16">
+          <text x="626" y="72"  fill="#7386A1">100%</text>
+          <text x="626" y="182" fill="#3E7CC6">57%</text>
+          <text x="626" y="292" fill="#6B46C1">3.7%</text>
+          <text x="626" y="394" fill="#E2553D">0.6%</text>
+        </g>
+      </svg>
+      <div class="funnel-cap">ตัวเลขเป็นตัวอย่างของหนึ่งวันทำงาน เพื่ออธิบายแนวคิด Signal Funnel</div>
+    </div>
+        <div class="engine"><div class="brain-row"><div class="brain"><svg viewBox="0 0 100 100" fill="none"><path d="M34 75c-13 0-20-13-14-24-10-10-2-28 12-28 4-12 22-14 29-5 12-4 25 8 21 21 11 9 4 28-9 30-2 13-19 18-29 8-4 1-7 0-10-2Z" stroke="white" stroke-width="5"/><path d="M49 18v62M36 32c8 3 11 8 13 14M63 32c-8 3-11 8-14 14M35 61c7 0 11-3 14-8M64 61c-7 0-11-3-15-8" stroke="#DDF956" stroke-width="4" stroke-linecap="round"/></svg></div><div><span class="eyebrow">AI ANALYSIS</span><h3>Structured Intelligence</h3><p>โมเดลคืนผลเป็น JSON schema เดียวกันทุกตัว จึงสลับหรืออัปเกรดโมเดลที่ fine-tune แล้วได้โดยไม่ต้องแก้ Dashboard, Alert หรือ Audit</p></div></div>
+      <div class="analysis-grid"><div class="analysis-card"><b>ความเกี่ยวข้อง</b><span>เกี่ยวกับภารกิจ/หน่วยงานจริงหรือไม่</span></div><div class="analysis-card"><b>ประเภทประเด็น</b><span>ร้องเรียน · นโยบาย · ข้อมูลบิดเบือน · เทรนด์</span></div><div class="analysis-card"><b>ทิศทาง &amp; ความเสี่ยง</b><span>บวก / กลาง / ลบ + ระดับความรุนแรง</span></div><div class="analysis-card"><b>ข้อเสนอการดำเนินการ</b><span>ไม่ต้องทำ · เฝ้าดู · ชี้แจง · เสนอผู้บริหาร</span></div></div>
+      <div class="score-row"><div class="score-ring"><div><strong>82</strong><span>IMPACT / 100</span></div></div><div class="thresholds"><div class="threshold"><b>80–100</b><div class="th-dot critical"></div><span>แจ้งผู้บริหารทันที</span></div><div class="threshold"><b>50–79</b><div class="th-dot digest"></div><span>เข้าสรุปประจำวัน</span></div><div class="threshold"><b>0–49</b><div class="th-dot archive"></div><span>เก็บไว้ค้นย้อนหลัง</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 ARCHITECTURE -->
+<section class="slide" id="architecture">
+  <div class="head"><div><span class="eyebrow">05 — สถาปัตยกรรมระบบ</span><h2>โครงสร้างระบบ 3 ส่วน: รับข้อมูล → ประมวลผล → ส่งถึงผู้ใช้</h2></div><p>แต่ละส่วนทำงานแยกกันชัดเจน จึงเพิ่มหรือถอดแหล่งข่าว เปลี่ยนโมเดล AI หรือปรับหน้าจอได้ทีละส่วน โดยส่วนที่เหลือยังทำงานตามปกติ และทีมเทคนิคของหน่วยงานรับช่วงดูแลต่อได้</p></div>
+  <div class="arch-board">
+    <div class="tower">
+      <div class="arch-block"><div class="ico">WEB</div><div><b>Website Connectors</b><span>RSS · Sitemap · Search API · Site Parser · Page Diff</span></div></div>
+      <div class="arch-block"><div class="ico">⏱</div><div><b>Scheduler & Worker</b><span>Hangfire / Quartz · retry · backoff · pagination</span></div></div>
+      <div class="arch-block"><div class="ico">Q</div><div><b>Queue / Job Control</b><span>เริ่มง่ายด้วย DB queue; scale ค่อย RabbitMQ/Kafka</span></div></div>
+      <div class="arch-block"><div class="ico">RAW</div><div><b>Raw Page Store</b><span>source URL · fetched_at · HTML hash · extracted text</span></div></div>
+    </div>
+    <div class="bridge"></div>
+    <div class="core"><h3>Core Intelligence Pipeline</h3><div class="core-grid"><div class="core-item"><b>Normalize</b><span>schema กลางทุก source</span></div><div class="core-item"><b>Deduplicate</b><span>canonical URL · content hash · semantic similarity</span></div><div class="core-item"><b>LLM Enrichment</b><span>โมเดล fine-tuned อ่านทุกชิ้น · คืน JSON</span></div><div class="core-item"><b>Impact Score</b><span>relevance · risk · velocity · business impact</span></div><div class="core-item"><b>Routing Rules</b><span>ใช้ตัดสินปลายทางเท่านั้น ไม่ใช้กรองเนื้อหา</span></div><div class="core-item"><b>Audit &amp; Training Data</b><span>feedback ของผู้ใช้ไหลกลับเป็นชุดเทรนรอบถัดไป</span></div></div></div>
+    <div class="bridge"></div>
+    <div class="tower">
+      <div class="arch-block"><div class="ico">DB</div><div><b>PostgreSQL + Search</b><span>Full-text · pgvector · analytics data</span></div></div>
+      <div class="arch-block"><div class="ico">UI</div><div><b>Executive Dashboard</b><span>Angular · trend · drill-down · saved views</span></div></div>
+      <div class="arch-block"><div class="ico">!</div><div><b>Alert Engine</b><span>LINE Messaging API · Email · Teams / webhook</span></div></div>
+      <div class="arch-block"><div class="ico">↗</div><div><b>Business Routing</b><span>Marketing · Sales · Product · Management</span></div></div>
+    </div>
+  </div>
+  <div class="arch-caption"><div class="caption-card"><b>Resilient:</b> Source ล่ม 1 ตัว ไม่ทำให้ระบบทั้งหมดหยุด</div><div class="caption-card"><b>Auditable:</b> Insight ย้อนกลับ Raw source + model + prompt ได้</div><div class="caption-card"><b>Efficient:</b> dedupe ก่อนเรียก AI เพื่อให้ผลลัพธ์นิ่งและตรวจสอบซ้ำได้</div><div class="caption-card"><b>Improvable:</b> เปลี่ยนเป็นโมเดลที่ fine-tune รอบใหม่ได้โดยไม่แตะ pipeline</div></div>
+</section>
+
+<!-- 7 MODEL STRATEGY -->
+<section class="slide alt" id="models">
+  <div class="head"><div><span class="eyebrow">06 — กลยุทธ์ LLM และการเลือกขนาดโมเดล</span><h2>เลือกชั้นโมเดลให้ตรงงานก่อน แล้วค่อยกำหนดเครื่อง</h2></div><p>ให้ LLM อ่านทุกหน้าตั้งแต่ชิ้นแรก ไม่กรองด้วย keyword — และ<b>ชั้นวิเคราะห์ควรอยู่ที่ 100B ขึ้นไป</b> เพราะเป็นจุดที่แยกบริบทเชิงนโยบายและน้ำเสียงในข่าวไทยได้ต่างชัด <span style="white-space:nowrap">(ข้อมูลรุ่น ณ ก.ย. 2569)</span></p></div>
+  <div class="tier-stack">
+
+    <div class="tier">
+      <span class="tier-tag">ด่านคัดกรอง · ภาษาไทย</span>
+      <div class="tier-size">4–30B</div>
+      <div class="tier-kind">โมเดลไทย · fine-tune ทั้งตัวได้</div>
+      <div class="tier-bar"><i style="width:24%"></i></div>
+      <div class="tier-role">อ่านทุกหน้าเว็บ คัดว่าเกี่ยวกับภารกิจไหม จับหัวข้อและชื่อที่ถูกพูดถึง</div>
+      <div class="tier-chips"><span>Typhoon 2.5</span><span>OpenThai 2.0</span><span>Pathumma</span></div>
+      <div class="tier-depth">ความลึกของการให้เหตุผล<i><b class="f"></b><b class="f"></b><b></b><b></b><b></b></i></div>
+      <div class="tier-foot"><div><b>~17–20 GB</b><span>VRAM ที่ Q4</span></div><div><b>Full FT</b><span>เทรนทั้งตัว ไม่ใช่แค่ LoRA</span></div></div>
+    </div>
+
+    <div class="tier on">
+      <span class="tier-tag">★ ชั้นวิเคราะห์ที่แนะนำ</span>
+      <div class="tier-size">100–120B</div>
+      <div class="tier-kind">MoE · Apache 2.0 · fine-tune ต่อยอดได้</div>
+      <div class="tier-bar"><i style="width:72%"></i></div>
+      <div class="tier-role">ให้คะแนนผลกระทบ อ่านน้ำเสียง จับข้อถกเถียงเชิงนโยบาย และเสนอว่าควรทำอะไรต่อ</div>
+      <div class="tier-chips"><span>gpt-oss-120B</span><span>Mistral Small 4</span><span>Qwen3.5-122B</span><span>Llama 4 Scout</span></div>
+      <div class="tier-depth">ความลึกของการให้เหตุผล<i><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b></b></i></div>
+      <div class="tier-foot"><div><b>~55–80 GB</b><span>VRAM ที่ Q4–Q5</span></div><div><b>5–17B</b><span>active ต่อ token จึงยังเร็ว</span></div></div>
+    </div>
+
+    <div class="tier">
+      <span class="tier-tag">เผื่อขยาย · ตัดสินใจทีหลังได้</span>
+      <div class="tier-size">300B+</div>
+      <div class="tier-kind">sparse MoE · context ระดับ 1M</div>
+      <div class="tier-bar"><i style="width:100%"></i></div>
+      <div class="tier-role">ทวนซ้ำเคสวิกฤตก่อนรบกวนผู้บริหาร และงานที่ต้องอ้างอิงเอกสารยาว</div>
+      <div class="tier-chips"><span>DeepSeek V4 Pro</span><span>GLM-5.2</span><span>Kimi K3</span></div>
+      <div class="tier-depth">ความลึกของการให้เหตุผล<i><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b><b class="f"></b></i></div>
+      <div class="tier-foot"><div><b>1M</b><span>context ต่อคำถาม</span></div><div><b>MIT</b><span>DeepSeek V4 · GLM ใช้ได้เสรี</span></div></div>
+    </div>
+
+  </div>
+  <div class="routebar">
+    <div class="rb"><i>1</i><div><b>SCREEN</b><small>คัดความเกี่ยวข้องทุกหน้า</small></div><em>100%</em></div>
+    <div class="rb-arr">→</div>
+    <div class="rb"><i>2</i><div><b>ANALYZE</b><small>ให้คะแนน · เหตุผล · ข้อเสนอ</small></div><em>~10–15%</em></div>
+    <div class="rb-arr">→</div>
+    <div class="rb"><i>3</i><div><b>ESCALATE</b><small>ทวนซ้ำเคสวิกฤต</small></div><em>1–2%</em></div>
+  </div>
+</section>
+
+
+<!-- 8 DATA & SECURITY -->
+<section class="slide" id="data">
+  <div class="head"><div><span class="eyebrow">07 — ข้อมูลและธรรมาภิบาลข้อมูล</span><h2>ถ้าย้อนไม่ได้ว่า Insight มาจากไหน ก็เอาไปตัดสินใจไม่ได้</h2></div><p>ทุกบรรทัดบน Dashboard ย้อนกลับไปถึง URL ต้นทาง เวลาที่ดึง โมเดลและ prompt ที่ใช้ได้เสมอ และเปลี่ยน prompt แล้ววิเคราะห์ใหม่ทั้งคลังได้ โดยไม่ต้องไปไล่ดึงเว็บซ้ำ</p></div>
+  <div class="data-layout">
+    <div class="data-diagram">
+      <div class="entity primary"><b>source_account</b><span>platform
+account_id
+token_ref
+status</span></div><div class="entity primary"><b>monitor_query</b><span>brand
+keywords
+negative_terms
+schedule</span></div><div class="entity"><b>raw_item</b><span>source_id
+url
+payload_hash
+published_at</span></div>
+      <div class="entity"><b>content_item</b><span>canonical_text
+language
+entity
+engagement
+dedupe_group</span></div><div class="entity ai"><b>ai_analysis</b><span>model
+prompt_version
+relevance
+topic
+sentiment
+summary</span></div><div class="entity alert"><b>alert_event</b><span>score
+rule
+recipient
+sent_at
+acknowledged</span></div>
+      <div class="entity"><b>feedback</b><span>useful
+wrong_topic
+wrong_sentiment
+note</span></div><div class="entity"><b>connector_health</b><span>last_success
+quota
+error_count
+latency</span></div><div class="entity"><b>audit_log</b><span>actor
+action
+object
+before/after</span></div>
+    </div>
+    <div class="security"><div class="shield">🛡</div><h3>Production Guardrails</h3><div class="security-list"><div class="security-item"><i>1</i><span><b>On-premise:</b> ระบบและโมเดลอยู่ในศูนย์ข้อมูลของหน่วยงาน ข้อมูลไม่ถูกส่งออกนอกองค์กร</span></div><div class="security-item"><i>2</i><span><b>PDPA:</b> เก็บเฉพาะเนื้อหาสาธารณะ · กำหนดระยะเก็บและสิทธิ์การเข้าถึงตามระเบียบหน่วยงาน</span></div><div class="security-item"><i>3</i><span><b>Audit:</b> ทุก insight ย้อนกลับ URL, Raw Item, Prompt Version, Model Version ได้</span></div><div class="security-item"><i>4</i><span><b>Usage governance:</b> quota ต่อ connector + cache + dedupe + usage dashboard</span></div><div class="security-item"><i>5</i><span><b>Reliability:</b> retry, dead-letter, health status, last-success timestamp</span></div><div class="security-item"><i>6</i><span><b>ผู้ใช้มีส่วนร่วม:</b> เจ้าหน้าที่กดยืนยัน/แก้ไขผลวิเคราะห์ กลายเป็นข้อมูลเทรนรอบถัดไป</span></div></div></div>
+  </div>
+</section>
+
+<!-- 9 DASHBOARD -->
+<section class="slide alt" id="dashboard">
+  <div class="head"><div><span class="eyebrow">08 — หน้าจอที่ผู้ใช้เห็นจริง</span><h2>เปิดหน้าจอ 30 วินาที ต้องรู้ว่าวันนี้ต้องตัดสินใจอะไร</h2></div><p>ไม่ใช่ที่กองโพสต์ให้คนนั่งไล่อ่าน แต่เป็นหน้าจอที่บอกว่าอะไรเปลี่ยน ใครต้องรับผิดชอบ และกดดูต้นทางได้ในคลิกเดียว</p></div>
+  <div class="dashboard-layout">
+    <div class="screen"><div class="screen-inner"><div class="screen-top"><b>สรุปประเด็นสำหรับผู้บริหาร</b><span>อัปเดตล่าสุด 14:10 · แหล่งข่าวทำงานปกติทั้งหมด</span></div><div class="screen-kpis"><div class="dkpi"><strong>12</strong><span>ประเด็นที่เกี่ยวข้องวันนี้</span></div><div class="dkpi"><strong style="color:#E35A42">2</strong><span>ต้องชี้แจง/สั่งการ</span></div><div class="dkpi"><strong style="color:#16835F">5</strong><span>ควรเฝ้าติดตาม</span></div></div><div class="visuals"><div class="vis"><h4>แนวโน้มประเด็น 7 วัน</h4><svg viewBox="0 0 400 100" preserveAspectRatio="none"><defs><linearGradient id="dasharea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1466DE" stop-opacity=".28"/><stop offset="1" stop-color="#1466DE" stop-opacity="0"/></linearGradient></defs><path d="M0 88 C45 82 54 62 89 68 C126 75 145 39 180 51 C211 62 231 33 267 39 C306 46 331 18 400 12 L400 100 L0 100Z" fill="url(#dasharea)"/><path d="M0 88 C45 82 54 62 89 68 C126 75 145 39 180 51 C211 62 231 33 267 39 C306 46 331 18 400 12" fill="none" stroke="#1466DE" stroke-width="3"/><circle cx="331" cy="18" r="5" fill="#FF6648"/></svg></div><div class="vis"><h4>ประเด็นที่ถูกพูดถึงมากสุด</h4><svg viewBox="0 0 120 100"><circle cx="60" cy="50" r="34" fill="none" stroke="#E7EEF7" stroke-width="15"/><path d="M60 16a34 34 0 0 1 29 52" fill="none" stroke="#1466DE" stroke-width="15" stroke-linecap="round"/><path d="M89 68a34 34 0 0 1-31 16" fill="none" stroke="#2E9CE8" stroke-width="15" stroke-linecap="round"/><path d="M56 84a34 34 0 0 1-27-17" fill="none" stroke="#DDF956" stroke-width="15" stroke-linecap="round"/></svg></div></div><div class="mentions"><div class="mention"><div class="micon">!</div><div><b>ร้องเรียนขั้นตอนขออนุญาตล่าช้าที่สำนักงานพื้นที่</b><p>ถูกอ้างถึงใน 4 สำนักข่าว · ยอดแชร์สูงกว่าค่าเฉลี่ย 3 เท่า</p></div><div class="mscore">87</div></div><div class="mention"><div class="micon">↗</div><div><b>ข้อถกเถียงเชิงนโยบายในร่างประกาศฉบับใหม่</b><p>มีบทวิเคราะห์จากนักวิชาการ 2 ราย · ควรเตรียมข้อมูลชี้แจง</p></div><div class="mscore" style="color:#A66A00">72</div></div><div class="mention"><div class="micon">+</div><div><b>ข้อมูลคลาดเคลื่อนเรื่องเงื่อนไขการยื่นคำขอ</b><p>ต้นทางมาจากเพจเดียว แล้วถูกคัดลอกต่อ · ควรออกข้อเท็จจริง</p></div><div class="mscore" style="color:#16835F">68</div></div></div></div></div>
+    <div class="alert-demo"><div class="phone"><div class="phone-screen"><div class="phone-notch"></div><div class="message"><div class="alert-head"><div class="bell">🔔</div><div><h4>ประเด็นเร่งด่วน · 87/100</h4><span style="font-size:9px;color:#7B889B">ระบบติดตามข่าวและแนวโน้ม</span></div></div><p><b>เกิดอะไรขึ้น:</b> ข่าวร้องเรียนขั้นตอนขออนุญาตล่าช้า ปรากฏใน 4 สำนักข่าวภายใน 2 ชั่วโมง</p><p><b>ทำไมสำคัญ:</b> อยู่ในประเด็นที่หน่วยงานติดตามเป็นพิเศษ และยอดแชร์สูงกว่าค่าเฉลี่ย 3 เท่า</p><p><b>แนะนำ:</b> ให้กองประชาสัมพันธ์เตรียมข้อเท็จจริงภายใน 6 ชม. และแจ้งสำนักงานพื้นที่ตรวจสอบข้อมูลจริง</p><span class="action-btn">เปิด Source + ดูรายละเอียด</span></div></div></div><div class="demo-note">แจ้งเตือนที่ดีต้องมี “เหตุผล + ข้อเสนอ” ไม่ใช่ส่งลิงก์ให้เจ้าหน้าที่ไปอ่านเอง</div></div>
+  </div>
+</section>
+
+<!-- 10 INVESTMENT -->
+<section class="slide" id="approach">
+  <div class="head"><div><span class="eyebrow">09 — โครงสร้างการลงทุนและสิ่งที่ได้รับ</span><h2>งบประมาณลงไปกับอะไร และหน่วยงานได้อะไรกลับมา</h2></div><p>เราเสนอให้ลงกับ <b>ความสามารถที่อยู่กับหน่วยงานถาวร</b> ไม่ใช่ค่าเช่ารายเดือนที่หยุดจ่ายแล้วระบบดับ — ทั้งเครื่อง โมเดลที่เทรนแล้ว และซอร์สโค้ด ตกเป็นของหน่วยงานเมื่อจบโครงการ</p></div>
+  <div class="cost-layout">
+    <div class="budget-card"><span class="eyebrow">สัดส่วนการลงทุน · ปีที่ 1</span><div class="big" style="font-size:40px;letter-spacing:-1px">6 หมวดหลัก <small>ของงบทั้งโครงการ</small></div><p>สัดส่วนด้านล่างเป็นกรอบวางแผน ปรับได้ตามรายละเอียดใน TOR — ส่วนที่เราแนะนำไม่ให้ลดคือการพัฒนาระบบและงานด้าน AI เพราะเป็นตัวกำหนดว่าระบบจะแม่นพอให้ผู้บริหารใช้จริงหรือไม่</p>
+      <div class="cost-lines">
+        <div class="cost-line"><span>พัฒนาระบบ + ติดตั้ง</span><div class="cbar"><i style="width:100%"></i></div><b>45%</b></div>
+        <div class="cost-line"><span>ครุภัณฑ์ AI + ระบบ On-premise</span><div class="cbar"><i style="width:44%"></i></div><b>20%</b></div>
+        <div class="cost-line"><span>AI · Fine-tune ตลอดปี</span><div class="cbar"><i style="width:35%"></i></div><b>16%</b></div>
+        <div class="cost-line"><span>Search API / ข้อมูลลิขสิทธิ์</span><div class="cbar"><i style="width:18%"></i></div><b>8%</b></div>
+        <div class="cost-line"><span>อบรม · เอกสาร · ถ่ายทอดความรู้</span><div class="cbar"><i style="width:12%"></i></div><b>5%</b></div>
+        <div class="cost-line"><span>บำรุงรักษาปีแรก + สำรองความเสี่ยง</span><div class="cbar"><i style="width:12%"></i></div><b>6%</b></div>
+      </div>
+      <p style="font-size:9px">* เป็นกรอบสัดส่วนเพื่อวางแผน ไม่ใช่ใบเสนอราคา — วงเงินจริงกำหนดร่วมกันในขั้นตอนจัดทำ TOR</p>
+    </div>
+    <div class="variable"><span class="eyebrow" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:#DCEAFF">สิ่งที่หน่วยงานได้รับ</span><h3>จบโครงการแล้ว ทุกอย่างอยู่ในมือหน่วยงาน</h3><p>ไม่มีส่วนไหนที่ผูกให้ต้องจ่ายต่อเพื่อให้ระบบยังทำงาน — ถอดผู้พัฒนาออกแล้วระบบยังเดินต่อได้</p>
+      <div class="variable-grid">
+        <div class="var"><b>ระบบ + ซอร์สโค้ด</b><span>ส่งมอบพร้อมสิทธิ์การใช้งานและแก้ไขภายในหน่วยงาน</span></div>
+        <div class="var"><b>โมเดลที่เทรนแล้ว</b><span>น้ำหนักโมเดลที่ fine-tune ด้วยข้อมูลของหน่วยงาน เป็นทรัพย์สินของหน่วยงาน</span></div>
+        <div class="var"><b>ครุภัณฑ์ที่ติดตั้งจริง</b><span>เครื่อง AI อยู่ในศูนย์ข้อมูลของหน่วยงาน ข้อมูลไม่ออกนอกองค์กร</span></div>
+        <div class="var"><b>คนของหน่วยงานทำเองได้</b><span>อบรมเจ้าหน้าที่ + คู่มือปฏิบัติการ + เอกสารสถาปัตยกรรมครบชุด</span></div>
+      </div>
+      <div class="guardrail" style="background:rgba(221,249,86,.13);border-color:rgba(221,249,86,.24);color:#EAF6C8"><b>เทียบกับการทำด้วยคน:</b> งานเฝ้าข่าวครอบคลุม 100–300 เว็บตลอด 24 ชม. เทียบเท่าเจ้าหน้าที่วิเคราะห์ข่าว 4–5 อัตราแบบผลัดเวร — ระบบนี้ทำแทนได้ทุกวัน ไม่ลา ไม่ลืม และย้อนตรวจได้ทุกชิ้น</div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 ROADMAP -->
+<section class="slide alt" id="roadmap">
+  <div class="head"><div><span class="eyebrow">10 — แผนงาน 6 เดือน</span><h2>6 เดือน จากศูนย์ ถึง<span style="white-space:nowrap">ระบบที่ผู้บริหารใช้จริงทุกเช้า</span></h2></div><p>ขอบเขตที่เสนอ: 5–10 ประเด็นเฝ้าติดตาม · เริ่มที่ <b>100–300 เว็บไซต์เป้าหมาย</b> แล้วขยายเป็น <b>300–600 เว็บ</b> ในครึ่งหลัง · แจ้งเตือน 2 ช่องทาง · Dashboard ผู้บริหารเต็มรูปแบบ — <b>ผู้บริหารเริ่มใช้หน้าจอจริงตั้งแต่สิ้นเดือนที่ 3</b></p></div>
+  <div class="timeline m6">
+    <div class="week"><div class="week-no">M1</div><div class="week-card"><h3>วางรากฐาน</h3><ul><li>กำหนดประเด็นเฝ้าติดตามร่วมกับหน่วยงาน</li><li>บัญชีเว็บเป้าหมายชุดแรก 100–300 เว็บ</li><li>ติดตั้งเครื่องและสภาพแวดล้อมในศูนย์ข้อมูล</li><li>ออกแบบฐานข้อมูลและ Connector</li></ul></div></div>
+    <div class="week"><div class="week-no">M2</div><div class="week-card"><h3>เก็บข้อมูลและตัดของซ้ำ</h3><ul><li>Scheduler + Worker ดึงหน้าเว็บตาม robots.txt</li><li>แยกเนื้อหาหลัก · normalize · ตัดข่าวซ้ำ</li><li>เชื่อม RSS + Sitemap + Search API ชุดแรก</li><li>ชุดทดสอบมาตรฐาน 500–1,000 ชิ้น</li></ul></div></div>
+    <div class="week mark"><div class="week-no">M3</div><div class="week-card"><h3>สมองและหน้าจอ</h3><ul><li>ติดตั้ง LLM ในหน่วยงาน + Structured JSON</li><li>คะแนนผลกระทบพร้อมเหตุผล</li><li>Dashboard ผู้บริหาร + แจ้งเตือน LINE/อีเมล</li><li><b>จุดตรวจกลางทาง — ผู้บริหารเริ่มใช้จริง</b></li></ul></div></div>
+    <div class="week"><div class="week-no">M4</div><div class="week-card"><h3>ขยายแหล่งข้อมูล</h3><ul><li>ขยายเว็บเป้าหมายเป็น 300–600 เว็บ</li><li>เพิ่มโซเชียล · YouTube · เว็บบอร์ด ตามสิทธิ์</li><li>แหล่งข้อมูลลิขสิทธิ์ + Search API ชุดที่สอง</li><li>หน้าจอสถานะแหล่งข่าวและระบบ</li></ul></div></div>
+    <div class="week"><div class="week-no">M5</div><div class="week-card"><h3>Fine-tune รอบ 2 · วัดความแม่น</h3><ul><li>เทรนจากข้อมูลที่เจ้าหน้าที่ยืนยันแล้ว</li><li>ขยายชุดทดสอบเป็น 2,000+ ชิ้น</li><li>รายงานความแม่น/แจ้งผิด เทียบก่อน–หลัง</li><li>ปรับเกณฑ์คะแนนตามการใช้งานจริง</li></ul></div></div>
+    <div class="week last"><div class="week-no">M6</div><div class="week-card"><h3>Fine-tune รอบ 3 · ส่งมอบ</h3><ul><li>เทรนรอบสุดท้าย + ล็อกเวอร์ชันโมเดล</li><li>อบรมเจ้าหน้าที่ + คู่มือปฏิบัติการ</li><li>ส่งมอบซอร์สโค้ด · น้ำหนักโมเดล · เอกสาร</li><li>ตรวจรับตามเกณฑ์ (UAT)</li></ul></div></div>
+  </div>
+  <div class="gate"><div><b>ตรวจรับ · สิ้นเดือนที่ 6</b><br><span>เกณฑ์ตกลงกันไว้ตั้งแต่วันแรก และมีจุดตรวจกลางทางสิ้นเดือนที่ 3 — ถ้ายังไม่เข้าเป้า ปรับแผนครึ่งหลังได้ทันที</span></div><div class="gate-pills"><span class="gate-pill">ความแม่นยำ ≥ 90%</span><span class="gate-pill">แจ้งผิด &lt; 10%</span><span class="gate-pill">ประเด็นเร่งด่วน ≤ 15 นาที</span><span class="gate-pill">เจ้าหน้าที่ใช้งานจริง</span></div></div>
+</section>
+
+<div class="footer">ระบบติดตามข่าวและแนวโน้มประเด็นสาธารณะ · เอกสารนำเสนอสำหรับผู้บริหาร · 2569</div>
+</div></div></div>
+
+<script>
+// สไลด์ 02: เดโม flow 5 ขั้น — เวลาเดียว (t) กำหนดทุกอย่างบนจอ จึงกด Pause/Reset/สลับแท็บได้ไม่เพี้ยน
+(() => {
+  const app = document.getElementById('sxApp');
+  if (!app) return;
+  const $ = s => app.querySelector(s), $$ = s => [...app.querySelectorAll(s)];
+  const DATA = [
+    { n: 16, score: 64, m: [80, 78, 64, 72], k: [16, 0, 0],
+      title: 'มีความเคลื่อนไหวในประเด็นที่ติดตามเป็นพิเศษ',
+      desc: 'พบการกล่าวถึงที่อาจกระทบภาพลักษณ์ หรือต้องเตรียมข้อมูลชี้แจง' },
+    { n: 14, score: 86, m: [92, 84, 88, 90], k: [0, 14, 0],
+      title: 'ข้อร้องเรียนกำลังลุกลาม — ควรชี้แจงภายใน 6 ชม.',
+      desc: 'ถูกอ้างถึงใน 4 สำนักข่าว ยอดแชร์สูงกว่าค่าเฉลี่ย 3 เท่า' },
+    { n: 11, score: 41, m: [68, 52, 74, 30], k: [0, 0, 11],
+      title: 'ข้อถกเถียงเชิงนโยบาย ยังไม่ถึงเกณฑ์เสนอ',
+      desc: 'ระบบเก็บเข้าคลัง และติดตามต่อในรอบถัดไป' }
+  ];
+  const LANE = {
+    alert:   { ch: ['LINE', 'Email', 'Teams'], bell: '🔔', color: '#FF5A3C', note: 'เข้าเกณฑ์แจ้งผู้บริหารทันที ผ่าน LINE / Email / Teams' },
+    brief:   { ch: ['Email'],                  bell: '🔔', color: '#FF7A45', note: 'เข้าสรุปประจำวัน (Daily Brief) · แจ้งทันทีเมื่อถึง 80' },
+    archive: { ch: [],                         bell: '🗂', color: '#4D8EF0', note: 'เก็บเข้าคลังค้นย้อนหลัง · ยังไม่ถึงเกณฑ์เสนอผู้บริหาร' }
+  };
+  const STEP = ['', 'รับข้อมูลจากแหล่งข่าว', 'รวบรวมและตัดของซ้ำ', 'AI วิเคราะห์ทีละชิ้น', 'ให้คะแนนผลกระทบ', 'ส่งต่อผู้เกี่ยวข้อง'];
+  const PH = [0, 1200, 3000, 4600, 5800, 7000], END = PH[5];
+  const CIRC = 2 * Math.PI * 54;
+  const clamp = x => Math.max(0, Math.min(1, x));
+  const laneOf = s => s >= 80 ? 'alert' : s >= 50 ? 'brief' : 'archive';
+  let set = 0, t = END, speed = 1, timer = null, paused = false;
+
+  function render() {
+    const d = DATA[set], lane = laneOf(d.score), L = LANE[lane];
+    const step = t <= 0 ? 0 : t >= END ? 6 : PH.findIndex((p, i) => t >= p && t < PH[i + 1]) + 1;
+    const running = step > 0 && step < 6;
+    app.classList.toggle('idle', step === 0);
+    app.classList.toggle('run', running);
+    app.classList.toggle('paused', running && paused);
+    $$('.sx-col').forEach(c => {
+      const n = +c.dataset.step;
+      c.classList.toggle('on', step >= n);
+      c.classList.toggle('now', step === n);
+    });
+
+    const got = Math.round(d.n * clamp((t - PH[1]) / (PH[2] - PH[1])));
+    const pill = $('#sxPill');
+    pill.classList.toggle('wait', step < 2);
+    pill.querySelector('span').textContent = step < 2 ? 'รอรับข้อมูล' : step === 2 ? 'กำลังรวบรวม ' + got + '/' + d.n : 'Batch complete';
+
+    const mk = clamp((t - PH[2]) / (PH[3] - PH[2]));
+    $$('.sx-metrics > div').forEach((el, i) => {
+      const v = Math.round(d.m[i] * mk);
+      el.querySelector('i').style.width = v + '%';
+      el.querySelector('em').textContent = v;
+    });
+
+    const sc = Math.round(d.score * clamp((t - PH[3]) / (PH[4] - PH[3])));
+    $('#sxScore').textContent = sc;
+    const arc = $('#sxArc');
+    arc.style.strokeDashoffset = CIRC * (1 - sc / 100);
+    arc.style.stroke = L.color;
+    const decided = t >= PH[4];
+    $$('.sx-lanes span').forEach(s => s.classList.toggle('on', decided && s.dataset.lane === lane));
+
+    const alert = $('#sxAlert');
+    alert.dataset.tone = lane;
+    alert.classList.toggle('hide', !decided);
+    $('#sxBell').textContent = L.bell;
+    $('#sxAlertT').textContent = d.title;
+    $('#sxAlertD').textContent = d.desc;
+    $$('.sx-ch span').forEach(s => s.classList.toggle('off', !L.ch.includes(s.dataset.ch)));
+    const kk = clamp((t - PH[4]) / (END - PH[4]));
+    $$('.sx-kpi b').forEach((b, i) => { b.textContent = Math.round(d.k[i] * kk); });
+
+    $('#sxState').textContent = step === 0 ? 'Ready — กด Play Flow เพื่อเริ่มรอบใหม่'
+      : step === 6 ? 'Complete — ready for next monitoring cycle'
+      : (paused ? 'Paused — ' : 'Running — ') + 'ขั้นที่ ' + step + '/5 · ' + STEP[step];
+    $('#sxCount').textContent = got + ' / ' + d.n + ' signals';
+    $('#sxProg').style.width = (got / d.n * 100) + '%';
+
+    document.getElementById('sxNoteMain').textContent = 'ผลการทำงาน 1 รอบ · ' + d.n + ' สัญญาณ';
+    document.getElementById('sxNoteSub').textContent = '· คะแนนผลกระทบ ' + d.score + '/100 → ' + L.note;
+  }
+
+  const stop = () => { clearInterval(timer); timer = null; };
+  function play() {
+    if (t >= END) t = 0;
+    paused = false;
+    if (!timer) timer = setInterval(() => {
+      t = Math.min(END, t + 100 * speed);
+      if (t >= END) stop();
+      render();
+    }, 100);
+    render();
+  }
+
+  app.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    b.blur();   // ไม่ให้ปุ่มค้างโฟกัส — Space/ลูกศรจะได้เปลี่ยนสไลด์ตามปกติ
+    const act = b.dataset.act;
+    if (act === 'play') play();
+    else if (act === 'pause') { if (timer) { stop(); paused = true; render(); } }
+    else if (act === 'reset') { stop(); paused = false; t = 0; render(); }
+    else if (act === 'speed') { speed = speed === 1 ? 2 : speed === 2 ? 4 : 1; b.querySelector('em').textContent = speed + '×'; }
+    else if (b.dataset.set) {
+      set = +b.dataset.set;
+      $$('.sx-tabs button').forEach(x => x.classList.toggle('on', x === b));
+      stop(); t = 0; play();
+    } else if (b.dataset.engine) {
+      $$('.sx-engine button').forEach(x => x.classList.toggle('on', x === b));
+      $('#sxEngineTxt').textContent = (b.dataset.engine === 'local' ? 'Local LLM' : 'Cloud LLM (สำรอง)') + ' • ความเกี่ยวข้อง + ทิศทาง + ประเด็น';
+    }
+  });
+
+  render();
+})();
+</script>
+
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const viewport = document.getElementById('viewport');
+  const scroller = document.getElementById('scroller');
+  const slides = [...stage.querySelectorAll('section.slide')];
+  const W = 1600, H = 900;
+  let idx = 0, mode = 'page';
+
+  // ห่อเนื้อหาในแต่ละสไลด์ เพื่อย่ออัตโนมัติเมื่อเนื้อหาสูงเกินกรอบ
+  slides.forEach(sl => {
+    const cs = getComputedStyle(sl);
+    const inner = document.createElement('div');
+    inner.className = 'slide-inner';
+    // ถ้าตัวสไลด์เองเป็น grid/flex ต้องย้าย layout ไปไว้ที่ inner ไม่งั้นคอลัมน์จะยุบ
+    if (cs.display === 'grid' || cs.display === 'flex') {
+      ['display','gridTemplateColumns','gridTemplateRows','gridAutoFlow','gap','rowGap','columnGap',
+       'alignItems','justifyItems','alignContent','justifyContent','placeItems','flexDirection','flexWrap']
+        .forEach(k => { inner.style[k] = cs[k]; });
+      inner.style.height = '100%';
+      sl.style.display = 'block';
+    }
+    while (sl.firstChild) inner.appendChild(sl.firstChild);
+    sl.appendChild(inner);
+  });
+
+  function fitContent(sl) {
+    const inner = sl.querySelector('.slide-inner');
+    if (!inner) return;
+    const cs = getComputedStyle(sl);
+    const availH = H - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    inner.style.transform = 'none';
+    inner.style.width = '100%';
+    inner.style.marginTop = '0px';
+    let k = 1;
+    // วัดซ้ำ เพราะพอย่อแล้วความกว้างเปลี่ยน ความสูงของเนื้อหาจะเปลี่ยนตาม
+    for (let pass = 0; pass < 3; pass++) {
+      const rendered = inner.scrollHeight * k;   // ความสูงจริงบนสไลด์หลังย่อ
+      if (rendered <= availH + 1) break;
+      k = Math.max(.6, k * (availH / rendered));
+      inner.style.width = (100 / k) + '%';
+      inner.style.transform = 'scale(' + k + ')';
+    }
+    // ถ้าเนื้อหาสั้นกว่ากรอบมาก ให้ดันลงมาให้สมดุล ไม่ลอยติดขอบบน
+    const finalH = inner.scrollHeight * k;
+    const slack = availH - finalH;
+    if (slack > 70) inner.style.marginTop = Math.round(slack * 0.42) + 'px';
+  }
+
+  function layout() {
+    const vw = viewport.clientWidth, vh = viewport.clientHeight;
+    const s = mode === 'page' ? Math.min(vw / W, vh / H) : vw / W;
+    stage.style.transform = 'scale(' + s + ')';
+    stage.style.left = Math.max(0, (vw - W * s) / 2) + 'px';
+    scroller.style.height = (H * s) + 'px';
+  }
+
+  function show(i) {
+    idx = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach((sl, n) => sl.classList.toggle('active', n === idx));
+    document.getElementById('pNow').textContent = idx + 1;
+    [...document.querySelectorAll('.pitem')].forEach((el, n) => el.classList.toggle('on', n === idx));
+    fitContent(slides[idx]);
+    viewport.scrollTop = 0;
+    try { if (location.hash.slice(1) !== slides[idx].id) history.replaceState(null, '', '#' + slides[idx].id); } catch (e) { /* preview แบบ sandbox เปลี่ยน URL ไม่ได้ ข้ามไป */ }
+  }
+
+  // เมนูรายการสไลด์
+  const list = document.getElementById('drawerList');
+  slides.forEach((sl, n) => {
+    const t = sl.querySelector('h2') || sl.querySelector('h1');
+    const label = t ? t.textContent.replace(/\s+/g, ' ').trim().slice(0, 46) : ('สไลด์ ' + (n + 1));
+    const el = document.createElement('div');
+    el.className = 'pitem';
+    el.innerHTML = '<i>' + String(n + 1).padStart(2, '0') + '</i><span></span>';
+    el.querySelector('span').textContent = label;
+    el.onclick = () => { show(n); closeDrawer(); };
+    list.appendChild(el);
+  });
+  document.getElementById('pAll').textContent = slides.length;
+
+  const drawer = document.getElementById('drawer'), mask = document.getElementById('mask');
+  const closeDrawer = () => { drawer.classList.remove('open'); mask.classList.remove('on'); };
+  document.getElementById('btnMenu').onclick = () => { drawer.classList.toggle('open'); mask.classList.toggle('on'); };
+  mask.onclick = closeDrawer;
+
+  const bw = document.getElementById('btnFitW'), bp = document.getElementById('btnFitP');
+  bw.onclick = () => { mode = 'width'; bw.classList.add('active'); bp.classList.remove('active'); layout(); };
+  bp.onclick = () => { mode = 'page'; bp.classList.add('active'); bw.classList.remove('active'); layout(); };
+  document.getElementById('btnPdf').onclick = () => { try { window.print(); } catch (e) {} };
+  document.getElementById('btnFull').onclick = () => {
+    try {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+      else document.exitFullscreen?.();
+    } catch (e) { /* บางสภาพแวดล้อมไม่อนุญาตเต็มจอ */ }
+  };
+  document.getElementById('btnPrev').onclick = () => show(idx - 1);
+  document.getElementById('btnNext').onclick = () => show(idx + 1);
+
+  addEventListener('keydown', e => {
+    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { show(idx + 1); e.preventDefault(); }
+    else if (['ArrowLeft', 'PageUp'].includes(e.key)) { show(idx - 1); e.preventDefault(); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'Escape') closeDrawer();
+  });
+
+  addEventListener('resize', () => { layout(); fitContent(slides[idx]); });
+
+  let start = -1;
+  try { start = slides.findIndex(sl => sl.id === location.hash.slice(1)); } catch (e) { start = -1; }
+  layout();
+  show(start > 0 ? start : 0);
+  setTimeout(() => { layout(); fitContent(slides[idx]); }, 350);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitContent(slides[idx]));
+})();
+</script>
+</body>
+</html>
