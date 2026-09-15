@@ -233,11 +233,17 @@ main{flex:1;overflow:auto;padding:18px;min-width:0;display:flex;flex-direction:c
 
 /* พิมพ์ / PDF — ทุกสไลด์ขนาดจริงหน้าละแผ่น */
 @media print{
-  html,body{height:auto;overflow:visible;display:block;background:#fff}
+  /* พิมพ์สี เส้น พื้นหลัง ตรงตามจอ (ไม่ขึ้นกับตัวเลือก "กราฟิกพื้นหลัง" ของเบราว์เซอร์) และหยุดแอนิเมชัน */
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;transition:none!important;animation:none!important}
+  /* เงาเบลอและเอฟเฟกต์โปร่งแสงแปลงลง PDF แล้วเป็นกรอบสี่เหลี่ยมซ้อน — ตัดออกตอนพิมพ์ (ไฟล์ส่งลูกค้าใช้ export.js ที่สร้างจากภาพ) */
+  *{box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;filter:none!important}
+  html,body{height:auto;overflow:visible;display:block;background:#F3F7FD}
   header.bar,nav,.edge,.scrim,.hint{display:none!important}
   .body,main{display:block;overflow:visible;padding:0}
-  .slidewrap{display:block!important;width:auto!important;height:auto!important;margin:0!important;break-after:page}
-  .sheet{transform:none!important;border-radius:0;box-shadow:none}
+  /* ทุกหน้าขนาดเท่ากัน 16:9 */
+  .slidewrap{display:block!important;width:1800px!important;height:1013px!important;margin:0!important;overflow:hidden;break-after:page;page-break-after:always}
+  .slidewrap:last-of-type{break-after:auto;page-break-after:auto}
+  .sheet{transform:none!important;border-radius:0!important;box-shadow:none!important;height:1013px!important;min-height:1013px}
   @page{size:1800px 1013px;margin:0}
 }
 
