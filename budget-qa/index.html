@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ถาม–ตอบ รัน Budget</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230E4CA8'/><text x='32' y='44' font-size='32' font-family='Arial' font-weight='700' fill='%23DDF956' text-anchor='middle'>?</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap">
+<style>
+:root{--deep:#0E4CA8;--pri:#1466DE;--sky:#2E9CE8;--pale:#EAF2FE;--lime:#DDF956;--ink:#2A3346;--mut:#55617A;--mut2:#8A93A6;
+--line:#D5E3FB;--bg:#F3F7FD;--card:#fff;--ok:#0F7350;--okbg:#E4F4EE;--warn:#A3361F;--warnbg:#FFF1ED;--yr:#8A5A00;--yrbg:#FFF7E6;
+--code:#0F1B33;--codet:#E8EEF8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:200px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Sarabun,system-ui,sans-serif;font-size:17px;line-height:1.6}
+a{color:var(--pri)}
+header{position:sticky;top:0;z-index:5;background:var(--deep);color:#fff;box-shadow:0 4px 18px rgba(14,76,168,.25)}
+.hin{max-width:1400px;margin:0 auto;padding:14px 20px 12px}
+.ttl{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.ttl h1{margin:0;font-size:24px;font-weight:800;letter-spacing:.01em}
+.ttl .sub{font-size:14.5px;color:#B7CBEA}
+.ttl .nav{margin-left:auto;font-size:14.5px}
+.ttl .nav a{color:var(--lime);text-decoration:none;margin-left:14px}
+.srow{display:flex;gap:10px;margin-top:10px;align-items:center}
+#q{flex:1;min-width:0;font:inherit;font-size:19px;padding:11px 16px;border-radius:14px;border:2px solid transparent;outline:none;background:#fff;color:var(--ink)}
+#q:focus{border-color:var(--lime)}
+.srow button{font:inherit;font-size:14.5px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;
+  border-radius:12px;padding:9px 14px;cursor:pointer;white-space:nowrap}
+#cnt{font-size:14.5px;color:#DCE8F8;white-space:nowrap;min-width:92px;text-align:right}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{font:inherit;font-size:14px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#DCE8F8;border-radius:20px;padding:4px 13px;cursor:pointer}
+.chip.on{background:var(--lime);color:#3D4F06;border-color:var(--lime);font-weight:700}
+.wrap{max-width:1400px;margin:0 auto;padding:18px 20px 60px;display:grid;grid-template-columns:300px 1fr;gap:26px}
+aside{position:sticky;top:170px;align-self:start;max-height:calc(100vh - 190px);overflow:auto;font-size:14.5px;padding-right:6px}
+.tc{margin-bottom:14px}
+.tch{font-weight:800;color:var(--deep);margin-bottom:4px;font-size:15px}
+.tc a{display:block;color:var(--mut);text-decoration:none;padding:3px 8px;border-radius:8px;line-height:1.4}
+.tc a:hover,.tc a.cur{background:var(--pale);color:var(--deep)}
+.tc a.hide{display:none}
+main{min-width:0}
+.cat h2{font-size:22px;color:var(--deep);margin:26px 0 10px;display:flex;align-items:center;gap:10px}
+.cat h2 small{font-size:13px;background:var(--pale);color:var(--pri);border-radius:20px;padding:1px 10px;font-weight:700}
+.cat:first-child h2{margin-top:4px}
+.qa{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:10px;box-shadow:0 4px 14px rgba(20,102,222,.05)}
+.qa[open]{border-color:#9DBEF5;box-shadow:0 8px 24px rgba(20,102,222,.10)}
+.qa.flash{animation:fl 1.6s ease}
+@keyframes fl{0%{box-shadow:0 0 0 4px var(--lime)}100%{box-shadow:0 8px 24px rgba(20,102,222,.10)}}
+summary{list-style:none;cursor:pointer;padding:13px 18px;display:flex;gap:12px;align-items:flex-start}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"›";font-size:22px;line-height:1.1;color:var(--pri);font-weight:800;transition:transform .15s;flex:none;width:12px}
+.qa[open] summary::before{transform:rotate(90deg)}
+.qt{flex:1;font-size:18.5px;font-weight:700;color:var(--ink)}
+.qt code{font-size:15px}
+.lk{flex:none;color:var(--mut2);text-decoration:none;font-weight:800;opacity:0;padding:0 4px}
+summary:hover .lk{opacity:1}
+mark{background:var(--lime);color:inherit;border-radius:3px;padding:0 1px}
+.ans{padding:0 22px 18px 42px}
+.ans p{margin:8px 0}
+.ans ul,.ans ol{margin:8px 0;padding-left:24px}
+.ans li{margin:3px 0}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14.5px;background:var(--pale);color:var(--deep);border-radius:6px;padding:1px 6px}
+.code{position:relative;margin:10px 0}
+.code pre{margin:0;background:var(--code);color:var(--codet);border-radius:14px;padding:16px 18px;overflow:auto;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14.5px;line-height:1.6}
+.code .k{color:#84AFFB;font-weight:700}
+.code .s{color:var(--lime)}
+.code .c{color:#8FA3C8;font-family:Sarabun,sans-serif;font-size:14.5px}
+.copy{position:absolute;top:8px;right:8px;font:inherit;font-size:13px;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);
+  border-radius:9px;padding:3px 11px;cursor:pointer}
+.copy.done{background:var(--lime);color:#3D4F06}
+.box{border-radius:12px;padding:10px 14px;margin:10px 0;font-size:16px;background:#F7F9FC;border:1px solid var(--line);color:var(--mut)}
+.box .bl{display:block;font-size:12.5px;font-weight:800;letter-spacing:.04em;margin-bottom:2px}
+.box.ok{background:var(--okbg);border-color:#9FD8C1;color:var(--ok)}
+.box.warn{background:var(--warnbg);border-color:#FFC0AF;color:var(--warn)}
+.box.year{background:var(--yrbg);border-color:#F5C77A;color:var(--yr)}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:12.5px;color:var(--mut2);border:1px solid var(--line);border-radius:20px;padding:0 9px}
+#none{display:none;text-align:center;color:var(--mut);padding:40px 10px;font-size:18px}
+footer{max-width:1400px;margin:0 auto;padding:0 20px 40px;color:var(--mut2);font-size:14px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr;padding:12px 12px 40px}aside{display:none}.ans{padding:0 14px 14px 16px}
+  html{scroll-padding-top:150px}.hin{padding:10px 12px}.ttl h1{font-size:20px}.ttl .sub,.ttl .nav,#openall,#closeall{display:none}
+  .srow{margin-top:8px}#q{font-size:16px;padding:9px 12px}#cnt{min-width:0;font-size:13px}
+  .chips{flex-wrap:nowrap;overflow-x:auto;margin-top:8px;padding-bottom:2px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+  .chip{flex:none}.qt{font-size:17px}summary{padding:12px 14px}}
+@media print{header,aside,.copy,.lk{display:none}.wrap{display:block}.qa{break-inside:avoid;box-shadow:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<header><div class="hin">
+  <div class="ttl"><h1>ถาม–ตอบ รัน Budget</h1><span class="sub">คำสั่งเช็ค · วิธีตรวจ · ปัญหาที่เคยเจอ · 49 ข้อ</span>
+    <span class="nav"><a href="../budget-deck/">ชุดนำเสนอ</a></span></div>
+  <div class="srow"><input id="q" type="search" placeholder="พิมพ์อาการ ข้อความ error ชื่อตาราง หรือรหัส เช่น ราคาวัตถุดิบไม่ครบ · TRANCOUNT · config · L5   (กด / เพื่อค้นหา)" autocomplete="off">
+    <span id="cnt"></span><button id="openall" type="button">เปิดทั้งหมด</button><button id="closeall" type="button">ปิดทั้งหมด</button></div>
+  <div class="chips"><button class="chip on" data-cat="">ทั้งหมด</button><button class="chip" data-cat="0">เริ่มต้น</button><button class="chip" data-cat="1">ความปลอดภัยใน SSMS</button><button class="chip" data-cat="2">ตรวจความพร้อมก่อนคิดต้นทุน</button><button class="chip" data-cat="3">ค่าใช้จ่ายและกติกาการปัน</button><button class="chip" data-cat="4">ฐานและอัตรา</button><button class="chip" data-cat="5">คิดต้นทุนและตรวจส่วนต่าง</button><button class="chip" data-cat="6">ข้อความ error ที่เจอบ่อย</button><button class="chip" data-cat="7">เรื่องค้างและข้อควรรู้</button></div>
+</div></header>
+<div class="wrap">
+  <aside><div class="tc" data-cat="0"><div class="tch">เริ่มต้น</div><a href="#cost-formula" data-id="cost-formula">ต้นทุนต่อ kg ของสินค้าคิดมาจากอะไร</a><a href="#yearly-steps" data-id="yearly-steps">ทุกปีต้องทำอะไรบ้าง ตามลำดับ</a><a href="#new-year" data-id="new-year">ปีใหม่ต้องแก้อะไรในสคริปต์ก่อนใช้</a><a href="#buttons" data-id="buttons">ปุ่มในโปรแกรมรัน budget ตรงกับคำสั่งอะไร</a><a href="#files" data-id="files">ไฟล์และโฟลเดอร์อยู่ที่ไหน</a></div><div class="tc" data-cat="1"><div class="tch">ความปลอดภัยใน SSMS</div><a href="#trancount" data-id="trancount">@@TRANCOUNT ไม่เป็น 0 / แก้แล้วคนอื่นไม่เห็น ทำยังไง</a><a href="#backup" data-id="backup">สำรองตารางก่อนแก้ทำยังไง</a><a href="#safe-edit" data-id="safe-edit">แก้ข้อมูลอย่างปลอดภัยทำยังไง</a></div><div class="tc" data-cat="2"><div class="tch">ตรวจความพร้อมก่อนคิดต้นทุน</div><a href="#precheck" data-id="precheck">จะรู้ได้ยังไงว่าสินค้าตัวไหนจะรันไม่ผ่าน</a><a href="#precheck-codes" data-id="precheck-codes">รหัสปัญหาใน PreRunCost แปลว่าอะไร</a><a href="#no-price" data-id="no-price">Run Cost หยุด "ราคาวัตถุดิบไม่ครบ , รหัส…"</a><a href="#zero-price" data-id="zero-price">ราคาเป็น 0 ถือว่ามีราคาไหม</a><a href="#silent-fail" data-id="silent-fail">Semi ค้าง ไม่มีต้นทุน แต่ไม่มี error อะไรเลย</a><a href="#cannot-cal" data-id="cannot-cal">ขึ้น "Can not cal" ทั้งที่ DM ครบ</a><a href="#routing" data-id="routing">ตรวจ BOM และ Routing ของสินค้าหนึ่งตัว</a><a href="#mg-manhead" data-id="mg-manhead">ตรวจกลุ่มเครื่อง (MG) และจำนวนคนต่อกะ</a><a href="#no-cost-fg" data-id="no-cost-fg">สินค้าในแผนขายตัวไหนยังไม่มีต้นทุน</a></div><div class="tc" data-cat="3"><div class="tch">ค่าใช้จ่ายและกติกาการปัน</div><a href="#check-oh-alloc" data-id="check-oh-alloc">ตรวจค่าใช้จ่ายและ config ทั้งหมดในคำสั่งเดียว</a><a href="#expense-total" data-id="expense-total">ยอดค่าใช้จ่ายในระบบรวมเท่าไร ตรงกับไฟล์บัญชีไหม</a><a href="#old-period" data-id="old-period">มีค่าใช้จ่ายปีเก่าค้างอยู่ไหม</a><a href="#amount-bad" data-id="amount-bad">ค่า Amount ไม่ใช่ตัวเลข</a><a href="#dup-expense" data-id="dup-expense">มีแถวค่าใช้จ่ายซ้ำไหม</a><a href="#no-config" data-id="no-config">บัญชี-แผนกคู่ไหนยังไม่มี config</a><a href="#view-config" data-id="view-config">ดู config ของบัญชี/แผนกหนึ่ง</a><a href="#new-config" data-id="new-config">มีแผนกหรือบัญชีใหม่ ต้องตั้ง config ยังไง</a><a href="#ratio-sum" data-id="ratio-sum">Ratio รวมไม่เท่า 1 / config มีแถวซ้ำ</a><a href="#no-wc" data-id="no-wc">แผนกปลายทางไม่มี WC (เงินหายเงียบ)</a></div><div class="tc" data-cat="4"><div class="tch">ฐานและอัตรา</div><a href="#base" data-id="base">ฐานของแต่ละ WC (ชั่วโมงเครื่อง / กก. / ชั่วโมงคน) ดูยังไง</a><a href="#expected-rate" data-id="expected-rate">อัตราที่ควรได้ คำนวณมือยังไง</a><a href="#set-rates" data-id="set-rates">ตั้งอัตรายังไง (ห้ามกด Allocate Main)</a><a href="#allocate-bug" data-id="allocate-bug">กด Allocate Main ขึ้น "เสร็จสิ้น" แต่ส่วนต่างเท่าเดิม</a><a href="#rates-saved" data-id="rates-saved">เช็คว่าอัตราถูกบันทึกจริง</a><a href="#mg-norate" data-id="mg-norate">MG ไหนยังไม่มีแถวอัตรา (สินค้าได้ DL/OH = 0)</a><a href="#fixvar" data-id="fixvar">OHFix + OHVar ไม่เท่า OHRate</a><a href="#wc-noexpense" data-id="wc-noexpense">WC มีการผลิต แต่อัตรา = 0</a></div><div class="tc" data-cat="5"><div class="tch">คิดต้นทุนและตรวจส่วนต่าง</div><a href="#run-cost" data-id="run-cost">รันต้นทุนยังไง Reset กับ Run Cost 2 ต่างกันยังไง</a><a href="#read-diff" data-id="read-diff">อ่านผล GetDiffAllocation ยังไง</a><a href="#diff-pattern" data-id="diff-pattern">ส่วนต่างเป็นแบบนี้ แปลว่าอะไร</a><a href="#find-diff-row" data-id="find-diff-row">DiffAmt บวกบรรทัดเดียว หาว่ามาจากแถวไหน</a><a href="#item-cost" data-id="item-cost">ดูต้นทุนของสินค้า 1 ตัว</a><a href="#item-check" data-id="item-check">ตรวจต้นทุนแปรสภาพของสินค้าด้วยมือ</a></div><div class="tc" data-cat="6"><div class="tch">ข้อความ error ที่เจอบ่อย</div><a href="#err-config" data-id="err-config">"พบผังบัญชีในค่าใช้จ่ายที่ไม่ได้ config [cost.configratio]"</a><a href="#err-price" data-id="err-price">"ราคาวัตถุดิบไม่ครบ , &lt;รหัส&gt;"</a><a href="#err-varchar" data-id="err-varchar">"Operand data type varchar is invalid for sum operator"</a><a href="#err-div0" data-id="err-div0">"Divide by zero error encountered"</a><a href="#err-cannotcal" data-id="err-cannotcal">"Can not cal"</a></div><div class="tc" data-cat="7"><div class="tch">เรื่องค้างและข้อควรรู้</div><a href="#tool-status" data-id="tool-status">เครื่องมือตัวไหนเคยใช้จริงแล้ว</a><a href="#unknowns" data-id="unknowns">ยังไม่เคยเห็นโค้ดของอะไรบ้าง</a><a href="#how-to-debug" data-id="how-to-debug">เจอปัญหาใหม่ที่ไม่มีในนี้ หาเองยังไง</a></div></aside>
+  <main><section class="cat" data-cat="0"><h2>เริ่มต้น <small>5</small></h2><details class="qa" id="cost-formula" data-cat="0" data-hay="ต้นทุนต่อ kg ของสินค้าคิดมาจากอะไร สูตร, dm, dl, oh, ต้นทุนต่อ kg, คิดยังไง ต้นทุนต่อ kg ของสินค้าคิดมาจากอะไร ต้นทุนต่อ kg = **dm + dl + oh** **dm (วัตถุดิบ)** = สูตรการผลิต (bom) × ราคาวัตถุดิบ ไล่จากชั้นล่างสุดขึ้นมา **dl (ค่าแรง)** = อัตราค่าแรง × ชั่วโมงคนที่ใช้ผลิต 1 kg **oh (ค่าใช้จ่ายการผลิต)** = อัตรา × ชั่วโมงเครื่องต่อ kg (แบบชั่วโมง) + อัตราต่อ kg (แบบกิโล) อัตรา dl/oh ได้จากการ **ปันค่าใช้จ่ายทั้งปี** ลงเครื่องจักร: อัตรา = ค่าใช้จ่ายของ wc ÷ ฐานของ wc (ชั่วโมงเครื่อง / กก. / ชั่วโมงคน) อ่านภาพรวมแบบมีรูปได้ที่ [ชุดนำเสนอ หน้า 2–11](../budget-deck/index.html#goal)">
+<summary><span class="qt" data-raw="ต้นทุนต่อ kg ของสินค้าคิดมาจากอะไร">ต้นทุนต่อ kg ของสินค้าคิดมาจากอะไร</span><a class="lk" href="#cost-formula" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>ต้นทุนต่อ kg = <b>DM + DL + OH</b></p><ul><li><b>DM (วัตถุดิบ)</b> = สูตรการผลิต (BOM) × ราคาวัตถุดิบ ไล่จากชั้นล่างสุดขึ้นมา</li><li><b>DL (ค่าแรง)</b> = อัตราค่าแรง × ชั่วโมงคนที่ใช้ผลิต 1 kg</li><li><b>OH (ค่าใช้จ่ายการผลิต)</b> = อัตรา × ชั่วโมงเครื่องต่อ kg (แบบชั่วโมง) + อัตราต่อ kg (แบบกิโล)</li></ul><p>อัตรา DL/OH ได้จากการ <b>ปันค่าใช้จ่ายทั้งปี</b> ลงเครื่องจักร: อัตรา = ค่าใช้จ่ายของ WC ÷ ฐานของ WC (ชั่วโมงเครื่อง / กก. / ชั่วโมงคน)</p><div class="box note">อ่านภาพรวมแบบมีรูปได้ที่ <a href="../budget-deck/index.html#goal" target=_blank>ชุดนำเสนอ หน้า 2–11</a></div><div class="tags"><span>สูตร</span><span>DM</span><span>DL</span><span>OH</span><span>ต้นทุนต่อ kg</span><span>คิดยังไง</span></div></div>
+</details><details class="qa" id="yearly-steps" data-cat="0" data-hay="ทุกปีต้องทำอะไรบ้าง ตามลำดับ ลำดับ, ขั้นตอน, เริ่มยังไง, runbook, checklist, เช็คลิสต์ ทุกปีต้องทำอะไรบ้าง ตามลำดับ **เตรียมข้อมูล + แตกสูตร** — ปุ่ม update rt → trafer data → run dm · ผ่านเมื่อแท็บ result ว่าง **ตรวจความพร้อมก่อนคิดต้นทุน** — `exec chk.preruncost @erroronly = 1;` · ผ่านเมื่อไม่มีแถว error ([ดูข้อนี้](#precheck)) **โหลดค่าใช้จ่าย + กติกาการปัน** — เมนู template (ค่าใช้จ่าย · acc ratio · ocrcode wc) **ตรวจค่าใช้จ่ายและการปัน** — `sql/alloc/check_oh_alloc.sql` · ผ่านเมื่อไม่มีระดับ 1 และ 2 ([ดูข้อนี้](#check-oh-alloc)) **สร้างฐาน** — `exec bg.createmguse; exec bg.createtableratemas;` (= ปุ่ม predata) **ตั้งอัตรา** — ใช้คำสั่ง `&#x27;n&#x27;` ห้ามกดปุ่ม allocate main ([ดูข้อนี้](#set-rates)) **คิดต้นทุน** — `exec bg.caldmbudget3 &#x27;2028&#x27;, &#x27;y&#x27;;` **ตรวจส่วนต่าง** — `exec bg.getdiffallocation;` · ผ่านเมื่อ diffamt ทุกบรรทัดไม่เกิน ±200 ([ดูข้อนี้](#read-diff)) **ออกรายงาน + จดปัญหาใหม่** ลงไฟล์นี้ แก้ข้อมูลตั้งต้น (bom, routing, แผนขาย, คนต่อกะ, ราคา) หลังขั้น 6 เมื่อไร ต้องย้อนกลับไปขั้น 5 → 6 → 7 ใหม่ ไม่งั้นส่วนต่างจะไม่เป็น 0 ภาพเดียวกันแบบการ์ด: [ชุดนำเสนอ หน้า 16](../budget-deck/index.html#flow)">
+<summary><span class="qt" data-raw="ทุกปีต้องทำอะไรบ้าง ตามลำดับ">ทุกปีต้องทำอะไรบ้าง ตามลำดับ</span><a class="lk" href="#yearly-steps" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><ol><li><b>เตรียมข้อมูล + แตกสูตร</b> — ปุ่ม Update RT → Trafer Data → Run DM · ผ่านเมื่อแท็บ Result ว่าง</li><li><b>ตรวจความพร้อมก่อนคิดต้นทุน</b> — <code>EXEC chk.PreRunCost @ErrorOnly = 1;</code> · ผ่านเมื่อไม่มีแถว ERROR (<a href="#precheck">ดูข้อนี้</a>)</li><li><b>โหลดค่าใช้จ่าย + กติกาการปัน</b> — เมนู Template (ค่าใช้จ่าย · Acc Ratio · Ocrcode WC)</li><li><b>ตรวจค่าใช้จ่ายและการปัน</b> — <code>sql/alloc/check_oh_alloc.sql</code> · ผ่านเมื่อไม่มีระดับ 1 และ 2 (<a href="#check-oh-alloc">ดูข้อนี้</a>)</li><li><b>สร้างฐาน</b> — <code>EXEC bg.CreateMGUse; EXEC bg.CreateTableRateMas;</code> (= ปุ่ม PreData)</li><li><b>ตั้งอัตรา</b> — ใช้คำสั่ง <code>'N'</code> ห้ามกดปุ่ม Allocate Main (<a href="#set-rates">ดูข้อนี้</a>)</li><li><b>คิดต้นทุน</b> — <code>EXEC bg.CalDMBudget3 '2028', 'Y';</code></li><li><b>ตรวจส่วนต่าง</b> — <code>EXEC bg.GetDiffAllocation;</code> · ผ่านเมื่อ DiffAmt ทุกบรรทัดไม่เกิน ±200 (<a href="#read-diff">ดูข้อนี้</a>)</li><li><b>ออกรายงาน + จดปัญหาใหม่</b> ลงไฟล์นี้</li></ol><div class="box warn"><span class="bl">ระวัง</span>แก้ข้อมูลตั้งต้น (BOM, Routing, แผนขาย, คนต่อกะ, ราคา) หลังขั้น 6 เมื่อไร ต้องย้อนกลับไปขั้น 5 → 6 → 7 ใหม่ ไม่งั้นส่วนต่างจะไม่เป็น 0</div><div class="box note">ภาพเดียวกันแบบการ์ด: <a href="../budget-deck/index.html#flow" target=_blank>ชุดนำเสนอ หน้า 16</a></div><div class="tags"><span>ลำดับ</span><span>ขั้นตอน</span><span>เริ่มยังไง</span><span>runbook</span><span>checklist</span><span>เช็คลิสต์</span></div></div>
+</details><details class="qa" id="new-year" data-cat="0" data-hay="ปีใหม่ต้องแก้อะไรในสคริปต์ก่อนใช้ 2027, 2028, ปีใหม่, เปลี่ยนปี, @period ปีใหม่ต้องแก้อะไรในสคริปต์ก่อนใช้ สคริปต์ปีนี้เขียนเลขปี 2027 ไว้ในหลายที่ ก่อนใช้ปีหน้าให้: คัดลอก `sql/alloc/run_rates_2027.sql` เป็นไฟล์ปีใหม่ (เช่น `run_rates_2028.sql`) ค้นคำว่า **2027** ในไฟล์ที่จะใช้ แล้วแทนด้วยปีใหม่ (รวมถึงชื่อตาราง backup เช่น `_bak18092026`) ใน `sql/alloc/check_oh_alloc.sql` แก้บรรทัด `declare @period varchar(10) = &#x27;2027&#x27;;` ในคำสั่งคิดต้นทุนใช้ `exec bg.caldmbudget3 &#x27;2028&#x27;, &#x27;y&#x27;;`">
+<summary><span class="qt" data-raw="ปีใหม่ต้องแก้อะไรในสคริปต์ก่อนใช้">ปีใหม่ต้องแก้อะไรในสคริปต์ก่อนใช้</span><a class="lk" href="#new-year" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>สคริปต์ปีนี้เขียนเลขปี 2027 ไว้ในหลายที่ ก่อนใช้ปีหน้าให้:</p><ol><li>คัดลอก <code>sql/alloc/run_rates_2027.sql</code> เป็นไฟล์ปีใหม่ (เช่น <code>run_rates_2028.sql</code>)</li><li>ค้นคำว่า <b>2027</b> ในไฟล์ที่จะใช้ แล้วแทนด้วยปีใหม่ (รวมถึงชื่อตาราง backup เช่น <code>_bak18092026</code>)</li><li>ใน <code>sql/alloc/check_oh_alloc.sql</code> แก้บรรทัด <code>DECLARE @Period varchar(10) = '2027';</code></li><li>ในคำสั่งคิดต้นทุนใช้ <code>EXEC bg.CalDMBudget3 '2028', 'Y';</code></li></ol><div class="tags"><span>2027</span><span>2028</span><span>ปีใหม่</span><span>เปลี่ยนปี</span><span>@Period</span></div></div>
+</details><details class="qa" id="buttons" data-cat="0" data-hay="ปุ่มในโปรแกรมรัน budget ตรงกับคำสั่งอะไร ปุ่ม, หน้าจอ, allocate main, predata, run dm, reset and run cost, run cost 2, diff allocation, update rt, trafer data ปุ่มในโปรแกรมรัน budget ตรงกับคำสั่งอะไร **update rt** — ตั้งเครื่องที่ใช้คิดต้นทุน (routing priority 1) **trafer data** — ดึงสินค้า / bom / routing มาเป็น `bt_itembomall` **run dm** — `bg.getdm` แตกแผนขายลงไปจนถึงวัตถุดิบ **predata** — `bg.createmguse` + `bg.createtableratemas` สร้างฐานชั่วโมง/กก. **allocate main** — `bg.calrate` ⚠️ **ไม่บันทึกอัตรา** (ดู [ข้อนี้](#allocate-bug)) **allocate fix / var** — `bg.calrate_varfix &#x27;fix&#x27;` / `&#x27;var&#x27;` **reset and run cost 1** — `bg.caldmbudget3 &#x27;&lt;ปี&gt;&#x27;, &#x27;y&#x27;` ล้างผลเดิมแล้วคิดใหม่ทั้งหมด **run cost 2 (ต่อ)** — คิดต่อเฉพาะตัวที่ยังไม่มีต้นทุน (ตัวที่คิดแล้วใช้ค่าเดิม) **diff allocation** — `bg.getdiffallocation` ตรวจส่วนต่าง (อ่านอย่างเดียว)">
+<summary><span class="qt" data-raw="ปุ่มในโปรแกรมรัน budget ตรงกับคำสั่งอะไร">ปุ่มในโปรแกรมรัน budget ตรงกับคำสั่งอะไร</span><a class="lk" href="#buttons" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><ul><li><b>Update RT</b> — ตั้งเครื่องที่ใช้คิดต้นทุน (Routing Priority 1)</li><li><b>Trafer Data</b> — ดึงสินค้า / BOM / Routing มาเป็น <code>BT_ItemBomAll</code></li><li><b>Run DM</b> — <code>bg.GetDM</code> แตกแผนขายลงไปจนถึงวัตถุดิบ</li><li><b>PreData</b> — <code>bg.CreateMGUse</code> + <code>bg.CreateTableRateMas</code> สร้างฐานชั่วโมง/กก.</li><li><b>Allocate Main</b> — <code>bg.CalRate</code> ⚠️ <b>ไม่บันทึกอัตรา</b> (ดู <a href="#allocate-bug">ข้อนี้</a>)</li><li><b>Allocate Fix / Var</b> — <code>bg.CalRate_VarFix 'FIX'</code> / <code>'VAR'</code></li><li><b>Reset and Run Cost 1</b> — <code>bg.CalDMBudget3 '&lt;ปี&gt;', 'Y'</code> ล้างผลเดิมแล้วคิดใหม่ทั้งหมด</li><li><b>Run Cost 2 (ต่อ)</b> — คิดต่อเฉพาะตัวที่ยังไม่มีต้นทุน (ตัวที่คิดแล้วใช้ค่าเดิม)</li><li><b>Diff Allocation</b> — <code>bg.GetDiffAllocation</code> ตรวจส่วนต่าง (อ่านอย่างเดียว)</li></ul><div class="tags"><span>ปุ่ม</span><span>หน้าจอ</span><span>Allocate Main</span><span>PreData</span><span>Run DM</span><span>Reset and Run Cost</span><span>Run Cost 2</span><span>Diff Allocation</span><span>Update RT</span><span>Trafer Data</span></div></div>
+</details><details class="qa" id="files" data-cat="0" data-hay="ไฟล์และโฟลเดอร์อยู่ที่ไหน โฟลเดอร์, ไฟล์, อยู่ไหน, readme, handoff ไฟล์และโฟลเดอร์อยู่ที่ไหน `sql/alloc/` — คำสั่งตรวจค่าใช้จ่าย / ตั้งอัตรา (ใช้บ่อยสุด) `sql/precheck/` — ตรวจความพร้อมก่อนคิดต้นทุน `data/` — ไฟล์ที่ export จากระบบ (`run-results/` = ผลรันจริง) `procs-source/` — โค้ดจริงของ stored procedure (ใช้ค้นข้อความ error) `budget-deck/index.html` — ชุดนำเสนอ · `handoff.md` — สถานะล่าสุด · `knowledge_ฐานข้อมูลงบประมาณ.md` — รายละเอียดเทคนิค">
+<summary><span class="qt" data-raw="ไฟล์และโฟลเดอร์อยู่ที่ไหน">ไฟล์และโฟลเดอร์อยู่ที่ไหน</span><a class="lk" href="#files" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><ul><li><code>sql/alloc/</code> — คำสั่งตรวจค่าใช้จ่าย / ตั้งอัตรา (ใช้บ่อยสุด)</li><li><code>sql/precheck/</code> — ตรวจความพร้อมก่อนคิดต้นทุน</li><li><code>data/</code> — ไฟล์ที่ export จากระบบ (<code>run-results/</code> = ผลรันจริง)</li><li><code>procs-source/</code> — โค้ดจริงของ stored procedure (ใช้ค้นข้อความ error)</li><li><code>budget-deck/index.html</code> — ชุดนำเสนอ · <code>HANDOFF.md</code> — สถานะล่าสุด · <code>KNOWLEDGE_ฐานข้อมูลงบประมาณ.md</code> — รายละเอียดเทคนิค</li></ul><div class="tags"><span>โฟลเดอร์</span><span>ไฟล์</span><span>อยู่ไหน</span><span>README</span><span>HANDOFF</span></div></div>
+</details></section><section class="cat" data-cat="1"><h2>ความปลอดภัยใน SSMS <small>3</small></h2><details class="qa" id="trancount" data-cat="1" data-hay="@@trancount ไม่เป็น 0 / แก้แล้วคนอื่นไม่เห็น ทำยังไง trancount, transaction, ทรานค้าง, commit, implicit, ไม่เห็นข้อมูล, ล็อก, ค้าง @@trancount ไม่เป็น 0 / แก้แล้วคนอื่นไม่เห็น ทำยังไง ssms ที่ใช้อยู่เปิดโหมด **implicit transaction** ไว้ ทุกคำสั่ง (แม้แต่ select) จะเปิดทรานให้เองและค้างไว้จนกว่าจะสั่ง commit ถ้าปิดหน้าต่างไป งานที่ทำอาจหายหมด และระหว่างนั้นตารางถูกล็อก select @@trancount as [ทรานที่เปิดค้าง];          -- ต้องได้ 0
+select case when @@options &amp; 2 = 2 then 1 else 0 end as [implicit transaction];  -- 1 = เปิดอยู่
+
+-- ดูว่าทรานเปิดมานานแค่ไหน และแก้ข้อมูลไปแล้วกี่รายการ
+select at.transaction_begin_time as [เริ่มเมื่อ],
+       dt.database_transaction_log_record_count as [จำนวนการแก้ไข]
+from sys.dm_tran_session_transactions st
+join sys.dm_tran_active_transactions at on at.transaction_id = st.transaction_id
+left join sys.dm_tran_database_transactions dt
+       on dt.transaction_id = st.transaction_id and dt.database_id = db_id()
+where st.session_id = @@spid; จำนวนการแก้ไข = 0 → เป็นทรานว่าง commit ได้เลย ไม่เสียอะไร จำนวนการแก้ไข &gt; 0 → ตรวจข้อมูลที่แก้ให้ถูกก่อน แล้วค่อย commit (ไม่แน่ใจอย่า rollback) commit;
+set implicit_transactions off;   -- ปิดโหมดเฉพาะหน้าต่างนี้ ปิดถาวร: ssms → tools → options → query execution → sql server → ansi → เอาติ๊ก set implicit_transactions ออก">
+<summary><span class="qt" data-raw="@@TRANCOUNT ไม่เป็น 0 / แก้แล้วคนอื่นไม่เห็น ทำยังไง">@@TRANCOUNT ไม่เป็น 0 / แก้แล้วคนอื่นไม่เห็น ทำยังไง</span><a class="lk" href="#trancount" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>SSMS ที่ใช้อยู่เปิดโหมด <b>implicit transaction</b> ไว้ ทุกคำสั่ง (แม้แต่ SELECT) จะเปิดทรานให้เองและค้างไว้จนกว่าจะสั่ง COMMIT ถ้าปิดหน้าต่างไป งานที่ทำอาจหายหมด และระหว่างนั้นตารางถูกล็อก</p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> @@TRANCOUNT <span class="k">AS</span> [ทรานที่เปิดค้าง];          <span class="c">-- ต้องได้ 0</span>
+<span class="k">SELECT</span> <span class="k">CASE</span> <span class="k">WHEN</span> @@OPTIONS &amp; 2 = 2 <span class="k">THEN</span> 1 <span class="k">ELSE</span> 0 <span class="k">END</span> <span class="k">AS</span> [implicit transaction];  <span class="c">-- 1 = เปิดอยู่</span>
+
+<span class="c">-- ดูว่าทรานเปิดมานานแค่ไหน และแก้ข้อมูลไปแล้วกี่รายการ</span>
+<span class="k">SELECT</span> at.transaction_begin_time <span class="k">AS</span> [เริ่มเมื่อ],
+       dt.database_transaction_log_record_count <span class="k">AS</span> [จำนวนการแก้ไข]
+<span class="k">FROM</span> sys.dm_tran_session_transactions st
+<span class="k">JOIN</span> sys.dm_tran_active_transactions at <span class="k">ON</span> at.transaction_id = st.transaction_id
+<span class="k">LEFT</span> <span class="k">JOIN</span> sys.dm_tran_database_transactions dt
+       <span class="k">ON</span> dt.transaction_id = st.transaction_id <span class="k">AND</span> dt.database_id = DB_ID()
+<span class="k">WHERE</span> st.session_id = @@SPID;</pre></div><ul><li>จำนวนการแก้ไข = 0 → เป็นทรานว่าง COMMIT ได้เลย ไม่เสียอะไร</li><li>จำนวนการแก้ไข &gt; 0 → ตรวจข้อมูลที่แก้ให้ถูกก่อน แล้วค่อย COMMIT (ไม่แน่ใจอย่า ROLLBACK)</li></ul><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">COMMIT</span>;
+<span class="k">SET</span> IMPLICIT_TRANSACTIONS <span class="k">OFF</span>;   <span class="c">-- ปิดโหมดเฉพาะหน้าต่างนี้</span></pre></div><div class="box note">ปิดถาวร: SSMS → Tools → Options → Query Execution → SQL Server → ANSI → เอาติ๊ก SET IMPLICIT_TRANSACTIONS ออก</div><div class="tags"><span>TRANCOUNT</span><span>transaction</span><span>ทรานค้าง</span><span>COMMIT</span><span>implicit</span><span>ไม่เห็นข้อมูล</span><span>ล็อก</span><span>ค้าง</span></div></div>
+</details><details class="qa" id="backup" data-cat="1" data-hay="สำรองตารางก่อนแก้ทำยังไง backup, สำรอง, ย้อนคืน, temp สำรองตารางก่อนแก้ทำยังไง เก็บสำเนาไว้ใน schema `temp` ตั้งชื่อตามวันที่ ใช้เทียบก่อน/หลัง และย้อนคืนได้ select * into temp.cost_ratehour_bak20280915 from cost_ratehour;
+select * into temp.cost_ratekg_bak20280915   from cost_ratekg;
+select * into temp.configratio_bak20280915   from cost.configratio;
+
+-- ย้อนคืน (ตัวอย่าง configratio)
+-- delete cost.configratio;
+-- insert cost.configratio (acctcode, acctname, costtype, prccode, toprccode, ratio)
+-- select acctcode, acctname, costtype, prccode, toprccode, ratio from temp.configratio_bak20280915;">
+<summary><span class="qt" data-raw="สำรองตารางก่อนแก้ทำยังไง">สำรองตารางก่อนแก้ทำยังไง</span><a class="lk" href="#backup" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>เก็บสำเนาไว้ใน schema <code>temp</code> ตั้งชื่อตามวันที่ ใช้เทียบก่อน/หลัง และย้อนคืนได้</p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> * <span class="k">INTO</span> temp.COST_RateHour_bak20280915 <span class="k">FROM</span> COST_RateHour;
+<span class="k">SELECT</span> * <span class="k">INTO</span> temp.COST_RateKG_bak20280915   <span class="k">FROM</span> COST_RateKG;
+<span class="k">SELECT</span> * <span class="k">INTO</span> temp.ConfigRatio_bak20280915   <span class="k">FROM</span> cost.ConfigRatio;
+
+<span class="c">-- ย้อนคืน (ตัวอย่าง ConfigRatio)</span>
+<span class="c">-- DELETE cost.ConfigRatio;</span>
+<span class="c">-- INSERT cost.ConfigRatio (Acctcode, AcctName, CostType, PrcCode, ToPrcCode, Ratio)</span>
+<span class="c">-- SELECT Acctcode, AcctName, CostType, PrcCode, ToPrcCode, Ratio FROM temp.ConfigRatio_bak20280915;</span></pre></div><div class="tags"><span>backup</span><span>สำรอง</span><span>ย้อนคืน</span><span>temp</span></div></div>
+</details><details class="qa" id="safe-edit" data-cat="1" data-hay="แก้ข้อมูลอย่างปลอดภัยทำยังไง begin tran, rollback, แก้ข้อมูล, update, delete, insert แก้ข้อมูลอย่างปลอดภัยทำยังไง เปิดทรานเอง → แก้ → รันคิวรีตรวจ → ถูกค่อย commit ผิด rollback begin tran;
+
+-- 1) แก้ข้อมูล
+-- insert / update / delete ...
+
+-- 2) ตรวจ (ต้องได้ผลตามที่ตั้งใจ)
+-- select ...
+
+-- 3) เลือกอย่างใดอย่างหนึ่ง
+-- commit;
+-- rollback; ตัวอย่างจริงที่ใช้แบบนี้: `sql/old/fix_config_18092026.sql`">
+<summary><span class="qt" data-raw="แก้ข้อมูลอย่างปลอดภัยทำยังไง">แก้ข้อมูลอย่างปลอดภัยทำยังไง</span><a class="lk" href="#safe-edit" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>เปิดทรานเอง → แก้ → รันคิวรีตรวจ → ถูกค่อย COMMIT ผิด ROLLBACK</p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">BEGIN</span> <span class="k">TRAN</span>;
+
+<span class="c">-- 1) แก้ข้อมูล</span>
+<span class="c">-- INSERT / UPDATE / DELETE ...</span>
+
+<span class="c">-- 2) ตรวจ (ต้องได้ผลตามที่ตั้งใจ)</span>
+<span class="c">-- SELECT ...</span>
+
+<span class="c">-- 3) เลือกอย่างใดอย่างหนึ่ง</span>
+<span class="c">-- COMMIT;</span>
+<span class="c">-- ROLLBACK;</span></pre></div><div class="box note">ตัวอย่างจริงที่ใช้แบบนี้: <code>sql/old/fix_config_18092026.sql</code></div><div class="tags"><span>BEGIN TRAN</span><span>ROLLBACK</span><span>แก้ข้อมูล</span><span>UPDATE</span><span>DELETE</span><span>INSERT</span></div></div>
+</details></section><section class="cat" data-cat="2"><h2>ตรวจความพร้อมก่อนคิดต้นทุน <small>9</small></h2><details class="qa" id="precheck" data-cat="2" data-hay="จะรู้ได้ยังไงว่าสินค้าตัวไหนจะรันไม่ผ่าน preruncost, precheck, ตรวจก่อนรัน, ความพร้อม, error, warn จะรู้ได้ยังไงว่าสินค้าตัวไหนจะรันไม่ผ่าน ติดตั้งครั้งแรกครั้งเดียว: เปิด `sql/precheck/create_preruncost.sql` แล้ว execute จากนั้น exec chk.preruncost @erroronly = 1;             -- เฉพาะที่ต้องแก้
+exec chk.preruncost @fg = &#x27;fg-0001&#x27;;    -- ดู fg ตัวเดียว
+exec chk.preruncost @dmonly = 0;                -- ตรวจอัตรา dl/oh ด้วย (หลังตั้งอัตราแล้ว) ผลเป็นตารางเดียว ทุกแถวบอก **ปัญหา · ไปแก้ที่ · วิธีแก้** ให้ ผ่านเมื่อไม่มีแถว error · แถว warn อ่านแล้วตัดสินใจว่ายอมรับได้ไหม คำสั่งนี้ยังไม่เคยรันบนฐานจริง ถ้า error ให้เปิด `sql/precheck/precheck.sql` แล้ว execute ตรงๆ แทน หรือตรวจจากไฟล์ excel: `python3 tools/precheck.py --dm`">
+<summary><span class="qt" data-raw="จะรู้ได้ยังไงว่าสินค้าตัวไหนจะรันไม่ผ่าน">จะรู้ได้ยังไงว่าสินค้าตัวไหนจะรันไม่ผ่าน</span><a class="lk" href="#precheck" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>ติดตั้งครั้งแรกครั้งเดียว: เปิด <code>sql/precheck/create_PreRunCost.sql</code> แล้ว Execute จากนั้น</p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">EXEC</span> chk.PreRunCost @ErrorOnly = 1;             <span class="c">-- เฉพาะที่ต้องแก้</span>
+<span class="k">EXEC</span> chk.PreRunCost @FG = <span class="s">'FG-0001'</span>;    <span class="c">-- ดู FG ตัวเดียว</span>
+<span class="k">EXEC</span> chk.PreRunCost @DMOnly = 0;                <span class="c">-- ตรวจอัตรา DL/OH ด้วย (หลังตั้งอัตราแล้ว)</span></pre></div><p>ผลเป็นตารางเดียว ทุกแถวบอก <b>ปัญหา · ไปแก้ที่ · วิธีแก้</b> ให้</p><div class="box ok"><span class="bl">ผ่านเมื่อ / ผลที่ควรได้</span>ผ่านเมื่อไม่มีแถว ERROR · แถว WARN อ่านแล้วตัดสินใจว่ายอมรับได้ไหม</div><div class="box warn"><span class="bl">ระวัง</span>คำสั่งนี้ยังไม่เคยรันบนฐานจริง ถ้า error ให้เปิด <code>sql/precheck/precheck.sql</code> แล้ว Execute ตรงๆ แทน หรือตรวจจากไฟล์ Excel: <code>python3 tools/precheck.py --dm</code></div><div class="tags"><span>PreRunCost</span><span>precheck</span><span>ตรวจก่อนรัน</span><span>ความพร้อม</span><span>ERROR</span><span>WARN</span></div></div>
+</details><details class="qa" id="precheck-codes" data-cat="2" data-hay="รหัสปัญหาใน preruncost แปลว่าอะไร cost_missing, routing_none, routing_bad, mguse_none, bom_closed, bom_none, bom_not_cost, not_in_oitm, machine_none, manhead_none, bom_loop, mono_other, bom_dup, frozen, tokg_zero รหัสปัญหาใน preruncost แปลว่าอะไร `cost_missing` — วัตถุดิบ (mono=y) ไม่มีแถวราคา → ใส่ราคา manual หรือแก้ bom ถ้าควรเป็น semi `mono_other` — ลูก mono ไม่ใช่ y/n และไม่มีราคา (ระบบไม่คิด ไม่แจ้ง) → แก้ flagmono `not_in_oitm` — ลูกไม่มีใน sap → ต้นทุนหายเงียบ → เปิดรหัสใน sap / แก้รหัสใน bom `bom_none` / `bom_not_cost` / `bom_closed` — ไม่มี bom / ไม่มีตัวที่ bomcost=y / ตัวนั้นถูกปิด `routing_none` / `routing_bad` — ไม่มีเครื่อง priority 1 / capperhour ≤ 0 หรือไม่มี mg `machine_none` — เครื่องใน routing ไม่มีใน `bt_machine` `mguse_none` — จะขึ้น &quot;can not cal&quot; → เติม mg ให้ครบ แล้ว run dm ใหม่ `bom_loop` — bom วนหากันเอง (getdm จะวนไม่จบ) `manhead_none` (warn) — mg ไม่มีจำนวนคน → dl = 0 `bom_dup` (warn) — `bt_bom` หลายแถวต่อ itemcode → ต้นทุนถูกนับซ้ำ ครบทั้ง 21 รหัสอยู่ใน `sql/precheck/precheck.sql` ส่วน insert #code">
+<summary><span class="qt" data-raw="รหัสปัญหาใน PreRunCost แปลว่าอะไร">รหัสปัญหาใน PreRunCost แปลว่าอะไร</span><a class="lk" href="#precheck-codes" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><ul><li><code>COST_MISSING</code> — วัตถุดิบ (Mono=Y) ไม่มีแถวราคา → ใส่ราคา Manual หรือแก้ BOM ถ้าควรเป็น Semi</li><li><code>MONO_OTHER</code> — ลูก Mono ไม่ใช่ Y/N และไม่มีราคา (ระบบไม่คิด ไม่แจ้ง) → แก้ FlagMono</li><li><code>NOT_IN_OITM</code> — ลูกไม่มีใน SAP → ต้นทุนหายเงียบ → เปิดรหัสใน SAP / แก้รหัสใน BOM</li><li><code>BOM_NONE</code> / <code>BOM_NOT_COST</code> / <code>BOM_CLOSED</code> — ไม่มี BOM / ไม่มีตัวที่ BOMCost=Y / ตัวนั้นถูกปิด</li><li><code>ROUTING_NONE</code> / <code>ROUTING_BAD</code> — ไม่มีเครื่อง Priority 1 / CapPerHour ≤ 0 หรือไม่มี MG</li><li><code>MACHINE_NONE</code> — เครื่องใน Routing ไม่มีใน <code>BT_Machine</code></li><li><code>MGUSE_NONE</code> — จะขึ้น "Can not cal" → เติม MG ให้ครบ แล้ว Run DM ใหม่</li><li><code>BOM_LOOP</code> — BOM วนหากันเอง (GetDM จะวนไม่จบ)</li><li><code>MANHEAD_NONE</code> (WARN) — MG ไม่มีจำนวนคน → DL = 0</li><li><code>BOM_DUP</code> (WARN) — <code>BT_Bom</code> หลายแถวต่อ ItemCode → ต้นทุนถูกนับซ้ำ</li></ul><div class="box note">ครบทั้ง 21 รหัสอยู่ใน <code>sql/precheck/precheck.sql</code> ส่วน INSERT #code</div><div class="tags"><span>COST_MISSING</span><span>ROUTING_NONE</span><span>ROUTING_BAD</span><span>MGUSE_NONE</span><span>BOM_CLOSED</span><span>BOM_NONE</span><span>BOM_NOT_COST</span><span>NOT_IN_OITM</span><span>MACHINE_NONE</span><span>MANHEAD_NONE</span><span>BOM_LOOP</span><span>MONO_OTHER</span><span>BOM_DUP</span><span>FROZEN</span><span>TOKG_ZERO</span></div></div>
+</details><details class="qa" id="no-price" data-cat="2" data-hay="run cost หยุด &quot;ราคาวัตถุดิบไม่ครบ , รหัส…&quot; ราคาวัตถุดิบไม่ครบ, ไม่พบราคา, errorlogtable, cost_missing, mono, ราคา run cost หยุด &quot;ราคาวัตถุดิบไม่ครบ , รหัส…&quot; แปลว่ามี **วัตถุดิบ (mono=y) ตัวหนึ่งในสูตร ชั้นไหนก็ได้ ไม่มีแถวราคา** ใน `cost_budgetcost` (ราคา 0 ถือว่ามีราคา) -- 1) ดูข้อความล่าสุด
+select top 50 logdate, itemcode, errormessage
+from errorlogtable
+order by logdate desc;
+
+-- 2) รหัสนั้นมีราคาไหม (ไม่มีแถว = ไม่มีราคา)
+select period, itemcode, source, cost
+from cost_budgetcost
+where itemcode = &#x27;rm-0001&#x27;;     -- ← รหัสจากข้อความ error
+
+-- 3) ใครใช้รหัสนี้เป็นลูก และถูกตั้งเป็นวัตถุดิบหรือ semi
+select distinct itemcode as [แม่], childitemcode, formula, mono
+from bt_itembomall
+where childitemcode = &#x27;rm-0001&#x27;; ถ้าเป็นของซื้อ → ใส่ราคา manual ใน `cost_budgetcost` ถ้าควรให้ระบบคำนวณ (เป็น semi) → แก้บรรทัดลูกใน bom แม่ให้ formula=y / mono=n แล้วสร้าง bom + routing ให้ตัวนี้">
+<summary><span class="qt" data-raw="Run Cost หยุด &quot;ราคาวัตถุดิบไม่ครบ , รหัส…&quot;">Run Cost หยุด "ราคาวัตถุดิบไม่ครบ , รหัส…"</span><a class="lk" href="#no-price" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>แปลว่ามี <b>วัตถุดิบ (Mono=Y) ตัวหนึ่งในสูตร ชั้นไหนก็ได้ ไม่มีแถวราคา</b> ใน <code>COST_BudgetCost</code> (ราคา 0 ถือว่ามีราคา)</p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="c">-- 1) ดูข้อความล่าสุด</span>
+<span class="k">SELECT</span> <span class="k">TOP</span> 50 LogDate, ItemCode, ErrorMessage
+<span class="k">FROM</span> ErrorLogTable
+<span class="k">ORDER</span> <span class="k">BY</span> LogDate <span class="k">DESC</span>;
+
+<span class="c">-- 2) รหัสนั้นมีราคาไหม (ไม่มีแถว = ไม่มีราคา)</span>
+<span class="k">SELECT</span> period, itemcode, source, cost
+<span class="k">FROM</span> COST_BudgetCost
+<span class="k">WHERE</span> itemcode = <span class="s">'RM-0001'</span>;     <span class="c">-- ← รหัสจากข้อความ error</span>
+
+<span class="c">-- 3) ใครใช้รหัสนี้เป็นลูก และถูกตั้งเป็นวัตถุดิบหรือ Semi</span>
+<span class="k">SELECT</span> <span class="k">DISTINCT</span> ItemCode <span class="k">AS</span> [แม่], ChildItemCode, Formula, Mono
+<span class="k">FROM</span> BT_ItemBomAll
+<span class="k">WHERE</span> ChildItemCode = <span class="s">'RM-0001'</span>;</pre></div><ul><li>ถ้าเป็นของซื้อ → ใส่ราคา Manual ใน <code>COST_BudgetCost</code></li><li>ถ้าควรให้ระบบคำนวณ (เป็น Semi) → แก้บรรทัดลูกใน BOM แม่ให้ Formula=Y / Mono=N แล้วสร้าง BOM + Routing ให้ตัวนี้</li></ul><div class="tags"><span>ราคาวัตถุดิบไม่ครบ</span><span>ไม่พบราคา</span><span>ErrorLogTable</span><span>COST_MISSING</span><span>Mono</span><span>ราคา</span></div></div>
+</details><details class="qa" id="zero-price" data-cat="2" data-hay="ราคาเป็น 0 ถือว่ามีราคาไหม ราคา 0, ศูนย์, cost 0 ราคาเป็น 0 ถือว่ามีราคาไหม **ถือว่ามี** ระบบหยุดเฉพาะเมื่อ **ไม่มีแถว** ใน `cost_budgetcost` เลย ราคา 0 จะผ่านไปได้ (ต้นทุนส่วนนั้นเป็น 0)">
+<summary><span class="qt" data-raw="ราคาเป็น 0 ถือว่ามีราคาไหม">ราคาเป็น 0 ถือว่ามีราคาไหม</span><a class="lk" href="#zero-price" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p><b>ถือว่ามี</b> ระบบหยุดเฉพาะเมื่อ <b>ไม่มีแถว</b> ใน <code>COST_BudgetCost</code> เลย ราคา 0 จะผ่านไปได้ (ต้นทุนส่วนนั้นเป็น 0)</p><div class="tags"><span>ราคา 0</span><span>ศูนย์</span><span>cost 0</span></div></div>
+</details><details class="qa" id="silent-fail" data-cat="2" data-hay="semi ค้าง ไม่มีต้นทุน แต่ไม่มี error อะไรเลย ค้าง, เงียบ, ไม่มี error, semi, pbf, test_calc, catch semi ค้าง ไม่มีต้นทุน แต่ไม่มี error อะไรเลย ใน `bg.caldmbudgetdet` ส่วนคำนวณอยู่ใน `begin catch` ที่ว่างเปล่า ถ้าพังจะ **เงียบ** ไม่แจ้งอะไร เปิด `sql/precheck/test_calc.sql` ใส่รหัส semi ที่ค้าง สคริปต์จะคิดทีละตัวในทรานแล้ว rollback พร้อมแสดง **ข้อความ error จริง** แก้ตามข้อความ (ส่วนใหญ่เป็นข้อมูลเครื่อง / mg / capperhour = 0) อีกสาเหตุที่พบบ่อย: ยังมีลูกที่ไม่มีราคา (`@cost_null &gt; 0`) ระบบจะข้ามทั้งตัว — ตรวจด้วย [preruncost](#precheck)">
+<summary><span class="qt" data-raw="Semi ค้าง ไม่มีต้นทุน แต่ไม่มี error อะไรเลย">Semi ค้าง ไม่มีต้นทุน แต่ไม่มี error อะไรเลย</span><a class="lk" href="#silent-fail" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>ใน <code>bg.CalDMBudgetDet</code> ส่วนคำนวณอยู่ใน <code>BEGIN CATCH</code> ที่ว่างเปล่า ถ้าพังจะ <b>เงียบ</b> ไม่แจ้งอะไร</p><ol><li>เปิด <code>sql/precheck/test_calc.sql</code> ใส่รหัส Semi ที่ค้าง</li><li>สคริปต์จะคิดทีละตัวในทรานแล้ว ROLLBACK พร้อมแสดง <b>ข้อความ error จริง</b></li><li>แก้ตามข้อความ (ส่วนใหญ่เป็นข้อมูลเครื่อง / MG / CapPerHour = 0)</li></ol><div class="box note">อีกสาเหตุที่พบบ่อย: ยังมีลูกที่ไม่มีราคา (<code>@cost_null &gt; 0</code>) ระบบจะข้ามทั้งตัว — ตรวจด้วย <a href="#precheck">PreRunCost</a></div><div class="tags"><span>ค้าง</span><span>เงียบ</span><span>ไม่มี error</span><span>semi</span><span>PBF</span><span>test_calc</span><span>CATCH</span></div></div>
+</details><details class="qa" id="cannot-cal" data-cat="2" data-hay="ขึ้น &quot;can not cal&quot; ทั้งที่ dm ครบ can not cal, cost.mguse, mguse_none, calmas, ไม่มีข้อมูลเครื่อง ขึ้น &quot;can not cal&quot; ทั้งที่ dm ครบ สินค้านั้น **ไม่มีแถวใน `cost.mguse`** → `cost_calmas` ไม่มีแถว → คิดไม่ได้เลย (แม้ dm ครบ) select itemcode, wc, mg, machine, capperhour, headcounts_shift, qtykg
+from cost.mguse
+where itemcode = &#x27;fg-0002&#x27;;    -- ← รหัสที่ขึ้น can not cal ไม่มีแถว → ตรวจ routing และ mg ([ข้อนี้](#routing)) แล้ว run dm + predata ใหม่">
+<summary><span class="qt" data-raw="ขึ้น &quot;Can not cal&quot; ทั้งที่ DM ครบ">ขึ้น "Can not cal" ทั้งที่ DM ครบ</span><a class="lk" href="#cannot-cal" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>สินค้านั้น <b>ไม่มีแถวใน <code>cost.MGUSE</code></b> → <code>COST_CalMas</code> ไม่มีแถว → คิดไม่ได้เลย (แม้ DM ครบ)</p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> ItemCode, wc, MG, machine, CapPerHour, Headcounts_shift, QtyKg
+<span class="k">FROM</span> cost.MGUSE
+<span class="k">WHERE</span> ItemCode = <span class="s">'FG-0002'</span>;    <span class="c">-- ← รหัสที่ขึ้น Can not cal</span></pre></div><ul><li>ไม่มีแถว → ตรวจ Routing และ MG (<a href="#routing">ข้อนี้</a>) แล้ว Run DM + PreData ใหม่</li></ul><div class="tags"><span>Can not cal</span><span>cost.MGUSE</span><span>MGUSE_NONE</span><span>CalMas</span><span>ไม่มีข้อมูลเครื่อง</span></div></div>
+</details><details class="qa" id="routing" data-cat="2" data-hay="ตรวจ bom และ routing ของสินค้าหนึ่งตัว routing, bom, bt_bomcapacity, machinepriority, capperhour, bomcost, bomflag, เครื่อง ตรวจ bom และ routing ของสินค้าหนึ่งตัว select b.itemcode, b.bomno, b.bomcost, b.bomflag,
+       c.capseq, c.machine, c.mg, c.capperhour, c.machinepriority
+from bt_bom b
+left join bt_bomcapacity c on c.bomno = b.bomno and c.machinepriority = 1
+where b.itemcode = &#x27;fg-0002&#x27;; bom ที่ใช้คิดต้นทุนต้องมี bomcost = y และ bomflag = a · ต้องมีเครื่อง priority 1 อย่างน้อย 1 แถว · capperhour &gt; 0 · มี mg">
+<summary><span class="qt" data-raw="ตรวจ BOM และ Routing ของสินค้าหนึ่งตัว">ตรวจ BOM และ Routing ของสินค้าหนึ่งตัว</span><a class="lk" href="#routing" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> b.ItemCode, b.BOMNO, b.BOMCost, b.BOMFlag,
+       c.CapSeq, c.Machine, c.MG, c.CapPerHour, c.MachinePriority
+<span class="k">FROM</span> BT_Bom b
+<span class="k">LEFT</span> <span class="k">JOIN</span> BT_BomCapacity c <span class="k">ON</span> c.BOMNO = b.BOMNO <span class="k">AND</span> c.MachinePriority = 1
+<span class="k">WHERE</span> b.ItemCode = <span class="s">'FG-0002'</span>;</pre></div><div class="box ok"><span class="bl">ผ่านเมื่อ / ผลที่ควรได้</span>BOM ที่ใช้คิดต้นทุนต้องมี BOMCost = Y และ BOMFlag = A · ต้องมีเครื่อง Priority 1 อย่างน้อย 1 แถว · CapPerHour &gt; 0 · มี MG</div><div class="tags"><span>Routing</span><span>BOM</span><span>BT_BomCapacity</span><span>MachinePriority</span><span>CapPerHour</span><span>BOMCost</span><span>BOMFlag</span><span>เครื่อง</span></div></div>
+</details><details class="qa" id="mg-manhead" data-cat="2" data-hay="ตรวจกลุ่มเครื่อง (mg) และจำนวนคนต่อกะ mg, bt_machine, bt_dlmanhead, headcounts_shift, คนต่อกะ, manhead_none, ค่าแรงต่ำ ตรวจกลุ่มเครื่อง (mg) และจำนวนคนต่อกะ select m.machine, m.machinename, m.wc, m.mg, m.capperhour, d.headcounts_shift
+from bt_machine m
+left join bt_dlmanhead d on d.mgcode = m.mg
+where m.mg = &#x27;mg001&#x27;;            -- ← หรือ where m.wc = &#x27;wc01&#x27; `headcounts_shift` ว่าง (null) → mg นี้ไม่มีใน `bt_dlmanhead` → dl = 0 `headcounts_shift = 0` → dl = 0 (ถูกต้องเฉพาะงานจ้างผลิต / ไม่มีคนประจำ)">
+<summary><span class="qt" data-raw="ตรวจกลุ่มเครื่อง (MG) และจำนวนคนต่อกะ">ตรวจกลุ่มเครื่อง (MG) และจำนวนคนต่อกะ</span><a class="lk" href="#mg-manhead" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> m.Machine, m.MachineName, m.WC, m.MG, m.CapPerHour, d.Headcounts_shift
+<span class="k">FROM</span> BT_Machine m
+<span class="k">LEFT</span> <span class="k">JOIN</span> BT_DLManhead d <span class="k">ON</span> d.MGCode = m.MG
+<span class="k">WHERE</span> m.MG = <span class="s">'MG001'</span>;            <span class="c">-- ← หรือ WHERE m.WC = 'WC01'</span></pre></div><ul><li><code>Headcounts_shift</code> ว่าง (NULL) → MG นี้ไม่มีใน <code>BT_DLManhead</code> → DL = 0</li><li><code>Headcounts_shift = 0</code> → DL = 0 (ถูกต้องเฉพาะงานจ้างผลิต / ไม่มีคนประจำ)</li></ul><div class="tags"><span>MG</span><span>BT_Machine</span><span>BT_DLManhead</span><span>Headcounts_shift</span><span>คนต่อกะ</span><span>MANHEAD_NONE</span><span>ค่าแรงต่ำ</span></div></div>
+</details><details class="qa" id="no-cost-fg" data-cat="2" data-hay="สินค้าในแผนขายตัวไหนยังไม่มีต้นทุน ไม่มีต้นทุน, ค้าง, cost_budgetcost, แผนขาย, bt_saleforecast สินค้าในแผนขายตัวไหนยังไม่มีต้นทุน select s.itemcode, s.qtykg, s.secgroup_lev2
+from bt_saleforecast s
+where not exists (select 1 from cost_budgetcost c
+                  where c.itemcode = s.itemcode and c.period = &#x27;2027&#x27;)   -- ← ปี
+order by s.qtykg desc;">
+<summary><span class="qt" data-raw="สินค้าในแผนขายตัวไหนยังไม่มีต้นทุน">สินค้าในแผนขายตัวไหนยังไม่มีต้นทุน</span><a class="lk" href="#no-cost-fg" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> s.ItemCode, s.QtyKg, s.secgroup_lev2
+<span class="k">FROM</span> BT_SaleForecast s
+<span class="k">WHERE</span> <span class="k">NOT</span> <span class="k">EXISTS</span> (<span class="k">SELECT</span> 1 <span class="k">FROM</span> COST_BudgetCost c
+                  <span class="k">WHERE</span> c.itemcode = s.ItemCode <span class="k">AND</span> c.period = <span class="s">'2027'</span>)   <span class="c">-- ← ปี</span>
+<span class="k">ORDER</span> <span class="k">BY</span> s.QtyKg <span class="k">DESC</span>;</pre></div><div class="tags"><span>ไม่มีต้นทุน</span><span>ค้าง</span><span>COST_BudgetCost</span><span>แผนขาย</span><span>BT_SaleForecast</span></div></div>
+</details></section><section class="cat" data-cat="3"><h2>ค่าใช้จ่ายและกติกาการปัน <small>10</small></h2><details class="qa" id="check-oh-alloc" data-cat="3" data-hay="ตรวจค่าใช้จ่ายและ config ทั้งหมดในคำสั่งเดียว check_oh_alloc, ตรวจค่าใช้จ่าย, config, ระดับ, หยุดรัน, เงินหาย, เงินเกิน, เตือน ตรวจค่าใช้จ่ายและ config ทั้งหมดในคำสั่งเดียว เปิด `sql/alloc/check_oh_alloc.sql` แก้ `@period` แล้ว execute ทั้งไฟล์ (อ่านอย่างเดียว) ได้ 3 ตาราง **สรุปยอด** — ค่าใช้จ่ายทั้งหมด / ปันถึง wc ได้ / ปันไม่ได้ **รายการที่ต้องแก้** — ระดับ · รหัสปัญหา · ยอดเงิน · ไปแก้ที่ · วิธีแก้ **ราย wc** — เงินที่เข้า / ฐาน / อัตราที่ควรได้ อ่านระดับ: **1-หยุดรัน** — calrate จะหยุด ต้องแก้ก่อน (เช่น `no_config`, `amount_bad`) **2-เงินหาย** — รันผ่าน แต่เงินไม่ถึงสินค้า (เช่น `toprc_nowc`, `wc_nobase`, `mg_norate`) **3-เงินเกิน** — ปันซ้ำ/เกิน (เช่น `ratio_sum`, `old_period`) **4-เตือน** — ยืนยันกับบัญชีแล้วไปต่อได้ (เช่น `wc_noexpense`, `base_tiny`, `costflg_bad`) ผ่านเมื่อไม่มีระดับ 1 และ 2 · บรรทัด &quot;ปันไม่ได้&quot; ในตารางสรุป = 0">
+<summary><span class="qt" data-raw="ตรวจค่าใช้จ่ายและ config ทั้งหมดในคำสั่งเดียว">ตรวจค่าใช้จ่ายและ config ทั้งหมดในคำสั่งเดียว</span><a class="lk" href="#check-oh-alloc" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>เปิด <code>sql/alloc/check_oh_alloc.sql</code> แก้ <code>@Period</code> แล้ว Execute ทั้งไฟล์ (อ่านอย่างเดียว) ได้ 3 ตาราง</p><ol><li><b>สรุปยอด</b> — ค่าใช้จ่ายทั้งหมด / ปันถึง WC ได้ / ปันไม่ได้</li><li><b>รายการที่ต้องแก้</b> — ระดับ · รหัสปัญหา · ยอดเงิน · ไปแก้ที่ · วิธีแก้</li><li><b>ราย WC</b> — เงินที่เข้า / ฐาน / อัตราที่ควรได้</li></ol><p>อ่านระดับ:</p><ul><li><b>1-หยุดรัน</b> — CalRate จะหยุด ต้องแก้ก่อน (เช่น <code>NO_CONFIG</code>, <code>AMOUNT_BAD</code>)</li><li><b>2-เงินหาย</b> — รันผ่าน แต่เงินไม่ถึงสินค้า (เช่น <code>TOPRC_NOWC</code>, <code>WC_NOBASE</code>, <code>MG_NORATE</code>)</li><li><b>3-เงินเกิน</b> — ปันซ้ำ/เกิน (เช่น <code>RATIO_SUM</code>, <code>OLD_PERIOD</code>)</li><li><b>4-เตือน</b> — ยืนยันกับบัญชีแล้วไปต่อได้ (เช่น <code>WC_NOEXPENSE</code>, <code>BASE_TINY</code>, <code>COSTFLG_BAD</code>)</li></ul><div class="box ok"><span class="bl">ผ่านเมื่อ / ผลที่ควรได้</span>ผ่านเมื่อไม่มีระดับ 1 และ 2 · บรรทัด "ปันไม่ได้" ในตารางสรุป = 0</div><div class="tags"><span>check_oh_alloc</span><span>ตรวจค่าใช้จ่าย</span><span>config</span><span>ระดับ</span><span>หยุดรัน</span><span>เงินหาย</span><span>เงินเกิน</span><span>เตือน</span></div></div>
+</details><details class="qa" id="expense-total" data-cat="3" data-hay="ยอดค่าใช้จ่ายในระบบรวมเท่าไร ตรงกับไฟล์บัญชีไหม ยอดค่าใช้จ่าย, load_amt, bt_oh_allocation, รวม, costid, ไม่ตรงไฟล์, varchar ยอดค่าใช้จ่ายในระบบรวมเท่าไร ตรงกับไฟล์บัญชีไหม select period, cat, costtype, costid, alloctype,
+       count(*) as [แถว],
+       sum(try_convert(decimal(18, 2), amount)) as [บาท]
+from bt_oh_allocation
+group by period, cat, costtype, costid, alloctype
+order by period, cat, costtype, costid, alloctype; เทียบบาทราย costid กับไฟล์ที่บัญชีส่งมา และกับคอลัมน์ `load_amt` ของ getdiffallocation ต้องเท่ากัน ถ้ามี **ปี (period) อื่น** ที่ cat = 5 → ต้องย้ายออก ([ข้อนี้](#old-period)) `amount` เป็นตัวอักษร (varchar) ต้องใช้ `try_convert` ทุกครั้ง ไม่งั้นจะเจอ &quot;operand data type varchar is invalid for sum operator&quot;">
+<summary><span class="qt" data-raw="ยอดค่าใช้จ่ายในระบบรวมเท่าไร ตรงกับไฟล์บัญชีไหม">ยอดค่าใช้จ่ายในระบบรวมเท่าไร ตรงกับไฟล์บัญชีไหม</span><a class="lk" href="#expense-total" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> Period, Cat, CostType, CostID, AllocType,
+       <span class="k">COUNT</span>(*) <span class="k">AS</span> [แถว],
+       <span class="k">SUM</span>(<span class="k">TRY_CONVERT</span>(<span class="k">decimal</span>(18, 2), Amount)) <span class="k">AS</span> [บาท]
+<span class="k">FROM</span> BT_OH_Allocation
+<span class="k">GROUP</span> <span class="k">BY</span> Period, Cat, CostType, CostID, AllocType
+<span class="k">ORDER</span> <span class="k">BY</span> Period, Cat, CostType, CostID, AllocType;</pre></div><ul><li>เทียบบาทราย CostID กับไฟล์ที่บัญชีส่งมา และกับคอลัมน์ <code>Load_Amt</code> ของ GetDiffAllocation ต้องเท่ากัน</li><li>ถ้ามี <b>ปี (Period) อื่น</b> ที่ Cat = 5 → ต้องย้ายออก (<a href="#old-period">ข้อนี้</a>)</li></ul><div class="box warn"><span class="bl">ระวัง</span><code>Amount</code> เป็นตัวอักษร (varchar) ต้องใช้ <code>TRY_CONVERT</code> ทุกครั้ง ไม่งั้นจะเจอ "Operand data type varchar is invalid for sum operator"</div><div class="tags"><span>ยอดค่าใช้จ่าย</span><span>Load_Amt</span><span>BT_OH_Allocation</span><span>รวม</span><span>CostID</span><span>ไม่ตรงไฟล์</span><span>varchar</span></div></div>
+</details><details class="qa" id="old-period" data-cat="3" data-hay="มีค่าใช้จ่ายปีเก่าค้างอยู่ไหม ปีเก่า, period, old_period, cat 5, ไม่กรองปี มีค่าใช้จ่ายปีเก่าค้างอยู่ไหม proc ตั้งอัตราดึงค่าใช้จ่ายด้วย `cat = 5` **ไม่กรองปี** ปีเก่าที่ค้างจะถูกบวกเข้าอัตราด้วย select period, cat, count(*) as [แถว], sum(try_convert(decimal(18, 2), amount)) as [บาท]
+from bt_oh_allocation
+group by period, cat
+order by period, cat; cat = 5 ต้องมีแค่ปีที่กำลังรัน · ปีอื่นให้สำรองแล้วลบ/ย้ายออกก่อนตั้งอัตรา">
+<summary><span class="qt" data-raw="มีค่าใช้จ่ายปีเก่าค้างอยู่ไหม">มีค่าใช้จ่ายปีเก่าค้างอยู่ไหม</span><a class="lk" href="#old-period" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>proc ตั้งอัตราดึงค่าใช้จ่ายด้วย <code>Cat = 5</code> <b>ไม่กรองปี</b> ปีเก่าที่ค้างจะถูกบวกเข้าอัตราด้วย</p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> Period, Cat, <span class="k">COUNT</span>(*) <span class="k">AS</span> [แถว], <span class="k">SUM</span>(<span class="k">TRY_CONVERT</span>(<span class="k">decimal</span>(18, 2), Amount)) <span class="k">AS</span> [บาท]
+<span class="k">FROM</span> BT_OH_Allocation
+<span class="k">GROUP</span> <span class="k">BY</span> Period, Cat
+<span class="k">ORDER</span> <span class="k">BY</span> Period, Cat;</pre></div><div class="box ok"><span class="bl">ผ่านเมื่อ / ผลที่ควรได้</span>Cat = 5 ต้องมีแค่ปีที่กำลังรัน · ปีอื่นให้สำรองแล้วลบ/ย้ายออกก่อนตั้งอัตรา</div><div class="tags"><span>ปีเก่า</span><span>Period</span><span>OLD_PERIOD</span><span>Cat 5</span><span>ไม่กรองปี</span></div></div>
+</details><details class="qa" id="amount-bad" data-cat="3" data-hay="ค่า amount ไม่ใช่ตัวเลข amount, varchar, ตัวเลข, try_convert, amount_bad, operand data type varchar is invalid for sum operator ค่า amount ไม่ใช่ตัวเลข select period, acctcode, ocrcode, costid, amount
+from bt_oh_allocation
+where try_convert(decimal(18, 6), amount) is null; ต้องได้ 0 แถว · ถ้ามี ให้แก้ในไฟล์ให้เป็นตัวเลขล้วน (ห้ามมีคอมมา ช่องว่าง หรือขีด) แล้วโหลดใหม่">
+<summary><span class="qt" data-raw="ค่า Amount ไม่ใช่ตัวเลข">ค่า Amount ไม่ใช่ตัวเลข</span><a class="lk" href="#amount-bad" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> Period, Acctcode, Ocrcode, CostID, Amount
+<span class="k">FROM</span> BT_OH_Allocation
+<span class="k">WHERE</span> <span class="k">TRY_CONVERT</span>(<span class="k">decimal</span>(18, 6), Amount) IS NULL;</pre></div><div class="box ok"><span class="bl">ผ่านเมื่อ / ผลที่ควรได้</span>ต้องได้ 0 แถว · ถ้ามี ให้แก้ในไฟล์ให้เป็นตัวเลขล้วน (ห้ามมีคอมมา ช่องว่าง หรือขีด) แล้วโหลดใหม่</div><div class="tags"><span>Amount</span><span>varchar</span><span>ตัวเลข</span><span>TRY_CONVERT</span><span>AMOUNT_BAD</span><span>Operand data type varchar is invalid for sum operator</span></div></div>
+</details><details class="qa" id="dup-expense" data-cat="3" data-hay="มีแถวค่าใช้จ่ายซ้ำไหม ซ้ำ, duplicate, แถวซ้ำ, sum, รวมบรรทัด, หน้างาน มีแถวค่าใช้จ่ายซ้ำไหม select period, acctcode, ocrcode, costid, alloctype, costflg, grp, mg, amount,
+       count(*) as [จำนวนแถวที่เหมือนกัน]
+from bt_oh_allocation
+where cat = 5
+group by period, acctcode, ocrcode, costid, alloctype, costflg, grp, mg, amount
+having count(*) &gt; 1
+order by amount desc; ลงหลายบรรทัดยอดต่างกัน = ปกติ (รายการย่อย) ระบบรวมให้เอง บัญชี-แผนกหนึ่งมี **แต่แถวยอดเท่ากัน** = น่าสงสัยว่าพิมพ์ซ้ำ → ยืนยันกับหน้างาน การ &quot;sum&quot; รวมหลายบรรทัดเป็นบรรทัดเดียว **ยอดเท่าเดิม** ไม่ได้ตัดส่วนที่ซ้ำ ถ้าซ้ำจริงต้องแก้ **ยอด**">
+<summary><span class="qt" data-raw="มีแถวค่าใช้จ่ายซ้ำไหม">มีแถวค่าใช้จ่ายซ้ำไหม</span><a class="lk" href="#dup-expense" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> Period, Acctcode, Ocrcode, CostID, AllocType, costflg, Grp, MG, Amount,
+       <span class="k">COUNT</span>(*) <span class="k">AS</span> [จำนวนแถวที่เหมือนกัน]
+<span class="k">FROM</span> BT_OH_Allocation
+<span class="k">WHERE</span> Cat = 5
+<span class="k">GROUP</span> <span class="k">BY</span> Period, Acctcode, Ocrcode, CostID, AllocType, costflg, Grp, MG, Amount
+<span class="k">HAVING</span> <span class="k">COUNT</span>(*) &gt; 1
+<span class="k">ORDER</span> <span class="k">BY</span> Amount <span class="k">DESC</span>;</pre></div><ul><li>ลงหลายบรรทัดยอดต่างกัน = ปกติ (รายการย่อย) ระบบรวมให้เอง</li><li>บัญชี-แผนกหนึ่งมี <b>แต่แถวยอดเท่ากัน</b> = น่าสงสัยว่าพิมพ์ซ้ำ → ยืนยันกับหน้างาน</li></ul><div class="box warn"><span class="bl">ระวัง</span>การ "sum" รวมหลายบรรทัดเป็นบรรทัดเดียว <b>ยอดเท่าเดิม</b> ไม่ได้ตัดส่วนที่ซ้ำ ถ้าซ้ำจริงต้องแก้ <b>ยอด</b></div><div class="tags"><span>ซ้ำ</span><span>duplicate</span><span>แถวซ้ำ</span><span>sum</span><span>รวมบรรทัด</span><span>หน้างาน</span></div></div>
+</details><details class="qa" id="no-config" data-cat="3" data-hay="บัญชี-แผนกคู่ไหนยังไม่มี config พบผังบัญชีในค่าใช้จ่ายที่ไม่ได้ config, no_config, configratio, acc ratio, แผนกใหม่, บัญชีใหม่, raiserror บัญชี-แผนกคู่ไหนยังไม่มี config `bg.calrate` เช็คเงื่อนไขนี้กับ **ทุกแถว ไม่กรองปีหรือหมวด** ถ้าเจอจะหยุดทันที select a.acctcode, max(a.acctname) as acctname, a.ocrcode,
+       count(*) as [แถว], sum(try_convert(decimal(18, 2), a.amount)) as [บาท]
+from bt_oh_allocation a
+where not exists (select 1 from cost.configratio c
+                  where c.acctcode = a.acctcode and c.prccode = a.ocrcode)
+group by a.acctcode, a.ocrcode
+order by [บาท] desc; ต้องได้ 0 แถว · ถ้ามี → ตั้ง config ตาม [ข้อนี้](#new-config)">
+<summary><span class="qt" data-raw="บัญชี-แผนกคู่ไหนยังไม่มี config">บัญชี-แผนกคู่ไหนยังไม่มี config</span><a class="lk" href="#no-config" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p><code>bg.CalRate</code> เช็คเงื่อนไขนี้กับ <b>ทุกแถว ไม่กรองปีหรือหมวด</b> ถ้าเจอจะหยุดทันที</p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> a.Acctcode, <span class="k">MAX</span>(a.AcctName) <span class="k">AS</span> AcctName, a.Ocrcode,
+       <span class="k">COUNT</span>(*) <span class="k">AS</span> [แถว], <span class="k">SUM</span>(<span class="k">TRY_CONVERT</span>(<span class="k">decimal</span>(18, 2), a.Amount)) <span class="k">AS</span> [บาท]
+<span class="k">FROM</span> BT_OH_Allocation a
+<span class="k">WHERE</span> <span class="k">NOT</span> <span class="k">EXISTS</span> (<span class="k">SELECT</span> 1 <span class="k">FROM</span> cost.ConfigRatio c
+                  <span class="k">WHERE</span> c.Acctcode = a.Acctcode <span class="k">AND</span> c.PrcCode = a.Ocrcode)
+<span class="k">GROUP</span> <span class="k">BY</span> a.Acctcode, a.Ocrcode
+<span class="k">ORDER</span> <span class="k">BY</span> [บาท] <span class="k">DESC</span>;</pre></div><div class="box ok"><span class="bl">ผ่านเมื่อ / ผลที่ควรได้</span>ต้องได้ 0 แถว · ถ้ามี → ตั้ง config ตาม <a href="#new-config">ข้อนี้</a></div><div class="tags"><span>พบผังบัญชีในค่าใช้จ่ายที่ไม่ได้ config</span><span>NO_CONFIG</span><span>ConfigRatio</span><span>Acc Ratio</span><span>แผนกใหม่</span><span>บัญชีใหม่</span><span>RAISERROR</span></div></div>
+</details><details class="qa" id="view-config" data-cat="3" data-hay="ดู config ของบัญชี/แผนกหนึ่ง ดู config, configratio, configocrcodewc, toprccode, ratio, wc ของแผนก ดู config ของบัญชี/แผนกหนึ่ง -- config ของคู่บัญชี-แผนก + wc ปลายทาง
+select c.acctcode, c.acctname, c.prccode, c.toprccode, c.ratio, w.wc
+from cost.configratio c
+left join cost.configocrcodewc w on w.ocrcode = c.toprccode
+where c.acctcode = &#x27;acc001&#x27;        -- ← บัญชี
+  and c.prccode  = &#x27;dp01&#x27;;          -- ← แผนก (ลบบรรทัดนี้ถ้าจะดูทุกแผนก)
+
+-- แผนกนี้ใช้สัดส่วนแบบไหนกับบัญชีอื่น (ใช้เป็นแบบเวลาตั้งบัญชีใหม่)
+select c.toprccode, c.ratio, count(*) as [ใช้กับกี่บัญชี]
+from cost.configratio c
+where c.prccode = &#x27;dp02&#x27;
+group by c.toprccode, c.ratio
+order by [ใช้กับกี่บัญชี] desc;
+
+-- แผนก → wc ทั้งหมด
+select ocrcode, wc from cost.configocrcodewc order by wc;">
+<summary><span class="qt" data-raw="ดู config ของบัญชี/แผนกหนึ่ง">ดู config ของบัญชี/แผนกหนึ่ง</span><a class="lk" href="#view-config" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="c">-- config ของคู่บัญชี-แผนก + WC ปลายทาง</span>
+<span class="k">SELECT</span> c.Acctcode, c.AcctName, c.PrcCode, c.ToPrcCode, c.Ratio, w.WC
+<span class="k">FROM</span> cost.ConfigRatio c
+<span class="k">LEFT</span> <span class="k">JOIN</span> cost.ConfigOcrcodeWc w <span class="k">ON</span> w.Ocrcode = c.ToPrcCode
+<span class="k">WHERE</span> c.Acctcode = <span class="s">'ACC001'</span>        <span class="c">-- ← บัญชี</span>
+  <span class="k">AND</span> c.PrcCode  = <span class="s">'DP01'</span>;          <span class="c">-- ← แผนก (ลบบรรทัดนี้ถ้าจะดูทุกแผนก)</span>
+
+<span class="c">-- แผนกนี้ใช้สัดส่วนแบบไหนกับบัญชีอื่น (ใช้เป็นแบบเวลาตั้งบัญชีใหม่)</span>
+<span class="k">SELECT</span> c.ToPrcCode, c.Ratio, <span class="k">COUNT</span>(*) <span class="k">AS</span> [ใช้กับกี่บัญชี]
+<span class="k">FROM</span> cost.ConfigRatio c
+<span class="k">WHERE</span> c.PrcCode = <span class="s">'DP02'</span>
+<span class="k">GROUP</span> <span class="k">BY</span> c.ToPrcCode, c.Ratio
+<span class="k">ORDER</span> <span class="k">BY</span> [ใช้กับกี่บัญชี] <span class="k">DESC</span>;
+
+<span class="c">-- แผนก → WC ทั้งหมด</span>
+<span class="k">SELECT</span> Ocrcode, WC <span class="k">FROM</span> cost.ConfigOcrcodeWc <span class="k">ORDER</span> <span class="k">BY</span> WC;</pre></div><div class="tags"><span>ดู config</span><span>ConfigRatio</span><span>ConfigOcrcodeWc</span><span>ToPrcCode</span><span>Ratio</span><span>WC ของแผนก</span></div></div>
+</details><details class="qa" id="new-config" data-cat="3" data-hay="มีแผนกหรือบัญชีใหม่ ต้องตั้ง config ยังไง แผนกใหม่, บัญชีใหม่, ตั้ง config, เพิ่ม config, dp03, dp04, แผนกบริการ, แผนกผลิต, configocrcodewc มีแผนกหรือบัญชีใหม่ ต้องตั้ง config ยังไง ถามก่อนว่าแผนกนั้นเป็นแบบไหน: **แผนกผลิต** (มีเครื่องจักร มีคนงานผลิต) → ลงแผนกตัวเอง ratio = 1 **และต้องผูก wc** ใน `cost.configocrcodewc` · wc นั้นต้องมีการผลิตในแผนขาย (มีฐาน) ไม่งั้นอัตราคิดไม่ได้ **แผนกบริการ** (ควบคุมคุณภาพ จัดซื้อ ซ่อมบำรุง ไอที …) → กระจายเข้าแผนกผลิต 6 แผนก: ตามสัดส่วนที่ฝ่ายบัญชีกำหนด (ใช้แบบเดียวกับแผนกบริการอื่นที่มีอยู่) **บัญชีใหม่ของแผนกเดิม** → ใช้แบบเดียวกับบัญชีอื่นของแผนกนั้น ([ดูแบบ](#view-config)) begin tran;
+
+-- แผนกผลิตใหม่: ลงตัวเอง + ผูก wc
+insert cost.configratio (acctcode, acctname, costtype, prccode, toprccode, ratio)
+values (&#x27;acc002&#x27;, n&#x27;เงินเดือนและค่าจ้างแรงงาน&#x27;, &#x27;dl&#x27;, &#x27;dp03&#x27;, &#x27;dp03&#x27;, 1);
+if not exists (select 1 from cost.configocrcodewc where ocrcode = &#x27;dp03&#x27;)
+    insert cost.configocrcodewc (ocrcode, wc) values (&#x27;dp03&#x27;, &#x27;wc02&#x27;);
+
+-- แผนกบริการใหม่: กระจาย 6 แผนก
+insert cost.configratio (acctcode, acctname, costtype, prccode, toprccode, ratio)
+select &#x27;acc003&#x27;, n&#x27;ค่าใช้จ่ายเกี่ยวกับคอมพิวเตอร์&#x27;, &#x27;oh&#x27;, &#x27;dp04&#x27;, v.toprccode, v.ratio
+from (values (&#x27;prod-a&#x27;,0.40),(&#x27;prod-b&#x27;,0.35),(&#x27;prod-c&#x27;,0.25)) v (toprccode, ratio);
+
+-- ตรวจ 3 ข้อ (ต้องได้ 0 แถวทุกข้อ) → ดูคำถาม &quot;ratio รวมไม่เท่า 1&quot; และ &quot;แผนกปลายทางไม่มี wc&quot;
+-- commit;   /   rollback; อย่าตั้งแผนกบริการให้ลงตัวเอง (เช่น dp01 → dp01) เพราะแผนกบริการไม่มี wc เงินจะหายเงียบ">
+<summary><span class="qt" data-raw="มีแผนกหรือบัญชีใหม่ ต้องตั้ง config ยังไง">มีแผนกหรือบัญชีใหม่ ต้องตั้ง config ยังไง</span><a class="lk" href="#new-config" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>ถามก่อนว่าแผนกนั้นเป็นแบบไหน:</p><ul><li><b>แผนกผลิต</b> (มีเครื่องจักร มีคนงานผลิต) → ลงแผนกตัวเอง Ratio = 1 <b>และต้องผูก WC</b> ใน <code>cost.ConfigOcrcodeWc</code> · WC นั้นต้องมีการผลิตในแผนขาย (มีฐาน) ไม่งั้นอัตราคิดไม่ได้</li><li><b>แผนกบริการ</b> (ควบคุมคุณภาพ จัดซื้อ ซ่อมบำรุง ไอที …) → กระจายเข้าแผนกผลิต 6 แผนก: ตามสัดส่วนที่ฝ่ายบัญชีกำหนด (ใช้แบบเดียวกับแผนกบริการอื่นที่มีอยู่)</li><li><b>บัญชีใหม่ของแผนกเดิม</b> → ใช้แบบเดียวกับบัญชีอื่นของแผนกนั้น (<a href="#view-config">ดูแบบ</a>)</li></ul><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">BEGIN</span> <span class="k">TRAN</span>;
+
+<span class="c">-- แผนกผลิตใหม่: ลงตัวเอง + ผูก WC</span>
+<span class="k">INSERT</span> cost.ConfigRatio (Acctcode, AcctName, CostType, PrcCode, ToPrcCode, Ratio)
+<span class="k">VALUES</span> (<span class="s">'ACC002'</span>, <span class="s">N'เงินเดือนและค่าจ้างแรงงาน'</span>, <span class="s">'DL'</span>, <span class="s">'DP03'</span>, <span class="s">'DP03'</span>, 1);
+<span class="k">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> (<span class="k">SELECT</span> 1 <span class="k">FROM</span> cost.ConfigOcrcodeWc <span class="k">WHERE</span> Ocrcode = <span class="s">'DP03'</span>)
+    <span class="k">INSERT</span> cost.ConfigOcrcodeWc (Ocrcode, WC) <span class="k">VALUES</span> (<span class="s">'DP03'</span>, <span class="s">'WC02'</span>);
+
+<span class="c">-- แผนกบริการใหม่: กระจาย 6 แผนก</span>
+<span class="k">INSERT</span> cost.ConfigRatio (Acctcode, AcctName, CostType, PrcCode, ToPrcCode, Ratio)
+<span class="k">SELECT</span> <span class="s">'ACC003'</span>, <span class="s">N'ค่าใช้จ่ายเกี่ยวกับคอมพิวเตอร์'</span>, <span class="s">'OH'</span>, <span class="s">'DP04'</span>, v.ToPrcCode, v.Ratio
+<span class="k">FROM</span> (<span class="k">VALUES</span> (<span class="s">'PROD-A'</span>,0.40),(<span class="s">'PROD-B'</span>,0.35),(<span class="s">'PROD-C'</span>,0.25)) v (ToPrcCode, Ratio);
+
+<span class="c">-- ตรวจ 3 ข้อ (ต้องได้ 0 แถวทุกข้อ) → ดูคำถาม "Ratio รวมไม่เท่า 1" และ "แผนกปลายทางไม่มี WC"</span>
+<span class="c">-- COMMIT;   /   ROLLBACK;</span></pre></div><div class="box warn"><span class="bl">ระวัง</span>อย่าตั้งแผนกบริการให้ลงตัวเอง (เช่น DP01 → DP01) เพราะแผนกบริการไม่มี WC เงินจะหายเงียบ</div><div class="tags"><span>แผนกใหม่</span><span>บัญชีใหม่</span><span>ตั้ง config</span><span>เพิ่ม config</span><span>DP03</span><span>DP04</span><span>แผนกบริการ</span><span>แผนกผลิต</span><span>ConfigOcrcodeWc</span></div></div>
+</details><details class="qa" id="ratio-sum" data-cat="3" data-hay="ratio รวมไม่เท่า 1 / config มีแถวซ้ำ ratio, รวมไม่เท่า 1, ratio_sum, แถวซ้ำ, ปันเกิน, ซ้ำ config ratio รวมไม่เท่า 1 / config มีแถวซ้ำ -- ratio รวมต่อคู่ต้อง = 1
+select acctcode, prccode, sum(ratio) as ratiosum, count(*) as [แถว]
+from cost.configratio
+group by acctcode, prccode
+having abs(sum(ratio) - 1) &gt; 0.0001;
+
+-- แถวที่ซ้ำเป๊ะ (บัญชี + แผนก + ปลายทาง เดียวกัน)
+select acctcode, prccode, toprccode, count(*) as [แถว]
+from cost.configratio
+group by acctcode, prccode, toprccode
+having count(*) &gt; 1; ต้องได้ 0 แถวทั้งสองคำสั่ง · ratio รวม 2 = เงินถูกปันสองเท่า">
+<summary><span class="qt" data-raw="Ratio รวมไม่เท่า 1 / config มีแถวซ้ำ">Ratio รวมไม่เท่า 1 / config มีแถวซ้ำ</span><a class="lk" href="#ratio-sum" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="c">-- Ratio รวมต่อคู่ต้อง = 1</span>
+<span class="k">SELECT</span> Acctcode, PrcCode, <span class="k">SUM</span>(Ratio) <span class="k">AS</span> RatioSum, <span class="k">COUNT</span>(*) <span class="k">AS</span> [แถว]
+<span class="k">FROM</span> cost.ConfigRatio
+<span class="k">GROUP</span> <span class="k">BY</span> Acctcode, PrcCode
+<span class="k">HAVING</span> <span class="k">ABS</span>(<span class="k">SUM</span>(Ratio) - 1) &gt; 0.0001;
+
+<span class="c">-- แถวที่ซ้ำเป๊ะ (บัญชี + แผนก + ปลายทาง เดียวกัน)</span>
+<span class="k">SELECT</span> Acctcode, PrcCode, ToPrcCode, <span class="k">COUNT</span>(*) <span class="k">AS</span> [แถว]
+<span class="k">FROM</span> cost.ConfigRatio
+<span class="k">GROUP</span> <span class="k">BY</span> Acctcode, PrcCode, ToPrcCode
+<span class="k">HAVING</span> <span class="k">COUNT</span>(*) &gt; 1;</pre></div><div class="box ok"><span class="bl">ผ่านเมื่อ / ผลที่ควรได้</span>ต้องได้ 0 แถวทั้งสองคำสั่ง · Ratio รวม 2 = เงินถูกปันสองเท่า</div><div class="tags"><span>Ratio</span><span>รวมไม่เท่า 1</span><span>RATIO_SUM</span><span>แถวซ้ำ</span><span>ปันเกิน</span><span>ซ้ำ config</span></div></div>
+</details><details class="qa" id="no-wc" data-cat="3" data-hay="แผนกปลายทางไม่มี wc (เงินหายเงียบ) ไม่มี wc, toprc_nowc, หายเงียบ, configocrcodewc, toprccode, ปันขาด แผนกปลายทางไม่มี wc (เงินหายเงียบ) proc ใช้ left join → ถ้าแผนกปลายทางไม่มี wc เงินก้อนนั้นหายไป **ไม่มี error** select c.toprccode, sum(try_convert(decimal(18, 2), a.amount) * c.ratio) as [บาทที่จะหาย]
+from bt_oh_allocation a
+join cost.configratio c on c.acctcode = a.acctcode and c.prccode = a.ocrcode
+where a.cat = 5
+  and not exists (select 1 from cost.configocrcodewc w where w.ocrcode = c.toprccode)
+group by c.toprccode; ต้องได้ 0 แถว">
+<summary><span class="qt" data-raw="แผนกปลายทางไม่มี WC (เงินหายเงียบ)">แผนกปลายทางไม่มี WC (เงินหายเงียบ)</span><a class="lk" href="#no-wc" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>proc ใช้ LEFT JOIN → ถ้าแผนกปลายทางไม่มี WC เงินก้อนนั้นหายไป <b>ไม่มี error</b></p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> c.ToPrcCode, <span class="k">SUM</span>(<span class="k">TRY_CONVERT</span>(<span class="k">decimal</span>(18, 2), a.Amount) * c.Ratio) <span class="k">AS</span> [บาทที่จะหาย]
+<span class="k">FROM</span> BT_OH_Allocation a
+<span class="k">JOIN</span> cost.ConfigRatio c <span class="k">ON</span> c.Acctcode = a.Acctcode <span class="k">AND</span> c.PrcCode = a.Ocrcode
+<span class="k">WHERE</span> a.Cat = 5
+  <span class="k">AND</span> <span class="k">NOT</span> <span class="k">EXISTS</span> (<span class="k">SELECT</span> 1 <span class="k">FROM</span> cost.ConfigOcrcodeWc w <span class="k">WHERE</span> w.Ocrcode = c.ToPrcCode)
+<span class="k">GROUP</span> <span class="k">BY</span> c.ToPrcCode;</pre></div><div class="box ok"><span class="bl">ผ่านเมื่อ / ผลที่ควรได้</span>ต้องได้ 0 แถว</div><div class="tags"><span>ไม่มี WC</span><span>TOPRC_NOWC</span><span>หายเงียบ</span><span>ConfigOcrcodeWc</span><span>ToPrcCode</span><span>ปันขาด</span></div></div>
+</details></section><section class="cat" data-cat="4"><h2>ฐานและอัตรา <small>8</small></h2><details class="qa" id="base" data-cat="4" data-hay="ฐานของแต่ละ wc (ชั่วโมงเครื่อง / กก. / ชั่วโมงคน) ดูยังไง ฐาน, base, ชั่วโมงเครื่อง, ชั่วโมงคน, cost.mguse, bt_mguse, predata ฐานของแต่ละ wc (ชั่วโมงเครื่อง / กก. / ชั่วโมงคน) ดูยังไง select wc,
+       sum(qtykg / nullif(capperhour, 0))                    as [ชม.เครื่อง · ฐาน oh/h],
+       sum(qtykg)                                            as [กก. · ฐาน oh/k],
+       sum(qtykg / nullif(capperhour, 0) * headcounts_shift) as [ชม.คน · ฐาน dl]
+from cost.mguse
+group by wc
+order by wc; ฐานสร้างจากแผนขาย × bom × routing ด้วย `bg.createmguse` (ปุ่ม predata) wc ที่มีค่าใช้จ่ายแต่ฐาน = 0 → อัตราคิดไม่ได้ เงินหาย">
+<summary><span class="qt" data-raw="ฐานของแต่ละ WC (ชั่วโมงเครื่อง / กก. / ชั่วโมงคน) ดูยังไง">ฐานของแต่ละ WC (ชั่วโมงเครื่อง / กก. / ชั่วโมงคน) ดูยังไง</span><a class="lk" href="#base" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> wc,
+       <span class="k">SUM</span>(QtyKg / <span class="k">NULLIF</span>(CapPerHour, 0))                    <span class="k">AS</span> [ชม.เครื่อง · ฐาน OH/H],
+       <span class="k">SUM</span>(QtyKg)                                            <span class="k">AS</span> [กก. · ฐาน OH/K],
+       <span class="k">SUM</span>(QtyKg / <span class="k">NULLIF</span>(CapPerHour, 0) * Headcounts_shift) <span class="k">AS</span> [ชม.คน · ฐาน DL]
+<span class="k">FROM</span> cost.MGUSE
+<span class="k">GROUP</span> <span class="k">BY</span> wc
+<span class="k">ORDER</span> <span class="k">BY</span> wc;</pre></div><ul><li>ฐานสร้างจากแผนขาย × BOM × Routing ด้วย <code>bg.CreateMGUse</code> (ปุ่ม PreData)</li><li>WC ที่มีค่าใช้จ่ายแต่ฐาน = 0 → อัตราคิดไม่ได้ เงินหาย</li></ul><div class="tags"><span>ฐาน</span><span>base</span><span>ชั่วโมงเครื่อง</span><span>ชั่วโมงคน</span><span>cost.MGUSE</span><span>BT_MGUse</span><span>PreData</span></div></div>
+</details><details class="qa" id="expected-rate" data-cat="4" data-hay="อัตราที่ควรได้ คำนวณมือยังไง คำนวณอัตรา, ตรวจอัตรา, อัตราที่ควรได้, คิดมือ, rate อัตราที่ควรได้ คำนวณมือยังไง **อัตรา = ค่าใช้จ่ายที่เข้า wc ÷ ฐานของ wc** (ทุก mg ใน wc เดียวกันได้อัตราเท่ากัน) ;with e as (
+    select w.wc collate database_default as wc, a.costtype, a.alloctype,
+           sum(try_convert(decimal(18, 6), a.amount) * c.ratio) as amt
+    from bt_oh_allocation a
+    join cost.configratio c     on c.acctcode = a.acctcode and c.prccode = a.ocrcode
+    join cost.configocrcodewc w on w.ocrcode = c.toprccode
+    where a.cat = 5
+    group by w.wc, a.costtype, a.alloctype
+), b as (
+    select wc collate database_default as wc,
+           sum(qtykg / nullif(capperhour, 0))                    as h,
+           sum(qtykg)                                            as k,
+           sum(qtykg / nullif(capperhour, 0) * headcounts_shift) as mh
+    from cost.mguse
+    group by wc
+)
+select e.wc, e.costtype, e.alloctype, e.amt as [ค่าใช้จ่ายเข้า wc],
+       x.base as [ฐาน], e.amt / nullif(x.base, 0) as [อัตราที่ควรได้]
+from e
+left join b on b.wc = e.wc
+cross apply (select case when e.costtype = &#x27;dl&#x27; then b.mh
+                         when e.alloctype = &#x27;k&#x27; then b.k else b.h end as base) x
+order by e.wc, e.costtype, e.alloctype; ตัวอย่าง: wc หนึ่งมีค่าใช้จ่าย oh แบบชั่วโมง 1,000,000 บาท ฐาน 20,000 ชม. → อัตรา **50** บาท/ชม. · ทุก mg ใน wc นั้นต้องได้ ohrate = 50 ตัวอย่างคำนวณครบทุก mg: `analysis/expected_rates_2027.xlsx`">
+<summary><span class="qt" data-raw="อัตราที่ควรได้ คำนวณมือยังไง">อัตราที่ควรได้ คำนวณมือยังไง</span><a class="lk" href="#expected-rate" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p><b>อัตรา = ค่าใช้จ่ายที่เข้า WC ÷ ฐานของ WC</b> (ทุก MG ใน WC เดียวกันได้อัตราเท่ากัน)</p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql">;<span class="k">WITH</span> e <span class="k">AS</span> (
+    <span class="k">SELECT</span> w.WC <span class="k">COLLATE</span> <span class="k">DATABASE_DEFAULT</span> <span class="k">AS</span> WC, a.CostType, a.AllocType,
+           <span class="k">SUM</span>(<span class="k">TRY_CONVERT</span>(<span class="k">decimal</span>(18, 6), a.Amount) * c.Ratio) <span class="k">AS</span> Amt
+    <span class="k">FROM</span> BT_OH_Allocation a
+    <span class="k">JOIN</span> cost.ConfigRatio c     <span class="k">ON</span> c.Acctcode = a.Acctcode <span class="k">AND</span> c.PrcCode = a.Ocrcode
+    <span class="k">JOIN</span> cost.ConfigOcrcodeWc w <span class="k">ON</span> w.Ocrcode = c.ToPrcCode
+    <span class="k">WHERE</span> a.Cat = 5
+    <span class="k">GROUP</span> <span class="k">BY</span> w.WC, a.CostType, a.AllocType
+), b <span class="k">AS</span> (
+    <span class="k">SELECT</span> wc <span class="k">COLLATE</span> <span class="k">DATABASE_DEFAULT</span> <span class="k">AS</span> WC,
+           <span class="k">SUM</span>(QtyKg / <span class="k">NULLIF</span>(CapPerHour, 0))                    <span class="k">AS</span> H,
+           <span class="k">SUM</span>(QtyKg)                                            <span class="k">AS</span> K,
+           <span class="k">SUM</span>(QtyKg / <span class="k">NULLIF</span>(CapPerHour, 0) * Headcounts_shift) <span class="k">AS</span> MH
+    <span class="k">FROM</span> cost.MGUSE
+    <span class="k">GROUP</span> <span class="k">BY</span> wc
+)
+<span class="k">SELECT</span> e.WC, e.CostType, e.AllocType, e.Amt <span class="k">AS</span> [ค่าใช้จ่ายเข้า WC],
+       x.Base <span class="k">AS</span> [ฐาน], e.Amt / <span class="k">NULLIF</span>(x.Base, 0) <span class="k">AS</span> [อัตราที่ควรได้]
+<span class="k">FROM</span> e
+<span class="k">LEFT</span> <span class="k">JOIN</span> b <span class="k">ON</span> b.WC = e.WC
+<span class="k">CROSS</span> <span class="k">APPLY</span> (<span class="k">SELECT</span> <span class="k">CASE</span> <span class="k">WHEN</span> e.CostType = <span class="s">'DL'</span> <span class="k">THEN</span> b.MH
+                         <span class="k">WHEN</span> e.AllocType = <span class="s">'K'</span> <span class="k">THEN</span> b.K <span class="k">ELSE</span> b.H <span class="k">END</span> <span class="k">AS</span> Base) x
+<span class="k">ORDER</span> <span class="k">BY</span> e.WC, e.CostType, e.AllocType;</pre></div><p>ตัวอย่าง: WC หนึ่งมีค่าใช้จ่าย OH แบบชั่วโมง 1,000,000 บาท ฐาน 20,000 ชม. → อัตรา <b>50</b> บาท/ชม. · ทุก MG ใน WC นั้นต้องได้ OHRate = 50</p><div class="box note">ตัวอย่างคำนวณครบทุก MG: <code>analysis/Expected_Rates_2027.xlsx</code></div><div class="tags"><span>คำนวณอัตรา</span><span>ตรวจอัตรา</span><span>อัตราที่ควรได้</span><span>คิดมือ</span><span>rate</span></div></div>
+</details><details class="qa" id="set-rates" data-cat="4" data-hay="ตั้งอัตรายังไง (ห้ามกด allocate main) ตั้งอัตรา, allocate, calrate, calratekg, calratehour, calratedlhour, calrate_varfix, &#x27;n&#x27;, run_rates ตั้งอัตรายังไง (ห้ามกด allocate main) ใช้ `sql/alloc/run_rates_2027.sql` (รันทีละส่วน) สรุปคำสั่ง: select @@trancount;              -- ต้องได้ 0
+exec bg.createmguse;             -- สร้างฐาน (= predata)
+exec bg.createtableratemas;
+-- สำรองอัตราเดิมก่อน (ดูคำถาม &quot;สำรองตาราง&quot;)
+exec bg.calratekg      &#x27;n&#x27;;      -- &#x27;n&#x27; = บันทึกจริง
+exec bg.calratehour    &#x27;n&#x27;;
+exec bg.calratedlhour  &#x27;n&#x27;;      -- ต้องรันหลัง hour/kg
+exec bg.calrate_varfix &#x27;fix&#x27;;    -- อย่างละครั้งเท่านั้น
+exec bg.calrate_varfix &#x27;var&#x27;;
+select @@trancount;              -- &gt; 0 ให้ commit อัตราเปลี่ยนจริง ([เช็คข้อนี้](#rates-saved)) · ใกล้กับ [อัตราที่ควรได้](#expected-rate) · @@trancount = 0 ถ้าตั้งอัตราใหม่ ต้องรันต้นทุนแบบ reset (`&#x27;y&#x27;`) ตัวที่เคยคิดไว้จะได้ใช้อัตราใหม่">
+<summary><span class="qt" data-raw="ตั้งอัตรายังไง (ห้ามกด Allocate Main)">ตั้งอัตรายังไง (ห้ามกด Allocate Main)</span><a class="lk" href="#set-rates" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>ใช้ <code>sql/alloc/run_rates_2027.sql</code> (รันทีละส่วน) สรุปคำสั่ง:</p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> @@TRANCOUNT;              <span class="c">-- ต้องได้ 0</span>
+<span class="k">EXEC</span> bg.CreateMGUse;             <span class="c">-- สร้างฐาน (= PreData)</span>
+<span class="k">EXEC</span> bg.CreateTableRateMas;
+<span class="c">-- สำรองอัตราเดิมก่อน (ดูคำถาม "สำรองตาราง")</span>
+<span class="k">EXEC</span> bg.CalRateKG      <span class="s">'N'</span>;      <span class="c">-- 'N' = บันทึกจริง</span>
+<span class="k">EXEC</span> bg.CalRateHour    <span class="s">'N'</span>;
+<span class="k">EXEC</span> bg.CalRateDLHour  <span class="s">'N'</span>;      <span class="c">-- ต้องรันหลัง Hour/KG</span>
+<span class="k">EXEC</span> bg.CalRate_VarFix <span class="s">'FIX'</span>;    <span class="c">-- อย่างละครั้งเท่านั้น</span>
+<span class="k">EXEC</span> bg.CalRate_VarFix <span class="s">'VAR'</span>;
+<span class="k">SELECT</span> @@TRANCOUNT;              <span class="c">-- &gt; 0 ให้ COMMIT</span></pre></div><div class="box ok"><span class="bl">ผ่านเมื่อ / ผลที่ควรได้</span>อัตราเปลี่ยนจริง (<a href="#rates-saved">เช็คข้อนี้</a>) · ใกล้กับ <a href="#expected-rate">อัตราที่ควรได้</a> · @@TRANCOUNT = 0</div><div class="box warn"><span class="bl">ระวัง</span>ถ้าตั้งอัตราใหม่ ต้องรันต้นทุนแบบ Reset (<code>'Y'</code>) ตัวที่เคยคิดไว้จะได้ใช้อัตราใหม่</div><div class="tags"><span>ตั้งอัตรา</span><span>Allocate</span><span>CalRate</span><span>CalRateKG</span><span>CalRateHour</span><span>CalRateDLHour</span><span>CalRate_VarFix</span><span>&#x27;N&#x27;</span><span>run_rates</span></div></div>
+</details><details class="qa" id="allocate-bug" data-cat="4" data-hay="กด allocate main ขึ้น &quot;เสร็จสิ้น&quot; แต่ส่วนต่างเท่าเดิม allocate main, เสร็จสิ้น, เหมือนเดิม, isreport, calrate, อัตราไม่เปลี่ยน, ไม่บันทึก กด allocate main ขึ้น &quot;เสร็จสิ้น&quot; แต่ส่วนต่างเท่าเดิม `bg.calrate` (ปุ่ม allocate main) คอมเมนต์พารามิเตอร์ทิ้งแล้วเขียนไว้ตายตัว `declare @isreport varchar(1) = &#x27;y&#x27;` → proc ย่อยทำงานแบบ **รายงานอย่างเดียว ไม่บันทึกอัตรา** กดกี่ครั้งอัตราก็เป็นชุดเดิม แก้ทันที: ตั้งอัตราด้วยคำสั่ง `&#x27;n&#x27;` ([ข้อนี้](#set-rates)) แก้ถาวร (ทีม it): เปิดพารามิเตอร์ `@isreport` ใน `bg.calrate` และลบบรรทัด declare ที่ทับไว้">
+<summary><span class="qt" data-raw="กด Allocate Main ขึ้น &quot;เสร็จสิ้น&quot; แต่ส่วนต่างเท่าเดิม">กด Allocate Main ขึ้น "เสร็จสิ้น" แต่ส่วนต่างเท่าเดิม</span><a class="lk" href="#allocate-bug" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p><code>bg.CalRate</code> (ปุ่ม Allocate Main) คอมเมนต์พารามิเตอร์ทิ้งแล้วเขียนไว้ตายตัว <code>declare @IsReport Varchar(1) = 'Y'</code> → proc ย่อยทำงานแบบ <b>รายงานอย่างเดียว ไม่บันทึกอัตรา</b> กดกี่ครั้งอัตราก็เป็นชุดเดิม</p><ul><li>แก้ทันที: ตั้งอัตราด้วยคำสั่ง <code>'N'</code> (<a href="#set-rates">ข้อนี้</a>)</li><li>แก้ถาวร (ทีม IT): เปิดพารามิเตอร์ <code>@IsReport</code> ใน <code>bg.CalRate</code> และลบบรรทัด declare ที่ทับไว้</li></ul><div class="tags"><span>Allocate Main</span><span>เสร็จสิ้น</span><span>เหมือนเดิม</span><span>IsReport</span><span>CalRate</span><span>อัตราไม่เปลี่ยน</span><span>ไม่บันทึก</span></div></div>
+</details><details class="qa" id="rates-saved" data-cat="4" data-hay="เช็คว่าอัตราถูกบันทึกจริง อัตราเปลี่ยนไหม, เทียบอัตรา, cost_ratehour, cost_ratekg, ohrate, dlrate, เท่า เช็คว่าอัตราถูกบันทึกจริง -- อัตราของ wc หนึ่ง
+select &#x27;h&#x27; as [ชนิด], wc, mg, ohrate, ohfix, ohvar, dlrate from cost_ratehour where wc = &#x27;wc03&#x27;
+union all
+select &#x27;k&#x27;, wc, mg, ohrate, ohfix, ohvar, dlrate from cost_ratekg where wc = &#x27;wc03&#x27;;
+
+-- เทียบกับที่สำรองไว้ (เปลี่ยนชื่อตาราง backup ให้ตรง)
+select n.wc, n.mg, o.ohrate as [เก่า], n.ohrate as [ใหม่],
+       convert(decimal(9, 2), n.ohrate / nullif(o.ohrate, 0)) as [เท่า]
+from cost_ratehour n
+left join temp.cost_ratehour_bak20280915 o on o.mg = n.mg
+order by n.wc, n.mg; &quot;เท่า&quot; = 1.00 ทุกแถว → **ไม่ถูกบันทึก** (ลืม commit / กดปุ่มแทนคำสั่ง) อัตราต้องเท่ากันทุก mg ใน wc เดียวกัน &quot;เก่า&quot; = null → mg ใหม่ของปี (ดีที่มีแถวแล้ว)">
+<summary><span class="qt" data-raw="เช็คว่าอัตราถูกบันทึกจริง">เช็คว่าอัตราถูกบันทึกจริง</span><a class="lk" href="#rates-saved" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="c">-- อัตราของ WC หนึ่ง</span>
+<span class="k">SELECT</span> <span class="s">'H'</span> <span class="k">AS</span> [ชนิด], WC, MG, OHRate, OHFix, OHVar, DLRate <span class="k">FROM</span> COST_RateHour <span class="k">WHERE</span> WC = <span class="s">'WC03'</span>
+<span class="k">UNION</span> <span class="k">ALL</span>
+<span class="k">SELECT</span> <span class="s">'K'</span>, WC, MG, OHRate, OHFix, OHVar, DLRate <span class="k">FROM</span> COST_RateKG <span class="k">WHERE</span> WC = <span class="s">'WC03'</span>;
+
+<span class="c">-- เทียบกับที่สำรองไว้ (เปลี่ยนชื่อตาราง backup ให้ตรง)</span>
+<span class="k">SELECT</span> n.WC, n.MG, o.OHRate <span class="k">AS</span> [เก่า], n.OHRate <span class="k">AS</span> [ใหม่],
+       <span class="k">CONVERT</span>(<span class="k">decimal</span>(9, 2), n.OHRate / <span class="k">NULLIF</span>(o.OHRate, 0)) <span class="k">AS</span> [เท่า]
+<span class="k">FROM</span> COST_RateHour n
+<span class="k">LEFT</span> <span class="k">JOIN</span> temp.COST_RateHour_bak20280915 o <span class="k">ON</span> o.MG = n.MG
+<span class="k">ORDER</span> <span class="k">BY</span> n.WC, n.MG;</pre></div><ul><li>"เท่า" = 1.00 ทุกแถว → <b>ไม่ถูกบันทึก</b> (ลืม COMMIT / กดปุ่มแทนคำสั่ง)</li><li>อัตราต้องเท่ากันทุก MG ใน WC เดียวกัน</li><li>"เก่า" = NULL → MG ใหม่ของปี (ดีที่มีแถวแล้ว)</li></ul><div class="tags"><span>อัตราเปลี่ยนไหม</span><span>เทียบอัตรา</span><span>COST_RateHour</span><span>COST_RateKG</span><span>OHRate</span><span>DLRate</span><span>เท่า</span></div></div>
+</details><details class="qa" id="mg-norate" data-cat="4" data-hay="mg ไหนยังไม่มีแถวอัตรา (สินค้าได้ dl/oh = 0) mg ใหม่, ไม่มีอัตรา, mg_norate, dl = 0, oh = 0, ratehour_none, ratekg_none mg ไหนยังไม่มีแถวอัตรา (สินค้าได้ dl/oh = 0) select distinct u.wc, u.mg,
+       case when not exists (select 1 from cost_ratehour h where h.mg = u.mg collate database_default) then &#x27;ไม่มี&#x27; else &#x27;&#x27; end as [ratehour],
+       case when not exists (select 1 from cost_ratekg   k where k.mg = u.mg collate database_default) then &#x27;ไม่มี&#x27; else &#x27;&#x27; end as [ratekg]
+from cost.mguse u
+where not exists (select 1 from cost_ratehour h where h.mg = u.mg collate database_default)
+   or not exists (select 1 from cost_ratekg   k where k.mg = u.mg collate database_default)
+order by u.wc, u.mg; แถวอัตราถูกสร้างใหม่ทุกครั้งที่ตั้งอัตรา **เฉพาะ wc ที่มีค่าใช้จ่ายให้ปัน** → wc ที่ไม่มีค่าใช้จ่ายเลย (wc04, wc05) จะไม่มีแถว เป็นเรื่องปกติถ้ายืนยันแล้ว wc ที่มีค่าใช้จ่ายแต่ mg ไม่มีแถว → รัน predata แล้วตั้งอัตราใหม่">
+<summary><span class="qt" data-raw="MG ไหนยังไม่มีแถวอัตรา (สินค้าได้ DL/OH = 0)">MG ไหนยังไม่มีแถวอัตรา (สินค้าได้ DL/OH = 0)</span><a class="lk" href="#mg-norate" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> <span class="k">DISTINCT</span> u.wc, u.MG,
+       <span class="k">CASE</span> <span class="k">WHEN</span> <span class="k">NOT</span> <span class="k">EXISTS</span> (<span class="k">SELECT</span> 1 <span class="k">FROM</span> COST_RateHour h <span class="k">WHERE</span> h.MG = u.MG <span class="k">COLLATE</span> <span class="k">DATABASE_DEFAULT</span>) <span class="k">THEN</span> <span class="s">'ไม่มี'</span> <span class="k">ELSE</span> <span class="s">''</span> <span class="k">END</span> <span class="k">AS</span> [RateHour],
+       <span class="k">CASE</span> <span class="k">WHEN</span> <span class="k">NOT</span> <span class="k">EXISTS</span> (<span class="k">SELECT</span> 1 <span class="k">FROM</span> COST_RateKG   k <span class="k">WHERE</span> k.MG = u.MG <span class="k">COLLATE</span> <span class="k">DATABASE_DEFAULT</span>) <span class="k">THEN</span> <span class="s">'ไม่มี'</span> <span class="k">ELSE</span> <span class="s">''</span> <span class="k">END</span> <span class="k">AS</span> [RateKG]
+<span class="k">FROM</span> cost.MGUSE u
+<span class="k">WHERE</span> <span class="k">NOT</span> <span class="k">EXISTS</span> (<span class="k">SELECT</span> 1 <span class="k">FROM</span> COST_RateHour h <span class="k">WHERE</span> h.MG = u.MG <span class="k">COLLATE</span> <span class="k">DATABASE_DEFAULT</span>)
+   <span class="k">OR</span> <span class="k">NOT</span> <span class="k">EXISTS</span> (<span class="k">SELECT</span> 1 <span class="k">FROM</span> COST_RateKG   k <span class="k">WHERE</span> k.MG = u.MG <span class="k">COLLATE</span> <span class="k">DATABASE_DEFAULT</span>)
+<span class="k">ORDER</span> <span class="k">BY</span> u.wc, u.MG;</pre></div><ul><li>แถวอัตราถูกสร้างใหม่ทุกครั้งที่ตั้งอัตรา <b>เฉพาะ WC ที่มีค่าใช้จ่ายให้ปัน</b> → WC ที่ไม่มีค่าใช้จ่ายเลย (WC04, WC05) จะไม่มีแถว เป็นเรื่องปกติถ้ายืนยันแล้ว</li><li>WC ที่มีค่าใช้จ่ายแต่ MG ไม่มีแถว → รัน PreData แล้วตั้งอัตราใหม่</li></ul><div class="tags"><span>MG ใหม่</span><span>ไม่มีอัตรา</span><span>MG_NORATE</span><span>DL = 0</span><span>OH = 0</span><span>RATEHOUR_NONE</span><span>RATEKG_NONE</span></div></div>
+</details><details class="qa" id="fixvar" data-cat="4" data-hay="ohfix + ohvar ไม่เท่า ohrate fix, var, ohfix, ohvar, คงที่, ผันแปร, fixvar_sum, บวกสะสม, calrate_varfix ohfix + ohvar ไม่เท่า ohrate `bg.calratekgfixvar` **บวกสะสม** ทุกครั้งที่รัน ถ้ารัน varfix ซ้ำ ค่าจะโตขึ้นเรื่อยๆ select &#x27;h&#x27; as [ชนิด], wc, mg, ohrate, ohfix + ohvar as [fix+var],
+       (ohfix + ohvar) / nullif(ohrate, 0) as [ควร = 1]
+from cost_ratehour
+union all
+select &#x27;k&#x27;, wc, mg, ohrate, ohfix + ohvar, (ohfix + ohvar) / nullif(ohrate, 0)
+from cost_ratekg
+order by 1, 2, 3; คอลัมน์ &quot;ควร = 1&quot; ใกล้ 1.00 ทุกแถว · ถ้าไม่ใช่ ให้ตั้งอัตราใหม่ทั้งชุดแล้วรัน varfix fix / var อย่างละครั้ง เรื่องนี้ไม่กระทบยอดปันรวม กระทบเฉพาะรายงานแยกคงที่/ผันแปร">
+<summary><span class="qt" data-raw="OHFix + OHVar ไม่เท่า OHRate">OHFix + OHVar ไม่เท่า OHRate</span><a class="lk" href="#fixvar" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p><code>bg.CalRateKGFixVar</code> <b>บวกสะสม</b> ทุกครั้งที่รัน ถ้ารัน VarFix ซ้ำ ค่าจะโตขึ้นเรื่อยๆ</p><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> <span class="s">'H'</span> <span class="k">AS</span> [ชนิด], WC, MG, OHRate, OHFix + OHVar <span class="k">AS</span> [Fix+Var],
+       (OHFix + OHVar) / <span class="k">NULLIF</span>(OHRate, 0) <span class="k">AS</span> [ควร = 1]
+<span class="k">FROM</span> COST_RateHour
+<span class="k">UNION</span> <span class="k">ALL</span>
+<span class="k">SELECT</span> <span class="s">'K'</span>, WC, MG, OHRate, OHFix + OHVar, (OHFix + OHVar) / <span class="k">NULLIF</span>(OHRate, 0)
+<span class="k">FROM</span> COST_RateKG
+<span class="k">ORDER</span> <span class="k">BY</span> 1, 2, 3;</pre></div><div class="box ok"><span class="bl">ผ่านเมื่อ / ผลที่ควรได้</span>คอลัมน์ "ควร = 1" ใกล้ 1.00 ทุกแถว · ถ้าไม่ใช่ ให้ตั้งอัตราใหม่ทั้งชุดแล้วรัน VarFix FIX / VAR อย่างละครั้ง</div><div class="box note">เรื่องนี้ไม่กระทบยอดปันรวม กระทบเฉพาะรายงานแยกคงที่/ผันแปร</div><div class="tags"><span>Fix</span><span>Var</span><span>OHFix</span><span>OHVar</span><span>คงที่</span><span>ผันแปร</span><span>FIXVAR_SUM</span><span>บวกสะสม</span><span>CalRate_VarFix</span></div></div>
+</details><details class="qa" id="wc-noexpense" data-cat="4" data-hay="wc มีการผลิต แต่อัตรา = 0 อัตรา 0, wc_noexpense, ไม่มีค่าใช้จ่าย, wc04, wc05, จ้างผลิต wc มีการผลิต แต่อัตรา = 0 ไม่มีค่าใช้จ่ายไหลมาถึง wc นั้น (ไม่มีแผนกผูก หรือแผนกนั้นไม่มีงบ) → สินค้าที่ผ่าน wc นี้ได้ dl/oh = 0 wc จ้างผลิต (wc05) คิดต้นทุนจากราคาจ้างอยู่แล้ว → ถูกต้อง wc อื่น → ถามบัญชีว่าค่าใช้จ่ายของ wc นี้อยู่ที่แผนกไหน แล้วผูก wc ([ข้อนี้](#new-config))">
+<summary><span class="qt" data-raw="WC มีการผลิต แต่อัตรา = 0">WC มีการผลิต แต่อัตรา = 0</span><a class="lk" href="#wc-noexpense" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>ไม่มีค่าใช้จ่ายไหลมาถึง WC นั้น (ไม่มีแผนกผูก หรือแผนกนั้นไม่มีงบ) → สินค้าที่ผ่าน WC นี้ได้ DL/OH = 0</p><ul><li>WC จ้างผลิต (WC05) คิดต้นทุนจากราคาจ้างอยู่แล้ว → ถูกต้อง</li><li>WC อื่น → ถามบัญชีว่าค่าใช้จ่ายของ WC นี้อยู่ที่แผนกไหน แล้วผูก WC (<a href="#new-config">ข้อนี้</a>)</li></ul><div class="tags"><span>อัตรา 0</span><span>WC_NOEXPENSE</span><span>ไม่มีค่าใช้จ่าย</span><span>WC04</span><span>WC05</span><span>จ้างผลิต</span></div></div>
+</details></section><section class="cat" data-cat="5"><h2>คิดต้นทุนและตรวจส่วนต่าง <small>6</small></h2><details class="qa" id="run-cost" data-cat="5" data-hay="รันต้นทุนยังไง reset กับ run cost 2 ต่างกันยังไง run cost, caldmbudget3, reset, run cost 2, คิดต้นทุน, รันต้นทุน รันต้นทุนยังไง reset กับ run cost 2 ต่างกันยังไง exec bg.caldmbudget3 &#x27;2028&#x27;, &#x27;y&#x27;;   -- &#x27;y&#x27; = ล้างผลที่คิดไว้แล้วคิดใหม่ทั้งหมด (ใช้เวลานาน) **reset (`&#x27;y&#x27;`)** — ใช้ทุกครั้งหลังตั้งอัตราใหม่ / แก้ราคา ตัวที่เคยคิดไว้ถึงจะใช้ค่าใหม่ **run cost 2 (ต่อ)** — คิดต่อเฉพาะตัวที่ยังไม่มีต้นทุน ใช้เมื่อรันค้างกลางทาง แล้วแก้ข้อมูลของตัวที่ค้าง ท้ายสุด proc นี้เรียก `bg.createmguse` อีกรอบ ถ้าข้อมูลเปลี่ยนระหว่างนั้น ฐานจะไม่ตรงกับอัตรา">
+<summary><span class="qt" data-raw="รันต้นทุนยังไง Reset กับ Run Cost 2 ต่างกันยังไง">รันต้นทุนยังไง Reset กับ Run Cost 2 ต่างกันยังไง</span><a class="lk" href="#run-cost" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">EXEC</span> bg.CalDMBudget3 <span class="s">'2028'</span>, <span class="s">'Y'</span>;   <span class="c">-- 'Y' = ล้างผลที่คิดไว้แล้วคิดใหม่ทั้งหมด (ใช้เวลานาน)</span></pre></div><ul><li><b>Reset (<code>'Y'</code>)</b> — ใช้ทุกครั้งหลังตั้งอัตราใหม่ / แก้ราคา ตัวที่เคยคิดไว้ถึงจะใช้ค่าใหม่</li><li><b>Run Cost 2 (ต่อ)</b> — คิดต่อเฉพาะตัวที่ยังไม่มีต้นทุน ใช้เมื่อรันค้างกลางทาง แล้วแก้ข้อมูลของตัวที่ค้าง</li></ul><div class="box note">ท้ายสุด proc นี้เรียก <code>bg.CreateMGUse</code> อีกรอบ ถ้าข้อมูลเปลี่ยนระหว่างนั้น ฐานจะไม่ตรงกับอัตรา</div><div class="tags"><span>Run Cost</span><span>CalDMBudget3</span><span>Reset</span><span>Run Cost 2</span><span>คิดต้นทุน</span><span>รันต้นทุน</span></div></div>
+</details><details class="qa" id="read-diff" data-cat="5" data-hay="อ่านผล getdiffallocation ยังไง diff, getdiffallocation, ส่วนต่าง, load_amt, allocamt, diffamt, ปันเกิน, ปันขาด, ชีต all อ่านผล getdiffallocation ยังไง exec bg.getdiffallocation; **load_amt** = ค่าใช้จ่ายตั้งต้นของรหัสนั้น (cat 5) **allocamt** = แผนขาย kg × dl/oh ต่อ kg ของ fg ทุกตัวรวมกัน **diffamt = load_amt − allocamt** · **ติดลบ = ปันเกิน** (ต้นทุนสูงกว่าจริง) · **บวก = ปันขาด** (ต่ำกว่าจริง) ทุกบรรทัดอยู่ในช่วง ±200 บาท (เศษจากการปัดทศนิยมของอัตรา)">
+<summary><span class="qt" data-raw="อ่านผล GetDiffAllocation ยังไง">อ่านผล GetDiffAllocation ยังไง</span><a class="lk" href="#read-diff" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">EXEC</span> bg.GetDiffAllocation;</pre></div><ul><li><b>Load_Amt</b> = ค่าใช้จ่ายตั้งต้นของรหัสนั้น (Cat 5)</li><li><b>AllocAmt</b> = แผนขาย kg × DL/OH ต่อ kg ของ FG ทุกตัวรวมกัน</li><li><b>DiffAmt = Load_Amt − AllocAmt</b> · <b>ติดลบ = ปันเกิน</b> (ต้นทุนสูงกว่าจริง) · <b>บวก = ปันขาด</b> (ต่ำกว่าจริง)</li></ul><div class="box ok"><span class="bl">ผ่านเมื่อ / ผลที่ควรได้</span>ทุกบรรทัดอยู่ในช่วง ±200 บาท (เศษจากการปัดทศนิยมของอัตรา)</div><div class="tags"><span>Diff</span><span>GetDiffAllocation</span><span>ส่วนต่าง</span><span>Load_Amt</span><span>AllocAmt</span><span>DiffAmt</span><span>ปันเกิน</span><span>ปันขาด</span><span>ชีต All</span></div></div>
+</details><details class="qa" id="diff-pattern" data-cat="5" data-hay="ส่วนต่างเป็นแบบนี้ แปลว่าอะไร รูปแบบส่วนต่าง, สาเหตุ, ติดลบทุกบรรทัด, บวกบรรทัดเดียว, h ลบ k บวก ส่วนต่างเป็นแบบนี้ แปลว่าอะไร **ติดลบเกือบทุกบรรทัด** → อัตราเก่า (ไม่ได้บันทึก หรือข้อมูลเปลี่ยนหลังตั้งอัตรา) → [ตั้งอัตราใหม่](#set-rates) **ฝั่ง h ติดลบ ฝั่ง k บวก ขนาดใกล้กัน** → ค่าใช้จ่ายย้ายฐาน h ↔ k แต่อัตราเก่า → ตั้งอัตราใหม่ทั้ง kg และ hour **บวกบรรทัดเดียว ≈ ยอดหนึ่งพอดี** → มีแถวค่าใช้จ่ายที่ไม่ถูกปัน → [หาแถวนั้น](#find-diff-row) **บวกเป็นก้อนหลายบรรทัด** → mg ใหม่ไม่มีอัตรา / wc ไม่มีฐาน → [ข้อนี้](#mg-norate) **ทุกบรรทัดไม่เกิน ±200** → ผ่าน ภาพประกอบ: [ชุดนำเสนอ หน้า 22](../budget-deck/index.html#diff)">
+<summary><span class="qt" data-raw="ส่วนต่างเป็นแบบนี้ แปลว่าอะไร">ส่วนต่างเป็นแบบนี้ แปลว่าอะไร</span><a class="lk" href="#diff-pattern" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><ul><li><b>ติดลบเกือบทุกบรรทัด</b> → อัตราเก่า (ไม่ได้บันทึก หรือข้อมูลเปลี่ยนหลังตั้งอัตรา) → <a href="#set-rates">ตั้งอัตราใหม่</a></li><li><b>ฝั่ง H ติดลบ ฝั่ง K บวก ขนาดใกล้กัน</b> → ค่าใช้จ่ายย้ายฐาน H ↔ K แต่อัตราเก่า → ตั้งอัตราใหม่ทั้ง KG และ Hour</li><li><b>บวกบรรทัดเดียว ≈ ยอดหนึ่งพอดี</b> → มีแถวค่าใช้จ่ายที่ไม่ถูกปัน → <a href="#find-diff-row">หาแถวนั้น</a></li><li><b>บวกเป็นก้อนหลายบรรทัด</b> → MG ใหม่ไม่มีอัตรา / WC ไม่มีฐาน → <a href="#mg-norate">ข้อนี้</a></li><li><b>ทุกบรรทัดไม่เกิน ±200</b> → ผ่าน</li></ul><div class="box note">ภาพประกอบ: <a href="../budget-deck/index.html#diff" target=_blank>ชุดนำเสนอ หน้า 22</a></div><div class="tags"><span>รูปแบบส่วนต่าง</span><span>สาเหตุ</span><span>ติดลบทุกบรรทัด</span><span>บวกบรรทัดเดียว</span><span>H ลบ K บวก</span></div></div>
+</details><details class="qa" id="find-diff-row" data-cat="5" data-hay="diffamt บวกบรรทัดเดียว หาว่ามาจากแถวไหน หาแถว, ยอดโดด, diffamt บวก, เงินหาย, ไม่ถูกปัน diffamt บวกบรรทัดเดียว หาว่ามาจากแถวไหน declare @diff decimal(18, 2) = 12345.67;   -- ← diffamt ที่โดด
+declare @cid  varchar(10)    = &#x27;oh05&#x27;;     -- ← costid ของบรรทัดนั้น
+
+select a.acctcode, a.acctname, a.ocrcode, a.costid, a.alloctype, a.amount,
+       c.toprccode, c.ratio, w.wc
+from bt_oh_allocation a
+left join cost.configratio c     on c.acctcode = a.acctcode and c.prccode = a.ocrcode
+left join cost.configocrcodewc w on w.ocrcode = c.toprccode
+where a.cat = 5 and a.costid = @cid
+  and abs(try_convert(decimal(18, 2), a.amount) - @diff) &lt; 200; คอลัมน์ `wc` ว่าง → แผนกปลายทางไม่มี wc ([ข้อนี้](#no-wc)) `wc` มีค่า → config ถูกแก้หลังตั้งอัตรา → ตั้งอัตราใหม่แล้วรันต้นทุนใหม่">
+<summary><span class="qt" data-raw="DiffAmt บวกบรรทัดเดียว หาว่ามาจากแถวไหน">DiffAmt บวกบรรทัดเดียว หาว่ามาจากแถวไหน</span><a class="lk" href="#find-diff-row" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">DECLARE</span> @diff <span class="k">decimal</span>(18, 2) = 12345.67;   <span class="c">-- ← DiffAmt ที่โดด</span>
+<span class="k">DECLARE</span> @cid  <span class="k">varchar</span>(10)    = <span class="s">'OH05'</span>;     <span class="c">-- ← CostID ของบรรทัดนั้น</span>
+
+<span class="k">SELECT</span> a.Acctcode, a.AcctName, a.Ocrcode, a.CostID, a.AllocType, a.Amount,
+       c.ToPrcCode, c.Ratio, w.WC
+<span class="k">FROM</span> BT_OH_Allocation a
+<span class="k">LEFT</span> <span class="k">JOIN</span> cost.ConfigRatio c     <span class="k">ON</span> c.Acctcode = a.Acctcode <span class="k">AND</span> c.PrcCode = a.Ocrcode
+<span class="k">LEFT</span> <span class="k">JOIN</span> cost.ConfigOcrcodeWc w <span class="k">ON</span> w.Ocrcode = c.ToPrcCode
+<span class="k">WHERE</span> a.Cat = 5 <span class="k">AND</span> a.CostID = @cid
+  <span class="k">AND</span> <span class="k">ABS</span>(<span class="k">TRY_CONVERT</span>(<span class="k">decimal</span>(18, 2), a.Amount) - @diff) &lt; 200;</pre></div><ul><li>คอลัมน์ <code>WC</code> ว่าง → แผนกปลายทางไม่มี WC (<a href="#no-wc">ข้อนี้</a>)</li><li><code>WC</code> มีค่า → config ถูกแก้หลังตั้งอัตรา → ตั้งอัตราใหม่แล้วรันต้นทุนใหม่</li></ul><div class="tags"><span>หาแถว</span><span>ยอดโดด</span><span>DiffAmt บวก</span><span>เงินหาย</span><span>ไม่ถูกปัน</span></div></div>
+</details><details class="qa" id="item-cost" data-cat="5" data-hay="ดูต้นทุนของสินค้า 1 ตัว ต้นทุนสินค้า, cost_budgetcost, cost, dl5, h_oh5, k_oh5, process_dl, ดูต้นทุน ดูต้นทุนของสินค้า 1 ตัว select period, itemcode, source, cost,
+       resin_exwaste, netwaste, pack, ink, other,
+       dl5, h_oh5, k_oh5,
+       process_dl, process_h_oh, process_k_oh, wc
+from cost_budgetcost
+where itemcode = &#x27;fg-0002&#x27;; ทุกคอลัมน์เป็น **บาทต่อ kg** · `source` = manual (ตั้งราคาเอง) หรือ cal (ระบบคิด) `dl5` / `h_oh5` / `k_oh5` = รวมของลูกทุกชั้น + ของขั้นตัวเอง · `process_*` = เฉพาะขั้นตัวเอง `h_ohxx` / `k_ohxx` แยกตาม costid เป็นค่า **× 10000** (หาร 10000 ก่อนอ่าน)">
+<summary><span class="qt" data-raw="ดูต้นทุนของสินค้า 1 ตัว">ดูต้นทุนของสินค้า 1 ตัว</span><a class="lk" href="#item-cost" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> period, itemcode, source, cost,
+       resin_exwaste, netwaste, pack, ink, other,
+       dl5, h_oh5, k_oh5,
+       process_dl, process_h_oh, process_k_oh, wc
+<span class="k">FROM</span> COST_BudgetCost
+<span class="k">WHERE</span> itemcode = <span class="s">'FG-0002'</span>;</pre></div><ul><li>ทุกคอลัมน์เป็น <b>บาทต่อ kg</b> · <code>source</code> = Manual (ตั้งราคาเอง) หรือ Cal (ระบบคิด)</li><li><code>dl5</code> / <code>h_oh5</code> / <code>k_oh5</code> = รวมของลูกทุกชั้น + ของขั้นตัวเอง · <code>process_*</code> = เฉพาะขั้นตัวเอง</li><li><code>h_ohXX</code> / <code>k_ohXX</code> แยกตาม CostID เป็นค่า <b>× 10000</b> (หาร 10000 ก่อนอ่าน)</li></ul><div class="tags"><span>ต้นทุนสินค้า</span><span>COST_BudgetCost</span><span>cost</span><span>dl5</span><span>h_oh5</span><span>k_oh5</span><span>process_dl</span><span>ดูต้นทุน</span></div></div>
+</details><details class="qa" id="item-check" data-cat="5" data-hay="ตรวจต้นทุนแปรสภาพของสินค้าด้วยมือ ตรวจมือ, คำนวณมือ, dl ต่อ kg, oh ต่อ kg, capperhour, ตรวจต้นทุน ตรวจต้นทุนแปรสภาพของสินค้าด้วยมือ ของขั้นตัวเอง (ต่อ 1 kg): **dl** = 1 ÷ capperhour × headcounts_shift × dlrate **oh แบบชั่วโมง** = 1 ÷ capperhour × ohrate (ratehour) **oh แบบกิโล** = ohrate (ratekg) select u.itemcode, u.wc, u.mg, u.capperhour, u.headcounts_shift,
+       1.0 / nullif(u.capperhour, 0) * u.headcounts_shift * h.dlrate as [dl ต่อ kg],
+       1.0 / nullif(u.capperhour, 0) * h.ohrate                    as [oh ชม. ต่อ kg],
+       k.ohrate                                                     as [oh กก. ต่อ kg]
+from cost.mguse u
+left join cost_ratehour h on h.mg = u.mg collate database_default
+left join cost_ratekg   k on k.mg = u.mg collate database_default
+where u.itemcode = &#x27;fg-0002&#x27;; เทียบกับ `process_dl` / `process_h_oh` / `process_k_oh` ใน [cost_budgetcost](#item-cost) ต้องเท่ากัน ตัวอย่าง: เครื่องกำลังผลิต 50 kg/ชม. คน 1 คน/กะ · อัตรา dl 120 / oh ชม. 50 / oh กก. 3 → dl = 1/50 × 1 × 120 = 2.40 · oh ชม. = 50 / 50 = 1.00 · oh กก. 3.00 บาท/kg">
+<summary><span class="qt" data-raw="ตรวจต้นทุนแปรสภาพของสินค้าด้วยมือ">ตรวจต้นทุนแปรสภาพของสินค้าด้วยมือ</span><a class="lk" href="#item-check" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>ของขั้นตัวเอง (ต่อ 1 kg):</p><ul><li><b>DL</b> = 1 ÷ CapPerHour × Headcounts_shift × DLRate</li><li><b>OH แบบชั่วโมง</b> = 1 ÷ CapPerHour × OHRate (RateHour)</li><li><b>OH แบบกิโล</b> = OHRate (RateKG)</li></ul><div class="code"><button class="copy" type="button">คัดลอก</button><pre data-lang="sql"><span class="k">SELECT</span> u.ItemCode, u.wc, u.MG, u.CapPerHour, u.Headcounts_shift,
+       1.0 / <span class="k">NULLIF</span>(u.CapPerHour, 0) * u.Headcounts_shift * h.DLRate <span class="k">AS</span> [DL ต่อ kg],
+       1.0 / <span class="k">NULLIF</span>(u.CapPerHour, 0) * h.OHRate                    <span class="k">AS</span> [OH ชม. ต่อ kg],
+       k.OHRate                                                     <span class="k">AS</span> [OH กก. ต่อ kg]
+<span class="k">FROM</span> cost.MGUSE u
+<span class="k">LEFT</span> <span class="k">JOIN</span> COST_RateHour h <span class="k">ON</span> h.MG = u.MG <span class="k">COLLATE</span> <span class="k">DATABASE_DEFAULT</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> COST_RateKG   k <span class="k">ON</span> k.MG = u.MG <span class="k">COLLATE</span> <span class="k">DATABASE_DEFAULT</span>
+<span class="k">WHERE</span> u.ItemCode = <span class="s">'FG-0002'</span>;</pre></div><p>เทียบกับ <code>process_dl</code> / <code>process_h_oh</code> / <code>process_k_oh</code> ใน <a href="#item-cost">COST_BudgetCost</a> ต้องเท่ากัน</p><div class="box note">ตัวอย่าง: เครื่องกำลังผลิต 50 kg/ชม. คน 1 คน/กะ · อัตรา DL 120 / OH ชม. 50 / OH กก. 3 → DL = 1/50 × 1 × 120 = 2.40 · OH ชม. = 50 / 50 = 1.00 · OH กก. 3.00 บาท/kg</div><div class="tags"><span>ตรวจมือ</span><span>คำนวณมือ</span><span>DL ต่อ kg</span><span>OH ต่อ kg</span><span>CapPerHour</span><span>ตรวจต้นทุน</span></div></div>
+</details></section><section class="cat" data-cat="6"><h2>ข้อความ error ที่เจอบ่อย <small>5</small></h2><details class="qa" id="err-config" data-cat="6" data-hay="&quot;พบผังบัญชีในค่าใช้จ่ายที่ไม่ได้ config [cost.configratio]&quot; เกิดข้อผิดพลาด, พบผังบัญชี, ไม่ได้ config, configratio, calrate &quot;พบผังบัญชีในค่าใช้จ่ายที่ไม่ได้ config [cost.configratio]&quot; มีคู่ บัญชี-แผนก ในค่าใช้จ่ายที่ไม่มีใน `cost.configratio` (เช็คทุกแถว ไม่กรองปี) → [หาคู่ที่ขาด](#no-config) → [ตั้ง config](#new-config)">
+<summary><span class="qt" data-raw="&quot;พบผังบัญชีในค่าใช้จ่ายที่ไม่ได้ config [cost.configratio]&quot;">"พบผังบัญชีในค่าใช้จ่ายที่ไม่ได้ config [cost.configratio]"</span><a class="lk" href="#err-config" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>มีคู่ บัญชี-แผนก ในค่าใช้จ่ายที่ไม่มีใน <code>cost.ConfigRatio</code> (เช็คทุกแถว ไม่กรองปี) → <a href="#no-config">หาคู่ที่ขาด</a> → <a href="#new-config">ตั้ง config</a></p><div class="tags"><span>เกิดข้อผิดพลาด</span><span>พบผังบัญชี</span><span>ไม่ได้ config</span><span>configratio</span><span>CalRate</span></div></div>
+</details><details class="qa" id="err-price" data-cat="6" data-hay="&quot;ราคาวัตถุดิบไม่ครบ , &lt;รหัส&gt;&quot; ราคาวัตถุดิบไม่ครบ, ไม่พบราคา, error ราคา &quot;ราคาวัตถุดิบไม่ครบ , &lt;รหัส&gt;&quot; วัตถุดิบในสูตรไม่มีแถวราคา → [ดูวิธีแก้](#no-price)">
+<summary><span class="qt" data-raw="&quot;ราคาวัตถุดิบไม่ครบ , &lt;รหัส&gt;&quot;">"ราคาวัตถุดิบไม่ครบ , &lt;รหัส&gt;"</span><a class="lk" href="#err-price" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>วัตถุดิบในสูตรไม่มีแถวราคา → <a href="#no-price">ดูวิธีแก้</a></p><div class="tags"><span>ราคาวัตถุดิบไม่ครบ</span><span>ไม่พบราคา</span><span>error ราคา</span></div></div>
+</details><details class="qa" id="err-varchar" data-cat="6" data-hay="&quot;operand data type varchar is invalid for sum operator&quot; operand data type varchar is invalid for sum operator, varchar, sum, msg 8117 &quot;operand data type varchar is invalid for sum operator&quot; คอลัมน์ `amount` ของ `bt_oh_allocation` เป็นตัวอักษร ใช้ `sum(try_convert(decimal(18, 2), amount))` แทน `sum(amount)`">
+<summary><span class="qt" data-raw="&quot;Operand data type varchar is invalid for sum operator&quot;">"Operand data type varchar is invalid for sum operator"</span><a class="lk" href="#err-varchar" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>คอลัมน์ <code>Amount</code> ของ <code>BT_OH_Allocation</code> เป็นตัวอักษร ใช้ <code>SUM(TRY_CONVERT(decimal(18, 2), Amount))</code> แทน <code>SUM(Amount)</code></p><div class="tags"><span>Operand data type varchar is invalid for sum operator</span><span>varchar</span><span>sum</span><span>Msg 8117</span></div></div>
+</details><details class="qa" id="err-div0" data-cat="6" data-hay="&quot;divide by zero error encountered&quot; divide by zero, หารด้วยศูนย์, capperhour 0, msg 8134 &quot;divide by zero error encountered&quot; ส่วนใหญ่มาจาก **capperhour = 0** ใน routing หรือเครื่อง → [ตรวจ routing](#routing) แก้ให้ &gt; 0">
+<summary><span class="qt" data-raw="&quot;Divide by zero error encountered&quot;">"Divide by zero error encountered"</span><a class="lk" href="#err-div0" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>ส่วนใหญ่มาจาก <b>CapPerHour = 0</b> ใน Routing หรือเครื่อง → <a href="#routing">ตรวจ Routing</a> แก้ให้ &gt; 0</p><div class="tags"><span>Divide by zero</span><span>หารด้วยศูนย์</span><span>CapPerHour 0</span><span>Msg 8134</span></div></div>
+</details><details class="qa" id="err-cannotcal" data-cat="6" data-hay="&quot;can not cal&quot; can not cal, คิดไม่ได้ &quot;can not cal&quot; สินค้าไม่มีแถวใน `cost.mguse` → [ดูวิธีแก้](#cannot-cal)">
+<summary><span class="qt" data-raw="&quot;Can not cal&quot;">"Can not cal"</span><a class="lk" href="#err-cannotcal" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><p>สินค้าไม่มีแถวใน <code>cost.MGUSE</code> → <a href="#cannot-cal">ดูวิธีแก้</a></p><div class="tags"><span>Can not cal</span><span>คิดไม่ได้</span></div></div>
+</details></section><section class="cat" data-cat="7"><h2>เรื่องค้างและข้อควรรู้ <small>3</small></h2><details class="qa" id="tool-status" data-cat="7" data-hay="เครื่องมือตัวไหนเคยใช้จริงแล้ว ทดสอบแล้ว, ใช้จริง, เชื่อถือได้, ยังไม่เคยรัน เครื่องมือตัวไหนเคยใช้จริงแล้ว ✅ `sql/alloc/run_rates_2027.sql` — ใช้จริง 18 ก.ย. 2026 ✅ `sql/old/fix_config_18092026.sql` · `check_expense_vs_file.sql` · `check_alloc_config.sql` — รันจริงแล้ว ✅ `tools/precheck.py` — ทดสอบแล้ว (อ่านไฟล์ excel) 🟡 `sql/alloc/check_oh_alloc.sql` — ตรรกะทดสอบกับข้อมูลจริงแล้ว แต่ยังไม่ได้รันบนฐาน 🟡 `chk.preruncost` · `test_calc.sql` · `check_rate_sync.sql` — ยังไม่เคยรันบนฐานจริง ถ้าตัว 🟡 error ให้อ่านข้อความ ส่วนใหญ่เป็นชื่อตาราง/คอลัมน์ไม่ตรง แก้ให้ตรงกับฐานแล้วรันใหม่">
+<summary><span class="qt" data-raw="เครื่องมือตัวไหนเคยใช้จริงแล้ว">เครื่องมือตัวไหนเคยใช้จริงแล้ว</span><a class="lk" href="#tool-status" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><ul><li>✅ <code>sql/alloc/run_rates_2027.sql</code> — ใช้จริง 18 ก.ย. 2026</li><li>✅ <code>sql/old/fix_config_18092026.sql</code> · <code>check_expense_vs_file.sql</code> · <code>check_alloc_config.sql</code> — รันจริงแล้ว</li><li>✅ <code>tools/precheck.py</code> — ทดสอบแล้ว (อ่านไฟล์ Excel)</li><li>🟡 <code>sql/alloc/check_oh_alloc.sql</code> — ตรรกะทดสอบกับข้อมูลจริงแล้ว แต่ยังไม่ได้รันบนฐาน</li><li>🟡 <code>chk.PreRunCost</code> · <code>test_calc.sql</code> · <code>check_rate_sync.sql</code> — ยังไม่เคยรันบนฐานจริง</li></ul><div class="box note">ถ้าตัว 🟡 error ให้อ่านข้อความ ส่วนใหญ่เป็นชื่อตาราง/คอลัมน์ไม่ตรง แก้ให้ตรงกับฐานแล้วรันใหม่</div><div class="tags"><span>ทดสอบแล้ว</span><span>ใช้จริง</span><span>เชื่อถือได้</span><span>ยังไม่เคยรัน</span></div></div>
+</details><details class="qa" id="unknowns" data-cat="7" data-hay="ยังไม่เคยเห็นโค้ดของอะไรบ้าง ยังไม่รู้, ไม่เคยเห็น, tempcalmas, mguwaste, getconmat, itemnocost, bt_itembomall ยังไม่เคยเห็นโค้ดของอะไรบ้าง definition ของวิว `cost.mguse` (น่าจะอ่านจาก `bt_mguse`) `bg.tempcalmas` (สร้าง `cost_tempcalmas` เลือกเครื่อง/mg ต่อ item) `bg.mguwaste` · `chk.itemnocost` · ตัวที่สร้าง `bt_itembomall` ถ้าเจอปัญหาที่เกี่ยวกับตัวเหล่านี้ ให้ดูโค้ดใน ssms: `exec sp_helptext &#x27;bg.tempcalmas&#x27;;`">
+<summary><span class="qt" data-raw="ยังไม่เคยเห็นโค้ดของอะไรบ้าง">ยังไม่เคยเห็นโค้ดของอะไรบ้าง</span><a class="lk" href="#unknowns" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><ul><li>definition ของวิว <code>cost.MGUSE</code> (น่าจะอ่านจาก <code>BT_MGUse</code>)</li><li><code>bg.TEMPCALMAS</code> (สร้าง <code>COST_TEMPCALMAS</code> เลือกเครื่อง/MG ต่อ item)</li><li><code>bg.MGUWaste</code> · <code>chk.ItemNoCost</code> · ตัวที่สร้าง <code>BT_ItemBomAll</code></li></ul><div class="box note">ถ้าเจอปัญหาที่เกี่ยวกับตัวเหล่านี้ ให้ดูโค้ดใน SSMS: <code>EXEC sp_helptext 'bg.TEMPCALMAS';</code></div><div class="tags"><span>ยังไม่รู้</span><span>ไม่เคยเห็น</span><span>TEMPCALMAS</span><span>MGUWaste</span><span>getConMat</span><span>ItemNoCost</span><span>BT_ItemBomAll</span></div></div>
+</details><details class="qa" id="how-to-debug" data-cat="7" data-hay="เจอปัญหาใหม่ที่ไม่มีในนี้ หาเองยังไง ปัญหาใหม่, ไม่มีคำตอบ, หาเอง, debug, วิธีหา เจอปัญหาใหม่ที่ไม่มีในนี้ หาเองยังไง **อ่านข้อความให้ครบ** — คัดลอก error ทั้งบรรทัด ดู `errorlogtable` ด้วย **หาต้นทาง** — ค้นข้อความนั้นใน `procs-source/*.txt` (หรือ `sp_helptext &#x27;ชื่อ proc&#x27;`) จะรู้ว่า proc ไหน เงื่อนไขอะไร **พิสูจน์ด้วยคิวรีเล็ก** — select ดูข้อมูลตามเงื่อนไขนั้นก่อนแก้ แก้ใน `begin tran` **จดเพิ่มในไฟล์นี้** — แก้ `qa/qa.md` แล้วรัน `python3 qa/build_qa.py`">
+<summary><span class="qt" data-raw="เจอปัญหาใหม่ที่ไม่มีในนี้ หาเองยังไง">เจอปัญหาใหม่ที่ไม่มีในนี้ หาเองยังไง</span><a class="lk" href="#how-to-debug" title="ลิงก์ตรงไปคำถามนี้">#</a></summary>
+<div class="ans"><ol><li><b>อ่านข้อความให้ครบ</b> — คัดลอก error ทั้งบรรทัด ดู <code>ErrorLogTable</code> ด้วย</li><li><b>หาต้นทาง</b> — ค้นข้อความนั้นใน <code>procs-source/*.txt</code> (หรือ <code>sp_helptext 'ชื่อ proc'</code>) จะรู้ว่า proc ไหน เงื่อนไขอะไร</li><li><b>พิสูจน์ด้วยคิวรีเล็ก</b> — SELECT ดูข้อมูลตามเงื่อนไขนั้นก่อนแก้ แก้ใน <code>BEGIN TRAN</code></li><li><b>จดเพิ่มในไฟล์นี้</b> — แก้ <code>qa/qa.md</code> แล้วรัน <code>python3 qa/build_qa.py</code></li></ol><div class="tags"><span>ปัญหาใหม่</span><span>ไม่มีคำตอบ</span><span>หาเอง</span><span>debug</span><span>วิธีหา</span></div></div>
+</details></section><div id="none">ไม่พบคำตอบ ลองคำที่สั้นลง หรือดู <a href="#how-to-debug">วิธีหาเองเมื่อเจอปัญหาใหม่</a></div></main>
+</div>
+<footer>ฉบับเผยแพร่ · รหัสและตัวเลขในตัวอย่างเป็นค่าสมมติ · ชื่อตารางและคำสั่งเป็นของระบบจริง · 2026-09-18</footer>
+<script>
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const q = $('#q'), cnt = $('#cnt'), none = $('#none');
+const QA = $$('.qa'), TOC = $$('.tc a');
+let cat = '';
+function esc(s){return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function run(){
+  const terms = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  let n = 0;
+  QA.forEach(d => {
+    const hit = (!cat || d.dataset.cat === cat) && terms.every(t => d.dataset.hay.includes(t));
+    d.style.display = hit ? '' : 'none';
+    const t = d.querySelector('.qt');
+    if (!t.dataset.html) t.dataset.html = t.innerHTML;
+    if (hit && terms.length){
+      let h = esc(t.dataset.raw);
+      terms.forEach(w => { const i = h.toLowerCase().indexOf(esc(w)); if (i >= 0) h = h.slice(0, i) + '<mark>' + h.slice(i, i + esc(w).length) + '</mark>' + h.slice(i + esc(w).length); });
+      t.innerHTML = h;
+    } else t.innerHTML = t.dataset.html;
+    if (terms.length) d.open = hit && n < 6;
+    if (hit) n++;
+  });
+  $$('.cat').forEach(s => s.style.display = s.querySelector('.qa:not([style*="none"])') ? '' : 'none');
+  TOC.forEach(a => a.classList.toggle('hide', document.getElementById(a.dataset.id).style.display === 'none'));
+  $$('.tc').forEach(t => t.style.display = t.querySelector('a:not(.hide)') ? '' : 'none');
+  cnt.textContent = n + ' / ' + QA.length + ' ข้อ';
+  none.style.display = n ? 'none' : 'block';
+  try { history.replaceState(null, '', q.value ? '?q=' + encodeURIComponent(q.value) + location.hash : location.pathname + location.hash); } catch (e) {}
+}
+q.addEventListener('input', run);
+$$('.chip').forEach(b => b.addEventListener('click', () => { $$('.chip').forEach(x => x.classList.remove('on')); b.classList.add('on'); cat = b.dataset.cat; run(); }));
+$('#openall').addEventListener('click', () => QA.forEach(d => { if (d.style.display !== 'none') d.open = true; }));
+$('#closeall').addEventListener('click', () => QA.forEach(d => d.open = false));
+addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement !== q){ e.preventDefault(); q.focus(); q.select(); }
+  if (e.key === 'Escape' && document.activeElement === q){ q.value = ''; run(); }
+});
+$$('.copy').forEach(b => b.addEventListener('click', async () => {
+  const txt = b.nextElementSibling.innerText;
+  try { await navigator.clipboard.writeText(txt); }
+  catch (e) { const t = document.createElement('textarea'); t.value = txt; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+  b.textContent = 'คัดลอกแล้ว'; b.classList.add('done'); setTimeout(() => { b.textContent = 'คัดลอก'; b.classList.remove('done'); }, 1400);
+}));
+function openHash(){
+  const id = decodeURIComponent(location.hash.slice(1)); const d = id && document.getElementById(id);
+  if (d && d.classList.contains('qa')){
+    if (d.style.display === 'none'){ q.value = ''; cat = ''; $$('.chip').forEach(x => x.classList.toggle('on', !x.dataset.cat)); run(); }
+    d.open = true; d.classList.remove('flash'); void d.offsetWidth; d.classList.add('flash');
+    setTimeout(() => scrollTo({top: d.getBoundingClientRect().top + scrollY - document.querySelector('header').offsetHeight - 14, behavior: 'instant'}), 30);
+  }
+  TOC.forEach(a => a.classList.toggle('cur', a.dataset.id === id));
+}
+addEventListener('hashchange', openHash);
+addEventListener('beforeprint', () => QA.forEach(d => d.open = true));
+const p = new URLSearchParams(location.search).get('q'); if (p) q.value = p;
+run(); openHash();
+</script>
+</body>
+</html>
