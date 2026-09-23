@@ -547,7 +547,7 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
   <div class="scrim"></div>
   <nav>
     <div class="head">
-      <span class="t">สไลด์ (32)</span>
+      <span class="t">สไลด์ (31)</span>
       <button id="pin" title="ตรึงเมนูไว้ (P)">📌</button>
     </div>
     <div class="nsec">เปิดเรื่อง</div>
@@ -570,7 +570,6 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
     <a href="#downtime"><span class="idx">15</span><span class="txt"><span class="nm">Pareto Downtime</span><span class="cd">เครื่องหยุดเพราะอะไร</span></span></a>
     <a href="#qc"><span class="idx">16</span><span class="txt"><span class="nm">Product Inspection</span><span class="cd">QC รายรอบ + COA</span></span></a>
     <a href="#oee"><span class="idx">17</span><span class="txt"><span class="nm">OEE</span><span class="cd">ประสิทธิผลเครื่องจักร</span></span></a>
-    <a href="#costsheet"><span class="idx">18</span><span class="txt"><span class="nm">Job Cost Sheet</span><span class="cd">ต้นทุนจริงต่อใบผลิต</span></span></a>
     <div class="nsec">ต้นทุน &amp; กำไร</div>
     <a href="#cost"><span class="idx">19</span><span class="txt"><span class="nm">Standard Cost Book</span><span class="cd">เล่มต้นทุนมาตรฐาน + Cost Sheet</span></span></a>
     <a href="#cost2"><span class="idx">20</span><span class="txt"><span class="nm">Actual Cost &amp; Margin</span><span class="cd">ต้นทุนจริงต่อใบ · กำไรรายสินค้า</span></span></a>
@@ -1078,17 +1077,6 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
   <h1>OEE</h1>
   <div class="rule"></div>
   <div class="shot"><img width="3360" height="2000" src="img/shot-oee.png" alt="OEE Dashboard" data-t="OEE — Availability × Performance × Quality"></div>
-  <div class="foot"><span class="brand">BESIDE</span></div>
-</div>
-</div>
-
-<!-- ═══ · JOB COST SHEET (วาดสด) ═══ -->
-<div class="slidewrap">
-<div class="sheet" data-key="costsheet">
-  <div class="eyebrow">COSTING · JOB COST SHEET</div>
-  <h1>Job Cost Sheet</h1>
-  <div class="rule"></div>
-  <div class="shot"><img width="3332" height="2826" src="img/w-128a.png" alt="Job Cost Sheet" data-t="Job Cost Sheet — ใบสรุปต้นทุนงาน แผน vs จริง"></div>
   <div class="foot"><span class="brand">BESIDE</span></div>
 </div>
 </div>
@@ -1697,8 +1685,12 @@ const EN = {
 "เลื่อนเมาส์มาที่ขอบเพื่อเปิดเมนู":"Move the mouse here to open the menu",
 
 /* ── NAV ── */
-"สไลด์ (32)":"SLIDES (32)",
+"สไลด์ (31)":"SLIDES (31)",
 "ตรึงเมนูไว้ (P)":"Pin menu (P)",
+"ซ่อนหน้านี้":"Hide this slide",
+"เอากลับมาแสดง":"Show again",
+"จัดการหน้าที่ซ่อน":"Manage hidden slides",
+"ออกจากโหมดจัดการหน้า":"Exit manage mode",
 "เปิดเรื่อง":"OPENING",
 "หน้าปก":"Cover",
 "ชั่วโมงที่ไม่ขาดทุน":"Hours that do not lose money",
@@ -2451,13 +2443,13 @@ const I18N = (() => {
 const T = I18N.t;
 </script>
 <script>
-const wraps = [...document.querySelectorAll('.slidewrap')];
-const links = [...document.querySelectorAll('nav a')];
+let wraps = [...document.querySelectorAll('.slidewrap')];
+let links = [...document.querySelectorAll('nav a')];
 const nav = document.querySelector('nav');
 const scrim = document.querySelector('.scrim');
 const count = document.getElementById('count');
 const pinBtn = document.getElementById('pin');
-const keys = wraps.map(w => w.querySelector('.sheet').dataset.key);
+let keys = wraps.map(w => w.querySelector('.sheet').dataset.key);
 let i = 0, hideTimer = null;
 
 /* ── เมนู : เลื่อนเข้า–ออก · ตรึงได้ด้วยหมุด ── */
@@ -2579,6 +2571,106 @@ document.querySelectorAll('.sheet img').forEach(im => im.addEventListener('load'
 addEventListener('langchange', () => { applyPin(); requestAnimationFrame(fit); });
 addEventListener('resize', fit);
 addEventListener('load', fit);
+
+
+/* ════════ ซ่อนสไลด์ · ระบบชั่วคราวก่อนทำจอจัดการเต็มรูปแบบ ════════
+   · กดไอคอน ✕ ท้ายรายการในเมนูเพื่อซ่อนหน้านั้น — หน้าที่ซ่อนจะหายจากเมนู ลูกศร ← → และเลขหน้า
+   · กดปุ่ม 👁 ที่หัวเมนูเพื่อเข้าโหมดจัดการ เห็นหน้าที่ซ่อนทั้งหมดและกด ↩ เอากลับมาได้
+   · จำไว้ใน localStorage ของเครื่องที่เปิด (ยังไม่เก็บลงไฟล์/ฐาน) */
+const SVG = {
+  eye: '<svg viewBox="0 0 24 24"><path d="M2.4 12S5.9 5.6 12 5.6 21.6 12 21.6 12 18.1 18.4 12 18.4 2.4 12 2.4 12Z"/><circle cx="12" cy="12" r="3.1"/></svg>',
+  eyeOff: '<svg viewBox="0 0 24 24"><path d="M9.9 5.9A9.6 9.6 0 0 1 12 5.6c6.1 0 9.6 6.4 9.6 6.4a17 17 0 0 1-2.9 3.8M6.3 7.7A16.8 16.8 0 0 0 2.4 12s3.5 6.4 9.6 6.4a9.4 9.4 0 0 0 4-.86"/><path d="M10.1 10.2a2.7 2.7 0 0 0 3.8 3.8"/><path d="m3.6 3.6 16.8 16.8"/></svg>',
+};
+const HIDE_KEY = 'beside-cd-hidden';
+const HIDE_DEFAULT = ['aidoc', 'aipanel', 'close'];
+let hidden = new Set(HIDE_DEFAULT);
+try { const raw = localStorage.getItem(HIDE_KEY); if (raw) hidden = new Set(JSON.parse(raw)); } catch (e) {}
+const saveHidden = () => { try { localStorage.setItem(HIDE_KEY, JSON.stringify([...hidden])); } catch (e) {} };
+let manage = false;
+
+const allLinks = [...document.querySelectorAll('nav a')];
+const allWraps = [...document.querySelectorAll('.slidewrap')];
+const linkKey = a => a.getAttribute('href').slice(1);
+
+(function initHideUI(){
+  const st = document.createElement('style');
+  st.textContent = `
+    nav a.hid{display:none}
+    nav.manage a.hid{display:flex;opacity:.45}
+    nav.manage a.hid .nm{text-decoration:line-through}
+    nav .nsec.hid{display:none}
+    nav a .hb{flex:0 0 auto;margin-left:auto;align-self:center;display:flex;align-items:center;justify-content:center;
+      width:24px;height:24px;border-radius:8px;border:0;background:transparent;color:#8AA3C8;cursor:pointer;opacity:0;transition:.15s}
+    nav a .hb svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    nav a:hover .hb, nav.manage a .hb{opacity:1}
+    nav a .hb:hover{background:#DCE8FB;color:#1466DE}
+    nav a.hid .hb{color:#1466DE;opacity:1}
+    nav .head #eye{position:relative;display:flex;align-items:center;justify-content:center;width:28px;height:28px;margin-left:auto;
+      border:0;background:transparent;color:#5A8FE0;cursor:pointer;border-radius:9px;transition:.15s}
+    nav .head #eye svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    nav .head #eye:hover{background:#DCE8FB;color:#1466DE}
+    nav .head #eye.on{background:#1466DE;color:#fff}
+    nav .head #eye .badge{position:absolute;top:-3px;right:-3px;min-width:15px;height:15px;padding:0 3px;border-radius:8px;
+      background:#FF6648;color:#fff;font-size:9px;font-weight:700;line-height:15px;text-align:center}
+    nav .head #eye.on .badge{background:#fff;color:#1466DE}
+  `;
+  document.head.appendChild(st);
+  allLinks.forEach(a => {
+    const b = document.createElement('button');
+    b.className = 'hb';
+    b.type = 'button';
+    b.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const k = linkKey(a);
+      hidden.has(k) ? hidden.delete(k) : hidden.add(k);
+      saveHidden(); applyHidden();
+    });
+    a.appendChild(b);
+  });
+  const eye = document.createElement('button');
+  eye.id = 'eye'; eye.type = 'button';
+  eye.addEventListener('click', () => { manage = !manage; applyHidden(); });
+  document.querySelector('nav .head').insertBefore(eye, document.getElementById('pin'));
+})();
+
+function applyHidden(){
+  const nav = document.querySelector('nav');
+  nav.classList.toggle('manage', manage);
+  allLinks.forEach(a => {
+    const h = hidden.has(linkKey(a));
+    a.classList.toggle('hid', h);
+    const b = a.querySelector('.hb');
+    if (b) { b.innerHTML = h ? SVG.eye : SVG.eyeOff; b.title = h ? T('เอากลับมาแสดง') : T('ซ่อนหน้านี้'); }
+  });
+  allWraps.forEach(w => { if (hidden.has(w.querySelector('.sheet').dataset.key)) w.classList.remove('on'); });
+
+  // หัวข้อหมวดที่ไม่เหลือหน้าแสดง → ซ่อนหัวข้อด้วย
+  [...document.querySelectorAll('nav .nsec')].forEach(sec => {
+    let any = false;
+    for (let el = sec.nextElementSibling; el && !el.classList.contains('nsec'); el = el.nextElementSibling)
+      if (el.tagName === 'A' && !el.classList.contains('hid')) { any = true; break; }
+    sec.classList.toggle('hid', !any && !manage);
+  });
+
+  const prev = keys && keys[i];
+  links = allLinks.filter(a => !hidden.has(linkKey(a)));
+  wraps = links.map(a => allWraps.find(w => w.querySelector('.sheet').dataset.key === linkKey(a)));
+  keys  = wraps.map(w => w.querySelector('.sheet').dataset.key);
+  links.forEach((a, k) => { const ix = a.querySelector('.idx'); if (ix) ix.textContent = k + 1; });
+
+  const label = document.querySelector('nav .head .t');
+  if (label) label.textContent = (I18N.lang === 'en' ? 'SLIDES (' : 'สไลด์ (') + wraps.length + ')';
+  const eye = document.getElementById('eye');
+  if (eye) {
+    eye.classList.toggle('on', manage);
+    eye.innerHTML = (hidden.size ? SVG.eyeOff : SVG.eye) + (hidden.size ? '<span class="badge">' + hidden.size + '</span>' : '');
+    eye.title = manage ? T('ออกจากโหมดจัดการหน้า') : T('จัดการหน้าที่ซ่อน');
+  }
+  const at = Math.max(0, keys.indexOf(prev));
+  if (wraps.length) show(at);
+}
+addEventListener('langchange', () => applyHidden());
+applyHidden();
 
 applyPin();
 const start = keys.indexOf(location.hash.slice(1));
