@@ -586,6 +586,9 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
     <a href="#aipanel"><span class="idx">28</span><span class="txt"><span class="nm">Assistant in Every Screen</span><span class="cd">สั่งด้วยคำพูด เปิดจอให้เอง</span></span></a>
     <div class="nsec">จอตัวอย่าง · ข้อมูลโรงคั่วกาแฟ</div>
     <a href="#mk-margin"><span class="idx">38</span><span class="txt"><span class="nm">Margin Analysis</span><span class="cd">ยอดขายจริงหักต้นทุน</span></span></a>
+    <div class="nsec">แนวทางเริ่มต้นใช้งาน</div>
+    <a href="#scope"><span class="idx">39</span><span class="txt"><span class="nm">ขอบเขตงาน</span><span class="cd">ระยะที่ 1 · ระยะที่ 2</span></span></a>
+    <a href="#timeline"><span class="idx">40</span><span class="txt"><span class="nm">เส้นทางสู่การใช้งานจริง</span><span class="cd">5 ช่วงงาน</span></span></a>
     <div class="nsec">ปิดท้าย</div>
     <a href="#close"><span class="idx">45</span><span class="txt"><span class="nm">ติดต่อเรา</span><span class="cd">พร้อมอยู่เคียงข้างธุรกิจคุณ</span></span></a>
   </nav>
@@ -1931,6 +1934,107 @@ html[lang="en"] .agd .ek{display:none}
 .ctc .cfoot{margin-top:50px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);
      font-size:16px;color:#A9C2E8;letter-spacing:.02em}
 </style>
+<style>
+.sheet[data-key="scope"],.sheet[data-key="timeline"]{height:1013px;display:flex;flex-direction:column}
+.sheet[data-key="scope"] .foot,.sheet[data-key="timeline"] .foot{margin-top:auto}
+.gs svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* scope */
+.sc2{flex:1;display:grid;grid-template-columns:1fr 92px 1fr;margin:6px 0 14px;min-height:0}
+.sc2-p{border-radius:24px;padding:26px 28px 22px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden}
+.sc2-p.a{background:#1466DE;color:#fff;box-shadow:0 26px 54px -26px rgba(20,102,222,.85)}
+.sc2-p.a:before{content:"";position:absolute;right:-90px;top:-90px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.07)}
+.sc2-p.b{background:#fff;border:2px solid #C9DCFA;color:#1E2A40}
+.sc2-tg{display:flex;align-items:center;gap:12px}
+.sc2-tg b{font-size:15px;font-weight:800;letter-spacing:.14em;border-radius:999px;padding:6px 16px}
+.a .sc2-tg b{background:#DDF956;color:#1E2A40}.b .sc2-tg b{background:#1466DE;color:#fff}
+.sc2-tg span{font-size:16px;font-weight:700;opacity:.8}
+.sc2-p h3{margin:0;font-size:38px;line-height:1.15}.b h3{color:#1466DE}
+.sc2-p p.d{margin:-8px 0 0;font-size:18px;opacity:.85}
+.sc2-g{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:14px;flex:1}
+.sc2-i{border-radius:18px;padding:20px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;position:relative}
+.a .sc2-i{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.22)}.b .sc2-i{background:#F4F8FF;border:1px solid #E1ECFC}
+.sc2-i .ic{position:absolute;left:20px;top:20px;width:54px;height:54px;border-radius:16px;padding:12px;box-sizing:border-box}
+.a .sc2-i .ic{background:#fff;color:#1466DE}.b .sc2-i .ic{background:#1466DE;color:#fff}
+.sc2-i em{position:absolute;right:18px;top:16px;font-style:normal;font-size:44px;font-weight:800;opacity:.18;line-height:1}
+.sc2-i b{font-size:26px;line-height:1.2;margin-top:64px}.sc2-i{justify-content:flex-start!important}.sc2-i .ch{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:10px}.sc2-i .ch u{text-decoration:none;font-size:14.5px;font-weight:600;border-radius:999px;padding:4px 11px}.a .sc2-i .ch u{background:rgba(255,255,255,.16);color:#fff}.b .sc2-i .ch u{background:#fff;border:1px solid #C9DCFA;color:#1466DE}.sc2-i span{font-size:17px;opacity:.82;line-height:1.35}
+.sc2-o{display:flex;gap:10px;align-items:center;border-radius:14px;padding:12px 16px;font-size:17px;font-weight:600}
+.a .sc2-o{background:rgba(0,0,0,.16)}.b .sc2-o{background:#F6FBDC;color:#3E4A00}
+.sc2-o i{flex:none;width:26px;height:26px}
+.sc2-m{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.sc2-m .ar{width:64px;height:64px;border-radius:50%;background:#fff;box-shadow:0 0 0 8px #EAF2FE,0 14px 26px -12px rgba(20,102,222,.6);display:flex;align-items:center;justify-content:center;color:#1466DE;font-size:30px;font-weight:800}
+.sc2-m small{font-size:14px;color:#6C7180;text-align:center;line-height:1.35;font-weight:600}
+/* roadmap */
+.rdm{flex:1;display:flex;flex-direction:column;margin:2px 0 14px;min-height:0}
+.rdm-lead{display:flex;align-items:center;gap:18px;margin-bottom:6px}
+.rdm-lead p{margin:0;font-size:20px;color:#4A5160}.rdm-lead p b{color:#1466DE}
+.rdm-road{position:relative;flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;min-height:0}
+.rdm-line{position:absolute;left:3%;right:3%;top:50%;height:10px;margin-top:-5px;border-radius:5px;background:linear-gradient(90deg,#84AFFB,#2E9CE8 35%,#1466DE 70%,#DDF956)}
+.rdm-s{position:relative;display:flex;flex-direction:column;align-items:center}
+.rdm-s .top,.rdm-s .bot{flex:1;display:flex;width:100%}
+.rdm-s .top{align-items:flex-end;padding-bottom:30px}.rdm-s .bot{align-items:flex-start;padding-top:30px}
+.rdm-n{position:relative;z-index:1;width:78px;height:78px;border-radius:50%;background:#fff;border:6px solid var(--c);box-shadow:0 12px 24px -10px rgba(20,102,222,.6);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;color:#1466DE;flex:none}
+.rdm-c{width:100%;background:#fff;border-radius:20px;padding:20px 20px 18px;box-shadow:0 20px 40px -24px rgba(20,102,222,.55);border:1px solid #E1ECFC;border-top:6px solid var(--c);position:relative}
+.rdm-c:after{content:"";position:absolute;left:50%;width:2px;height:30px;background:var(--c);margin-left:-1px}
+.top .rdm-c:after{top:100%}.bot .rdm-c:after{bottom:100%}
+.rdm-c .ic{width:46px;height:46px;border-radius:14px;background:#EAF2FE;color:#1466DE;padding:10px;box-sizing:border-box;margin-bottom:10px}
+.rdm-c b{display:block;font-size:24px;color:#1E2A40;line-height:1.2}
+.rdm-c p{margin:6px 0 10px;font-size:16px;color:#6C7180;line-height:1.4}
+.rdm-c .out{display:flex;gap:8px;align-items:flex-start;background:#F4F8FF;border-radius:10px;padding:8px 10px;font-size:15px;font-weight:700;color:#1466DE;line-height:1.35}
+.rdm-c .ms{position:absolute;right:14px;top:14px;background:#FF6648;color:#fff;font-size:12px;font-weight:800;border-radius:999px;padding:3px 10px;letter-spacing:.04em}
+.rdm-s.last .rdm-c{background:#1466DE;border-color:#1466DE}.rdm-s.last .rdm-c b{color:#fff}.rdm-s.last .rdm-c p{color:#C9DCFA}
+.rdm-s.last .rdm-c .out{background:#DDF956;color:#1E2A40}.rdm-s.last .rdm-c .ic{background:#fff}
+.rdm-ft{display:flex;gap:28px;justify-content:center;font-size:16px;color:#4A5160;margin-top:4px}
+.rdm-ft span{display:flex;align-items:center;gap:8px}.rdm-ft i{width:14px;height:14px;border-radius:50%;background:#FF6648}
+</style>
+<div class="slidewrap">
+<div class="sheet gs" data-key="scope">
+  <div class="eyebrow">GETTING STARTED · ขอบเขตงาน</div>
+  <h1>เริ่มจากหัวใจการผลิต แล้วต่อยอดทีละขั้น</h1>
+  <div class="rule"></div>
+  <div class="sc2">
+    <div class="sc2-p a">
+      <div class="sc2-tg"><b>ระยะที่ 1</b><span>ใช้งานได้ก่อน</span></div>
+      <h3>วางแผน · ผลิต · เชื่อม SAP B1</h3>
+      <p class="d">หน้างานบันทึกครั้งเดียว บัญชีเห็นเอกสารใน SAP B1 ทันที</p>
+      <div class="sc2-g">
+        <div class="sc2-i"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div><em>01</em><b>Master Data</b><span>สินค้า · BOM · Routing · เครื่องจักร</span><div class="ch"><u>สินค้า / FG / SEMI</u><u>BOM หลายชั้น</u><u>Routing · เครื่องจักร · กะ</u></div></div>
+        <div class="sc2-i"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4M7 14h4"/></svg></div><em>02</em><b>Planning</b><span>Forecast · ใบสั่งผลิต · Timeline</span><div class="ch"><u>Sales Forecast</u><u>MPS · MRP</u><u>Work Order Timeline</u></div></div>
+        <div class="sc2-i"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21V10l6 4V10l6 4V6l6 3v12z"/><path d="M7 18h2M12 18h2M17 18h1"/></svg></div><em>03</em><b>Production</b><span>เบิก–รับผลผลิต · Machine Monitoring</span><div class="ch"><u>เบิก–คืน–รับผลผลิต</u><u>Machine Monitoring</u><u>Lot / Batch</u></div></div>
+        <div class="sc2-i"><div class="ic"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div><em>04</em><b>SAP B1 Integration</b><span>Goods Issue / Receipt อัตโนมัติ</span><div class="ch"><u>Goods Issue</u><u>Goods Receipt</u><u>Item · BP จาก SAP</u></div></div>
+      </div>
+      <div class="sc2-o"><i><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 11l2 2 4-4"/></svg></i>ทีมโรงงานเตรียมข้อมูลและผู้รับผิดชอบ · ทีมติดตั้งตั้งค่า เชื่อม SAP B1 และอบรม</div>
+    </div>
+    <div class="sc2-m"><div class="ar">→</div><small>ต่อยอด<br>จากข้อมูลจริง</small></div>
+    <div class="sc2-p b">
+      <div class="sc2-tg"><b>ระยะที่ 2</b><span>ต่อยอดทันที</span></div>
+      <h3>คุณภาพ · ต้นทุน · ผู้บริหาร</h3>
+      <p class="d">ใช้ข้อมูลที่สะสมจากหน้างาน ตอบคำถามระดับบริหาร</p>
+      <div class="sc2-g">
+        <div class="sc2-i"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></div><em>05</em><b>Quality Control</b><span>ตรวจรับ · ระหว่างผลิต · ของเสีย · COA</span><div class="ch"><u>ตรวจรับวัตถุดิบ</u><u>ตรวจระหว่างผลิต</u><u>Scrap · COA</u></div></div>
+        <div class="sc2-i"><div class="ic"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="7" rx="8" ry="3"/><path d="M4 7v5c0 1.7 3.6 3 8 3s8-1.3 8-3V7M4 12v5c0 1.7 3.6 3 8 3s8-1.3 8-3v-5"/></svg></div><em>06</em><b>Costing</b><span>Actual Cost · Cost Simulator</span><div class="ch"><u>Standard Cost</u><u>Actual Cost ต่อ WO</u><u>Cost Simulator</u></div></div>
+        <div class="sc2-i"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><em>07</em><b>Dashboard</b><span>Production · OEE · Margin</span><div class="ch"><u>Production Dashboard</u><u>OEE รายเครื่อง</u><u>Margin Analysis</u></div></div>
+        <div class="sc2-i"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg></div><em>08</em><b>Report Designer</b><span>ฟอร์มและรายงานของโรงงานเอง</span><div class="ch"><u>ใบเบิก · ใบรับ</u><u>ป้าย Lot / Barcode</u><u>รายงานผู้บริหาร</u></div></div>
+      </div>
+      <div class="sc2-o"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></i>รู้ต้นทุนจริงต่อใบสั่งผลิต และ OEE รายเครื่อง</div>
+    </div>
+  </div>
+  <div class="foot"><span class="brand">BESIDE ENTERPRISE</span></div>
+</div>
+</div>
+
+<div class="slidewrap">
+<div class="sheet gs" data-key="timeline">
+  <div class="eyebrow">GETTING STARTED · ROADMAP</div>
+  <h1>เส้นทางสู่การใช้งานจริง</h1>
+  <div class="rule"></div>
+  <div class="rdm">
+    <div class="rdm-lead"><p>5 ช่วงงาน จากวันแรกที่สำรวจ ถึง <b>ขึ้นระบบจริงพร้อมเชื่อม SAP B1</b> · ระยะเวลากำหนดร่วมกันหลังสำรวจหน้างาน</p></div>
+    <div class="rdm-road"><div class="rdm-line"></div><div class="rdm-s" style="--c:#84AFFB"><div class="top"><div class="rdm-c"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div><b>สำรวจหน้างาน</b><p>เดินไลน์จริง เก็บ flow เอกสาร และความต้องการแต่ละแผนก</p><div class="out">✓ แผนงานที่ตกลงร่วมกัน</div></div></div><div class="rdm-n">1</div><div class="bot"></div></div><div class="rdm-s" style="--c:#2E9CE8"><div class="top"></div><div class="rdm-n">2</div><div class="bot"><div class="rdm-c"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></div><b>ตั้งค่า Master Data</b><p>สินค้า · BOM · Routing · เครื่องจักร · กะ</p><div class="out">✓ ข้อมูลหลักพร้อมใช้</div></div></div></div><div class="rdm-s" style="--c:#1466DE"><div class="top"><div class="rdm-c"><span class=ms>MILESTONE</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div><b>เชื่อม SAP B1 + ทดสอบ</b><p>ทดสอบเอกสารเบิก–รับ ด้วยข้อมูลจริงของโรงงาน</p><div class="out">✓ เอกสารตรงกันทั้งสองระบบ</div></div></div><div class="rdm-n">3</div><div class="bot"></div></div><div class="rdm-s" style="--c:#0E4CA8"><div class="top"></div><div class="rdm-n">4</div><div class="bot"><div class="rdm-c"><span class=ms>MILESTONE</span><div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 11l2 2 4-4"/></svg></div><b>อบรม + ใช้คู่ขนาน</b><p>ทีมหน้างานใช้จริงคู่กับวิธีเดิม ปรับจนลงตัว</p><div class="out">✓ หน้างานใช้ได้เอง</div></div></div></div><div class="rdm-s last" style="--c:#DDF956"><div class="top"><div class="rdm-c"><span class=ms>MILESTONE</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M9 12l3 3M14 4c3-1 6-1 6-1s0 3-1 6l-6 6-5-5z"/><circle cx="15" cy="9" r="1.5"/></svg></div><b>Go-live + ระยะที่ 2</b><p>ขึ้นระบบจริง แล้วต่อ QC · Costing · Dashboard</p><div class="out">✓ ส่งมอบครบ · ดูแลต่อเนื่อง</div></div></div><div class="rdm-n">5</div><div class="bot"></div></div></div>
+  </div>
+  <div class="foot"><span class="brand">BESIDE ENTERPRISE</span></div>
+</div>
+</div>
+
 <div class="slidewrap">
 <div class="sheet dark" data-key="close">
   <div class="ctc">
