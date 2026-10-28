@@ -530,6 +530,9 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
 .sigbox svg{position:absolute;inset:0;width:100%;height:100%}
 .sigbox .sl{position:absolute;left:12px;right:12px;bottom:20px;border-bottom:1px dashed #B0BDCC}
 .sigbox .sc{position:absolute;left:12px;bottom:5px;font-size:12px;color:var(--a-mut)}
+/* จุดบนวงนอก (หน้า 3, หน้า AI) หมุนช้าๆ ตามวง */
+.orb{transform-box:view-box;animation:orb 120s linear infinite}
+@keyframes orb{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
@@ -564,6 +567,7 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
     <div class="nsec">เปิดเรื่อง</div>
     <a href="#cover"><span class="idx">1</span><span class="txt"><span class="nm">หน้าปก</span><span class="cd">ชั่วโมงที่ไม่ขาดทุน</span></span></a>
     <a href="#agenda"><span class="idx">2</span><span class="txt"><span class="nm">Agenda</span><span class="cd">หัวข้อนำเสนอ</span></span></a>
+    <a href="#intro"><span class="idx">3</span><span class="txt"><span class="nm">SAP Business One × Beside</span><span class="cd">รู้จักสองระบบ</span></span></a>
     <a href="#system"><span class="idx">3</span><span class="txt"><span class="nm">Integration with SAP B1</span><span class="cd">แบ่งหน้าที่ SAP B1 · Beside</span></span></a>
     <a href="#e2e"><span class="idx">4</span><span class="txt"><span class="nm">End-to-End Flow</span><span class="cd">SAP B1 กับ Beside ในหนึ่งรอบ</span></span></a>
     <a href="#mcp"><span class="idx">5</span><span class="txt"><span class="nm">Beside AI</span><span class="cd">ถามระบบผ่าน Claude · ChatGPT</span></span></a>
@@ -578,6 +582,7 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
     <a href="#pdash"><span class="idx">16</span><span class="txt"><span class="nm">Production Dashboard</span><span class="cd">ทั้งโรงงานในจอเดียว</span></span></a>
     <a href="#oee"><span class="idx">20</span><span class="txt"><span class="nm">OEE</span><span class="cd">ประสิทธิผลเครื่องจักร</span></span></a>
     <a href="#mk-costsheet"><span class="idx">36</span><span class="txt"><span class="nm">Cost Sheet — Standard</span><span class="cd">เจาะต้นทุนมาตรฐานทุกบรรทัด ตั้งแต่</span></span></a>
+    <a href="#mk-margin"><span class="idx">38</span><span class="txt"><span class="nm">Margin Analysis</span><span class="cd">ยอดขายประมาณการหักต้นทุน</span></span></a>
     <div class="nsec">ระบบงานหลัก</div>
     <div class="nsec">ฝ่ายผลิต &amp; วางแผน</div>
     <div class="nsec">ต้นทุน &amp; กำไร</div>
@@ -587,7 +592,6 @@ iframe.scr{border:0;display:block;background:#F4F7FB}
     <a href="#aidoc"><span class="idx">27</span><span class="txt"><span class="nm">Beside Assistant</span><span class="cd">อ่าน PO ลูกค้า → ร่างใบสั่งขาย</span></span></a>
     <a href="#aipanel"><span class="idx">28</span><span class="txt"><span class="nm">Assistant in Every Screen</span><span class="cd">สั่งด้วยคำพูด เปิดจอให้เอง</span></span></a>
     <div class="nsec">จอตัวอย่าง · ข้อมูลโรงคั่วกาแฟ</div>
-    <a href="#mk-margin"><span class="idx">38</span><span class="txt"><span class="nm">Margin Analysis</span><span class="cd">ยอดขายประมาณการหักต้นทุน</span></span></a>
     <div class="nsec">แนวทางเริ่มต้นใช้งาน</div>
     <a href="#scope"><span class="idx">39</span><span class="txt"><span class="nm">ขอบเขตงาน</span><span class="cd">ระยะที่ 1 · ระยะที่ 2</span></span></a>
     <a href="#timeline"><span class="idx">40</span><span class="txt"><span class="nm">เส้นทางสู่การใช้งานจริง</span><span class="cd">5 ช่วงงาน</span></span></a>
@@ -676,6 +680,51 @@ html[lang="en"] .agd .ek{display:none}
 </div>
 </div>
 
+<!-- ═══ 2.5 · INTRO — รู้จัก SAP B1 และ Beside ═══ -->
+<style>
+.sheet[data-key="intro"]{height:1013px;display:flex;flex-direction:column}
+.sheet[data-key="intro"] .foot{margin-top:auto}
+.itr{flex:1;display:grid;grid-template-columns:1fr 96px 1fr;align-items:stretch;margin:26px 0 22px}
+.itr .c{background:#fff;border:1px solid #C9DCFA;border-radius:26px;padding:40px 46px;display:flex;flex-direction:column;gap:22px}
+.itr .c.bs{border:2px solid #1466DE}
+.itr .c .lg{height:96px;display:flex;align-items:center}.itr .c .lg img{height:100%}
+.itr .c .who{font-size:38px;font-weight:700;color:#1E2A40;line-height:1.35;padding-bottom:22px;border-bottom:1px solid #E3ECFA}
+.itr .c ul{list-style:none;display:flex;flex-direction:column;gap:22px;margin:6px 0 0;padding:0}
+.itr .c li{font-size:33px;color:#4A5160;display:flex;gap:14px;align-items:center}
+.itr .c li::before{content:"";flex:0 0 16px;height:16px;border-radius:50%;background:#1466DE}
+.itr .c.bs li::before{background:#DDF956;border:2px solid #1466DE}
+.itr .c .tg{margin-top:auto;align-self:flex-start;background:#EAF2FE;color:#1466DE;font-size:25px;font-weight:800;border-radius:999px;padding:12px 26px}
+.itr .c.bs .tg{background:#1466DE;color:#fff}
+.itr .x{display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:800;color:#84AFFB}
+.itrb{background:#1466DE;border-radius:22px;padding:26px 40px;color:#fff;display:flex;align-items:center;gap:30px;margin-bottom:10px}
+.itrb .st{flex:0 0 auto;font-size:44px;color:#DDF956;line-height:1}
+.itrb p{margin:0;font-size:29px;font-weight:700;line-height:1.45}.itrb p span{color:#DDF956}
+</style>
+<div class="slidewrap">
+<div class="sheet" data-key="intro">
+  <div class="eyebrow">รู้จักสองระบบ · ทำไมต้องทำงานคู่กัน</div>
+  <h1>SAP Business One × Beside</h1>
+  <div class="rule"></div>
+  <div class="itr">
+    <div class="c">
+      <div class="lg"><img src="img/sap-business-one-logo.png" alt="SAP Business One"></div>
+      <div class="who">ERP ระดับโลกจาก SAP<br>หัวใจด้านบัญชีและการเงินของบริษัท</div>
+      <ul><li>บัญชีและการเงิน</li><li>ขายและลูกค้า</li><li>จัดซื้อและผู้ขาย</li></ul>
+      <div class="tg">ข้อมูลจริงทางบัญชีของบริษัท</div>
+    </div>
+    <div class="x">×</div>
+    <div class="c bs">
+      <div class="lg"><img src="img/beside-logo.png" alt="Beside ERP Solutions"></div>
+      <div class="who">ระบบบริหารการผลิตครบวงจรสำหรับโรงงาน<br>มี AI ช่วยสรุปและวิเคราะห์ข้อมูล</div>
+      <ul><li>วางแผนการผลิตและวัตถุดิบ</li><li>ติดตามหน้างานและเครื่องจักร real-time</li><li>ต้นทุน คุณภาพ และคลังรายล็อต</li></ul>
+      <div class="tg">ข้อมูลจริงจากหน้างานผลิต</div>
+    </div>
+  </div>
+  <div class="itrb"><div class="st">✦</div><p>SAP B1 รู้ว่าเงินไปไหน · Beside รู้ว่าในโรงงานเกิดอะไรขึ้น<br><span>เชื่อมกันแล้ว ผู้บริหารเห็นภาพเดียวกันทั้งบริษัท</span></p></div>
+  <div class="foot"><span class="brand">BESIDE ENTERPRISE</span></div>
+</div>
+</div>
+
 <!-- ═══ 3 · SYSTEM — แบ่งหน้าที่ SAP B1 / Beside (หัวข้อ 1 ใน Agenda) ═══ -->
 <style>
 .sheet[data-key="system"]{height:1013px;display:flex;flex-direction:column}
@@ -759,8 +808,10 @@ html[lang="en"] .agd .ek{display:none}
     <rect x="785" y="452" width="130" height="34" rx="17" fill="#DDF956" stroke="#1466DE" stroke-width="2.5"/>
     <text x="850" y="476" font-size="17" font-weight="800" fill="#1466DE" text-anchor="middle" letter-spacing="1.5">REAL-TIME</text>
     <!-- ดาวเทียมบนวงนอก -->
+    <g class="orb" style="transform-origin:850px 385px">
     <g fill="#2E9CE8"><circle cx="733" cy="268" r="6"/><circle cx="967" cy="502" r="6"/></g>
     <g fill="#DDF956" stroke="#1466DE" stroke-width="2"><circle cx="985" cy="300" r="8"/><circle cx="715" cy="470" r="8"/></g>
+    </g>
     <!-- เส้นบน SAP → Beside -->
     <path d="M486 300 C 610 300 640 205 850 205 C 1060 205 1090 300 1214 300" stroke="#1466DE" stroke-width="18" fill="none" opacity=".12" stroke-linecap="round"/>
     <path d="M486 300 C 610 300 640 205 850 205 C 1060 205 1090 300 1214 300" stroke="#1466DE" stroke-width="6" fill="none" marker-end="url(#sdIn)"/>
@@ -909,6 +960,69 @@ html[lang="en"] .agd .ek{display:none}
 <style>
 .sheet[data-key="mcp"]{height:1013px;display:flex;flex-direction:column;background:#fff}
 .sheet[data-key="mcp"] .foot{margin-top:auto}
+.sheet[data-key="mcp"]{position:relative}
+.aif-open{position:absolute;top:58px;right:44px;border:0;border-radius:999px;padding:12px 26px;box-shadow:0 10px 24px -12px rgba(20,102,222,.6);background:#1466DE;color:#fff;font:700 21px Sarabun,sans-serif;cursor:pointer}
+.aif-open::before{content:'✦';margin-right:8px}
+.aif-open:hover{background:#0E4CA8}
+#aif{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;background:rgba(10,40,90,.92)}
+#aif.on{display:flex}
+.aif-panel{box-sizing:border-box;width:min(1400px,94vw);max-height:90vh;overflow:auto;border-radius:24px;background:#fff;padding:32px 40px;color:#1E2A40;font-size:22px;line-height:1.5}
+.aif-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.aif-head h2{margin:0;color:#1466DE;font-size:30px;font-weight:800}
+.aif-sub{margin:4px 0 0;color:#6C7180;font-size:16px}
+.aif-panel button{font-family:inherit;cursor:pointer}
+.aif-close{border:0;border-radius:50%;background:#EAF2FE;color:#1466DE;width:42px;height:42px;font-size:24px;flex-shrink:0}
+.aif-tabs{display:flex;gap:10px;margin:20px 0;flex-wrap:wrap}
+.aif-tab,.aif-actions button{border:1px solid #1466DE;border-radius:999px;padding:8px 22px;font-size:18px;font-weight:700;background:#EAF2FE;color:#1466DE}
+.aif-tab{border-color:transparent}
+.aif-tab[aria-selected="true"],.aif-actions button:last-of-type{background:#1466DE;color:#fff}
+.aif-body[hidden]{display:none}
+.aif-q{width:fit-content;max-width:90%;margin:0 0 16px auto;padding:14px 24px;border-radius:22px 22px 6px 22px;background:#1466DE;color:#fff;font-size:24px}
+.aif-card{background:#F4F8FF;border:1px solid #C9DCFA;border-radius:22px;padding:24px 28px;font-size:22px}
+.aif-by{display:flex;align-items:center;gap:10px;margin-bottom:12px;color:#1466DE;font-size:18px;font-weight:700}
+.aif-by span{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#1466DE;color:#DDF956}
+.aif-card p{margin:0 0 12px}.aif-card p:last-child{margin-bottom:0}
+.aif-card b{color:#1466DE}.aif-card em{font-style:normal;color:#FF6648;font-weight:700}
+.aif-chart{display:block;width:100%;max-height:300px;margin:8px 0;font-family:inherit}
+.aif-tablewrap{overflow-x:auto}
+.aif-table{width:100%;border-collapse:collapse;font-size:20px;margin:12px 0}
+.aif-table th{color:#6C7180;font-size:16px;font-weight:600;text-align:left}
+.aif-table th,.aif-table td{padding:12px 10px;border-bottom:1px solid #E3ECFA}
+.aif-table th:nth-child(n+4),.aif-table td:nth-child(n+4){text-align:right;white-space:nowrap}
+.aif-mail{padding:18px 22px;border:1px solid #C9DCFA;border-radius:14px;background:#fff}
+.aif-mailhead{padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid #C9DCFA}
+.aif-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+.aif-actions button{background:#fff}.aif-actions small{color:#6C7180;font-size:16px}
+.aif-wo th,.aif-wo td{text-align:left!important;white-space:normal!important}
+.aif-hit{cursor:pointer;outline:none}.aif-hit path{transition:fill .15s}.aif-hit:hover path,.aif-hit:focus path{fill:#0E4CA8}
+.aif-note{margin:18px 0 0;text-align:center;color:#6C7180;font-size:15px}
+@media(max-height:800px){.aif-panel{padding:24px 30px}.aif-tabs{margin:14px 0}.aif-card{padding:18px 24px}.aif-chart{max-height:230px}}
+/* popup หน้าตาแบบหน้าจอ ChatGPT (สีเทากลางของ ChatGPT ใช้เฉพาะกรอบหน้าจอจำลอง) */
+#aif .aif-panel{width:min(1500px,95vw);max-height:none;overflow:visible;background:none;padding:0;color:#0D0D0D}
+#aif .aif-head{align-items:center;margin-bottom:14px}.aif-head h2{color:#fff}.aif-sub{color:#C9DCFA}#aif .aif-close{background:rgba(255,255,255,.16);color:#fff}
+.aif-win{display:grid;grid-template-columns:270px 1fr;height:min(780px,80vh);border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.aif-side{background:#F9F9F9;border-right:1px solid #ECECEC;padding:16px 12px;display:flex;flex-direction:column;gap:2px;min-height:0}
+.aif-brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;padding:6px 10px 14px}.aif-brand img{width:24px;height:24px}
+.aif-new{padding:9px 10px;border-radius:10px;font-size:16px}
+.aif-lbl{padding:14px 10px 4px;font-size:13px;color:#8F8F8F}
+#aif .aif-tabs{flex-direction:column;flex-wrap:nowrap;gap:2px;margin:0}
+#aif .aif-tab{display:block;width:100%;text-align:left;border:0;border-radius:10px;padding:9px 10px;background:transparent;color:#0D0D0D;font-size:15px;font-weight:400}
+#aif .aif-tab b{display:block;font-weight:500;color:#0D0D0D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#aif .aif-tab small{display:block;font-size:12px;color:#8F8F8F}
+#aif .aif-tab:hover{background:#F0F0F0}#aif .aif-tab[aria-selected="true"]{background:#E8E8E8;color:#0D0D0D}
+.aif-conn{margin-top:auto;display:flex;align-items:center;gap:8px;padding:10px;border:1px solid #E5E5E5;border-radius:12px;background:#fff;font-size:14px;font-weight:600}.aif-conn img{width:22px;height:22px;border-radius:5px}.aif-conn span{margin-left:auto;font-size:12px;font-weight:600;color:#1466DE}
+.aif-main{display:flex;flex-direction:column;min-width:0;min-height:0}
+.aif-top{display:flex;align-items:center;gap:6px;padding:14px 22px;font-size:18px}.aif-top span{color:#8F8F8F}
+.aif-scroll{flex:1;min-height:0;overflow:auto;padding:6px 0 18px}
+#aif .aif-body{max-width:860px;margin:0 auto;padding:0 28px}
+#aif .aif-q{background:#F4F4F4;color:#0D0D0D;border-radius:22px;padding:11px 20px;margin:10px 0 18px auto;font-size:19px}
+#aif .aif-card{background:none;border:0;padding:0;font-size:18px;line-height:1.65;color:#0D0D0D}
+#aif .aif-by{gap:8px;margin-bottom:10px;font-size:14px;font-weight:500;color:#5D5D5D}.aif-by img{width:20px;height:20px;border-radius:5px}
+#aif .aif-chart{max-height:250px}#aif .aif-table{font-size:16px}#aif .aif-mail{font-size:17px}
+.aif-input{display:flex;align-items:center;gap:12px;width:calc(100% - 56px);max-width:804px;margin:0 auto 8px;padding:11px 12px 11px 18px;border:1px solid #E5E5E5;border-radius:28px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.aif-input span{font-size:22px;color:#5D5D5D}.aif-input em{flex:1;font-style:normal;font-size:17px;color:#8F8F8F}.aif-input i{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:#0D0D0D;color:#fff;font-style:normal;font-weight:700}
+#aif .aif-note{margin:0 0 12px;font-size:12px;color:#8F8F8F}
+@media(max-height:800px){.aif-win{height:80vh}#aif .aif-chart{max-height:200px}}
+
 .ai3{flex:1;display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;align-items:stretch;margin:34px 0 26px}
 .ai3 .ar{display:flex;align-items:center;justify-content:center}
 .ai3 .ar svg{width:56px;height:56px}
@@ -953,7 +1067,7 @@ html[lang="en"] .agd .ek{display:none}
     <rect x="0" y="0" width="500" height="640" rx="28" fill="#fff" filter="url(#xSh)"/>
     <rect x="24" y="24" width="220" height="70" rx="18" fill="#F4F8FF"/><image href="img/logo-claude.svg" x="44" y="40" width="38" height="38"/><text x="94" y="70" font-size="25" font-weight="800" fill="#1E2A40">Claude</text>
     <rect x="256" y="24" width="220" height="70" rx="18" fill="#F4F8FF"/><image href="img/logo-chatgpt.svg" x="274" y="41" width="36" height="36"/><text x="320" y="70" font-size="25" font-weight="800" fill="#1E2A40">ChatGPT</text>
-    <text x="28" y="134" font-size="18" font-weight="700" fill="#6C7180">ตัวอย่างคำถาม</text><path d="M60 150 H440 Q460 150 460 170 V240 Q460 260 440 260 H430 L454 282 L398 260 H60 Q40 260 40 240 V170 Q40 150 60 150Z" fill="#1466DE"/><text x="64" y="182" font-size="16" font-weight="800" fill="#DDF956" letter-spacing="1">ผู้บริหาร</text><text x="64" y="216" font-size="22" font-weight="700" fill="#fff">ยอดผลิตเมื่อวาน</text><text x="64" y="246" font-size="22" font-weight="700" fill="#fff">ของเสียกี่เปอร์เซ็นต์</text><path d="M60 310 H440 Q460 310 460 330 V400 Q460 420 440 420 H430 L454 442 L398 420 H60 Q40 420 40 400 V330 Q40 310 60 310Z" fill="#1466DE"/><text x="64" y="342" font-size="16" font-weight="800" fill="#DDF956" letter-spacing="1">ฝ่ายวางแผน</text><text x="64" y="376" font-size="22" font-weight="700" fill="#fff">ใบสั่งผลิตไหน</text><text x="64" y="406" font-size="22" font-weight="700" fill="#fff">จะส่งไม่ทันกำหนด</text><path d="M60 470 H440 Q460 470 460 490 V560 Q460 580 440 580 H430 L454 602 L398 580 H60 Q40 580 40 560 V490 Q40 470 60 470Z" fill="#1466DE"/><text x="64" y="502" font-size="16" font-weight="800" fill="#DDF956" letter-spacing="1">ฝ่ายผลิต · QC</text><text x="64" y="536" font-size="22" font-weight="700" fill="#fff">เครื่องไหนหยุดบ่อย</text><text x="64" y="566" font-size="22" font-weight="700" fill="#fff">เพราะอะไร</text>
+    <text x="28" y="134" font-size="18" font-weight="700" fill="#6C7180">ตัวอย่างคำถาม</text><g class="aif-hit" data-aif="0" role="button" tabindex="0"><path d="M60 150 H440 Q460 150 460 170 V226 Q460 246 440 246 H430 L454 266 L398 246 H60 Q40 246 40 226 V170 Q40 150 60 150Z" fill="#1466DE"/><text x="64" y="177" font-size="15" font-weight="800" fill="#DDF956" letter-spacing="1">ผู้บริหาร</text><text x="64" y="206" font-size="21" font-weight="700" fill="#fff">ยอดผลิตเมื่อวาน</text><text x="64" y="233" font-size="21" font-weight="700" fill="#fff">ของเสียกี่เปอร์เซ็นต์</text></g><g class="aif-hit" data-aif="1" role="button" tabindex="0"><path d="M60 270 H440 Q460 270 460 290 V346 Q460 366 440 366 H430 L454 386 L398 366 H60 Q40 366 40 346 V290 Q40 270 60 270Z" fill="#1466DE"/><text x="64" y="297" font-size="15" font-weight="800" fill="#DDF956" letter-spacing="1">ฝ่ายวางแผน</text><text x="64" y="326" font-size="21" font-weight="700" fill="#fff">ใบสั่งผลิตไหน</text><text x="64" y="353" font-size="21" font-weight="700" fill="#fff">จะส่งไม่ทันกำหนด</text></g><g class="aif-hit" data-aif="2" role="button" tabindex="0"><path d="M60 390 H440 Q460 390 460 410 V466 Q460 486 440 486 H430 L454 506 L398 486 H60 Q40 486 40 466 V410 Q40 390 60 390Z" fill="#1466DE"/><text x="64" y="417" font-size="15" font-weight="800" fill="#DDF956" letter-spacing="1">ฝ่ายผลิต · QC</text><text x="64" y="446" font-size="21" font-weight="700" fill="#fff">เครื่องไหนหยุดบ่อย</text><text x="64" y="473" font-size="21" font-weight="700" fill="#fff">เพราะอะไร</text></g><g class="aif-hit" data-aif="3" role="button" tabindex="0"><path d="M60 510 H440 Q460 510 460 530 V586 Q460 606 440 606 H430 L454 626 L398 606 H60 Q40 606 40 586 V530 Q40 510 60 510Z" fill="#1466DE"/><text x="64" y="537" font-size="15" font-weight="800" fill="#DDF956" letter-spacing="1">ผู้จัดการโรงงาน</text><text x="64" y="566" font-size="21" font-weight="700" fill="#fff">ร่างอีเมลแจ้งทีมซ่อม</text><text x="64" y="593" font-size="21" font-weight="700" fill="#fff">เรื่องเครื่อง PR-400T</text></g>
     
     <!-- กลาง: Beside MCP -->
     <circle cx="850" cy="335" r="165" fill="none" stroke="#84AFFB" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
@@ -963,8 +1077,10 @@ html[lang="en"] .agd .ek{display:none}
     <text x="850" y="360" font-size="28" font-weight="800" fill="#fff" text-anchor="middle">Beside</text>
     <text x="850" y="388" font-size="19" font-weight="700" fill="#84AFFB" text-anchor="middle" letter-spacing="2">MCP</text>
     <rect x="790" y="420" width="120" height="32" rx="16" fill="#DDF956" stroke="#1466DE" stroke-width="2.5"/><text x="850" y="442" font-size="15" font-weight="800" fill="#1466DE" text-anchor="middle" letter-spacing="1.5">REAL-TIME</text>
+    <g class="orb" style="transform-origin:850px 335px">
     <g fill="#2E9CE8"><circle cx="733" cy="218" r="6"/><circle cx="967" cy="452" r="6"/></g>
     <g fill="#DDF956" stroke="#1466DE" stroke-width="2"><circle cx="985" cy="250" r="8"/><circle cx="715" cy="420" r="8"/></g>
+    </g>
     <!-- เส้น: ผ่าน MCP ทุกเส้น -->
     <path d="M506 290 C 610 290 640 300 708 302" stroke="#1466DE" stroke-width="16" fill="none" opacity=".12" stroke-linecap="round"/><path d="M506 290 C 610 290 640 300 708 302" stroke="#1466DE" stroke-width="6" fill="none" marker-end="url(#xA)"/>
     <path d="M992 302 C 1070 300 1100 250 1212 250" stroke="#1466DE" stroke-width="16" fill="none" opacity=".12" stroke-linecap="round"/><path d="M992 302 C 1070 300 1100 250 1212 250" stroke="#1466DE" stroke-width="6" fill="none" marker-end="url(#xA)"/>
@@ -982,6 +1098,7 @@ html[lang="en"] .agd .ek{display:none}
     <div><h4>ถามเป็นภาษาไทยได้เลย</h4><p>ไม่ต้องเปิดหลายจอ ไม่ต้องรอทำรายงาน</p></div>
     <div><h4>เห็นเท่าที่มีสิทธิ์</h4><p>AI ใช้สิทธิ์เดียวกับผู้ใช้ใน Beside</p></div>
   </div>
+  <button type="button" class="aif-open" aria-haspopup="dialog" aria-controls="aif">ดูตัวอย่างรูปแบบคำตอบ</button>
   <div class="foot"><span class="brand">BESIDE ENTERPRISE</span></div>
 </div>
 </div>
@@ -1654,6 +1771,54 @@ html[lang="en"] .agd .ek{display:none}
 </div>
 </div>
 
+<!-- ═══ MARGIN ANALYSIS · ต่อจาก Cost Sheet ═══ -->
+<style>
+.sheet[data-key="mk-margin"] .mg{flex:1;min-height:0;margin:0 0 8px;background:#fff;border-radius:16px;box-shadow:0 20px 44px -24px rgba(20,102,222,.5);border:1px solid #E3E8F0;padding:14px 22px;display:flex;flex-direction:column;gap:12px;color:#1E2A40}
+.mg-f{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:14px;align-items:end;font-size:14px}.mg-f label{display:block;font-weight:700;color:#4A5160;margin-bottom:3px}
+.mg-f span{display:block;border:1px solid #D5DAE3;border-radius:8px;padding:6px 12px;font-size:15px}.mg-f .bt{display:flex;gap:8px}.mg-f .bt i{font-style:normal;font-weight:600;border:1.5px solid #B9C0CC;border-radius:10px;padding:5px 14px;font-size:15px}
+.mg-top{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex:1;min-height:0}
+.mg-s{background:#1466DE;border-radius:14px;color:#fff;padding:22px 30px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.mg-s .h{display:flex;justify-content:space-between;align-items:baseline}.mg-s .h b{font-size:24px}.mg-s .h span{font-size:15px;opacity:.85}
+.mg-s .ln{display:flex;justify-content:space-between;align-items:baseline;font-size:22px;font-weight:700}.mg-s .ln b{font-size:50px;font-weight:800}.mg-s .ln.c b{font-size:38px;opacity:.75}
+.mg-s hr{border:0;border-top:1.5px solid rgba(255,255,255,.4);margin:4px 0;width:100%}
+.mg-s .ln.p b{font-size:58px}.mg-s .ln.p em{font-style:normal;background:#DDF956;color:#1E2A40;border-radius:8px;padding:2px 10px;font-size:22px;margin-left:auto;margin-right:14px}
+.mg-s .nt{text-align:right;font-size:16px;font-weight:600}
+.mg-c{border:1px solid #E3E8F0;border-radius:14px;padding:12px 18px;display:flex;flex-direction:column}.mg-c h5{margin:0;font-size:18px;display:flex;justify-content:space-between}.mg-c h5 span{font-size:14px;color:#6C7180;font-weight:500}
+.mg-ch{flex:1;display:grid;grid-template-columns:repeat(6,1fr);gap:16px;align-items:end;padding:8px 6px 0;border-bottom:1px solid #D5DAE3;min-height:0}
+.mg-b{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end}
+.mg-b i{display:block;width:62%;background:#C9DCFA;border-radius:6px 6px 0 0}.mg-b.on i{background:#1466DE}
+.mg-v{text-align:center;margin-bottom:4px}.mg-v b{font-size:19px;display:block}.mg-b.on .mg-v b{color:#1466DE}.mg-v em{font-style:normal;font-size:13px;font-weight:700;display:block}.mg-v em.u{color:#1466DE}.mg-v em.d{color:#E5533A}.mg-b.on .mg-v em{color:#1466DE}
+.mg-b span{font-size:15px;font-weight:700;margin-top:6px}.mg-b small{font-size:13px;color:#6C7180}.mg-b.on span{color:#1466DE}
+.mg-ch .mg-b span,.mg-ch .mg-b small{position:relative;top:44px}.mg-ch{margin-bottom:44px}
+.mg-t{border:1px solid #E3E8F0;border-radius:14px;padding:10px 18px}.mg-t h5{margin:0 0 4px;font-size:18px;display:flex;justify-content:space-between}.mg-t h5 span{font-size:14px;color:#6C7180;font-weight:500}
+.mg-t table{width:100%;border-collapse:collapse;font-size:16px}.mg-t th{font-size:14px;color:#6C7180;text-align:left;font-weight:600;padding:3px 6px}.mg-t td{padding:5px 6px;border-top:1px solid #EEF0F4}
+.mg-t .r{text-align:right}.mg-t .cd{color:#1466DE;font-weight:700}.mg-t .g{color:#2E7D32;font-weight:700}.mg-t .pc{color:#1466DE;font-weight:700}
+.mg-t .br{display:block;height:8px;width:220px;background:#EEF2F8;border-radius:4px}.mg-t .br i{display:block;height:100%;background:#1466DE;border-radius:4px}
+.mg-t .ft{font-size:13px;color:#6C7180;margin-top:4px}
+</style>
+<div class="slidewrap">
+<div class="sheet compact" data-key="mk-margin">
+  <div class="eyebrow">PROFIT · กำไรรายสินค้า</div>
+  <h1>Margin Analysis</h1>
+  <div class="rule"></div>
+  <div class="mg">
+    <div class="mg-f"><div><label>Period</label><span>ก.ค.–ต.ค. 2026 ⌄</span></div><div><label>ลูกค้า</label><span>OEM-A ผู้ผลิตรถยนต์ ⌄</span></div><div><label>Selling price base</label><span>ราคาตามใบสั่งขาย ⌄</span></div><div class="bt"><i>Print report</i><i>Clear</i></div></div>
+    <div class="mg-top">
+      <div class="mg-s"><div class="h"><b>สรุปการขาย</b><span>1 ก.ค.–12 ต.ค. 2026 · ต้นทุนจริง</span></div>
+        <div class="ln"><span>ยอดขายประมาณการ</span><b>฿16,240,800</b></div>
+        <div class="ln c"><span>หัก ต้นทุนจริง</span><b>–฿12,870,300</b></div><hr>
+        <div class="ln p"><span>กำไรจากการขาย</span><em>20.8%</em><b>฿3,370,500</b></div>
+        <div class="nt">▲ +0.3 จุด % จากช่วงเดียวกันไตรมาสก่อน</div></div>
+      <div class="mg-c"><h5>กำไรจากการขาย 6 เดือนล่าสุด <span>ล้าน ฿</span></h5><div class="mg-ch"><div class="mg-b"><div class="mg-v"><b>0.86</b></div><i style="height:72%"></i><span>พ.ค.</span><small>กำไร 19.8%</small></div><div class="mg-b"><div class="mg-v"><b>0.91</b><em class="u">▲ 5.8%</em></div><i style="height:76%"></i><span>มิ.ย.</span><small>กำไร 20.3%</small></div><div class="mg-b"><div class="mg-v"><b>0.95</b><em class="u">▲ 4.4%</em></div><i style="height:79%"></i><span>ก.ค.</span><small>กำไร 20.6%</small></div><div class="mg-b"><div class="mg-v"><b>1.02</b><em class="u">▲ 7.4%</em></div><i style="height:85%"></i><span>ส.ค.</span><small>กำไร 21.2%</small></div><div class="mg-b"><div class="mg-v"><b>0.98</b><em class="d">▼ 3.9%</em></div><i style="height:82%"></i><span>ก.ย.</span><small>กำไร 20.9%</small></div><div class="mg-b on"><div class="mg-v"><b>0.42</b><em>ถึง 12 ต.ค.</em></div><i style="height:35%"></i><span>ต.ค.*</span><small>กำไร 20.4%</small></div></div></div>
+    </div>
+    <div class="mg-t"><h5>สินค้าทำกำไรสูงสุด <span>5 อันดับ · ก.ค.–ต.ค. 2026</span></h5>
+      <table><thead><tr><th>#</th><th>รหัสสินค้า</th><th>ชื่อสินค้า</th><th class="r">ยอดขายประมาณการ ฿</th><th></th><th class="r">กำไรจากการขาย ฿</th><th class="r">%</th></tr></thead><tbody><tr><td>1</td><td class="cd">FG-BP-1101</td><td>คานรับกันชนหน้า</td><td class="r">4,428,000</td><td><i class="br"><i style="width:100%"></i></i></td><td class="r g">+1,018,400</td><td class="r pc">23.0%</td></tr><tr><td>2</td><td class="cd">FG-BP-1103</td><td>แผงพื้นห้องโดยสาร</td><td class="r">3,960,500</td><td><i class="br"><i style="width:89%"></i></i></td><td class="r g">+812,000</td><td class="r pc">20.5%</td></tr><tr><td>3</td><td class="cd">FG-BP-1106</td><td>แผงบังโคลนหน้าด้านใน</td><td class="r">2,615,200</td><td><i class="br"><i style="width:59%"></i></i></td><td class="r g">+575,300</td><td class="r pc">22.0%</td></tr><tr><td>4</td><td class="cd">FG-BP-1104</td><td>เสากลาง B-Pillar</td><td class="r">2,240,800</td><td><i class="br"><i style="width:51%"></i></i></td><td class="r g">+425,700</td><td class="r pc">19.0%</td></tr><tr><td>5</td><td class="cd">FG-BP-1102</td><td>ซุ้มล้อหลัง</td><td class="r">1,598,300</td><td><i class="br"><i style="width:36%"></i></i></td><td class="r g">+287,700</td><td class="r pc">18.0%</td></tr></tbody></table>
+      <div class="ft">5 รายการนี้ทำกำไร ฿3,119,100 = 93% ของกำไรทั้งหมด</div></div>
+  </div>
+  <div class="foot"><span class="brand">BESIDE</span></div>
+</div>
+</div>
+
 <style>
 /* ═══ จอ desktop วาดสด — ธีมแอป Beside (สว่าง · หัวฟ้า · ตารางแบบ PrimeNG) ═══ */
 .win{background:#F4F7FB;border-radius:18px;overflow:hidden;border:1px solid #C9DCFA;
@@ -1927,52 +2092,6 @@ html[lang="en"] .agd .ek{display:none}
 .mkbox{width:1712px;flex:1;min-height:0;margin-bottom:10px;border-radius:18px;box-shadow:0 6px 24px rgba(14,76,168,.12);background:#fff}
 .mkbox iframe{width:2200px;height:calc(100% / 0.7782);transform:scale(0.7782)}
 </style>
-<style>
-.sheet[data-key="mk-margin"] .mg{flex:1;min-height:0;margin:0 0 8px;background:#fff;border-radius:16px;box-shadow:0 20px 44px -24px rgba(20,102,222,.5);border:1px solid #E3E8F0;padding:14px 22px;display:flex;flex-direction:column;gap:12px;color:#1E2A40}
-.mg-f{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:14px;align-items:end;font-size:14px}.mg-f label{display:block;font-weight:700;color:#4A5160;margin-bottom:3px}
-.mg-f span{display:block;border:1px solid #D5DAE3;border-radius:8px;padding:6px 12px;font-size:15px}.mg-f .bt{display:flex;gap:8px}.mg-f .bt i{font-style:normal;font-weight:600;border:1.5px solid #B9C0CC;border-radius:10px;padding:5px 14px;font-size:15px}
-.mg-top{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex:1;min-height:0}
-.mg-s{background:#1466DE;border-radius:14px;color:#fff;padding:22px 30px;display:flex;flex-direction:column;justify-content:center;gap:8px}
-.mg-s .h{display:flex;justify-content:space-between;align-items:baseline}.mg-s .h b{font-size:24px}.mg-s .h span{font-size:15px;opacity:.85}
-.mg-s .ln{display:flex;justify-content:space-between;align-items:baseline;font-size:22px;font-weight:700}.mg-s .ln b{font-size:50px;font-weight:800}.mg-s .ln.c b{font-size:38px;opacity:.75}
-.mg-s hr{border:0;border-top:1.5px solid rgba(255,255,255,.4);margin:4px 0;width:100%}
-.mg-s .ln.p b{font-size:58px}.mg-s .ln.p em{font-style:normal;background:#DDF956;color:#1E2A40;border-radius:8px;padding:2px 10px;font-size:22px;margin-left:auto;margin-right:14px}
-.mg-s .nt{text-align:right;font-size:16px;font-weight:600}
-.mg-c{border:1px solid #E3E8F0;border-radius:14px;padding:12px 18px;display:flex;flex-direction:column}.mg-c h5{margin:0;font-size:18px;display:flex;justify-content:space-between}.mg-c h5 span{font-size:14px;color:#6C7180;font-weight:500}
-.mg-ch{flex:1;display:grid;grid-template-columns:repeat(6,1fr);gap:16px;align-items:end;padding:8px 6px 0;border-bottom:1px solid #D5DAE3;min-height:0}
-.mg-b{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end}
-.mg-b i{display:block;width:62%;background:#C9DCFA;border-radius:6px 6px 0 0}.mg-b.on i{background:#1466DE}
-.mg-v{text-align:center;margin-bottom:4px}.mg-v b{font-size:19px;display:block}.mg-b.on .mg-v b{color:#1466DE}.mg-v em{font-style:normal;font-size:13px;font-weight:700;display:block}.mg-v em.u{color:#1466DE}.mg-v em.d{color:#E5533A}.mg-b.on .mg-v em{color:#1466DE}
-.mg-b span{font-size:15px;font-weight:700;margin-top:6px}.mg-b small{font-size:13px;color:#6C7180}.mg-b.on span{color:#1466DE}
-.mg-ch .mg-b span,.mg-ch .mg-b small{position:relative;top:44px}.mg-ch{margin-bottom:44px}
-.mg-t{border:1px solid #E3E8F0;border-radius:14px;padding:10px 18px}.mg-t h5{margin:0 0 4px;font-size:18px;display:flex;justify-content:space-between}.mg-t h5 span{font-size:14px;color:#6C7180;font-weight:500}
-.mg-t table{width:100%;border-collapse:collapse;font-size:16px}.mg-t th{font-size:14px;color:#6C7180;text-align:left;font-weight:600;padding:3px 6px}.mg-t td{padding:5px 6px;border-top:1px solid #EEF0F4}
-.mg-t .r{text-align:right}.mg-t .cd{color:#1466DE;font-weight:700}.mg-t .g{color:#2E7D32;font-weight:700}.mg-t .pc{color:#1466DE;font-weight:700}
-.mg-t .br{display:block;height:8px;width:220px;background:#EEF2F8;border-radius:4px}.mg-t .br i{display:block;height:100%;background:#1466DE;border-radius:4px}
-.mg-t .ft{font-size:13px;color:#6C7180;margin-top:4px}
-</style>
-<div class="slidewrap">
-<div class="sheet compact" data-key="mk-margin">
-  <div class="eyebrow">PROFIT · กำไรรายสินค้า</div>
-  <h1>Margin Analysis</h1>
-  <div class="rule"></div>
-  <div class="mg">
-    <div class="mg-f"><div><label>Period</label><span>ก.ค.–ต.ค. 2026 ⌄</span></div><div><label>ลูกค้า</label><span>OEM-A ผู้ผลิตรถยนต์ ⌄</span></div><div><label>Selling price base</label><span>ราคาตามใบสั่งขาย ⌄</span></div><div class="bt"><i>Print report</i><i>Clear</i></div></div>
-    <div class="mg-top">
-      <div class="mg-s"><div class="h"><b>สรุปการขาย</b><span>1 ก.ค.–12 ต.ค. 2026 · ต้นทุนจริง</span></div>
-        <div class="ln"><span>ยอดขายประมาณการ</span><b>฿16,240,800</b></div>
-        <div class="ln c"><span>หัก ต้นทุนจริง</span><b>–฿12,870,300</b></div><hr>
-        <div class="ln p"><span>กำไรจากการขาย</span><em>20.8%</em><b>฿3,370,500</b></div>
-        <div class="nt">▲ +0.3 จุด % จากช่วงเดียวกันไตรมาสก่อน</div></div>
-      <div class="mg-c"><h5>กำไรจากการขาย 6 เดือนล่าสุด <span>ล้าน ฿</span></h5><div class="mg-ch"><div class="mg-b"><div class="mg-v"><b>0.86</b></div><i style="height:72%"></i><span>พ.ค.</span><small>กำไร 19.8%</small></div><div class="mg-b"><div class="mg-v"><b>0.91</b><em class="u">▲ 5.8%</em></div><i style="height:76%"></i><span>มิ.ย.</span><small>กำไร 20.3%</small></div><div class="mg-b"><div class="mg-v"><b>0.95</b><em class="u">▲ 4.4%</em></div><i style="height:79%"></i><span>ก.ค.</span><small>กำไร 20.6%</small></div><div class="mg-b"><div class="mg-v"><b>1.02</b><em class="u">▲ 7.4%</em></div><i style="height:85%"></i><span>ส.ค.</span><small>กำไร 21.2%</small></div><div class="mg-b"><div class="mg-v"><b>0.98</b><em class="d">▼ 3.9%</em></div><i style="height:82%"></i><span>ก.ย.</span><small>กำไร 20.9%</small></div><div class="mg-b on"><div class="mg-v"><b>0.42</b><em>ถึง 12 ต.ค.</em></div><i style="height:35%"></i><span>ต.ค.*</span><small>กำไร 20.4%</small></div></div></div>
-    </div>
-    <div class="mg-t"><h5>สินค้าทำกำไรสูงสุด <span>5 อันดับ · ก.ค.–ต.ค. 2026</span></h5>
-      <table><thead><tr><th>#</th><th>รหัสสินค้า</th><th>ชื่อสินค้า</th><th class="r">ยอดขายประมาณการ ฿</th><th></th><th class="r">กำไรจากการขาย ฿</th><th class="r">%</th></tr></thead><tbody><tr><td>1</td><td class="cd">FG-BP-1101</td><td>คานรับกันชนหน้า</td><td class="r">4,428,000</td><td><i class="br"><i style="width:100%"></i></i></td><td class="r g">+1,018,400</td><td class="r pc">23.0%</td></tr><tr><td>2</td><td class="cd">FG-BP-1103</td><td>แผงพื้นห้องโดยสาร</td><td class="r">3,960,500</td><td><i class="br"><i style="width:89%"></i></i></td><td class="r g">+812,000</td><td class="r pc">20.5%</td></tr><tr><td>3</td><td class="cd">FG-BP-1106</td><td>แผงบังโคลนหน้าด้านใน</td><td class="r">2,615,200</td><td><i class="br"><i style="width:59%"></i></i></td><td class="r g">+575,300</td><td class="r pc">22.0%</td></tr><tr><td>4</td><td class="cd">FG-BP-1104</td><td>เสากลาง B-Pillar</td><td class="r">2,240,800</td><td><i class="br"><i style="width:51%"></i></i></td><td class="r g">+425,700</td><td class="r pc">19.0%</td></tr><tr><td>5</td><td class="cd">FG-BP-1102</td><td>ซุ้มล้อหลัง</td><td class="r">1,598,300</td><td><i class="br"><i style="width:36%"></i></i></td><td class="r g">+287,700</td><td class="r pc">18.0%</td></tr></tbody></table>
-      <div class="ft">5 รายการนี้ทำกำไร ฿3,119,100 = 93% ของกำไรทั้งหมด</div></div>
-  </div>
-  <div class="foot"><span class="brand">BESIDE</span></div>
-</div>
-</div>
 
 <style>
 /* ════════════ หน้าปิด · ติดต่อเรา ════════════ */
@@ -2124,6 +2243,23 @@ html[lang="en"] .agd .ek{display:none}
   </main>
 </div>
 
+<div id="aif">
+  <section class="aif-panel" role="dialog" aria-modal="true" aria-labelledby="aif-title" tabindex="-1">
+    <div class="aif-head"><div><h2 id="aif-title">รูปแบบคำตอบของ Beside AI</h2><p class="aif-sub">ตัวอย่างหน้าจอ ChatGPT ที่เชื่อม Beside · ข้อมูลตัวอย่าง</p></div><button type="button" class="aif-close" aria-label="Close">✕</button></div>
+    <div class="aif-win">
+    <aside class="aif-side"><div class="aif-brand"><img src="img/logo-chatgpt.svg" alt="">ChatGPT</div><div class="aif-new">✎ แชทใหม่</div><div class="aif-lbl">แชท</div>
+    <div class="aif-tabs" role="tablist"><button type="button" class="aif-tab" id="aif-tab-0" role="tab" aria-controls="aif-body-0" aria-selected="true" tabindex="0"><b>ยอดผลิตเมื่อวาน</b><small>กราฟ</small></button><button type="button" class="aif-tab" id="aif-tab-1" role="tab" aria-controls="aif-body-1" aria-selected="false" tabindex="-1"><b>ใบสั่งผลิตส่งไม่ทัน</b><small>ตาราง</small></button><button type="button" class="aif-tab" id="aif-tab-2" role="tab" aria-controls="aif-body-2" aria-selected="false" tabindex="-1"><b>เครื่องไหนหยุดบ่อย</b><small>ข้อความ</small></button><button type="button" class="aif-tab" id="aif-tab-3" role="tab" aria-controls="aif-body-3" aria-selected="false" tabindex="-1"><b>ร่างอีเมลถึงทีมซ่อม</b><small>ร่างอีเมล</small></button></div>
+    <div class="aif-conn"><img src="img/beside-mark.png" alt="">Beside<span>เชื่อมต่อแล้ว</span></div></aside>
+    <div class="aif-main"><div class="aif-top"><b>ChatGPT</b><span>▾</span></div><div class="aif-scroll">
+    <div class="aif-body" id="aif-body-0" role="tabpanel" aria-labelledby="aif-tab-0"><p class="aif-q">ยอดผลิตเมื่อวาน ของเสียกี่เปอร์เซ็นต์</p><div class="aif-card"><div class="aif-by"><img src="img/beside-mark.png" alt="">ใช้ Beside · ค้นข้อมูลจากระบบ</div><p>เมื่อวาน (12/10) ผลิตได้ <b>1,920 ชิ้น</b> สูงกว่าเป้า 1,860 ชิ้น · ของเสีย <em>2.6%</em></p><svg class="aif-chart" viewBox="0 0 900 300" role="img" aria-label="ยอดผลิตรายวัน"><path d="M55 250H860" stroke="#E3ECFA"/><text x="42" y="255" text-anchor="end" fill="#6C7180" font-size="16">1,700</text><path d="M55 210H860" stroke="#E3ECFA"/><text x="42" y="215" text-anchor="end" fill="#6C7180" font-size="16">1,800</text><path d="M55 170H860" stroke="#E3ECFA"/><text x="42" y="175" text-anchor="end" fill="#6C7180" font-size="16">1,900</text><path d="M55 130H860" stroke="#E3ECFA"/><text x="42" y="135" text-anchor="end" fill="#6C7180" font-size="16">2,000</text><path d="M55 90H860" stroke="#E3ECFA"/><text x="42" y="95" text-anchor="end" fill="#6C7180" font-size="16">2,100</text><path d="M55 50H860" stroke="#E3ECFA"/><text x="42" y="55" text-anchor="end" fill="#6C7180" font-size="16">2,200</text><path d="M55 186H860" stroke="#84AFFB" stroke-dasharray="8 6"/><text x="860" y="206" text-anchor="end" fill="#6C7180" font-size="16">เป้า 1,860</text><polyline points="80,146 188,94 296,178 404,106 512,210 620,90 728,118 836,162" fill="none" stroke="#1466DE" stroke-width="3"/><circle cx="80" cy="146" r="5" fill="#fff" stroke="#1466DE" stroke-width="2"/><text x="80" y="132" text-anchor="middle" fill="#1466DE" font-size="17">1,960</text><text x="80" y="280" text-anchor="middle" fill="#6C7180" font-size="16">01/10</text><circle cx="188" cy="94" r="5" fill="#fff" stroke="#1466DE" stroke-width="2"/><text x="188" y="80" text-anchor="middle" fill="#1466DE" font-size="17">2,090</text><text x="188" y="280" text-anchor="middle" fill="#6C7180" font-size="16">02/10</text><circle cx="296" cy="178" r="5" fill="#fff" stroke="#1466DE" stroke-width="2"/><text x="296" y="164" text-anchor="middle" fill="#1466DE" font-size="17">1,880</text><text x="296" y="280" text-anchor="middle" fill="#6C7180" font-size="16">05/10</text><circle cx="404" cy="106" r="5" fill="#fff" stroke="#1466DE" stroke-width="2"/><text x="404" y="92" text-anchor="middle" fill="#1466DE" font-size="17">2,060</text><text x="404" y="280" text-anchor="middle" fill="#6C7180" font-size="16">06/10</text><circle cx="512" cy="210" r="5" fill="#FF6648" stroke="#1466DE" stroke-width="2"/><text x="512" y="196" text-anchor="middle" fill="#FF6648" font-size="17">1,800</text><text x="512" y="280" text-anchor="middle" fill="#6C7180" font-size="16">07/10</text><circle cx="620" cy="90" r="5" fill="#fff" stroke="#1466DE" stroke-width="2"/><text x="620" y="76" text-anchor="middle" fill="#1466DE" font-size="17">2,100</text><text x="620" y="280" text-anchor="middle" fill="#6C7180" font-size="16">08/10</text><circle cx="728" cy="118" r="5" fill="#fff" stroke="#1466DE" stroke-width="2"/><text x="728" y="104" text-anchor="middle" fill="#1466DE" font-size="17">2,030</text><text x="728" y="280" text-anchor="middle" fill="#6C7180" font-size="16">09/10</text><circle cx="836" cy="162" r="7" fill="#1466DE" stroke="#1466DE" stroke-width="2"/><text x="836" y="148" text-anchor="middle" fill="#1466DE" font-size="17" font-weight="700">1,920</text><text x="836" y="280" text-anchor="middle" fill="#6C7180" font-size="16">12/10</text></svg><p>วันที่ผลิตต่ำกว่าเป้ามีวันเดียวคือ <em>07/10</em> ตรงกับวันที่แม่พิมพ์ PR-400T เสีย</p></div></div>
+    <div class="aif-body" id="aif-body-1" role="tabpanel" aria-labelledby="aif-tab-1" hidden><p class="aif-q">ใบสั่งผลิตไหนจะส่งไม่ทันกำหนด</p><div class="aif-card"><div class="aif-by"><img src="img/beside-mark.png" alt="">ใช้ Beside · ค้นข้อมูลจากระบบ</div><p>มีใบสั่งผลิต <b>2 ใบ</b> ที่ต้องติดตาม</p><div class="aif-tablewrap"><table class="aif-table aif-wo"><thead><tr><th scope="col">ใบสั่งผลิต</th><th scope="col">เครื่องจักร</th><th scope="col">สถานะ</th><th scope="col">สิ่งที่ควรทำ</th></tr></thead><tbody><tr><td><b>W2610-051</b></td><td>ED-01 สายพ่นสี</td><td><em>ส่งไม่ทันกำหนด</em></td><td>เพิ่มกะที่ ED-01 หรือแจ้งเลื่อนกำหนดส่ง</td></tr><tr><td><b>W2610-055</b></td><td>PR-600T</td><td><em>วัตถุดิบไม่พอ</em></td><td>เร่งสั่งซื้อวัตถุดิบก่อนถึงคิวผลิต</td></tr></tbody></table></div><p>ดูแผนลงเครื่องทั้งหมดได้ที่ Work Order Timeline</p></div></div>
+    <div class="aif-body" id="aif-body-2" role="tabpanel" aria-labelledby="aif-tab-2" hidden><p class="aif-q">เครื่องไหนหยุดบ่อย เพราะอะไร</p><div class="aif-card"><div class="aif-by"><img src="img/beside-mark.png" alt="">ใช้ Beside · ค้นข้อมูลจากระบบ</div><p>ช่วง 1–12 ต.ค. เครื่องที่ OEE ต่ำสุดคือ <b>PR-400T</b> อยู่ที่ <em>71.3%</em> ต่ำกว่าเป้า 85%</p><p>สาเหตุหลักคือ<em>แม่พิมพ์เสีย</em>เมื่อวันที่ 07/10 วันนั้น OEE รวมของโรงงานลดลงเหลือ <b>72.1%</b></p><p>แนะนำให้ตรวจสภาพแม่พิมพ์ของ PR-400T ก่อนรอบผลิตถัดไป</p></div></div>
+    <div class="aif-body" id="aif-body-3" role="tabpanel" aria-labelledby="aif-tab-3" hidden><p class="aif-q">ร่างอีเมลแจ้งทีมซ่อม เรื่องเครื่อง PR-400T</p><div class="aif-card"><div class="aif-by"><img src="img/beside-mark.png" alt="">ใช้ Beside · ค้นข้อมูลจากระบบ</div><div class="aif-mail"><div class="aif-mailhead"><p><b>ถึง:</b> ทีมซ่อมบำรุง</p><p><b>เรื่อง:</b> ขอตรวจแม่พิมพ์เครื่อง PR-400T</p></div><p>เรียน ทีมซ่อมบำรุง</p><p>ช่วง 1–12 ต.ค. OEE ของเครื่อง PR-400T อยู่ที่ 71.3% ต่ำกว่าเป้า 85% สาเหตุหลักมาจากแม่พิมพ์เสียเมื่อวันที่ 07/10</p><p>รบกวนตรวจสภาพแม่พิมพ์ก่อนรอบผลิตถัดไป และแจ้งกลับหากต้องหยุดเครื่องเพิ่ม</p><p>ขอบคุณครับ</p></div><div class="aif-actions"><button type="button" aria-disabled="true">คัดลอก</button><small>AI ร่างให้ ผู้ใช้ตรวจแล้วส่งเอง</small></div></div></div>
+    </div><div class="aif-input"><span>＋</span><em>ถามอะไรก็ได้</em><i>↑</i></div>
+    <p class="aif-note">AI ตอบจากข้อมูลจริงในระบบ ตามสิทธิ์ของผู้ใช้ · ร่างเอกสารให้ตรวจก่อน ไม่ส่งเอง</p>
+    </div></div>
+  </section>
+</div>
 <div id="lb"><img alt=""><div class="cap"></div><div class="x">ปิด · คลิกที่ใดก็ได้ หรือกด Esc</div></div>
 
 <div class="hint">← → เปลี่ยนสไลด์ · F เต็มจอ · 1 กว้าง · 2 ทั้งหน้า · M เมนู · P ตรึงเมนู · คลิกภาพเพื่อขยาย</div>
@@ -2139,6 +2275,8 @@ const EN = {"ดาวน์โหลด PDF หน้าตาเหมือ�
 
 /* ── AGENDA ── */
 "AGENDA · หัวข้อนำเสนอ":"AGENDA · TOPICS",
+"ดูตัวอย่างรูปแบบคำตอบ":"See answer formats","ตัวอย่างหน้าจอ ChatGPT ที่เชื่อม Beside · ข้อมูลตัวอย่าง":"ChatGPT connected to Beside · sample data","✎ แชทใหม่":"✎ New chat","แชท":"Chats","เชื่อมต่อแล้ว":"Connected","ใช้ Beside · ค้นข้อมูลจากระบบ":"Used Beside · searched system data","ถามอะไรก็ได้":"Ask anything","<b>ยอดผลิตเมื่อวาน</b><small>กราฟ</small>":"<b>Yesterday's output</b><small>Chart</small>","<b>ใบสั่งผลิตส่งไม่ทัน</b><small>ตาราง</small>":"<b>Late work orders</b><small>Table</small>","<b>เครื่องไหนหยุดบ่อย</b><small>ข้อความ</small>":"<b>Which machine stops most</b><small>Text</small>","<b>ร่างอีเมลถึงทีมซ่อม</b><small>ร่างอีเมล</small>":"<b>Email to maintenance</b><small>Email draft</small>","ผู้จัดการโรงงาน":"Plant manager","ร่างอีเมลแจ้งทีมซ่อม":"Draft an email to maintenance","เรื่องเครื่อง PR-400T":"about machine PR-400T","ร่างอีเมลแจ้งทีมซ่อม เรื่องเครื่อง PR-400T":"Draft an email to maintenance about machine PR-400T","<em>ส่งไม่ทันกำหนด</em>":"<em>Will miss due date</em>","<em>วัตถุดิบไม่พอ</em>":"<em>Material shortage</em>","ยอดผลิตเมื่อวาน ของเสียกี่เปอร์เซ็นต์":"Yesterday's output and scrap rate?","เมื่อวาน (12/10) ผลิตได้ <b>1,920 ชิ้น</b> สูงกว่าเป้า 1,860 ชิ้น · ของเสีย <em>2.6%</em>":"Yesterday (12/10) output was <b>1,920 pcs</b>, above the 1,860 target · scrap <em>2.6%</em>","เป้า 1,860":"Target 1,860","วันที่ผลิตต่ำกว่าเป้ามีวันเดียวคือ <em>07/10</em> ตรงกับวันที่แม่พิมพ์ PR-400T เสีย":"The only day below target was <em>07/10</em>, the day the PR-400T die failed","ใบสั่งผลิตไหนจะส่งไม่ทันกำหนด":"Which work orders will miss their due date?","มีใบสั่งผลิต <b>2 ใบ</b> ที่ต้องติดตาม":"<b>2 work orders</b> need attention","ใบสั่งผลิต":"Work order","เครื่องจักร":"Machine","สถานะ":"Status","สิ่งที่ควรทำ":"Next step","ED-01 สายพ่นสี":"ED-01 paint line","ส่งไม่ทันกำหนด":"Will miss due date","เพิ่มกะที่ ED-01 หรือแจ้งเลื่อนกำหนดส่ง":"Add a shift on ED-01 or reschedule delivery","วัตถุดิบไม่พอ":"Material shortage","เร่งสั่งซื้อวัตถุดิบก่อนถึงคิวผลิต":"Expedite material before its production slot","ดูแผนลงเครื่องทั้งหมดได้ที่ Work Order Timeline":"See the full machine plan in Work Order Timeline","ข้อความ":"Text","กราฟ":"Chart","ตาราง":"Table","ร่างอีเมล":"Email draft","รูปแบบคำตอบของ Beside AI":"Beside AI answer formats","ตัวอย่างการตอบกลับ · ข้อมูลตัวอย่าง":"Sample replies · sample data","ช่วง 1–12 ต.ค. เครื่องที่ OEE ต่ำสุดคือ <b>PR-400T</b> อยู่ที่ <em>71.3%</em> ต่ำกว่าเป้า 85%":"During 1–12 Oct, <b>PR-400T</b> had the lowest OEE at <em>71.3%</em>, below the 85% target","สาเหตุหลักคือ<em>แม่พิมพ์เสีย</em>เมื่อวันที่ 07/10 วันนั้น OEE รวมของโรงงานลดลงเหลือ <b>72.1%</b>":"The main cause was <em>die failure</em> on 07/10. Overall factory OEE fell to <b>72.1%</b> that day","แนะนำให้ตรวจสภาพแม่พิมพ์ของ PR-400T ก่อนรอบผลิตถัดไป":"Inspect the PR-400T die before the next production run","OEE รายวัน 1–12 ต.ค. · เป้า 85%":"Daily OEE 1–12 Oct · target 85%","เป้า 85%":"Target 85%","แม่พิมพ์เสีย":"Die failure","ค่าเฉลี่ยทั้งช่วง <b>78.4%</b> · ต่ำกว่าเป้า <em>6.6 จุด</em>":"Period average <b>78.4%</b> · below target by <em>6.6 points</em>","อันดับ":"Rank","รหัสสินค้า":"Item code","ชื่อสินค้า":"Item name","ยอดขาย (บาท)":"Sales (THB)","กำไร (บาท)":"Profit (THB)","คานรับกันชนหน้า":"Front bumper reinforcement","แผงพื้นห้องโดยสาร":"Cabin floor panel","แผงบังโคลนหน้าด้านใน":"Front inner fender panel","ลูกค้า OEM-A · 1 ก.ค.–12 ต.ค. 2026":"Customer OEM-A · 1 Jul–12 Oct 2026","FG-BP-1103 ยอดขายสูงกว่า แต่อัตรากำไร<em>ต่ำกว่า</em> FG-BP-1106":"FG-BP-1103 has higher sales, but a <em>lower</em> profit margin than FG-BP-1106","<b>ถึง:</b> ทีมซ่อมบำรุง":"<b>To:</b> Maintenance team","<b>เรื่อง:</b> ขอตรวจแม่พิมพ์เครื่อง PR-400T":"<b>Subject:</b> Request to inspect the PR-400T die","เรียน ทีมซ่อมบำรุง":"Dear Maintenance team,","ช่วง 1–12 ต.ค. OEE ของเครื่อง PR-400T อยู่ที่ 71.3% ต่ำกว่าเป้า 85% สาเหตุหลักมาจากแม่พิมพ์เสียเมื่อวันที่ 07/10":"During 1–12 Oct, OEE for PR-400T was 71.3%, below the 85% target. The main cause was die failure on 07/10.","รบกวนตรวจสภาพแม่พิมพ์ก่อนรอบผลิตถัดไป และแจ้งกลับหากต้องหยุดเครื่องเพิ่ม":"Please inspect the die before the next production run and let us know if additional downtime is needed.","ขอบคุณครับ":"Thank you","คัดลอก":"Copy","เปิดในอีเมล":"Open in email","AI ร่างให้ ผู้ใช้ตรวจแล้วส่งเอง":"AI drafts; the user reviews and sends","เครื่องไหนหยุดบ่อย เพราะอะไร":"Which machine stops frequently, and why?","ขอกราฟ OEE รายวันเดือนนี้":"Show a daily OEE chart for this month","สินค้าไหนทำกำไรสูงสุด 3 อันดับ":"Which 3 products generate the most profit?","ร่างอีเมลแจ้งทีมซ่อมบำรุงเรื่อง PR-400T":"Draft an email to the maintenance team about PR-400T","AI ตอบจากข้อมูลจริงในระบบ ตามสิทธิ์ของผู้ใช้ · ร่างเอกสารให้ตรวจก่อน ไม่ส่งเอง":"AI answers from real system data within your permissions · Drafts are reviewed by you; AI does not send them",
+"รู้จักสองระบบ · ทำไมต้องทำงานคู่กัน":"TWO SYSTEMS · WHY THEY WORK TOGETHER","รู้จักสองระบบ":"Two systems","ERP ระดับโลกจาก SAP<br>หัวใจด้านบัญชีและการเงินของบริษัท":"World-class ERP from SAP<br>the heart of accounting and finance","บัญชีและการเงิน":"Accounting and finance","ขายและลูกค้า":"Sales and customers","จัดซื้อและผู้ขาย":"Purchasing and vendors","ข้อมูลจริงทางบัญชีของบริษัท":"The company's book of record","ระบบบริหารการผลิตครบวงจรสำหรับโรงงาน<br>มี AI ช่วยสรุปและวิเคราะห์ข้อมูล":"End-to-end manufacturing for factories<br>with AI to summarize and analyze","วางแผนการผลิตและวัตถุดิบ":"Production and material planning","ติดตามหน้างานและเครื่องจักร real-time":"Real-time shop floor and machine tracking","ต้นทุน คุณภาพ และคลังรายล็อต":"Cost, quality and lot-level inventory","ข้อมูลจริงจากหน้างานผลิต":"The real data from the shop floor","SAP B1 รู้ว่าเงินไปไหน · Beside รู้ว่าในโรงงานเกิดอะไรขึ้น<br><span>เชื่อมกันแล้ว ผู้บริหารเห็นภาพเดียวกันทั้งบริษัท</span>":"SAP B1 knows where the money goes · Beside knows what happens in the factory<br><span>Connected, management sees one picture of the whole company</span>",
 "หัวข้อนำเสนอ":"Topics",
 "การเชื่อมต่อกับ SAP B1":"Integration with SAP B1",
 "แบ่งหน้าที่ SAP · Beside · ข้อมูลเข้า–ออก real-time":"SAP · Beside roles · real-time data in and out",
@@ -3176,7 +3314,43 @@ document.querySelectorAll('.shot img').forEach(el => el.addEventListener('click'
 }));
 lb.addEventListener('click', () => lb.classList.remove('on'));
 
+/* ── ตัวอย่างรูปแบบคำตอบ AI ── */
+const aif = document.getElementById('aif');
+const aifTabs = [...aif.querySelectorAll('.aif-tab')], aifBodies = [...aif.querySelectorAll('.aif-body')];
+let aifIndex = 0, aifFocus = null;
+function aifSelect(n){
+  aifIndex = (n + aifTabs.length) % aifTabs.length;
+  aifTabs.forEach((b, k) => { b.setAttribute('aria-selected', k === aifIndex); b.tabIndex = k === aifIndex ? 0 : -1; });
+  aifBodies.forEach((b, k) => { b.hidden = k !== aifIndex; });
+}
+function aifClose(){ aif.classList.remove('on'); if (aifFocus) aifFocus.focus({preventScroll:true}); }
+function aifOpen(n, e){
+  if (e) e.stopPropagation(); aifFocus = document.activeElement; aifSelect(n); aif.classList.add('on');
+  aif.querySelector('.aif-panel').scrollTop = 0; aifTabs[n].focus({preventScroll:true});
+}
+document.querySelector('.aif-open').addEventListener('click', e => aifOpen(0, e));
+/* คลิกฟองคำถามบนสไลด์ = เปิดคำตอบของคำถามนั้น */
+document.querySelectorAll('.aif-hit').forEach(g => {
+  g.addEventListener('click', e => aifOpen(+g.dataset.aif, e));
+  g.addEventListener('keydown', e => { if (e.key === 'Enter') aifOpen(+g.dataset.aif, e); });
+});
+aifTabs.forEach((b, k) => b.addEventListener('click', () => aifSelect(k)));
+aif.querySelector('.aif-close').addEventListener('click', aifClose);
+aif.addEventListener('click', e => { if (e.target === aif) aifClose(); });
+
 addEventListener('keydown', e => {
+  if (aif.classList.contains('on')) {
+    if (e.key === 'Escape') { e.preventDefault(); aifClose(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); aifSelect(aifIndex + (e.key === 'ArrowRight' ? 1 : -1)); aifTabs[aifIndex].focus({preventScroll:true}); }
+    if (e.key === 'l' || e.key === 'L') I18N.toggle();
+    if (e.key === 'Tab') {
+      const focusable = [...aif.querySelectorAll('button:not([tabindex="-1"])')].filter(b => b.offsetParent !== null);
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+    return;
+  }
   if (lb.classList.contains('on')) { if (e.key === 'Escape') lb.classList.remove('on'); return; }
   if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(i + 1); }
   if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(i - 1); }
